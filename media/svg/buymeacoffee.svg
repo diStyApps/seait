@@ -1,0 +1,20 @@
+<svg width="109.2" height="20" viewBox="0 0 1092 200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="buymeacoffee">
+  <title>buymeacoffee</title>
+  <linearGradient id="a" x2="0" y2="100%">
+    <stop offset="0" stop-opacity=".1" stop-color="#EEE"/>
+    <stop offset="1" stop-opacity=".1"/>
+  </linearGradient>
+  <mask id="m"><rect width="1092" height="200" rx="30" fill="#FFF"/></mask>
+  <g mask="url(#m)">
+    <rect width="212" height="200" fill="#555"/>
+    <rect width="880" height="200" fill="#08C" x="212"/>
+    <rect width="1092" height="200" fill="url(#a)"/>
+  </g>
+  <g aria-hidden="true" fill="#fff" text-anchor="start" font-family="Verdana,DejaVu Sans,sans-serif" font-size="110">
+    <text x="172" y="148" textLength="0" fill="#000" opacity="0.25"/>
+    <text x="162" y="138" textLength="0"/>
+    <text x="267" y="148" textLength="780" fill="#000" opacity="0.25">buymeacoffee</text>
+    <text x="257" y="138" textLength="780">buymeacoffee</text>
+  </g>
+  <image x="40" y="35" width="130" height="130" xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTYuODk4IDBMNS42ODIgMi43OTlIMy44Nzd2Mi41MjNoLjY5NUw1LjI3NyA5LjhINC4xNzJsMS40NiA4LjIzLjkzOC0uMDEuOTQyIDUuOThoOC45MThsLjA2Mi0uNC44OC01LjU4Ljg4OC4wMSAxLjQ2LTguMjMxaC0xLjA1NmwuNzA1LTQuNDc3aC43NTZWMi44aC0xLjkxOEwxNi45OSAwSDYuODk4em0uNTI4LjgwNWg5LjA0M2wuNzcxIDEuNzhINi42NTJsLjc3NC0xLjc4em0tMi43NSAyLjc5N0gxOS4zMnYuOTJINC42NzZ2LS45MnptLjQ1MyA2Ljk5OGgxMy42MzVsLTEuMTc2IDYuNjItNS42NDktLjA2LTUuNjM2LjA2LTEuMTc0LTYuNjJ6Ii8+PC9zdmc+Cg=="/>
+</svg>

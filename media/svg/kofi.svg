@@ -1,0 +1,20 @@
+<svg width="51.3" height="20" viewBox="0 0 513 200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-label="kofi">
+  <title>kofi</title>
+  <linearGradient id="a" x2="0" y2="100%">
+    <stop offset="0" stop-opacity=".1" stop-color="#EEE"/>
+    <stop offset="1" stop-opacity=".1"/>
+  </linearGradient>
+  <mask id="m"><rect width="513" height="200" rx="30" fill="#FFF"/></mask>
+  <g mask="url(#m)">
+    <rect width="212" height="200" fill="#555"/>
+    <rect width="301" height="200" fill="#08C" x="212"/>
+    <rect width="513" height="200" fill="url(#a)"/>
+  </g>
+  <g aria-hidden="true" fill="#fff" text-anchor="start" font-family="Verdana,DejaVu Sans,sans-serif" font-size="110">
+    <text x="172" y="148" textLength="0" fill="#000" opacity="0.25"/>
+    <text x="162" y="138" textLength="0"/>
+    <text x="267" y="148" textLength="201" fill="#000" opacity="0.25">kofi</text>
+    <text x="257" y="138" textLength="201">kofi</text>
+  </g>
+  <image x="40" y="35" width="130" height="130" xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MDAgNTAwIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGZpbGw9IiNmZmZmZmUiIGQ9Ik00OTYgMTg1Yy02LTM2LTI2LTU5LTQ2LTczLTIxLTE1LTQ2LTIyLTcxLTIySDE5QzYgOTAgMSAxMDIgMSAxMDh2NGwxIDI0NWMzIDUwIDUzIDUwIDUzIDUwbDI0NC0xIDExLTFjNDQtMTEgNDktNTMgNDktNzYgOTAgNSAxNTMtNTkgMTM3LTE0NG0tMTAxIDgzYy0xOSAyLTM1IDEtMzUgMVYxNTFoMjRjMTYgMCAzMSA2IDQxIDE4IDcgOCAxMyAyMCAxMyAzNiAwIDQwLTIxIDU2LTQzIDYzIi8+PHBhdGggZmlsbD0iI2UwNTk1OCIgZD0iTTE3NyAzNDFjNCAyIDcgMCA3IDBzNTctNTMgODMtODNjMjMtMjcgMjQtNzItMTUtODlzLTcyIDIwLTcyIDIwYy0yOC0zMS03MS0zMC05MC05LTIwIDIxLTEzIDU3IDIgNzcgMTMgMTkgNzQgNzMgODMgODJsMiAyIi8+PC9nPjwvc3ZnPgo="/>
+</svg>
