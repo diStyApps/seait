@@ -72,7 +72,7 @@ https://www.youtube.com/watch?v=aNFbemiq24E
 ## Downloads
 
 
-### For Windows and Nvidia GPU-based cards
+### For Windows 10+ and Nvidia GPU-based cards
 [Releases](https://github.com/diStyApps/seait/releases)
 
 $${\color{red}Note}$$
