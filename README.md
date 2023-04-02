@@ -18,7 +18,7 @@
 <div align="center">
 
 [![](media/svg/patreon.svg)](https://www.patreon.com/distyx)
-[![](media/svg/supportme.svg)](https://coindrop.to/disty)
+
 
 <img src="media/seait_image.jpg">
 
