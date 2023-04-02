@@ -18,8 +18,10 @@
 <div align="center">
 
 [![](media/svg/patreon.svg)](https://www.patreon.com/distyx)
-[![](media/svg/supportme.svg)](https://coindrop.to/disty)
-  
+
+
+<img src="media/seait_image.jpg">
+
   <h1 align="center">Super Easy AI Installer Tool</h1>
   <h3 align="center">Use artificial intelligence tools quickly and easily.</h3>
   <p align="center">
@@ -57,6 +59,9 @@ The tool is designed to provide an easy-to-use solution for accessing and instal
 "Super Easy AI Installer Tool" is currently in early development phase and may have a few bugs. 
 But remains a great solution for users with minimal technical knowledge or expertise. Fixes underway.
 
+
+https://www.youtube.com/watch?v=aNFbemiq24E
+
 <img src="media/preview/1_0.0.1.jpg">
 <img src="media/preview/2_0.0.1.jpg">
 <img src="media/preview/3_0.0.1.jpg">
@@ -67,7 +72,7 @@ But remains a great solution for users with minimal technical knowledge or exper
 ## Downloads
 
 
-
+### For Windows 10+ and Nvidia GPU-based cards
 [Releases](https://github.com/diStyApps/seait/releases)
 
 $${\color{red}Note}$$
@@ -92,7 +97,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Multilanguage support
+- [ ] Multi-language support
+- [ ] GPU Stats
 - [ ] More AI-related repos
 - [ ] Pre installed auto1111 version
 - [ ] Pre installed python version
@@ -100,7 +106,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 - [ ] App updater 
 - [ ] Remembering arguments
 - [ ] Adding arguments with input
-- [ ] Myabe arguments profiles
+- [ ] Maybe arguments profiles
 - [ ] Better event handling
 
 See the [open issues](https://github.com/diStyApps/seait/issues) for a full list of proposed features (and known issues).
