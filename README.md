@@ -98,6 +98,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 ## Roadmap
 
 - [ ] Multi-language support
+- [ ] GPU Stats
 - [ ] More AI-related repos
 - [ ] Pre installed auto1111 version
 - [ ] Pre installed python version
