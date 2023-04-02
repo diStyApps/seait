@@ -67,7 +67,7 @@ But remains a great solution for users with minimal technical knowledge or exper
 ## Downloads
 
 
-
+### For Windows and Nvidia GPU-based cards
 [Releases](https://github.com/diStyApps/seait/releases)
 
 $${\color{red}Note}$$
@@ -92,7 +92,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Multilanguage support
+- [ ] Multi-language support
 - [ ] More AI-related repos
 - [ ] Pre installed auto1111 version
 - [ ] Pre installed python version
@@ -100,7 +100,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 - [ ] App updater 
 - [ ] Remembering arguments
 - [ ] Adding arguments with input
-- [ ] Myabe arguments profiles
+- [ ] Maybe arguments profiles
 - [ ] Better event handling
 
 See the [open issues](https://github.com/diStyApps/seait/issues) for a full list of proposed features (and known issues).
