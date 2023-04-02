@@ -19,7 +19,9 @@
 
 [![](media/svg/patreon.svg)](https://www.patreon.com/distyx)
 [![](media/svg/supportme.svg)](https://coindrop.to/disty)
-  
+
+<img src="media/seait_image.jpg">
+
   <h1 align="center">Super Easy AI Installer Tool</h1>
   <h3 align="center">Use artificial intelligence tools quickly and easily.</h3>
   <p align="center">
@@ -56,6 +58,9 @@ The tool is designed to provide an easy-to-use solution for accessing and instal
 
 "Super Easy AI Installer Tool" is currently in early development phase and may have a few bugs. 
 But remains a great solution for users with minimal technical knowledge or expertise. Fixes underway.
+
+
+https://www.youtube.com/watch?v=aNFbemiq24E
 
 <img src="media/preview/1_0.0.1.jpg">
 <img src="media/preview/2_0.0.1.jpg">
