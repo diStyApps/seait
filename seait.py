@@ -19,7 +19,7 @@ import util.update_check_temp as update_check
 import util.support as support
 import util.repos as repos
 
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 APP_TITLE = f"Super Easy AI Installer Tool - Ver {__version__}"
 sg.theme('Dark Gray 15')
 python_ver = depcheck.check_python()

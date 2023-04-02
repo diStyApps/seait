@@ -31,12 +31,26 @@ def uninstall(app_info):
     subprocess.run(["rd", "/s", "/q", project_path], shell=True)
     print(f"{app_info['repo_name']} uninstalled")
 
-def launch(app_info,args):
+# def launch(app_info,args):
+#     project_path = get_project_path(app_info)
+#     venv_path = get_venv_path(app_info)
+#     launch_path = get_entry_point(app_info, 'launch')
+#     print(f"launching {app_info['repo_name']}")
+#     subprocess.run([f"{venv_path}/Scripts/python", launch_path,*args], cwd=project_path)
+
+def launch(app_info, args):
+    # print(app_info)
     project_path = get_project_path(app_info)
     venv_path = get_venv_path(app_info)
     launch_path = get_entry_point(app_info, 'launch')
     print(f"launching {app_info['repo_name']}")
-    subprocess.run([f"{venv_path}/Scripts/python", launch_path,*args], cwd=project_path)
+    
+    if launch_path.endswith(".py"):
+        subprocess.run([f"{venv_path}/Scripts/python", launch_path, *args], cwd=project_path)
+    elif launch_path.endswith(".bat"):
+        subprocess.run([launch_path, *args], cwd=project_path)
+    else:
+        raise ValueError("Unsupported file format for launch_path")    
 
 def install(app_info,args):
     print(f"installing {app_info['repo_name']}")
@@ -49,7 +63,13 @@ def install(app_info,args):
         install_requirements(app_info)
     # if app_info['id'] == 2:
     #     download_comfyui_models(app_info)
-    subprocess.run([f"{venv_path}/Scripts/python", install_path,*args], cwd=project_path)
+    # subprocess.run([f"{venv_path}/Scripts/python", install_path,*args], cwd=project_path)
+    if install_path.endswith(".py"):
+        subprocess.run([f"{venv_path}/Scripts/python", install_path, *args], cwd=project_path)
+    elif install_path.endswith(".bat"):
+        subprocess.run([install_path, *args], cwd=project_path)
+    else:
+        raise ValueError("Unsupported file format for launch_path")       
 
 def delete_virtual_environment(app_info,args=[]):
     venv_path = get_venv_path(app_info)

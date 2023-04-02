@@ -43,6 +43,7 @@ UPDATE_AVAILABLE_LBL_KEY = '-update_available_lbl-'
 CHECK_UPDATE_BTN_KEY = '-check_update_btn-'
 
 LATEST_RELEASE_URL = "https://github.com/diStyApps/seait/releases/latest"
+LATEST_RELEASE_CIVITAI_URL = "https://github.com/diStyApps/seait/releases/latest"
 CHECK_UPDATE_URL = "https://github.com/diStyApps/seait/releases"
 MODEL_URL_1_5 = "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.safetensors"
 
