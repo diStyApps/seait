@@ -20,7 +20,7 @@
 [![](media/svg/patreon.svg)](https://www.patreon.com/distyx)
 
 
-<img src="media/seait_image.jpg">
+<img src="media/covers/seait_image.jpg">
 
   <h1 align="center">Super Easy AI Installer Tool</h1>
   <h3 align="center">Use artificial intelligence tools quickly and easily.</h3>
@@ -60,7 +60,9 @@ The tool is designed to provide an easy-to-use solution for accessing and instal
 But remains a great solution for users with minimal technical knowledge or expertise. Fixes underway.
 
 
-https://www.youtube.com/watch?v=aNFbemiq24E
+[![0.0.2](media/covers/yt_0.0.2.jpg)](https://www.youtube.com/watch?v=_PJe_gSZn7I "0.0.2")
+[![0.0.1](media/covers/yt_0.0.1.jpg)](https://youtu.be/ePZzmMFb8Po "0.0.1")
+
 
 <img src="media/preview/1_0.0.3.jpg">
 <img src="media/preview/2_0.0.3.jpg">
@@ -139,6 +141,7 @@ distty@gmail.com
 
 * [AUTOMATIC1111- stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
 * [ComfyUI](https://github.com/comfyanonymous/ComfyUI)
+* [Kohya's GUI](https://github.com/bmaltais/kohya_ss)
 * [sd-webui-controlnet](https://github.com/Mikubill/sd-webui-controlnet)
 * [sd_dreambooth_extension](https://github.com/d8ahazard/sd_dreambooth_extension)
 
