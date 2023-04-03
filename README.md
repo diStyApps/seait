@@ -62,10 +62,10 @@ But remains a great solution for users with minimal technical knowledge or exper
 
 https://www.youtube.com/watch?v=aNFbemiq24E
 
-<img src="media/preview/1_0.0.1.jpg">
-<img src="media/preview/2_0.0.1.jpg">
+<img src="media/preview/1_0.0.3.jpg">
+<img src="media/preview/2_0.0.3.jpg">
 <img src="media/preview/3_0.0.1.jpg">
-
+<img src="media/preview/3_0.0.3.jpg">
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- Downloads -->

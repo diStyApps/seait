@@ -59,6 +59,8 @@ def install(app_info,args):
     project_path = get_project_path(app_info) 
     venv_path = get_venv_path(app_info)
     install_path = get_entry_point(app_info, 'install') 
+    print("venv_path",f"{venv_path}/Scripts/python")
+
     if app_info['install_requirements']:
         install_requirements(app_info)
     # if app_info['id'] == 2:
@@ -105,7 +107,16 @@ def install_requirements(app_info):
 
 def install_webui_extension(app_info):
     print(f"installing {app_info['repo_name']}")
+    # venv_path = os.path.abspath(f"{app_info['webui_path']}venv")
+    # project_path = f"{app_info['webui_path']}\extensions\{app_info['repo_name']}"
+    # print(f"{app_info['webui_path']}\extensions\{app_info['repo_name']}")
+
     subprocess.run(["git","clone",app_info["git_clone_url"],f"{app_info['webui_path']}\extensions\{app_info['repo_name']}"]) 
+    # subprocess.run([f"C:/repos/seait/stable-diffusion-webui/venv/Scripts/python","-m", "pip","install","-r","requirements.txt"], cwd=project_path)
+    # print(os.path.abspath(f"{app_info['webui_path']}\extensions\{app_info['repo_name']}"))
+    # print(os.path.abspath(f"{app_info['webui_path']}venv/Scripts/python"))
+
+    # C:\repos\seait\stable-diffusion-webui\venv/Scripts/python
     print(f"{app_info['repo_name']} installed")
 
 def update_webui_extension(app_info):

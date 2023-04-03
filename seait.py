@@ -19,7 +19,7 @@ import util.update_check_temp as update_check
 import util.support as support
 import util.repos as repos
 
-__version__ = '0.0.2'
+__version__ = '0.0.3'
 APP_TITLE = f"Super Easy AI Installer Tool - Ver {__version__}"
 sg.theme('Dark Gray 15')
 python_ver = depcheck.check_python()
@@ -28,6 +28,12 @@ usePreInstalledPython=True
 app_args = {
     1: ['--autolaunch'],
     2: [],
+    3: [],
+    4: [],
+    5: [],
+    6: [],
+    7: [],
+    8: [],
 }
 
 # jt.create_preferences_init()
@@ -157,7 +163,7 @@ def main():
         [
             sg.Frame('',[       
                     [
-                        sg.Button("Installs",k=INSTALLS_TAB_KEY,font=FONT,expand_x=True,size=(15,2),button_color=(color.DARK_GRAY,color.DARK_BLUE),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
+                        sg.Button("Installer",k=INSTALLS_TAB_KEY,font=FONT,expand_x=True,size=(15,2),button_color=(color.DARK_GRAY,color.DARK_BLUE),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
                         sg.Button("Launcher",k=LAUNCHER_TAB_KEY,disabled=False,font=FONT,expand_x=True,size=(15,2),button_color=(color.DARK_BLUE,color.DARK_GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
                         sg.Button("GPU",disabled=True,k=GPU_TAB_KEY,font=FONT,expand_x=True,size=(10,2),button_color=(color.DARK_BLUE,color.DARK_GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
                         sg.Button("AiPanic",disabled=True,k=AIPANIC_TAB_KEY,font=FONT,expand_x=True,size=(10,2),button_color=(color.DARK_BLUE,color.DARK_GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
@@ -340,7 +346,7 @@ def main():
                             sg.Text(app["title"],font=FONT,background_color=color.DARK_GRAY),
                         ],  
                         [
-                            sg.Button(get_last_commit_hash_local(app),k="setup",font=FONT,expand_x=True,size=(50,2),disabled=True),
+                            sg.Button(get_last_commit_hash_local(app),k="setup",font=FONT,expand_x=True,size=(40,2),disabled=True),
                         ],                      
                         [
                             sg.Button(button['button_text'], key=f"-applauncher_{app['id']}_{button['key']}_launcher_tab_btn-",font=FONT,expand_x=True,mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)) 
@@ -694,6 +700,7 @@ def main():
             if dialog_window(app_info['title'],method):
                 if method == "install":
                     window[f"-app_{app_info['id']}_install_install_tab_btn-"].update("Installing",disabled=True)
+                    
                     Thread(target=app_func.methods[method], args=(app_info,app_args[id_number],), daemon=True).start() 
                 else:
                     app_func.methods[method](app_info)
