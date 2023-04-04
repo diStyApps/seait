@@ -31,7 +31,7 @@ sg.set_options(
     suppress_error_popups = True,
 )
 
-__version__ = '0.0.3'
+__version__ = '0.0.4'
 APP_TITLE = f"Super Easy AI Installer Tool - Ver {__version__}"
 # sg.theme('Dark Gray 15')
 python_ver = depcheck.check_python()
