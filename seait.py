@@ -6,7 +6,7 @@ import subprocess
 import requests
 import re
 import webbrowser
-
+import threading
 from util.ui_flattener import flatten_ui_elements
 import util.colors as color
 import util.icons as ic
@@ -18,15 +18,27 @@ import util.app_func as app_func
 import util.update_check_temp as update_check
 import util.support as support
 import util.repos as repos
+import util.system_stats as system_stats
+import time
+
+sg.set_options(
+    # button_color=('white', 'green'),
+    # element_size=(50, 20),
+    # auto_size_buttons=True,
+    # font=('Helvetica', 14),
+    # background_color='lightgray',
+    # text_color='black',
+    suppress_error_popups = True,
+)
 
 __version__ = '0.0.3'
 APP_TITLE = f"Super Easy AI Installer Tool - Ver {__version__}"
-sg.theme('Dark Gray 15')
+# sg.theme('Dark Gray 15')
 python_ver = depcheck.check_python()
 git_ver = depcheck.check_git()
 usePreInstalledPython=True
 app_args = {
-    1: ['--autolaunch'],
+    1: ['--autolaunch', '--theme=dark'],
     2: [],
     3: [],
     4: [],
@@ -35,9 +47,7 @@ app_args = {
     7: [],
     8: [],
 }
-
 # jt.create_preferences_init()
-
 # jt.save_preference('usePreInstalledPython',usePreInstalledPython) 
 
 def repack(widget, option):
@@ -102,6 +112,7 @@ def get_last_commit_hash_local(app_info):
             # print(f"Error: Invalid value")
             return None
         # pass
+
 def get_last_commit_hash_remote(github_url):
     
     # extract the owner and repo name from the GitHub URL
@@ -157,6 +168,7 @@ def get_id(event):
     return int(re.search(r"_\d+", event).group(0)[1:])
 
 def main():
+    stop_event = threading.Event()
 
     #region layout
     top_column = [
@@ -165,7 +177,7 @@ def main():
                     [
                         sg.Button("Installer",k=INSTALLS_TAB_KEY,font=FONT,expand_x=True,size=(15,2),button_color=(color.DARK_GRAY,color.DARK_BLUE),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
                         sg.Button("Launcher",k=LAUNCHER_TAB_KEY,disabled=False,font=FONT,expand_x=True,size=(15,2),button_color=(color.DARK_BLUE,color.DARK_GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
-                        sg.Button("GPU",disabled=True,k=GPU_TAB_KEY,font=FONT,expand_x=True,size=(10,2),button_color=(color.DARK_BLUE,color.DARK_GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
+                        sg.Button("System Monitor",disabled=False,k=SYSTEM_STATS_TAB_KEY,font=FONT,expand_x=True,size=(20,2),button_color=(color.DARK_BLUE,color.DARK_GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
                         sg.Button("AiPanic",disabled=True,k=AIPANIC_TAB_KEY,font=FONT,expand_x=True,size=(10,2),button_color=(color.DARK_BLUE,color.DARK_GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
                         sg.Button("About",k=ABOUT_TAB_KEY,font=FONT,expand_x=False,size=(10,2),button_color=(color.DARK_BLUE,color.DARK_GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
                         sg.Button("EN",disabled=True,k=GPU_TAB_KEY,font=FONT,expand_x=False,size=(5,2),button_color=(color.DARK_BLUE,color.DARK_GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
@@ -187,7 +199,7 @@ def main():
     install_tab_column_left = [
         [
             sg.Frame('',[ 
-        #self
+        #seait
         [
             sg.Frame('',[       
                 [
@@ -213,7 +225,6 @@ def main():
                     sg.Button("Use pre installed",visible=False,k=DEP_APP_PYTHON_USE_PRE_INSTALL_KEY,font=FONT,expand_x=True,size=(20,1),button_color=(color.LIGHT_BLUE,color.GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
                     sg.Button("Install",k=DEP_APP_PYTHON_INSTALL_KEY,font=FONT,expand_x=True,size=(30,1),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
                     # sg.Button("Locate",k="setup",font=FONT,expand_x=True,size=(10,1),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
-                    # sg.Button("Refresh",k="setup",font=FONT,expand_x=True,size=(10,1),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
                 ],                                          
             ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
         ],                 
@@ -234,58 +245,10 @@ def main():
                             # sg.Button("Refresh",k="setup",font=FONT,expand_x=True,size=(10,1),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
                 ],                                          
             ],expand_x=True,expand_y=False,key=DEP_APP_GIT_INSTALLED_VERSION_FRAME_KEY,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
-        ],        
-        #torch2
-        # [
-        #     sg.Frame('',[       
-        #             [
-        #                 sg.Image(data=ic.torch,background_color=color.DARK_GRAY),
-        #                 sg.Text("Torch 2",font=FONT,background_color=color.DARK_GRAY),
-        #                 sg.Push(background_color=color.DARK_GRAY),
-        #             ],  
-        #             [
-        #                 sg.Button("Installed Version",k="setup",font=FONT,expand_x=True,size=(20,2),disabled=True),
-        #                 sg.Button("torch: 1.13.1",k="setup",font=FONT,expand_x=True,size=(20,2),disabled=True),
-        #             ],                                    
-        #             [
-        #                 sg.Button("Install",k="setup",font=FONT,expand_x=True,size=(10,1),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
-        #                 sg.Button("Uninstall",k="setup",font=FONT,expand_x=True,size=(10,1),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
-        #             ],                                          
-        #     ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
-        # ],                        
+        ],                              
             ],expand_x=True,expand_y=True,border_width=0,relief=sg.RELIEF_FLAT,element_justification="c",background_color="#2A2929")
         ],  
     ]
-
-    #region install_tab_column_right_dynamic
-
-    # install_tab_column_left = [   
-    #     [
-    #         sg.Frame("",layout=[
-    #             [
-    #                 sg.Frame('',[       
-    #                     [
-    #                         sg.Image(app["image_path"],background_color=color.DARK_GRAY),
-    #                         sg.Text(app["title"],font=FONT,background_color=color.DARK_GRAY),
-    #                     ],  
-    #                     [
-    #                         sg.Button(button_text=f"Installed Version - {app['installed_version_ver']}",k="setup",font=FONT,expand_x=True,size=(50,2),disabled=True),
-    #                         # sg.Button(button_text=f"{app['installed_ver_lbl_2']} - {app['installed_version_ver']}",k="setup",font=FONT,expand_x=True,size=(25,2),disabled=True),
-    #                     ],   
-    #                     [
-    #                         sg.Button(button['button_text'], key=f"-app_{app['id']}_{button['key']}_install_tab_btn-",font=FONT,expand_x=True,mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)) 
-    #                         for button in app['buttons']
-    #                     ]                                                                                
-    #                 ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
-    #             ], 
-    #             ],expand_x=True,expand_y=False,border_width=0,relief=sg.RELIEF_FLAT,element_justification="c",background_color=color.GRAY
-    #         )
-    #     ]
-    #     for app in dependencies if app['visible']
-    # ]
-
-    #endregion
-
 
     install_tab_column_right = [   
         [
@@ -327,13 +290,6 @@ def main():
         [
             sg.Column(install_tab_column_right, key=C2_INSTALLS_KEY, element_justification='l', expand_x=True,expand_y=True,visible=True,scrollable=True,vertical_scroll_only=True),
         ],
-        # [
-        #     sg.Frame('',[       
-        #         # [
-        #         #     # sg.Button("Install Selected",k=INSTALLS_TAB_KEY,font=FONT,expand_x=True,size=(15,2),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
-        #         # ],                          
-        #     ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
-        # ], 
     ]
 
     launcher_column_left = [
@@ -377,55 +333,68 @@ def main():
         # for app in apps if app['type'] == "app" #vertical
     ]
    
-    # launcher_column_right = [
-    #         [
-    #             sg.Frame('',[  
-    #         #ComfyUI
-    #         [
-    #             sg.Frame('',[       
-    #                 [
-    #                     sg.Image("C:/repos/disty_standalone_auto1111_webui/media/cu.png",background_color=color.DARK_GRAY,size=(30,30)),
-    #                     sg.Text("ComfyUI",font=FONT,background_color=color.DARK_GRAY),
-    #                 ],  
-    #                 [
-    #                     sg.Button("64ca71757a253229a00ec6bbda9abc9331718e3c",k="setup",font=FONT,expand_x=True,size=(35,2),disabled=True),
-    #                 ],                
-    #                 [
-    #                             sg.Button("Standalone",k="setup",font=FONT,expand_x=True,size=(15,1),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN),disabled=True),
-    #                             sg.Button("Launch",k="setup",font=FONT,expand_x=True,size=(10,1),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN),disabled=True),
-    #                 ],                                          
-    #             ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
-                
-    #         ],   
-    #         [
-    #             sg.Frame('',[       
-    #                 [
-    #                     sg.Image("C:/repos/disty_standalone_auto1111_webui/media/Git-logo.png",background_color=color.DARK_GRAY,size=(30,30)),
-    #                     sg.Text("Arguments",font=FONT,background_color=color.DARK_GRAY),
-    #                 ],  
-    #                 # [
-    #                 #     sg.Button("API only",k="setup",font=FONT,expand_x=True,size=(20,2),disabled=True),
-    #                 # ],                
-    #                 # [
-    #                 #             sg.Button("--xformers",k="setup",font=FONT,expand_x=True,size=(15,1),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
-    #                 #             sg.Button("--force-enable-xformers",k="setup",font=FONT,expand_x=True,size=(15,1),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
-    #                 #             sg.Button("--api",k="setup",font=FONT,expand_x=True,size=(10,1),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
-    #                 # ],   
-    #                 [
-        
-    #                             sg.Button("--lowvram",k="setup",font=FONT,expand_x=True,size=(20,1),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
-    #                             sg.Button("--lowram",k="setup",font=FONT,expand_x=True,size=(20,1),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
-    #                 ],
-    #                 [
-    #                             sg.Button("--medvram",k="setup",font=FONT,expand_x=True,size=(20,1),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
-    #                             sg.Button("--xformers",k="setup",font=FONT,expand_x=True,size=(20,1),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
-    #                 ],                                                           
-    #             ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
-                
-    #         ],                           
-    #             ],expand_x=True,expand_y=True,border_width=0,relief=sg.RELIEF_FLAT,element_justification="c",background_color="#2A2929",visible=False)
-    #         ],  
-    #     ]
+    system_stats_tab_column = [
+        [
+            sg.Frame('',[ 
+                [
+                    sg.Frame('',[ 
+
+                        # [
+                        #     sg.Button("Start",key="-start_monitor-",size=(15,1),font=FONT,expand_x=True,expand_y=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=False),
+
+                        #     sg.Button("Update Interval",key="-start_monitor-",font=FONT,expand_x=True,expand_y=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=False),
+
+                        #     sg.In("1",font=FONT,size=(5,1),expand_x=True,expand_y=True,justification="c",background_color=color.LIGHT_GRAY),   
+                        # ],
+                        # [
+                        #     # sg.Button("",key=SYSTEM_STATS_CPU_USAGE_PRECENT_LBL_KEY,size=(40,2),font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
+                        #     # sg.Button("1",size=(20,2),font=FONT,expand_x=True,expand_y=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=False),
+                        #     sg.Slider(range=(0, 10), orientation='h',
+                        #         key='-slider-',size=(20,15),expand_x=True,disable_number_display=True,visible=True,background_color=color.LIGHT_GRAY),
+                        #     sg.Button("Start",size=(15,2),font=FONT,expand_x=True,expand_y=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=False),
+                        # ],         
+                        [
+                            sg.Button("CPU Usage",size=(15,2),font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
+                            sg.Button("",key=SYSTEM_STATS_CPU_USAGE_PRECENT_LBL_KEY,size=(40,2),font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
+                        ],                         
+                        [
+                            sg.Button("RAM Usage",size=(15,2),font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),        
+                            sg.Button("",key=SYSTEM_STATS_RAM_USAGE_LBL_KEY,size=(40,2),font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
+                        ],                                     
+                    ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="c",background_color=color.DARK_GRAY)
+                ],                                  
+            ], expand_x=True, expand_y=False, border_width=5, pad=(10,10), relief=sg.RELIEF_FLAT, element_justification="c", background_color=color.DARK_GRAY)
+        ],  
+    ]
+
+    gpu_stats = system_stats.get_gpu_stats()
+    for i, gpu_stat in enumerate(gpu_stats):
+        system_stats_tab_column.append([
+            sg.Frame('',[
+                [
+                    sg.Text(gpu_stat['name'], key=f"-{SYSTEM_STATS_GPU_NAME_LBL_KEY}_{i}-", font=FONT_H1, background_color=color.DARK_GRAY, text_color=color.LIGHT_GRAY),
+                ],
+                [
+                    sg.Frame("",[       
+                            [
+                                sg.Button("Temperature",size=(15,2),font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
+            
+                                sg.Button('', key=f"-{SYSTEM_STATS_GPU_TEMP_LBL_KEY}_{i}-",size=(40,2),font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
+                            ], 
+                            [
+                                sg.Button("VRAM Usage",size=(15,2),font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
+                                sg.Button(f"",size=(40,2), key=f"-{SYSTEM_STATS_GPU_VRAM_LBL_KEY}_{i}-",font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
+                            ],                                 
+                            [
+                                sg.Button("Power Usage",size=(15,2),font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
+            
+                                sg.Button(f"",size=(40,2), key=f"-{SYSTEM_STATS_GPU_POWER_USAGE_LBL_KEY}_{i}-",font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
+                            ],                              
+                        ],expand_x=True,expand_y=True,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
+                ]
+            ], expand_x=True, expand_y=False, border_width=5, pad=(10,10), relief=sg.RELIEF_FLAT, element_justification="c", background_color=color.DARK_GRAY)
+        ])
+
 
     about_tab_column = [
             [
@@ -462,8 +431,7 @@ def main():
                 sg.Column(install_tab_column_right_scrollable, key=INSTALL_COLUMN_LEFT_SCROLLABLE_KEY, element_justification='l', expand_x=True,expand_y=True,visible=True),
                 sg.Column(launcher_column_left, key=C1_LAUNCH_KEY, element_justification='l', expand_x=True,expand_y=True,visible=False),
                 sg.Column(about_tab_column, key=C1_ABOUT_KEY, element_justification='c', expand_x=True,expand_y=True,visible=False),
-
-                # sg.Column(launcher_column_right, key=C2_LAUNCH_KEY, element_justification='r', expand_x=True,expand_y=True,visible=False),                
+                sg.Column(system_stats_tab_column, key=C1_SYSTEM_STATS_KEY, element_justification='c', expand_x=True,expand_y=True,visible=False),
             ],        
             [
                 bottom_column,
@@ -475,39 +443,38 @@ def main():
     window = sg.Window(APP_TITLE,layout,finalize=True, resizable=True,enable_close_attempted_event=False,background_color=color.GRAY_9900)
     # window.Maximize()    
     window.set_min_size((500,300))
-    # c1_install_rtl_widget:sg.Column = window[C1_INSTALLS_RTL_KEY]
-    # c2_install_rtl_widget:sg.Column = window[C2_INSTALLS_RTL_KEY]
-    # c1_launcher_rtl_widget:sg.Column = window[C1_LAUNCH_RTL_KEY]
-    # c2_launcher_rtl_widget:sg.Column = window[C2_LAUNCH_RTL_KEY]
 
     c1_install_col:sg.Column = window[C1_INSTALLS_KEY]
     c2_install_col_scroll:sg.Column = window[INSTALL_COLUMN_LEFT_SCROLLABLE_KEY]
-    c2_install_col:sg.Column = window[C2_INSTALLS_KEY]
     c1_launcher_col:sg.Column = window[C1_LAUNCH_KEY]
     c1_about_col:sg.Column = window[C1_ABOUT_KEY]
-    
-    # c2_launcher_col:sg.Column = window[C2_LAUNCH_KEY]
+    c1_system_stats_col:sg.Column = window[C1_SYSTEM_STATS_KEY]
     c2_install_widget:sg.Column = window[C2_INSTALLS_KEY].widget
-
-    #UPDATE_BTN_KEY
-    update_btn_elem:sg.Button = window[UPDATE_BTN_KEY]
-
     install_tab_btn_elem:sg.Button = window[INSTALLS_TAB_KEY]
     launcher_tab_btn_elem:sg.Button = window[LAUNCHER_TAB_KEY]
     about_tab_btn_elem:sg.Button = window[ABOUT_TAB_KEY]
+    system_stats_tab_btn_elem:sg.Button = window[SYSTEM_STATS_TAB_KEY]
     use_python_pre_install_btn_elem:sg.Button = window[DEP_APP_PYTHON_USE_PRE_INSTALL_KEY]
     install_python_btn_elem:sg.Button = window[DEP_APP_PYTHON_INSTALL_KEY]
     install_git_btn_elem:sg.Button = window[DEP_APP_GIT_INSTALL_KEY]
     installed_version_python_lbl_elem:sg.Text = window[DEP_APP_PYTHON_INSTALLED_VERSION_LBL_KEY]
-    #DEP_APP_GIT_INSTALLED_VERSION_LBL_KEY
     installed_git_version_lbl_elem:sg.Text = window[DEP_APP_GIT_INSTALLED_VERSION_LBL_KEY]
-    #DEP_APP_PRE_INSTALLED_VERSION_LBL_KEY
     pre_installed_version_lbl_elem:sg.Button = window[DEP_APP_PRE_INSTALLED_VERSION_LBL_KEY]
-    
-    #UPDATE_AVAILABLE_LBL_KEY
-
     update_available_lbl_elem:sg.Text = window[UPDATE_AVAILABLE_LBL_KEY]
 
+    tab_elements = {
+        INSTALLS_TAB_KEY: [c1_install_col, c2_install_col_scroll],
+        LAUNCHER_TAB_KEY: [c1_launcher_col],
+        ABOUT_TAB_KEY: [c1_about_col],
+        SYSTEM_STATS_TAB_KEY: [c1_system_stats_col]
+    }
+
+    tab_btn_elements = {
+        INSTALLS_TAB_KEY: install_tab_btn_elem,
+        LAUNCHER_TAB_KEY: launcher_tab_btn_elem,
+        ABOUT_TAB_KEY: about_tab_btn_elem,
+        SYSTEM_STATS_TAB_KEY: system_stats_tab_btn_elem
+    }
 
     def convert_button_disable():
         use_python_pre_install_btn_elem.update(button_color=(color.LIGHT_BLUE,color.GRAY))
@@ -621,9 +588,37 @@ def main():
                     update_extension_btn.update(disabled=True)
                     uninstall_extension_btn.update(disabled=True)
 
+    def system_stats_monitor(stop_event,update_interval=1):
+            while not stop_event.is_set():
+                window[SYSTEM_STATS_CPU_USAGE_PRECENT_LBL_KEY].update(f"{system_stats.get_cpu_stats()['cpu_percent']} %")
+                window[SYSTEM_STATS_RAM_USAGE_LBL_KEY].update(f"{system_stats.get_ram_stats()['ram_used']} / {system_stats.get_ram_stats()['ram_total']}") 
+                for i, gpu_stat in enumerate(system_stats.get_gpu_stats()):
+                    window[f"-{SYSTEM_STATS_GPU_NAME_LBL_KEY}_{i}-"].update(gpu_stat['name'])
+                    window[f"-{SYSTEM_STATS_GPU_TEMP_LBL_KEY}_{i}-"].update(f"{gpu_stat['temperature']} °C")
+                    window[f"-{SYSTEM_STATS_GPU_POWER_USAGE_LBL_KEY}_{i}-"].update(f"{gpu_stat['power_usage']:.2f} / {gpu_stat['card_power']:.2f}  W")
+                    window[f"-{SYSTEM_STATS_GPU_VRAM_LBL_KEY}_{i}-"].update(f"{gpu_stat['vram_used']} / {gpu_stat['vram_total']}")            
+            time.sleep(update_interval)
+
     def default_lancher_buttons():
-        # window["-appargs_1_--xformers_launcher_tab_btn-"].update(button_color=(color.GRAY_9900,color.DARK_GREEN))
+        window["-appargs_1_--theme=dark_launcher_tab_btn-"].update(button_color=(color.GRAY_9900,color.DARK_GREEN))
         window["-appargs_1_--autolaunch_launcher_tab_btn-"].update(button_color=(color.GRAY_9900,color.DARK_GREEN))
+
+    def handle_tab_event(event, tab_elements, tab_btn_elements, active_color, inactive_color):
+        if event == "-system_stats_tab-":
+            stop_event.clear()
+            t = threading.Thread(target=system_stats_monitor, args=(stop_event,1,))
+            t.start()
+        else:
+            stop_event.set()
+
+        for tab_key in tab_elements:
+            is_target = tab_key == event
+            for element in tab_elements[tab_key]:
+                element.update(visible=is_target)
+            tab_btn_elements[tab_key].update(button_color=(active_color if is_target else inactive_color))
+
+    active_color = (color.DARK_GRAY, color.DARK_BLUE)
+    inactive_color = (color.DARK_BLUE, color.DARK_GRAY)
 
     expand_column_helper(c2_install_widget)
     flatten_ui_elements(window)
@@ -660,38 +655,9 @@ def main():
             else:
                 installed_git_version_lbl_elem.update("Download the installers version")
 
-        #replace with tab_manager
-        if event == INSTALLS_TAB_KEY:
-            c1_launcher_col.update(visible=False)
-            c1_about_col.update(visible=False)
-            c1_install_col.update(visible=True)
-            c2_install_col_scroll.update(visible=True)
-
-            # c2_launcher_col.update(visible=False)
-            install_tab_btn_elem.update(button_color=(color.DARK_GRAY,color.DARK_BLUE))
-            launcher_tab_btn_elem.update(button_color=(color.DARK_BLUE,color.DARK_GRAY))
-            about_tab_btn_elem.update(button_color=(color.DARK_BLUE,color.DARK_GRAY))
-
-        if event == LAUNCHER_TAB_KEY:
-            c1_install_col.update(visible=False)
-            c2_install_col_scroll.update(visible=False)
-            c1_about_col.update(visible=False)
-            c1_launcher_col.update(visible=True)
-
-            # c2_launcher_col.update(visible=True)
-            launcher_tab_btn_elem.update(button_color=(color.DARK_GRAY,color.DARK_BLUE))
-            install_tab_btn_elem.update(button_color=(color.DARK_BLUE,color.DARK_GRAY))
-            about_tab_btn_elem.update(button_color=(color.DARK_BLUE,color.DARK_GRAY))
-
-        if event == ABOUT_TAB_KEY:
-            c1_install_col.update(visible=False)
-            c2_install_col_scroll.update(visible=False)
-            c1_launcher_col.update(visible=False)
-            c1_about_col.update(visible=True)
-            about_tab_btn_elem.update(button_color=(color.DARK_GRAY,color.DARK_BLUE))
-            launcher_tab_btn_elem.update(button_color=(color.DARK_BLUE,color.DARK_GRAY))
-            install_tab_btn_elem.update(button_color=(color.DARK_BLUE,color.DARK_GRAY))
-
+        if event in tab_elements:
+            handle_tab_event(event, tab_elements, tab_btn_elements, active_color, inactive_color)
+   
         if event.startswith("-app_") and event.endswith("_btn-"):
             id_number = get_id(event)
             method = re.search(r"-app_\d+_(.+)_install_tab_btn-", event).group(1) 
@@ -738,7 +704,9 @@ def main():
         support.buttons(event)
         repos.buttons(event)
 
+        if event == "-start_monitor-":
+            Thread(target=system_stats_monitor, args=(), daemon=True).start() 
 
 if __name__ == '__main__':
-    
+
     main() 

@@ -3,6 +3,7 @@ dist/
 build/
 tests/
 output/
+*.exe
 __pycache__/
 util\__pycache__/
 util/__pycache__/

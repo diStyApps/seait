@@ -1,9 +1,12 @@
 # PBAR_KEY = 'progress_bar'
 
 FONT = 'Arial 12'
+FONT_H1 = 'Arial 14'
+
 INSTALLS_TAB_KEY = '-installs_tab-'
 LAUNCHER_TAB_KEY = '-launcher_tab-'
 GPU_TAB_KEY = '-gpu_tab-'
+SYSTEM_STATS_TAB_KEY = '-system_stats_tab-'
 AIPANIC_TAB_KEY = '-aipanic_tab-'
 ABOUT_TAB_KEY = '-about_tab-'
 C1_INSTALLS_KEY = '-c1_installs-'
@@ -11,6 +14,8 @@ C2_INSTALLS_KEY = '-c2_installs-'
 C1_LAUNCH_KEY = '-c1_launch-'
 C2_LAUNCH_KEY = '-c2_launch-'
 C1_ABOUT_KEY = '-c1_about-'
+#system_stats
+C1_SYSTEM_STATS_KEY = '-c1_system_stats-'
 
 INSTALLS_TAB_RTL_KEY = '-installs_tab_rtl-'
 LAUNCHER_TAB_RTL_KEY = '-launcher_tab_rtl-'
@@ -46,6 +51,16 @@ LATEST_RELEASE_URL = "https://github.com/diStyApps/seait/releases/latest"
 LATEST_RELEASE_CIVITAI_URL = "https://github.com/diStyApps/seait/releases/latest"
 CHECK_UPDATE_URL = "https://github.com/diStyApps/seait/releases"
 MODEL_URL_1_5 = "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.safetensors"
+
+#power_usage
+SYSTEM_STATS_GPU_POWER_USAGE_LBL_KEY = '-system_stats_gpu_power_usage_lbl'
+SYSTEM_STATS_GPU_VRAM_LBL_KEY = '-system_stats_gpu_vram_lbl'
+SYSTEM_STATS_GPU_TEMP_LBL_KEY = '-system_stats_gpu_temp_lbl'
+SYSTEM_STATS_GPU_NAME_LBL_KEY = '-system_stats_gpu_name_lbl'
+SYSTEM_STATS_CPU_USAGE_PRECENT_LBL_KEY = '-system_stats_cpu_usage_precent_lbl'
+SYSTEM_STATS_RAM_USAGE_LBL_KEY = '-system_stats_ram_usage_lbl'
+
+
 
 CN_MODELS = [
     "cldm_v15.yaml",

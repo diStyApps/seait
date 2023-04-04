@@ -68,6 +68,7 @@ But remains a great solution for users with minimal technical knowledge or exper
 <img src="media/preview/2_0.0.3.jpg">
 <img src="media/preview/3_0.0.1.jpg">
 <img src="media/preview/3_0.0.3.jpg">
+<img src="media/preview/4_0.0.4.jpg">
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- Downloads -->
