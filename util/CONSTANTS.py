@@ -29,6 +29,7 @@ LAUNCH_A11WEBUI_BTN_KEY = '-launch_a11webui_button-'
 LAUNCH_A11API_BTN_KEY = '-launch_a11api_button-'
 
 INSTALL_COLUMN_LEFT_SCROLLABLE_KEY = '-install_column_left_scrollable_key-'
+LAUNCH_COLUMN_LEFT_SCROLLABLE_KEY = '-launch_column_left_scrollable_key-'
 
 DEP_APP_PYTHON_USE_PRE_INSTALL_KEY = '-dep_app_python_use_pre_install-'
 DEP_APP_PYTHON_INSTALL_KEY = '-dep_app_python_install-'

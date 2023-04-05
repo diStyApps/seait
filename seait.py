@@ -299,40 +299,120 @@ def main():
                     sg.Frame('',[       
                         [
                             sg.Image(app["image_path"],background_color=color.DARK_GRAY),
-                            sg.Text(app["title"],font=FONT,background_color=color.DARK_GRAY),
+                            # sg.Text(app["title"],font=FONT,background_color=color.DARK_GRAY,expand_x=True),
+                            sg.Button(app["title"],font=FONT,expand_x=True,size=(25,1),disabled=True),
                         ],  
+                    ],expand_x=True,expand_y=False,border_width=5,pad=(3,3),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
+                ],                           
+            ],expand_x=True,expand_y=False,border_width=0,relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.GRAY)
+        # for app in apps if app['type'] == "app"
+        ]
+        for app in apps if app['type'] #== "app" #vertical
+    ]
+   
+    launcher_tab_column_left_scrollable = [
+        # [
+        #     sg.Button("SD",k=f"-app_install_tab_installed_github_lbl_key-",font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN),disabled=False),
+        #     sg.Button("LLM",k=f"-app_install_tab_installed_github_lbl_key-",font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN),disabled=False),
+        #     sg.Button("Other",k=f"-app_install_tab_installed_github_lbl_key-",font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN),disabled=False),
+        # ],
+        [
+            sg.Column(launcher_column_left, key=C1_LAUNCH_KEY, element_justification='l', expand_x=True,expand_y=True,visible=True,scrollable=True,vertical_scroll_only=True,justification='c',sbar_width=15,sbar_trough_color=0,sbar_arrow_width=8),
+        ],
+    ] 
+      
+    launcher_column_right = [
+        [
+            sg.Frame('',[ 
+                [
+                    sg.Frame('',[       
+                        # [
+                        #     sg.Image(apps[0]["image_path"],background_color=color.DARK_GRAY),
+                        #     # sg.Text("app",font=FONT,background_color=color.DARK_GRAY),
+                        #     sg.Button(apps[0]["title"],font=FONT,expand_x=True,size=(30,2),disabled=True),
+
+                        # ],  
                         [
-                            sg.Button(get_last_commit_hash_local(app),k="setup",font=FONT,expand_x=True,size=(40,2),disabled=True),
-                        ],                      
+                            sg.Image(apps[0]["image_path"],background_color=color.DARK_GRAY),
+                            sg.Text(apps[0]["title"],font=FONT,background_color=color.DARK_GRAY),
+                            sg.Push(background_color=color.DARK_GRAY),
+                            # sg.Button("",k="setup",size=(3,1),font=FONT,mouseover_colors=(color.GRAY_9900,color.DARK_GREEN),button_color=(color.GRAY_9900,color.GRAY)),
+                        ],        
                         [
-                            sg.Button(button['button_text'], key=f"-applauncher_{app['id']}_{button['key']}_launcher_tab_btn-",font=FONT,expand_x=True,mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)) 
-                            for button in app['launch_buttons']
+                            sg.Button(apps[0]['github_url'],k=f"-app_{apps[0]['id']}_install_tab_installed_github_lbl_key-",font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN),disabled=False),
+                        ],                                         
+                        [
+                            sg.Button("Installed Version",visible=True,font=FONT,expand_x=True,size=(20,1),disabled=True),
+                            # sg.Button(app['installed_version'],visible=False,k=f"-lbl_app_{app['id']}_install_tab_installed_version_lbl_key-",size=(40,1),font=FONT,expand_x=True,disabled=True)
+                            sg.Button(get_last_commit_hash_local(apps[0]),visible=True,k=f"-lbl_app_{apps[0]['id']}_install_tab_installed_version_lbl_key-",size=(40,1),font=FONT,expand_x=True,disabled=True)
+                            # sg.Button(get_last_commit_hash_local(f"{app['webui_path']}\extensions\{app['repo_name']}"),visible=False,k=f"-lbl_app_{app['id']}_install_tab_installed_version_lbl_key-",size=(40,1),font=FONT,expand_x=True,disabled=True)
+                        ],                        
+                        [
+                            sg.Button(button['button_text'], key=f"-applauncher_{apps[0]['id']}_{button['key']}_launcher_tab_btn-",font=FONT,expand_x=True,mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)) 
+                            for button in apps[0]['launch_buttons']
                         ]                                  
                     ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
                 ],   
+
+            ],expand_x=True,expand_y=False,border_width=0,relief=sg.RELIEF_FLAT,element_justification="c",background_color=color.GRAY)
+        ],
+        [
+            sg.Frame("",[       
                 [
                     sg.Frame('',[       
                         [
                             sg.Image(ic.args,background_color=color.DARK_GRAY,size=(30,30)),
                             sg.Text("Arguments",font=FONT,background_color=color.DARK_GRAY),
                         ],  
-                    ],expand_x=True,expand_y=False,border_width=0,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)            
-                ],          
+                    ],expand_x=True,expand_y=False,border_width=0,pad=(10,3),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)            
+                ],  
                 [
-                    sg.Frame('',[                                 
+                    sg.Frame('',[  
+ 
                         [
-                            sg.Button(option["button_text"], key=f"-appargs_{app['id']}_{option['button_text']}_launcher_tab_btn-", font=FONT, expand_x=True,
+                            sg.Button(option["button_text"],size=(24,1), key=f"-appargs_{apps[0]['id']}_{option['button_text']}_launcher_tab_btn-", font=FONT, expand_x=True,
                                     mouseover_colors=(color.GRAY_9900, color.DARK_GREEN)) for option in arg
                         ]
-                        for arg in app['args']
-                    ],expand_x=True,expand_y=True,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
-                ],                           
-            ],expand_x=True,expand_y=True,border_width=0,relief=sg.RELIEF_FLAT,element_justification="c",background_color=color.GRAY)
-        for app in apps if app['type'] == "app"
-        ]
-        # for app in apps if app['type'] == "app" #vertical
+                        for arg in apps[0]['args']
+                    ],expand_x=True,expand_y=False,border_width=5,pad=(10,0),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
+                ],                            
+                ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
+        ],   
+        [
+                sg.Frame("",[       
+
+                    [
+
+                    ]                              
+                    ],expand_x=True,expand_y=True,border_width=0,relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.GRAY_1111)
+            ],                 
+
+        [
+            sg.Frame("",[       
+
+                [
+                    sg.MLine("--xformers",k="CONSOLE_ML_KEY",visible=True,text_color=color.TERMINAL_GREEN2,background_color=color.DARK_GRAY,border_width=10,sbar_width=20,sbar_trough_color=0,
+                            autoscroll=True, auto_refresh=True,expand_x=True,expand_y=True,font=FONT,no_scrollbar=True,pad=(10,10)),
+                ]                              
+                ],expand_x=True,expand_y=True,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
+        ], 
+        [
+            sg.Frame("",[       
+
+
+
+                    [
+                        sg.Button("Available Version",visible=False,font=FONT,expand_x=True,size=(20,1),disabled=True),
+                        sg.Button(get_last_commit_hash_remote(apps[0]['github_url']),visible=False,size=(40,1),k=f"-lbl_app_{apps[0]['id']}_install_tab_installed_version_lbl_key-",font=FONT,expand_x=True,disabled=True),
+                    ],  
+                    [
+                        sg.Button(button['button_text'],disabled=False, key=f"-app_{apps[0]['id']}_{button['key']}_install_tab_btn-",font=FONT,expand_x=True,mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)) 
+                        for button in apps[0]['buttons'] if apps[0]['status']
+                    ]                              
+                ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
+        ]        
     ]
-   
+
     system_stats_tab_column = [
         [
             sg.Frame('',[ 
@@ -427,9 +507,10 @@ def main():
                 top_column, 
             ],
             [
-                sg.Column(install_tab_column_left, key=C1_INSTALLS_KEY, element_justification='l', expand_x=True,expand_y=True,visible=True,scrollable=False,vertical_scroll_only=True),
+                sg.Column(install_tab_column_left, key=C1_INSTALLS_KEY, element_justification='l', expand_x=True,expand_y=True,scrollable=False,vertical_scroll_only=True,visible=True),
                 sg.Column(install_tab_column_right_scrollable, key=INSTALL_COLUMN_LEFT_SCROLLABLE_KEY, element_justification='l', expand_x=True,expand_y=True,visible=True),
-                sg.Column(launcher_column_left, key=C1_LAUNCH_KEY, element_justification='l', expand_x=True,expand_y=True,visible=False),
+                sg.Column(launcher_tab_column_left_scrollable, key=LAUNCH_COLUMN_LEFT_SCROLLABLE_KEY, element_justification='l', expand_x=True,expand_y=True,visible=False),
+                sg.Column(launcher_column_right, key=C2_LAUNCH_KEY, element_justification='r', expand_x=True,expand_y=True,visible=False),
                 sg.Column(about_tab_column, key=C1_ABOUT_KEY, element_justification='c', expand_x=True,expand_y=True,visible=False),
                 sg.Column(system_stats_tab_column, key=C1_SYSTEM_STATS_KEY, element_justification='c', expand_x=True,expand_y=True,visible=False),
             ],        
@@ -440,16 +521,22 @@ def main():
 
     #endregion layout
 
-    window = sg.Window(APP_TITLE,layout,finalize=True, resizable=True,enable_close_attempted_event=False,background_color=color.GRAY_9900)
+    window = sg.Window(APP_TITLE,layout,finalize=True,size=(1000,800), resizable=True,enable_close_attempted_event=False,background_color=color.GRAY_9900)
     # window.Maximize()    
-    window.set_min_size((500,300))
+    # window.set_min_size((800,600))
+    # window.set_min_size((500,300))
+
 
     c1_install_col:sg.Column = window[C1_INSTALLS_KEY]
     c2_install_col_scroll:sg.Column = window[INSTALL_COLUMN_LEFT_SCROLLABLE_KEY]
+    c2_launch_col_scroll:sg.Column = window[LAUNCH_COLUMN_LEFT_SCROLLABLE_KEY]
     c1_launcher_col:sg.Column = window[C1_LAUNCH_KEY]
+    c2_launcher_col:sg.Column = window[C2_LAUNCH_KEY]
     c1_about_col:sg.Column = window[C1_ABOUT_KEY]
     c1_system_stats_col:sg.Column = window[C1_SYSTEM_STATS_KEY]
     c2_install_widget:sg.Column = window[C2_INSTALLS_KEY].widget
+    c1_launcher_widget:sg.Column = window[C1_LAUNCH_KEY].widget
+
     install_tab_btn_elem:sg.Button = window[INSTALLS_TAB_KEY]
     launcher_tab_btn_elem:sg.Button = window[LAUNCHER_TAB_KEY]
     about_tab_btn_elem:sg.Button = window[ABOUT_TAB_KEY]
@@ -464,7 +551,7 @@ def main():
 
     tab_elements = {
         INSTALLS_TAB_KEY: [c1_install_col, c2_install_col_scroll],
-        LAUNCHER_TAB_KEY: [c1_launcher_col],
+        LAUNCHER_TAB_KEY: [c2_launch_col_scroll,c2_launcher_col],
         ABOUT_TAB_KEY: [c1_about_col],
         SYSTEM_STATS_TAB_KEY: [c1_system_stats_col]
     }
@@ -621,10 +708,14 @@ def main():
     inactive_color = (color.DARK_BLUE, color.DARK_GRAY)
 
     expand_column_helper(c2_install_widget)
+    expand_column_helper(c1_launcher_widget)
+
     flatten_ui_elements(window)
     git_event_handler()
     python_event_handler()
-    default_lancher_buttons()
+    # default_lancher_buttons()
+
+    window.write_event_value(LAUNCHER_TAB_KEY,'')    
 
     for app in apps:
         check_installation_status(app)
