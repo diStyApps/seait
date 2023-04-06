@@ -20,12 +20,12 @@ def clone_repo(app_info):
     subprocess.run(["git", "clone", app_info["git_clone_url"], project_path]) 
     # print(f"{app_info['repo_name']} cloned")
 
-def update(app_info):
+def update(app_info,args=[]):
     project_path = get_project_path(app_info)
     print(f"updating {app_info['repo_name']}")
     subprocess.run(["git", "pull"], cwd=project_path)
 
-def uninstall(app_info):
+def uninstall(app_info,args=[]):
     project_path = get_project_path(app_info)
     print(f"Uninstalling {app_info['repo_name']}")
     subprocess.run(["rd", "/s", "/q", project_path], shell=True)
@@ -38,7 +38,7 @@ def uninstall(app_info):
 #     print(f"launching {app_info['repo_name']}")
 #     subprocess.run([f"{venv_path}/Scripts/python", launch_path,*args], cwd=project_path)
 
-def launch(app_info, args):
+def launch(app_info ,args=[]):
     # print(app_info)
     project_path = get_project_path(app_info)
     venv_path = get_venv_path(app_info)
@@ -52,7 +52,7 @@ def launch(app_info, args):
     else:
         raise ValueError("Unsupported file format for launch_path")    
 
-def install(app_info,args):
+def install(app_info,args=[]):
     print(f"installing {app_info['repo_name']}")
     clone_repo(app_info)
     create_virtual_environment(app_info)
@@ -79,7 +79,7 @@ def delete_virtual_environment(app_info,args=[]):
     subprocess.run(["rd", "/s", "/q", venv_path], shell=True)
     print(f"virtual environment deleted for {app_info['repo_name']}")
 
-def create_virtual_environment(app_info):
+def create_virtual_environment(app_info,args=[]):
     venv_path = get_venv_path(app_info)
     print(f"creating virtual environment for {app_info['repo_name']}")
     if usePreInstalledPython:

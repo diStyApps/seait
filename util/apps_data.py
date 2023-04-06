@@ -25,10 +25,10 @@ apps = [
                     "button_text": "Install",
                     "key": "install",
                 },
-                # {
-                #     "button_text": "Update",
-                #     "key": "update",
-                # },
+                {
+                    "button_text": "Update",
+                    "key": "update",
+                },
                 {
                     "button_text": "Delete venv",
                     "key": "delete_venv",
@@ -47,10 +47,10 @@ apps = [
                     "button_text": "Launch",
                     "key": "launch",
                 },           
-                {
-                    "button_text": "Update",
-                    "key": "update",
-                },                                                 
+                # {
+                #     "button_text": "Update",
+                #     "key": "update",
+                # },                                                 
             ],            
             "args": [
                 [
@@ -246,11 +246,7 @@ apps = [
                     {
                         "button_text": "--listen",
                         "key": "listen",
-                    },
-                    {
-                        "button_text": "--listen",
-                        "key": "listen",
-                    },                    
+                    },                   
                 ],               
             ]
         },        

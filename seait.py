@@ -38,7 +38,8 @@ python_ver = depcheck.check_python()
 git_ver = depcheck.check_git()
 usePreInstalledPython=True
 app_args = {
-    1: ['--autolaunch', '--theme=dark'],
+    # 1: ['--autolaunch', '--theme=dark'],
+    1: [],
     2: [],
     3: [],
     4: [],
@@ -147,6 +148,12 @@ def update_app_args(app_id, arg_name):
     else:
         app_args[app_id].append(arg_name)
 
+def update_app_args_from_string(app_id, values_string):
+    args_list = values_string.split()
+    for arg_name in args_list:
+        if arg_name not in app_args.get(app_id, []):
+            update_app_args(app_id, arg_name)
+
 def get_app_by_id(apps, app_id):
     for app in apps:
         if app.get("id") == app_id:
@@ -165,7 +172,7 @@ def is_update_available(current_version):
     else:
         raise Exception(f"Failed to fetch latest release information (status code: {response.status_code})")
 
-def get_id(event):
+def get_app_id(event):
     return int(re.search(r"_\d+", event).group(0)[1:])
 
 def main():
@@ -338,88 +345,88 @@ def main():
         ],
     ] 
       
-    launcher_column_right = [
-        [
-            sg.Frame('',[ 
-                [
-                    sg.Frame('',[        
-                        [
-                            sg.Image('',key="-selected_app_img-",background_color=color.DARK_GRAY),
-                            sg.Text('',key="-selected_app_name-",font=FONT,background_color=color.DARK_GRAY),
-                            sg.Push(background_color=color.DARK_GRAY),
-                        ],        
-                        [
-                            sg.Button('',k=f"-selected_github_btn-",font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN),disabled=False),
-                            # sg.Button(apps[0]['github_url'],k=f"-app_{apps[0]['id']}_install_tab_installed_github_lbl_key-",font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN),disabled=False),
+    # launcher_column_right = [
+    #     [
+    #         sg.Frame('',[ 
+    #             [
+    #                 sg.Frame('',[        
+    #                     [
+    #                         sg.Image('',key="-selected_app_img-",background_color=color.DARK_GRAY),
+    #                         sg.Text('',key="-selected_app_name-",font=FONT,background_color=color.DARK_GRAY),
+    #                         sg.Push(background_color=color.DARK_GRAY),
+    #                     ],        
+    #                     [
+    #                         sg.Button('',k=f"-selected_github_btn-",font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN),disabled=False),
+    #                         # sg.Button(apps[0]['github_url'],k=f"-app_{apps[0]['id']}_install_tab_installed_github_lbl_key-",font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN),disabled=False),
 
-                        ],                                         
-                        [
-                            sg.Button("Installed Version",visible=True,font=FONT,expand_x=True,size=(20,1),disabled=True),
-                            # sg.Button(get_last_commit_hash_local(apps[0]),visible=True,k=f"-lbl_app_{apps[0]['id']}_install_tab_installed_version_lbl_key-",size=(40,1),font=FONT,expand_x=True,disabled=True),
-                            sg.Button(get_last_commit_hash_local(apps[0]),visible=True,k=f"-selected_app_commit_hash_lbl-",size=(40,1),font=FONT,expand_x=True,disabled=True)
+    #                     ],                                         
+    #                     [
+    #                         sg.Button("Installed Version",visible=True,font=FONT,expand_x=True,size=(20,1),disabled=True),
+    #                         # sg.Button(get_last_commit_hash_local(apps[0]),visible=True,k=f"-lbl_app_{apps[0]['id']}_install_tab_installed_version_lbl_key-",size=(40,1),font=FONT,expand_x=True,disabled=True),
+    #                         sg.Button(get_last_commit_hash_local(apps[0]),visible=True,k=f"-selected_app_commit_hash_lbl-",size=(40,1),font=FONT,expand_x=True,disabled=True)
 
-                        ],                        
-                        [
-                            sg.Button(button['button_text'], key=f"-applauncher_{apps[0]['id']}_{button['key']}_launcher_tab_btn-",font=FONT,expand_x=True,mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)) 
-                            for button in selected_app_launch_buttons['launch_buttons']
-                        ]                                  
-                    ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
-                ],   
-            ],key='-launch_buttons_frame-',expand_x=True,expand_y=False,border_width=0,relief=sg.RELIEF_FLAT,element_justification="c",background_color=color.GRAY)
-        ],
-        [
-            sg.Frame("",[       
-                [
-                    sg.Frame('',[       
-                        [
-                            sg.Image(ic.args,background_color=color.DARK_GRAY,size=(30,30)),
-                            sg.Text("Arguments",font=FONT,background_color=color.DARK_GRAY),
-                        ],  
-                    ],expand_x=True,expand_y=False,border_width=0,pad=(10,3),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)            
-                ],  
-                [
-                    sg.Frame('',[  
+    #                     ],                        
+    #                     [
+    #                         sg.Button(button['button_text'], key=f"-applauncher_{apps[0]['id']}_{button['key']}_launcher_tab_btn-",font=FONT,expand_x=True,mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)) 
+    #                         for button in selected_app_launch_buttons['launch_buttons']
+    #                     ]                                  
+    #                 ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
+    #             ],   
+    #         ],key='-launch_buttons_frame-',expand_x=True,expand_y=False,border_width=0,relief=sg.RELIEF_FLAT,element_justification="c",background_color=color.GRAY)
+    #     ],
+    #     [
+    #         sg.Frame("",[       
+    #             [
+    #                 sg.Frame('',[       
+    #                     [
+    #                         sg.Image(ic.args,background_color=color.DARK_GRAY,size=(30,30)),
+    #                         sg.Text("Arguments",font=FONT,background_color=color.DARK_GRAY),
+    #                     ],  
+    #                 ],expand_x=True,expand_y=False,border_width=0,pad=(10,3),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)            
+    #             ],  
+    #             [
+    #                 sg.Frame('',[  
  
-                        [
-                            sg.Button(option["button_text"],size=(24,1), key=f"-appargs_{apps[0]['id']}_{option['button_text']}_launcher_tab_btn-", font=FONT, expand_x=True,
-                                    mouseover_colors=(color.GRAY_9900, color.DARK_GREEN)) for option in arg
-                        ]
-                        for arg in apps[0]['args']
-                    ],expand_x=True,expand_y=False,border_width=5,pad=(10,0),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
-                ],    
+    #                     [
+    #                         sg.Button(option["button_text"],size=(24,1), key=f"-appargs_{apps[0]['id']}_{option['button_text']}_launcher_tab_btn-", font=FONT, expand_x=True,
+    #                                 mouseover_colors=(color.GRAY_9900, color.DARK_GREEN)) for option in arg
+    #                     ]
+    #                     for arg in apps[0]['args']
+    #                 ],expand_x=True,expand_y=False,border_width=5,pad=(10,0),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
+    #             ],    
                       
-                ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
-        ] ,
+    #             ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
+    #     ] ,
          
-        [
-            sg.Frame("",[       
-                [
+    #     [
+    #         sg.Frame("",[       
+    #             [
 
-                ]                              
-            ],expand_x=True,expand_y=True,border_width=0,relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.GRAY_1111)
-        ],                 
-        [
-            sg.Frame("",[       
+    #             ]                              
+    #         ],expand_x=True,expand_y=True,border_width=0,relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.GRAY_1111)
+    #     ],                 
+    #     [
+    #         sg.Frame("",[       
 
-                [
-                    sg.MLine("--xformers",k="CONSOLE_ML_KEY",visible=True,text_color=color.TERMINAL_GREEN2,border_width=10,sbar_width=20,sbar_trough_color=0,
-                            autoscroll=True, auto_refresh=True,expand_x=True,expand_y=True,font=FONT,no_scrollbar=True,),
-                ]                              
-                ],expand_x=True,expand_y=True,border_width=5,pad=(5,0),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.GRAY_1111)
-        ], 
-        [
-            sg.Frame("",[       
-                    [
-                        sg.Button("Available Version",visible=False,font=FONT,expand_x=True,size=(20,1),disabled=True),
-                        sg.Button(get_last_commit_hash_remote(apps[0]['github_url']),visible=False,size=(40,1),k=f"-lbl_app_{apps[0]['id']}_install_tab_installed_version_lbl_key-",font=FONT,expand_x=True,disabled=True),
-                    ],  
-                    [
-                        sg.Button(button['button_text'],disabled=False, key=f"-app_{apps[0]['id']}_{button['key']}_install_tab_btn-",font=FONT,expand_x=True,mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)) 
-                        for button in apps[0]['buttons'] if apps[0]['status']
-                    ]                              
-            ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
-        ]        
-    ]
+    #             [
+    #                 sg.MLine("--xformers",k="CONSOLE_ML_KEY",visible=True,text_color=color.TERMINAL_GREEN2,border_width=10,sbar_width=20,sbar_trough_color=0,
+    #                         autoscroll=True, auto_refresh=True,expand_x=True,expand_y=True,font=FONT,no_scrollbar=True,),
+    #             ]                              
+    #             ],expand_x=True,expand_y=True,border_width=5,pad=(5,0),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.GRAY_1111)
+    #     ], 
+    #     [
+    #         sg.Frame("",[       
+    #                 [
+    #                     sg.Button("Available Version",visible=False,font=FONT,expand_x=True,size=(20,1),disabled=True),
+    #                     sg.Button(get_last_commit_hash_remote(apps[0]['github_url']),visible=False,size=(40,1),k=f"-lbl_app_{apps[0]['id']}_install_tab_installed_version_lbl_key-",font=FONT,expand_x=True,disabled=True),
+    #                 ],  
+    #                 [
+    #                     sg.Button(button['button_text'],disabled=False, key=f"-app_{apps[0]['id']}_{button['key']}_install_tab_btn-",font=FONT,expand_x=True,mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)) 
+    #                     for button in apps[0]['buttons'] if apps[0]['status']
+    #                 ]                              
+    #         ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
+    #     ]        
+    # ]
 
     system_stats_tab_column = [
         [
@@ -513,7 +520,9 @@ def main():
     launcher_column_right_placeholder = [[
         sg.Frame('',[   
             [
-                sg.Button("Select a app to launch",expand_x=True,visible=True,k=f"-selected_app_commit_hash_lbl-",font=FONT,disabled=True)
+                sg.Button("Select a app to launch",expand_x=True,visible=True,k=f"-selected_app_lbl-",font=FONT,disabled=True)
+                
+                # sg.Column(install_tab_column_left, key="C2_LAUNCH_KEY", element_justification='r', expand_x=True,expand_y=True,visible=True),
 
             ],
         ],expand_x=True,expand_y=True,border_width=5,pad=(10,10),size=(550,None),relief=sg.RELIEF_FLAT,element_justification="c",background_color=color.DARK_GRAY)
@@ -740,15 +749,20 @@ def main():
         for button in buttons:
             window[f"-applauncher_{button['app_id']}_{button['key']}_launcher_tab_btn-"].update(button['button_text'])
 
-
-
+    def clear_items_keys(window):
+        for k in list(window.key_dict.keys()):
+            key_str = str(k)
+            if "-selected_app_" in key_str:
+                del window.key_dict[key_str]   
+                # print(f'item clear: {key_str}')
+         
     for app in apps:
         check_installation_status(app)
 
     while True:
         event, values = window.read()
         # print('main','event',event,'values',values)
-        print('main','event',event,)
+        print('main','event',event)
 
         if event == sg.WIN_CLOSED:
             break
@@ -792,14 +806,15 @@ def main():
 
         # if event.startswith("-applauncher_") and event.endswith("_btn-"):
         #     id_number = int(re.search(r"_\d+", event).group(0)[1:])
-        #     method = re.search(r"-applauncher_\d+_(.+)_launcher_tab_btn-", event).group(1)   
+        #     print('id_number',id_number,event)
+            # method = re.search(r"-applauncher_\d+_(.+)_launcher_tab_btn-", event).group(1)   
             
-        #     app_info = get_app_by_id(apps, id_number)
-        #     Thread(target=app_func.methods[method], args=(app_info,app_args[id_number],), daemon=True).start() 
-        #     window[f"-applauncher_{id_number}_launch_launcher_tab_btn-"].update("Launched",button_color=(color.GRAY_9900,color.DARK_GREEN),disabled=True)
+            # app_info = get_app_by_id(apps, id_number)
+            # Thread(target=app_func.methods[method], args=(app_info,app_args[id_number],), daemon=True).start() 
+            # window[f"-applauncher_{id_number}_launch_launcher_tab_btn-"].update("Launched",button_color=(color.GRAY_9900,color.DARK_GREEN),disabled=True)
 
         # if event.startswith("-appargs_") and event.endswith("_btn-"):
-        #     id_number = get_id(event)
+        #     id_number = get_app_id(event)
         #     method = re.search(r"-appargs_\d+_(.+)_launcher_tab_btn-", event).group(1)   
         #     update_app_args(id_number,method)
         #     if window[event].ButtonColor[0] == color.GRAY_9900:
@@ -812,78 +827,36 @@ def main():
         #     webbrowser.open(get_app_by_id(apps, id_number)['github_url'])  
 
         if event.startswith("-select_app_") and event.endswith("_btn-"):
-            id_number = int(re.search(r"_\d+", event).group(0)[1:])
-            print("triggered",id_number)
-            new_layout = app_item.app_item_layout(get_app_by_id(apps, id_number))
+            id_number = get_app_id(event)
+            # print("triggered",id_number)
+            clear_items_keys(window)        
+            new_layout = app_item.layout(get_app_by_id(apps, id_number))
             for element in list(window[C2_LAUNCH_KEY].Widget.children.values()):
                 element.destroy()
-
             window.extend_layout(window[C2_LAUNCH_KEY],new_layout)
             flatten_ui_elements(window)  
-            window.visibility_changed()
+            window.visibility_changed()                
 
-    # Hide the previous column
-            # new_layout = app_item.app_item_layout(get_app_by_id(apps, id_number))
+        if event.startswith("-selected_app_") and event.endswith("_btn-"):
+                if not event.startswith("-selected_app_args"):
+                    id_number, method = get_func_and_id(event)   
+                    app_info = get_app_by_id(apps, id_number)
+                    args_list = values[f"-selected_app_args_{id_number}_console_ml-"]
+                    update_app_args_from_string(id_number, args_list)
+                    Thread(target=app_func.methods[method], args=(app_info,app_args[id_number],), daemon=True).start() 
+                    window[f"-selected_app_{id_number}_{method}_btn-"].update("Launched",button_color=(color.GRAY_9900,color.DIM_GREEN),disabled_button_color=(color.GRAY_9900,color.DIM_GREEN),disabled=True)       
 
-            # Update the initial_column with the new layout
-            # window[C2_LAUNCH_KEY].update(new_layout)
-            # Get the new app layout
-            # new_layout = app_item.app_item_layout(get_app_by_id(apps, id_number))
+        if event.startswith("-selected_app_args_") and event.endswith("_btn-"):
+            id_number = get_app_id(event)
+            args = re.search(r"-selected_app_args_\d+_(.+)_btn-", event).group(1)   
+            update_app_args(id_number,args)
+            if window[event].ButtonColor[0] == color.GRAY:
+                window[event].update(button_color=(color.DIM_GREEN,color.GRAY))
+            else:
+                window[event].update(button_color=(color.GRAY,color.DIM_GREEN))
+            print("selected_app_args_triggered",id_number,args)
 
-
-            # # Update the container with the new column
-            # window[C2_LAUNCH_KEY].update(layout=[[new_layout]])
-
-            # # Set the current_id to the new id_number
-            # current_id = id_number
-            # window[C2_LAUNCH_KEY].update(app_item.app_item_layout(get_app_by_id(apps, id_number)))
-
-
-            # for element in list(window[C2_LAUNCH_KEY].Widget.children.values()):
-            #     element.grid_remove()
-
-
-            # window[C2_LAUNCH_KEY].replace(new_layout)
-
-   
-            # window[f"framy"].update(visible=True)
-
-            # window[files_frame_col_key].contents_changed()  
-            # window[frame].update(visible=True) 
-# # Update the column content
-#             column_content[:] = new_layout
-
-#             # Rebuild the entire layout with the updated column content
-#             # layout = build_your_main_layout() 
-
-#             window[C2_LAUNCH_KEY].update(new_layout)
-
-
-#                 # Remove the old column
-#             window[C2_LAUNCH_KEY].update(visible=False)
-
-#             # Add the new column
-#             new_column = sg.Column(new_layout, key=C2_LAUNCH_KEY, element_justification='r', expand_x=True, expand_y=True, visible=True)
-#             sg.extend_layout(window['container_key'], [[new_column]])
-            # window["selected_app_name"].update(get_app_by_id(apps, id_number)['title'])
-            # #selected_app_img
-            # window["selected_app_img"].update(data=get_app_by_id(apps, id_number)['image_path'])
-            # #-selected_github_btn-
-            # window["-selected_github_btn-"].update(get_app_by_id(apps, id_number)['github_url'])
-            #-selected_github_lbl-
-
-
-# app_item.app_item_layout(get_app_by_id(apps, 2))
-            
-
-            # selected_app_launch_buttons = get_app_by_id(apps, id_number)['launch_buttons']
-
-            # launch_buttons_layout = []
-            # for button in selected_app_launch_buttons['launch_buttons']:
-            #     launch_buttons_layout.append(sg.Button(button['button_text'], key=f"-applauncher_{id_number}_{button['key']}_launcher_tab_btn-", font=FONT, expand_x=True, mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)))
-            # window["launch_buttons_frame"].update(launch_buttons_layout)         
-
-
+            print("selected_app_args_triggered",values[f"-selected_app_args_{id_number}_console_ml-"].split())
 
 
         if event == UPDATE_BTN_KEY:
@@ -899,6 +872,11 @@ def main():
 
         if event == "-start_monitor-":
             Thread(target=system_stats_monitor, args=(), daemon=True).start() 
+
+def get_func_and_id(event):
+    id_number = get_app_id(event)
+    method = re.search(r"-selected_app_\d+_(.+)_btn-", event).group(1)
+    return id_number,method
 
 if __name__ == '__main__':
 
