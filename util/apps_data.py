@@ -1,4 +1,4 @@
-apps = [
+projects = [
         {
             "id": 1,
             "key": "app_",
@@ -21,10 +21,10 @@ apps = [
                     "launch":"launch.py",
                 },  
             "buttons": [
-                {
-                    "button_text": "Install",
-                    "key": "install",
-                },
+                # {
+                #     "button_text": "Install",
+                #     "key": "install",
+                # },
                 {
                     "button_text": "Update",
                     "key": "update",
@@ -47,10 +47,10 @@ apps = [
                     "button_text": "Launch",
                     "key": "launch",
                 },           
-                # {
-                #     "button_text": "Update",
-                #     "key": "update",
-                # },                                                 
+                {
+                    "button_text": "Install",
+                    "key": "install",
+                },                                               
             ],            
             "args": [
                 [
@@ -138,17 +138,16 @@ apps = [
             "install_cuda":False,
             "download_models_path": "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.safetensors",
             "checkpoints_path": "models\checkpoints",
-
             "entry_point": 
             {
                 "install":"setup.bat",
                 "launch":"gui.bat",
             },                      
             "buttons": [
-                {
-                    "button_text": "Install",
-                    "key": "install",
-                },
+                # {
+                #     "button_text": "Install",
+                #     "key": "install",
+                # },
                 {
                     "button_text": "Update",
                     "key": "update",
@@ -170,7 +169,11 @@ apps = [
                 {
                     "button_text": "Launch",
                     "key": "launch",
-                },                                            
+                },     
+                {
+                    "button_text": "Install",
+                    "key": "install",
+                },                                                          
             ],            
             "args": [
                 [
@@ -210,10 +213,10 @@ apps = [
                 "launch":"main.py",
             },                      
             "buttons": [
-                {
-                    "button_text": "Install",
-                    "key": "install",
-                },
+                # {
+                #     "button_text": "Install",
+                #     "key": "install",
+                # },
                 {
                     "button_text": "Update",
                     "key": "update",
@@ -235,7 +238,11 @@ apps = [
                 {
                     "button_text": "Launch",
                     "key": "launch",
-                },                                            
+                },    
+                {
+                    "button_text": "Install",
+                    "key": "install",
+                },                                                           
             ],            
             "args": [
                 [
@@ -267,10 +274,10 @@ apps = [
             "webui_path": "stable-diffusion-webui",
             "models_path": "https://huggingface.co/datasets/disty/seait_ControlNet-modules-safetensors",
             "buttons": [
-                {
-                    "button_text": "Install",
-                    "key": "install_webui_extension",
-                },
+                # {
+                #     "button_text": "Install",
+                #     "key": "install_webui_extension",
+                # },
                 # {
                 #     "button_text": "Install & Download Models",
                 #     "key": "install_and_dl_all",
@@ -279,17 +286,25 @@ apps = [
                     "button_text": "Download Models",
                     "key": "download_models",
                 },
-                {
-                    "button_text": "Update",
-                    "key": "update_webui_extension",
-                },                          
+                # {
+                #     "button_text": "Update",
+                #     "key": "update_webui_extension",
+                # },                          
                 {
                     "button_text": "Uninstall",
                     "key": "uninstall_webui_extension",
                 },                                              
             ],
-            "launch_buttons": [                                               
-            ],  
+            "launch_buttons": [
+                {
+                    "button_text": "Update",
+                    "key": "update_webui_extension",
+                },                                                           
+                {
+                    "button_text": "Install",
+                    "key": "install_webui_extension",
+                },  
+            ],
             "args": [                                               
             ],                          
         },  
@@ -348,21 +363,29 @@ apps = [
             "type": "webui_extension",
             "webui_path": "stable-diffusion-webui",
             "buttons": [
-                {
-                    "button_text": "Install",
-                    "key": "install_webui_extension",
-                },
-                {
-                    "button_text": "Update",
-                    "key": "update_webui_extension",
-                },
+                # {
+                #     "button_text": "Install",
+                #     "key": "install_webui_extension",
+                # },
+                # {
+                #     "button_text": "Update",
+                #     "key": "update_webui_extension",
+                # },
                 {
                     "button_text": "Uninstall",
                     "key": "uninstall_webui_extension",
                 },                                            
             ],
-            "launch_buttons": [                                               
-            ],  
+            "launch_buttons": [
+                {
+                    "button_text": "Update",
+                    "key": "update_webui_extension",
+                },                                                           
+                {
+                    "button_text": "Install",
+                    "key": "install_webui_extension",
+                },  
+            ],
             "args": [                                               
             ],               
         },       

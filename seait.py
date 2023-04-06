@@ -12,9 +12,9 @@ import util.colors as color
 import util.icons as ic
 import util.dependency_check as depcheck
 from util.CONSTANTS import *
-from util.apps_data import apps
+from util.apps_data import projects
 import util.json_tools as jt
-import util.app_func as app_func
+import util.app_func as project_funcs
 import util.update_check_temp as update_check
 import util.support as support
 import util.repos as repos
@@ -26,7 +26,7 @@ sg.set_options(
     # button_color=(color.LIGHT_GRAY, color.GRAY),
     # element_size=(50, 20),
     # auto_size_buttons=True,
-    font=('Helvetica', 14),
+    # font=('Helvetica', 14),
     # background_color='lightgray',
     # text_color='black',
     suppress_error_popups = True,
@@ -37,7 +37,8 @@ APP_TITLE = f"Super Easy AI Installer Tool - Ver {__version__}"
 python_ver = depcheck.check_python()
 git_ver = depcheck.check_git()
 usePreInstalledPython=True
-app_args = {
+
+project_args = {
     # 1: ['--autolaunch', '--theme=dark'],
     1: [],
     2: [],
@@ -75,7 +76,7 @@ def isfile_exist_check(file_path):
         # print('isfile_exist_check:',file_path,' FILE NOT EXIST')    
         return False   
     
-def isfolder_exist_check(file_path):
+def is_folder_exist_check(file_path):
     if os.path.exists(file_path):
         # print('isfolder_exist_check:',file_path, ' FOLDER EXIST')
         return True
@@ -83,13 +84,13 @@ def isfolder_exist_check(file_path):
         # print('isfolder_exist_check:',file_path,' FOLDER NOT EXIST')    
         return False   
 
-def get_last_commit_hash_local(app_info):
+def get_last_commit_hash_local(project):
     if depcheck.check_git():
         import git
-        if app_info['type'] == "app":
-            repo_path = app_info['repo_name']
-        elif app_info['type'] == "webui_extension":
-            repo_path = os.path.join(app_info['webui_path'], 'extensions', app_info['repo_name'])
+        if project['type'] == "app":
+            repo_path = project['repo_name']
+        elif project['type'] == "webui_extension":
+            repo_path = os.path.join(project['webui_path'], 'extensions', project['repo_name'])
         else:
             print("Error: Invalid app type")
             return None
@@ -140,18 +141,18 @@ def get_last_commit_hash_remote(github_url):
     pass
 
 def update_app_args(app_id, arg_name):
-    if app_id not in app_args:
-        app_args[app_id] = []
+    if app_id not in project_args:
+        project_args[app_id] = []
 
-    if arg_name in app_args[app_id]:
-        app_args[app_id].remove(arg_name)
+    if arg_name in project_args[app_id]:
+        project_args[app_id].remove(arg_name)
     else:
-        app_args[app_id].append(arg_name)
+        project_args[app_id].append(arg_name)
 
 def update_app_args_from_string(app_id, values_string):
     args_list = values_string.split()
     for arg_name in args_list:
-        if arg_name not in app_args.get(app_id, []):
+        if arg_name not in project_args.get(app_id, []):
             update_app_args(app_id, arg_name)
 
 def get_app_by_id(apps, app_id):
@@ -175,23 +176,36 @@ def is_update_available(current_version):
 def get_app_id(event):
     return int(re.search(r"_\d+", event).group(0)[1:])
 
+def get_func_and_id(event):
+    id_number = get_app_id(event)
+    method = re.search(r"-selected_app_func_\d+_(.+)_btn-", event).group(1)
+    return id_number,method
+
+def check_installation_status(project):
+    project_path = os.path.abspath(project['repo_name'])
+    if project['type'] == "app":
+        if is_folder_exist_check(project_path):
+            print(f"{project['repo_name']} project installed")      
+            if is_folder_exist_check(os.path.join(project_path, 'venv')):
+                print(f"{project['repo_name']} venv installed")
+                return True
+            else:
+                print(f"{project['repo_name']} venv not installed")
+                return False
+        else:
+            print(f"{project['repo_name']} project not installed")
+            return False
+    elif project['type'] == "webui_extension":
+        if is_folder_exist_check(f"{project['webui_path']}\extensions\{project['repo_name']}"):
+            print(f"extension {project['repo_name']} is installed")
+            return True
+        else:
+            print(f"extension {project['repo_name']} is not installed")
+            return False
+
 def main():
     stop_event = threading.Event()
-    global selected_app_launch_buttons
-    column_content = [[]]
-    current_id = 0
-    selected_app_launch_buttons = {
-                    "launch_buttons": [
-                    # {
-                    #     "button_text": "Launch",
-                    #     "key": "launch",
-                    # },           
-                    # {
-                    #     "button_text": "Update",
-                    #     "key": "update",
-                    # },                                                 
-                ],
-    }
+
     #region layout
     top_column = [
         [
@@ -305,7 +319,7 @@ def main():
                 ],expand_x=True,expand_y=True,border_width=0,relief=sg.RELIEF_FLAT,element_justification="c",background_color=color.GRAY
             )
         ]
-        for app in apps if app['visible']
+        for app in projects if app['visible']
     ]
 
     install_tab_column_right_scrollable = [
@@ -314,24 +328,54 @@ def main():
         ],
     ]
 
+    # launcher_column_left = [
+    #     [
+    #         sg.Frame('',[ 
+    #             [
+    #                 sg.Frame('',[       
+    #                     [
+    #                         sg.Image(app["image_path"],background_color=color.DARK_GRAY),
+    #                         # sg.Text(app["id"],font=FONT,background_color=color.DARK_GRAY,expand_x=True),
+    #                         # sg.Button(app["title"],k=f"-select_app_1_btn-",font=FONT,expand_x=True,size=(25,1)),
+    #                         sg.Button(app["title"],k=f"-select_app_{app['id']}_btn-",font=FONT,expand_x=True,size=(25,1)),
+    #                     ],  
+    #                 ],expand_x=True,expand_y=False,border_width=5,pad=(3,3),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
+    #             ],                           
+    #         ],expand_x=True,expand_y=False,border_width=0,relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.GRAY)
+    #     ]
+    #     for app in projects if app['type'] #== "app" #vertical
+    # ]
+    
     launcher_column_left = [
         [
-            sg.Frame('',[ 
+            sg.Frame('', [ 
                 [
-                    sg.Frame('',[       
+                    sg.Frame('', [
                         [
-                            sg.Image(app["image_path"],background_color=color.DARK_GRAY),
-                            # sg.Text(app["id"],font=FONT,background_color=color.DARK_GRAY,expand_x=True),
-                            # sg.Button(app["title"],k=f"-select_app_1_btn-",font=FONT,expand_x=True,size=(25,1)),
-                            sg.Button(app["title"],k=f"-select_app_{app['id']}_btn-",font=FONT,expand_x=True,size=(25,1)),
+                            sg.Image(app["image_path"], background_color=color.DARK_GRAY),
+                            sg.Button(app["title"], k=f"-select_app_{app['id']}_btn-", font=FONT, expand_x=True, size=(35, 1)),
+                            sg.Button('', k=f"-select_app_{app['id']}_btn-",font=FONT,disabled=True, expand_x=True,button_color=color.DIM_GREEN if check_installation_status(app) else color.LIGHT_GRAY)
 
-                        ],  
-                    ],expand_x=True,expand_y=False,border_width=5,pad=(3,3),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
-                ],                           
-            ],expand_x=True,expand_y=False,border_width=0,relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.GRAY)
-        # for app in apps if app['type'] == "app"
+                        ],
+                    ],
+                    expand_x=True,
+                    expand_y=False,
+                    border_width=5,
+                    pad=(3, 3),
+                    relief=sg.RELIEF_FLAT,
+                    element_justification="l",
+                    background_color=color.DARK_GRAY)
+
+                ],
+            ],
+            expand_x=True,
+            expand_y=False,
+            border_width=0,
+            relief=sg.RELIEF_FLAT,
+            element_justification="l",
+            background_color=color.DARK_GRAY)
         ]
-        for app in apps if app['type'] #== "app" #vertical
+        for app in projects if app['type'] #== "app" #vertical
     ]
    
     launcher_tab_column_left_scrollable = [
@@ -345,109 +389,12 @@ def main():
         ],
     ] 
       
-    # launcher_column_right = [
-    #     [
-    #         sg.Frame('',[ 
-    #             [
-    #                 sg.Frame('',[        
-    #                     [
-    #                         sg.Image('',key="-selected_app_img-",background_color=color.DARK_GRAY),
-    #                         sg.Text('',key="-selected_app_name-",font=FONT,background_color=color.DARK_GRAY),
-    #                         sg.Push(background_color=color.DARK_GRAY),
-    #                     ],        
-    #                     [
-    #                         sg.Button('',k=f"-selected_github_btn-",font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN),disabled=False),
-    #                         # sg.Button(apps[0]['github_url'],k=f"-app_{apps[0]['id']}_install_tab_installed_github_lbl_key-",font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN),disabled=False),
-
-    #                     ],                                         
-    #                     [
-    #                         sg.Button("Installed Version",visible=True,font=FONT,expand_x=True,size=(20,1),disabled=True),
-    #                         # sg.Button(get_last_commit_hash_local(apps[0]),visible=True,k=f"-lbl_app_{apps[0]['id']}_install_tab_installed_version_lbl_key-",size=(40,1),font=FONT,expand_x=True,disabled=True),
-    #                         sg.Button(get_last_commit_hash_local(apps[0]),visible=True,k=f"-selected_app_commit_hash_lbl-",size=(40,1),font=FONT,expand_x=True,disabled=True)
-
-    #                     ],                        
-    #                     [
-    #                         sg.Button(button['button_text'], key=f"-applauncher_{apps[0]['id']}_{button['key']}_launcher_tab_btn-",font=FONT,expand_x=True,mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)) 
-    #                         for button in selected_app_launch_buttons['launch_buttons']
-    #                     ]                                  
-    #                 ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
-    #             ],   
-    #         ],key='-launch_buttons_frame-',expand_x=True,expand_y=False,border_width=0,relief=sg.RELIEF_FLAT,element_justification="c",background_color=color.GRAY)
-    #     ],
-    #     [
-    #         sg.Frame("",[       
-    #             [
-    #                 sg.Frame('',[       
-    #                     [
-    #                         sg.Image(ic.args,background_color=color.DARK_GRAY,size=(30,30)),
-    #                         sg.Text("Arguments",font=FONT,background_color=color.DARK_GRAY),
-    #                     ],  
-    #                 ],expand_x=True,expand_y=False,border_width=0,pad=(10,3),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)            
-    #             ],  
-    #             [
-    #                 sg.Frame('',[  
- 
-    #                     [
-    #                         sg.Button(option["button_text"],size=(24,1), key=f"-appargs_{apps[0]['id']}_{option['button_text']}_launcher_tab_btn-", font=FONT, expand_x=True,
-    #                                 mouseover_colors=(color.GRAY_9900, color.DARK_GREEN)) for option in arg
-    #                     ]
-    #                     for arg in apps[0]['args']
-    #                 ],expand_x=True,expand_y=False,border_width=5,pad=(10,0),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
-    #             ],    
-                      
-    #             ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
-    #     ] ,
-         
-    #     [
-    #         sg.Frame("",[       
-    #             [
-
-    #             ]                              
-    #         ],expand_x=True,expand_y=True,border_width=0,relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.GRAY_1111)
-    #     ],                 
-    #     [
-    #         sg.Frame("",[       
-
-    #             [
-    #                 sg.MLine("--xformers",k="CONSOLE_ML_KEY",visible=True,text_color=color.TERMINAL_GREEN2,border_width=10,sbar_width=20,sbar_trough_color=0,
-    #                         autoscroll=True, auto_refresh=True,expand_x=True,expand_y=True,font=FONT,no_scrollbar=True,),
-    #             ]                              
-    #             ],expand_x=True,expand_y=True,border_width=5,pad=(5,0),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.GRAY_1111)
-    #     ], 
-    #     [
-    #         sg.Frame("",[       
-    #                 [
-    #                     sg.Button("Available Version",visible=False,font=FONT,expand_x=True,size=(20,1),disabled=True),
-    #                     sg.Button(get_last_commit_hash_remote(apps[0]['github_url']),visible=False,size=(40,1),k=f"-lbl_app_{apps[0]['id']}_install_tab_installed_version_lbl_key-",font=FONT,expand_x=True,disabled=True),
-    #                 ],  
-    #                 [
-    #                     sg.Button(button['button_text'],disabled=False, key=f"-app_{apps[0]['id']}_{button['key']}_install_tab_btn-",font=FONT,expand_x=True,mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)) 
-    #                     for button in apps[0]['buttons'] if apps[0]['status']
-    #                 ]                              
-    #         ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
-    #     ]        
-    # ]
-
     system_stats_tab_column = [
         [
             sg.Frame('',[ 
                 [
                     sg.Frame('',[ 
-
-                        # [
-                        #     sg.Button("Start",key="-start_monitor-",size=(15,1),font=FONT,expand_x=True,expand_y=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=False),
-
-                        #     sg.Button("Update Interval",key="-start_monitor-",font=FONT,expand_x=True,expand_y=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=False),
-
-                        #     sg.In("1",font=FONT,size=(5,1),expand_x=True,expand_y=True,justification="c",background_color=color.LIGHT_GRAY),   
-                        # ],
-                        # [
-                        #     # sg.Button("",key=SYSTEM_STATS_CPU_USAGE_PRECENT_LBL_KEY,size=(40,2),font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
-                        #     # sg.Button("1",size=(20,2),font=FONT,expand_x=True,expand_y=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=False),
-                        #     sg.Slider(range=(0, 10), orientation='h',
-                        #         key='-slider-',size=(20,15),expand_x=True,disable_number_display=True,visible=True,background_color=color.LIGHT_GRAY),
-                        #     sg.Button("Start",size=(15,2),font=FONT,expand_x=True,expand_y=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=False),
-                        # ],         
+         
                         [
                             sg.Button("CPU Usage",size=(15,2),font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
                             sg.Button("",key=SYSTEM_STATS_CPU_USAGE_PRECENT_LBL_KEY,size=(40,2),font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
@@ -525,7 +472,7 @@ def main():
                 # sg.Column(install_tab_column_left, key="C2_LAUNCH_KEY", element_justification='r', expand_x=True,expand_y=True,visible=True),
 
             ],
-        ],expand_x=True,expand_y=True,border_width=5,pad=(10,10),size=(550,None),relief=sg.RELIEF_FLAT,element_justification="c",background_color=color.DARK_GRAY)
+        ],expand_x=True,expand_y=True,border_width=5,pad=(10,10),size=(650,None),relief=sg.RELIEF_FLAT,element_justification="c",background_color=color.DARK_GRAY)
     ]]
     layout = [[ 
             [
@@ -547,7 +494,7 @@ def main():
 
     #endregion layout
 
-    window = sg.Window(APP_TITLE,layout,finalize=True,size=(1000,800), resizable=True,enable_close_attempted_event=False,background_color=color.GRAY_9900)
+    window = sg.Window(APP_TITLE,layout,finalize=True,size=(1100,800), resizable=True,enable_close_attempted_event=False,background_color=color.GRAY_9900)
     # window.Maximize()    
     # window.set_min_size((800,600))
     # window.set_min_size((500,300))
@@ -630,14 +577,14 @@ def main():
         else:
             install_python_btn_elem.update("Install",disabled=False)
             installed_version_python_lbl_elem.update(disabled_button_color=(color.GRAY,color.GRAY),button_color=(color.RED_ORANGE,color.RED_ORANGE),disabled=True)
-            if isfolder_exist_check(app_func.pre_installed_python_path):
-                app_func.usePreInstalledPython = not app_func.usePreInstalledPython
-                convert_button_enable() if app_func.usePreInstalledPython else convert_button_disable()
+            if is_folder_exist_check(project_funcs.pre_installed_python_path):
+                project_funcs.usePreInstalledPython = not project_funcs.usePreInstalledPython
+                convert_button_enable() if project_funcs.usePreInstalledPython else convert_button_disable()
 
-        if isfolder_exist_check(app_func.pre_installed_python_path):
+        if is_folder_exist_check(project_funcs.pre_installed_python_path):
             # print("pre installed python found")
-            app_func.usePreInstalledPython = not app_func.usePreInstalledPython
-            convert_button_enable() if app_func.usePreInstalledPython else convert_button_disable()
+            project_funcs.usePreInstalledPython = not project_funcs.usePreInstalledPython
+            convert_button_enable() if project_funcs.usePreInstalledPython else convert_button_disable()
         else:
             # print("pre installed python not found")         
             pre_installed_version_lbl_elem.update("Pre installed")
@@ -648,7 +595,7 @@ def main():
             if str(widget_key).startswith(x):
                 window[widget_key].update(disabled=staus) 
 
-    def check_installation_status(app):
+    def check_installation_status_old(app):
         project_path = os.path.abspath(app['repo_name'])
         if app['type'] == "app":
             install_btn = window[f"-app_{app['id']}_install_install_tab_btn-"]
@@ -657,13 +604,13 @@ def main():
             create_venv_btn = window[f"-app_{app['id']}_create_venv_install_tab_btn-"]
             delete_venv_btn = window[f"-app_{app['id']}_delete_venv_install_tab_btn-"]
             update_btn = window[f"-app_{app['id']}_update_install_tab_btn-"]
-            if isfolder_exist_check(project_path):
+            if is_folder_exist_check(project_path):
                 install_btn.update(disabled=True)
                 uninstall_btn.update(disabled=False)
                 update_btn.update(disabled=False)
                 # launcher_tab_btn_elem.update(disabled=False)
                 # print("webui installed")
-                if isfolder_exist_check(os.path.join(project_path, 'venv')):
+                if is_folder_exist_check(os.path.join(project_path, 'venv')):
                     create_venv_btn.update(disabled=True)
                     delete_venv_btn.update(disabled=False)
                     # print("venv installed")      
@@ -688,7 +635,7 @@ def main():
                 install_extension_btn = window[f"-app_{app['id']}_install_webui_extension_install_tab_btn-"]
 
                 
-                if isfolder_exist_check(f"{app['webui_path']}\extensions\{app['repo_name']}"):
+                if is_folder_exist_check(f"{app['webui_path']}\extensions\{app['repo_name']}"):
                     # print(f"{app['repo_name']} is installed")
                     install_extension_btn.update(disabled=True)
                     update_extension_btn.update(disabled=False)
@@ -700,6 +647,7 @@ def main():
                     install_extension_btn.update(disabled=False)
                     update_extension_btn.update(disabled=True)
                     uninstall_extension_btn.update(disabled=True)
+
 
     def system_stats_monitor(stop_event,update_interval=1):
             while not stop_event.is_set():
@@ -730,6 +678,15 @@ def main():
                 element.update(visible=is_target)
             tab_btn_elements[tab_key].update(button_color=(active_color if is_target else inactive_color))
 
+    def run_project_func(project,method,args=None):
+
+        project_funcs.methods[method](project)
+        print(f"running {method} for {project['repo_name']}")
+
+        # window.write_event_value("-run_app_func-",event)    
+        window.write_event_value(f"-select_app_{project['id']}_btn-","")    
+
+
     active_color = (color.DARK_GRAY, color.DARK_BLUE)
     inactive_color = (color.DARK_BLUE, color.DARK_GRAY)
 
@@ -743,8 +700,6 @@ def main():
 
     window.write_event_value(LAUNCHER_TAB_KEY,'')    
 
-
-
     def update_selected_app_launch_buttons(window, buttons):
         for button in buttons:
             window[f"-applauncher_{button['app_id']}_{button['key']}_launcher_tab_btn-"].update(button['button_text'])
@@ -756,8 +711,8 @@ def main():
                 del window.key_dict[key_str]   
                 # print(f'item clear: {key_str}')
          
-    for app in apps:
-        check_installation_status(app)
+    for project in projects:
+        check_installation_status(project)
 
     while True:
         event, values = window.read()
@@ -768,8 +723,8 @@ def main():
             break
 
         if event == DEP_APP_PYTHON_USE_PRE_INSTALL_KEY:
-            app_func.usePreInstalledPython = not app_func.usePreInstalledPython
-            convert_button_enable() if app_func.usePreInstalledPython else convert_button_disable()
+            project_funcs.usePreInstalledPython = not project_funcs.usePreInstalledPython
+            convert_button_enable() if project_funcs.usePreInstalledPython else convert_button_disable()
 
         if event == DEP_APP_PYTHON_INSTALL_KEY:
             if isfile_exist_check(INSTALLERS_PYTHON_PATH):
@@ -790,74 +745,71 @@ def main():
         if event in tab_elements:
             handle_tab_event(event, tab_elements, tab_btn_elements, active_color, inactive_color)
    
-        # if event.startswith("-app_") and event.endswith("_btn-"):
-        #     id_number = get_id(event)
-        #     method = re.search(r"-app_\d+_(.+)_install_tab_btn-", event).group(1) 
-        #     app_info = get_app_by_id(apps, id_number)
-        #     # if method != "install" or method != "install_webui_extension":
-        #     if dialog_window(app_info['title'],method):
-        #         if method == "install":
-        #             window[f"-app_{app_info['id']}_install_install_tab_btn-"].update("Installing",disabled=True)
-                    
-        #             Thread(target=app_func.methods[method], args=(app_info,app_args[id_number],), daemon=True).start() 
-        #         else:
-        #             app_func.methods[method](app_info)
-        #             check_installation_status(app_info)
-
-        # if event.startswith("-applauncher_") and event.endswith("_btn-"):
-        #     id_number = int(re.search(r"_\d+", event).group(0)[1:])
-        #     print('id_number',id_number,event)
-            # method = re.search(r"-applauncher_\d+_(.+)_launcher_tab_btn-", event).group(1)   
-            
-            # app_info = get_app_by_id(apps, id_number)
-            # Thread(target=app_func.methods[method], args=(app_info,app_args[id_number],), daemon=True).start() 
-            # window[f"-applauncher_{id_number}_launch_launcher_tab_btn-"].update("Launched",button_color=(color.GRAY_9900,color.DARK_GREEN),disabled=True)
-
-        # if event.startswith("-appargs_") and event.endswith("_btn-"):
-        #     id_number = get_app_id(event)
-        #     method = re.search(r"-appargs_\d+_(.+)_launcher_tab_btn-", event).group(1)   
-        #     update_app_args(id_number,method)
-        #     if window[event].ButtonColor[0] == color.GRAY_9900:
-        #         window[event].update(button_color=(color.LIGHT_BLUE,color.GRAY))
-        #     else:
-        #         window[event].update(button_color=(color.GRAY_9900,color.DARK_GREEN))
-
-        # if event.startswith("-app_") and event.endswith("_install_tab_installed_github_lbl_key-"):
-        #     id_number = get_id(event)
-        #     webbrowser.open(get_app_by_id(apps, id_number)['github_url'])  
-
+        #select app
         if event.startswith("-select_app_") and event.endswith("_btn-"):
             id_number = get_app_id(event)
             # print("triggered",id_number)
             clear_items_keys(window)        
-            new_layout = app_item.layout(get_app_by_id(apps, id_number))
+            # fix white flash
+            new_layout = app_item.layout(get_app_by_id(projects, id_number))
             for element in list(window[C2_LAUNCH_KEY].Widget.children.values()):
                 element.destroy()
             window.extend_layout(window[C2_LAUNCH_KEY],new_layout)
             flatten_ui_elements(window)  
             window.visibility_changed()                
 
+        #selected appp
         if event.startswith("-selected_app_") and event.endswith("_btn-"):
-                if not event.startswith("-selected_app_args"):
-                    id_number, method = get_func_and_id(event)   
-                    app_info = get_app_by_id(apps, id_number)
-                    args_list = values[f"-selected_app_args_{id_number}_console_ml-"]
-                    update_app_args_from_string(id_number, args_list)
-                    Thread(target=app_func.methods[method], args=(app_info,app_args[id_number],), daemon=True).start() 
-                    window[f"-selected_app_{id_number}_{method}_btn-"].update("Launched",button_color=(color.GRAY_9900,color.DIM_GREEN),disabled_button_color=(color.GRAY_9900,color.DIM_GREEN),disabled=True)       
+                # print("selected_app_",event)
 
-        if event.startswith("-selected_app_args_") and event.endswith("_btn-"):
-            id_number = get_app_id(event)
-            args = re.search(r"-selected_app_args_\d+_(.+)_btn-", event).group(1)   
+                if event.startswith("-selected_app_args"):
+                    print("args",event)
+                    window.write_event_value("-set_app_args-",event)    
+
+                if event.startswith("-selected_app_func"):
+                    print("func",event)
+                    window.write_event_value("-run_app_func-",event)    
+
+        if event == "-run_app_func-":
+            event_value = values['-run_app_func-']
+            print("func",event,values['-run_app_func-'])
+            id_number, method = get_func_and_id(event_value)   
+            print("func",id_number,method)
+            project = get_app_by_id(projects, id_number)
+            if project['type'] == 'app':
+                args_list = values[f"-selected_app_args_{id_number}_console_ml-"]
+                update_app_args_from_string(id_number, args_list)
+
+            if dialog_window(project['title'],method):
+
+                if method == "install":
+                    window[f"-selected_app_func_{id_number}_{method}_btn-"].update("Installing and launching",disabled=True)
+                    print(f"-selected_app_func_{id_number}_{method}_btn-")
+                    Thread(target=project_funcs.methods[method], args=(project,project_args[id_number],), daemon=True).start() 
+                    # Thread(target=run_project_func, args=(project,method,project_args[id_number],), daemon=True).start() 
+                    
+
+                elif method == "launch":
+                    # Thread(target=project_funcs.methods[method], args=(project,project_args[id_number],), daemon=True).start() 
+                    Thread(target=run_project_func, args=(project,method,project_args[id_number],), daemon=True).start() 
+                    window[f"-selected_app_func_{id_number}_{method}_btn-"].update("Launched",button_color=(color.GRAY_9900,color.DIM_GREEN),disabled_button_color=(color.GRAY_9900,color.DIM_GREEN),disabled=True)                  
+                else:
+                    run_project_func(project,method)
+                    # project_funcs.methods[method](project)
+
+                    # print("check_installation_status")
+                    # check_installation_status(project)
+
+        if event == "-set_app_args-":
+            print("args",event,values['-set_app_args-'])
+            event_value = values['-set_app_args-']
+            id_number = get_app_id(event_value)
+            args = re.search(r"-selected_app_args_\d+_(.+)_btn-", event_value).group(1)   
             update_app_args(id_number,args)
-            if window[event].ButtonColor[0] == color.GRAY:
-                window[event].update(button_color=(color.DIM_GREEN,color.GRAY))
+            if window[event_value].ButtonColor[0] == color.GRAY:
+                window[event_value].update(button_color=(color.DIM_GREEN,color.GRAY))
             else:
-                window[event].update(button_color=(color.GRAY,color.DIM_GREEN))
-            print("selected_app_args_triggered",id_number,args)
-
-            print("selected_app_args_triggered",values[f"-selected_app_args_{id_number}_console_ml-"].split())
-
+                window[event_value].update(button_color=(color.GRAY,color.DIM_GREEN))
 
         if event == UPDATE_BTN_KEY:
             if not update_check.check_update_available(__version__).startswith("No update available"):
@@ -873,10 +825,6 @@ def main():
         if event == "-start_monitor-":
             Thread(target=system_stats_monitor, args=(), daemon=True).start() 
 
-def get_func_and_id(event):
-    id_number = get_app_id(event)
-    method = re.search(r"-selected_app_\d+_(.+)_btn-", event).group(1)
-    return id_number,method
 
 if __name__ == '__main__':
 

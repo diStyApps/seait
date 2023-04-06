@@ -38,12 +38,57 @@ def get_last_commit_hash_local(app_info):
             return None
         # pass
 
+def is_file_exist_check(file_path):
+    if os.path.isfile(file_path):
+        # print('isfile_exist_check:',file_path, ' FILE EXIST')
+        return True
+    if not os.path.isfile(file_path):
+        # print('isfile_exist_check:',file_path,' FILE NOT EXIST')    
+        return False   
+    
+def is_folder_exist_check(file_path):
+    if os.path.exists(file_path):
+        # print('isfolder_exist_check:',file_path, ' FOLDER EXIST')
+        return True
+    if not os.path.exists(file_path):
+        # print('isfolder_exist_check:',file_path,' FOLDER NOT EXIST')    
+        return False   
 
-
+def check_installation_status(project):
+    project_path = os.path.abspath(project['repo_name'])
+    if project['type'] == "app":
+        if is_folder_exist_check(project_path):
+            print(f"{project['repo_name']} project installed")      
+            if is_folder_exist_check(os.path.join(project_path, 'venv')):
+                print(f"{project['repo_name']} venv installed")
+                return True
+            else:
+                print(f"{project['repo_name']} venv not installed")
+                return False
+        else:
+            print(f"{project['repo_name']} project not installed")
+            return False
+    elif project['type'] == "webui_extension":
+        if is_folder_exist_check(f"{project['webui_path']}\extensions\{project['repo_name']}"):
+            print(f"extension {project['repo_name']} is installed")
+            return True
+        else:
+            print(f"extension {project['repo_name']} is not installed")
+            return False
+        
+def check_installation_git_Python_status():
+    if depcheck.check_python() and depcheck.check_git():
+        print("Python and git installed")
+        return True  
+    else:
+        print("Python or git not installed")
+        return False        
+    
 def layout(app):
     main_key = '-selected_app_'
     selected_app_key = f"{main_key}{app['id']}_"
-
+    installation_status = check_installation_status(app)
+    git_Python_status = check_installation_git_Python_status()
     app_commit_hash = get_last_commit_hash_local(app)
     launcher_column_right = [
         [
@@ -54,16 +99,23 @@ def layout(app):
                     sg.Push(background_color=color.DARK_GRAY),
                 ],        
                 [
-                    sg.Button(app['github_url'],k=f"{selected_app_key}github_btn-",font=FONT,expand_x=True,button_color=(color.DARK_BLUE,color.GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN),disabled=False),
+                    sg.Button(app['github_url'],k=f"{selected_app_key}github_btn-",font=FONT,expand_x=True,button_color=(color.DARK_BLUE,color.GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_BLUE),disabled=False),
                 ],                                         
                 [
                     sg.Button("Installed Version",k=f"{main_key}github_lbl-",visible=True,font=FONT,expand_x=True,size=(20,1),disabled=True),
                     sg.Button(app_commit_hash,visible=True,k=f"-{selected_app_key}commit_hash_lbl-",size=(40,1),font=FONT,expand_x=True,disabled=True)
                 ],                        
-                [
-                    sg.Button(button['button_text'],disabled=False,button_color=(color.DIM_GREEN,color.GRAY), key=f"{selected_app_key}{button['key']}_btn-",font=FONT,expand_x=True,mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)) 
-                    for button in app['launch_buttons']
-                ]                                  
+                [ 
+                    # sg.Button(button['button_text'],disabled=False,button_color=(color.DIM_GREEN,color.GRAY), key=f"{main_key}func_{app['id']}_{button['key']}_btn-",font=FONT,expand_x=True,mouseover_colors=(color.GRAY_9900,color.DIM_GREEN)) 
+                    sg.Button(app['launch_buttons'][0]['button_text'],disabled=False if git_Python_status else True,button_color=(color.DIM_GREEN,color.GRAY), key=f"{main_key}func_{app['id']}_{app['launch_buttons'][0]['key']}_btn-",font=FONT_H1,expand_x=True,mouseover_colors=(color.GRAY_9900,color.DIM_GREEN)) 
+                   
+                    # for button in app['launch_buttons']
+                ] if installation_status else [
+                    # sg.Button(button['button_text'],disabled=True,button_color=(color.DIM_GREEN,color.GRAY), key=f"{main_key}func_{app['id']}_{button['key']}_btn-",font=FONT,expand_x=True,mouseover_colors=(color.GRAY_9900,color.DIM_GREEN)) 
+                    sg.Button(app['launch_buttons'][1]['button_text'],disabled=False if git_Python_status else True,button_color=(color.DIM_GREEN,color.GRAY), key=f"{main_key}func_{app['id']}_{app['launch_buttons'][1]['key']}_btn-",font=FONT_H1,expand_x=True,mouseover_colors=(color.GRAY_9900,color.DIM_GREEN)) 
+                    # for button in app['launch_buttons']
+                ]
+                                  
             ],key=f'{main_key}frame-',expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
         ],   
         [
@@ -108,7 +160,11 @@ def layout(app):
             [
                 sg.Frame("",[       
                         [
-                            sg.Button(button['button_text'],disabled=False, key=f"{main_key}{app['id']}_{button['key']}_btn-",font=FONT,expand_x=True,button_color=(color.DARK_BLUE,color.GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)) 
+                            sg.Button(button['button_text'],disabled=False, key=f"{main_key}func_{app['id']}_{button['key']}_btn-",font=FONT,expand_x=True,button_color=(color.DARK_BLUE,color.GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_BLUE)) 
+                            for button in app['buttons'] if app['status']
+                        ]
+                        if installation_status and git_Python_status else [
+                           sg.Button(button['button_text'],disabled=True, key=f"{main_key}func_{app['id']}_{button['key']}_btn-",font=FONT,expand_x=True,button_color=(color.DARK_BLUE,color.GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_BLUE)) 
                             for button in app['buttons'] if app['status']
                         ]                              
                 ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
