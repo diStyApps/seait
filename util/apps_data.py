@@ -291,7 +291,11 @@ apps = [
                     "button_text": "Uninstall",
                     "key": "uninstall_webui_extension",
                 },                                              
-            ]
+            ],
+            "launch_buttons": [                                               
+            ],  
+            "args": [                                               
+            ],                          
         },  
         # {
         #     "id": 5,
@@ -360,7 +364,11 @@ apps = [
                     "button_text": "Uninstall",
                     "key": "uninstall_webui_extension",
                 },                                            
-            ]
+            ],
+            "launch_buttons": [                                               
+            ],  
+            "args": [                                               
+            ],               
         },       
         # {
         #     "id": 6,
@@ -391,6 +399,8 @@ apps = [
         #             "key": "uninstall_webui_extension",
         #         },                                            
         #     ]
-        # },                                     
+        # },        
+        # 
+        #                              
     ]
     
