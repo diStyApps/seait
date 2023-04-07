@@ -7,6 +7,7 @@ def flatten_ui_elements(window):
         except:
             # print("error",widget_key)
             pass
+
 def repack(widget, option):
     pack_info = widget.pack_info()
     pack_info.update(option)
@@ -22,20 +23,9 @@ def expand_column_helper(column):
     frame_id, frame, canvas = column.frame_id, column.TKFrame, column.canvas
     canvas.bind("<Configure>", lambda event, canvas=canvas, frame_id=frame_id:configure_canvas(event, canvas, frame_id))
 
-def isfile_exist_check(file_path):
-    if os.path.isfile(file_path):
-        print('isfile_exist_check:',file_path, ' FILE EXIST')
-        return True
-    if not os.path.isfile(file_path):
-        print('isfile_exist_check:',file_path,' FILE NOT EXIST')    
-        return False   
-    
-def isfolder_exist_check(file_path):
-    if os.path.exists(file_path):
-        # print('isfolder_exist_check:',file_path, ' FOLDER EXIST')
-        return True
-    if not os.path.exists(file_path):
-        # print('isfolder_exist_check:',file_path,' FOLDER NOT EXIST')    
-        return False   
-
-
+def clear_items_keys(window):
+    for k in list(window.key_dict.keys()):
+        key_str = str(k)
+        if "-selected_app_" in key_str:
+            del window.key_dict[key_str]   
+            # print(f'item clear: {key_str}')

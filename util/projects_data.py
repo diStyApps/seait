@@ -21,10 +21,6 @@ projects = [
                     "launch":"launch.py",
                 },  
             "buttons": [
-                # {
-                #     "button_text": "Install",
-                #     "key": "install",
-                # },
                 {
                     "button_text": "Update",
                     "key": "update",
@@ -144,10 +140,6 @@ projects = [
                 "launch":"gui.bat",
             },                      
             "buttons": [
-                # {
-                #     "button_text": "Install",
-                #     "key": "install",
-                # },
                 {
                     "button_text": "Update",
                     "key": "update",
@@ -213,10 +205,6 @@ projects = [
                 "launch":"main.py",
             },                      
             "buttons": [
-                # {
-                #     "button_text": "Install",
-                #     "key": "install",
-                # },
                 {
                     "button_text": "Update",
                     "key": "update",
@@ -273,23 +261,11 @@ projects = [
             "type": "webui_extension",
             "webui_path": "stable-diffusion-webui",
             "models_path": "https://huggingface.co/datasets/disty/seait_ControlNet-modules-safetensors",
-            "buttons": [
-                # {
-                #     "button_text": "Install",
-                #     "key": "install_webui_extension",
-                # },
-                # {
-                #     "button_text": "Install & Download Models",
-                #     "key": "install_and_dl_all",
-                # },                      
+            "buttons": [                     
                 {
                     "button_text": "Download Models",
                     "key": "download_models",
-                },
-                # {
-                #     "button_text": "Update",
-                #     "key": "update_webui_extension",
-                # },                          
+                },                       
                 {
                     "button_text": "Uninstall",
                     "key": "uninstall_webui_extension",
@@ -308,45 +284,6 @@ projects = [
             "args": [                                               
             ],                          
         },  
-        # {
-        #     "id": 5,
-        #     "key": "app_",
-        #     "image_path": b'iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAIAAAC0Ujn1AAAFEUlEQVR4nJ2W248UVRDGq+p09/QMM7M7goAIAVxkg+At8ICXB9EYFUmURGNiMDESEhOIf4f4gDHGgKJP6qsxGJREAUkEXOMFBFxuQVEEhV2Ya2/39Dn1+dCz7izOwsbKvEyfrl+f7+tTVc2VZfcTEwCoUlewCDPTzQJQKHomesREgBcEfhCCOjcxcZrENm3fhA74QejlAozDmTmNO4meGDNWq69a89iTmzY1Gw0xRtUViqUvP3j/u892Fcplda4nVoyJ6vWH16575KUNrUZDxKhqoVj8Ysf2H/d8USiXPSICwQtyhf5+CIsYdTqjr+zlcoQupWAiAhHzxEUAJgyLff1ELMaoaqFc8v0AABF5mX4AzlpYCwGcOmuBSdaDiFmZmEDUZRKgNksEoIrUAiBmIgio4zAz0/jvvxYzZ0gQdxR0LU0kUleiME36P3UwAR0o42Y3ExHJuNzpwHmS09NDTycyJqYjMAvvxstGhImYSAGdXFP/H81EqlprNGyaOkUulyuEOWMMjy+D6MZO9kSDmdvWzpp5y7vb3hiLou+PHT9weGj49Llq9WrHbkW5ryRsgCnpPdHMRM5qX7H49KOPENFz69ZC9ZczZ747cuzk2XOpTZfesfje5cteevW1dprKFAdsaq8ZqppaK8wK+J63fHBw+eDgdVu4wVvN0EyELuMmNBpjhFkAEEFVASICwMzW2amxXbsGdGrTOg9nkU4VAMys6H1g/nW/c67VpjSpO0ynU/fmujTNSlYIYOb2WNT9rkEU5mdY65zt3VGJyDlnrQvD/KSrqnHUJGYCBERiTG1k1LbTTldiAqF/9q3VZqPWqE+1u2q9Xm02SzMrADKRIpIk7drIiPE8EAkBYkxj9GoctcQYAphY03T+wMBotXZ0+BQzpWmKrminKTP/8POxarN1+8CATS0TE8BikqgZ1WrGGAIEgBgT1WrN0avZ01ikHcfzltw5a/6CN7fvJKIgCLgrckEAord2vD9n0cK5iwfSJGYREIzv1a9ciWo1MQaAEJHxvKjRuDA87PlB1ihU1cuFz27e8vlX+x5//sU9+w9cuny5GUXNKLr49+Xde/evWf/C14eH1m/eYnw/m9dQeL7/24kTcaslxlDn8AFi+JdDB1c+9RQLd1yLWoOrV7+ydevu93au3bCxUioWwhwRorH4WrM1946Bja9vHVi5KonGWISIWCRN4pOHDnqeNzHAVDUsFH49cuT88eML77k7abbEGBZJomjZAw8tXbnqwqlTl38/X79WJaZyf2XOwkXzB5eK58dRJMJEpM6FpdLpoaHfT5zI5fOZjk7JMIuq2//xhy+veIONAZRZWCRpNVlk4YoVi++7Lzs/ANTadhyj3c5qCKrG82wSf/3xR51hBtBEyaiGhcK5n47u3rE9LBaM8dQ5AJnYJIqieq1Vrbaq1ahWS6IocwCAOmd838+Hn739zh8nh3P5wr+fShPtSVULxRlDn35ik+SJjRuLlUoSj9l2mm2Bx1sRiADAORL2/CDIh/WRkT3bth3dtzdfmqE6UWJcuev+7lpgkbFGY+aCBavXPbPswQf65swWzxvnZdYRMxOxdWn177+Gvzn47a5d1UuX8qXidWPoejQRsRGbtNM4Kc+aNW/Jkv5582feNrdYqRjPJyLn2s1qbfTipWt//nHxzNnG6Igf5r0ggF7fEnqgM/ksYtM0jRPnHDGJCIsIyAFQB5Axxgtzvu9Dtees+QeTftpZqowBbwAAAABJRU5ErkJggg==',
-        #     "title": "Controlnet -sd21_laion_face fork- webui extension",
-        #     "repo_name": "sd-webui-controlnet",
-        #     "github_url": "https://github.com/Mikubill/sd-webui-controlnet",
-        #     "git_clone_url":"https://github.com/Mikubill/sd-webui-controlnet.git",
-        #     "installed_version": "-",
-        #     "available_version": "-",
-        #     "installed": False,
-        #     "visible":True,
-        #     "status": 1,
-        #     "type": "webui_extension",
-        #     "webui_path": "stable-diffusion-webui",
-        #     "models_path": "https://huggingface.co/datasets/disty/seait_ControlNet-modules-safetensors",
-        #     "buttons": [
-        #         {
-        #             "button_text": "Install",
-        #             "key": "install_webui_extension",
-        #         },
-        #         # {
-        #         #     "button_text": "Install & Download Models",
-        #         #     "key": "install_and_dl_all",
-        #         # },                      
-        #         {
-        #             "button_text": "Download Models",
-        #             "key": "download_models",
-        #         },
-        #         {
-        #             "button_text": "Update",
-        #             "key": "update_webui_extension",
-        #         },                          
-        #         {
-        #             "button_text": "Uninstall",
-        #             "key": "uninstall_webui_extension",
-        #         },                                              
-        #     ]
-        # }, 
         {
             "id": 5,
             "key": "app_",
@@ -363,14 +300,6 @@ projects = [
             "type": "webui_extension",
             "webui_path": "stable-diffusion-webui",
             "buttons": [
-                # {
-                #     "button_text": "Install",
-                #     "key": "install_webui_extension",
-                # },
-                # {
-                #     "button_text": "Update",
-                #     "key": "update_webui_extension",
-                # },
                 {
                     "button_text": "Uninstall",
                     "key": "uninstall_webui_extension",

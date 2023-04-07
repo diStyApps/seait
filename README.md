@@ -17,9 +17,6 @@
 <br />
 <div align="center">
 
-[![](media/svg/patreon.svg)](https://www.patreon.com/distyx)
-
-
 <img src="media/covers/seait_image.jpg">
 
   <h1 align="center">Super Easy AI Installer Tool</h1>
@@ -40,7 +37,6 @@
     <li>
       <a href="#about-the-project">About The Project</a>
     </li>
-    <li><a href="#license">License</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#my-other-projects">My Other Projects</a></li>    
@@ -64,8 +60,8 @@ But remains a great solution for users with minimal technical knowledge or exper
 [![0.0.1](media/covers/yt_0.0.1.jpg)](https://youtu.be/ePZzmMFb8Po "0.0.1")
 
 
-<img src="media/preview/1_0.0.3.jpg">
-<img src="media/preview/2_0.0.3.jpg">
+<img src="media/preview/1_0.0.5.jpg">
+<img src="media/preview/2_0.0.5.jpg">
 <img src="media/preview/3_0.0.1.jpg">
 <img src="media/preview/3_0.0.3.jpg">
 <img src="media/preview/4_0.0.4.jpg">
@@ -89,26 +85,19 @@ In the future ill try maybe nukita or something.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 <!-- ROADMAP -->
 ## Roadmap
 
 - [ ] Multi-language support
-- [ ] GPU Stats
+- [x] GPU Stats
 - [ ] More AI-related repos
 - [ ] Pre installed auto1111 version
 - [ ] Pre installed python version
 - [ ] Locate repo
 - [ ] App updater 
 - [ ] Remembering arguments
-- [ ] Adding arguments with input
+- [x] Custom arguments
 - [ ] Maybe arguments profiles
 - [ ] Better event handling
 

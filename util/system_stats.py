@@ -97,7 +97,13 @@ def get_other_gpus_stats():
     for proc in psutil.process_iter(['name']):
         if 'Xorg' not in proc.info['name'] and 'X' not in proc.info['name']:
             continue
-        gpu_files = [dev.path for dev in proc.open_files() if 'card' in dev.path]
+        try:
+            gpu_files = [dev.path for dev in proc.open_files() if 'card' in dev.path]
+        except psutil.AccessDenied:
+            # logging.warning(f"Access denied for process {proc.info['name']} (pid={proc.pid}). Skipping.")
+            # print(f"Access denied for process {proc.info['name']} (pid={proc.pid}). Skipping.")
+            continue
+
         gpu_names = [get_gpu_info(file_path) for file_path in gpu_files]
         for gpu_name in gpu_names:
             gpu_stats.append({

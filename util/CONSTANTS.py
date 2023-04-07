@@ -4,15 +4,20 @@ FONT = 'Arial 12'
 FONT_H1 = 'Arial 14'
 
 INSTALLS_TAB_KEY = '-installs_tab-'
-LAUNCHER_TAB_KEY = '-launcher_tab-'
+PROJECTS_TAB_KEY = '-launcher_tab-'
 GPU_TAB_KEY = '-gpu_tab-'
+LANGUAGE_TAB_KEY = '-language_tab-'
 SYSTEM_STATS_TAB_KEY = '-system_stats_tab-'
 AIPANIC_TAB_KEY = '-aipanic_tab-'
+SETTINGS_TAB_KEY = '-settings_tab-'
 ABOUT_TAB_KEY = '-about_tab-'
 C1_INSTALLS_KEY = '-c1_installs-'
 C2_INSTALLS_KEY = '-c2_installs-'
 C1_LAUNCH_KEY = '-c1_launch-'
 C2_LAUNCH_KEY = '-c2_launch-'
+
+C2_LAUNCH_PLACE_KEY = '-c2_launch_placeholder-'
+
 C1_ABOUT_KEY = '-c1_about-'
 #system_stats
 C1_SYSTEM_STATS_KEY = '-c1_system_stats-'
@@ -62,6 +67,10 @@ SYSTEM_STATS_CPU_USAGE_PRECENT_LBL_KEY = '-system_stats_cpu_usage_precent_lbl'
 SYSTEM_STATS_RAM_USAGE_LBL_KEY = '-system_stats_ram_usage_lbl'
 
 
+SET_APP_ARGS = "-set_app_args-"
+RUN_APP_FUNC = "-run_app_func-"
+SELECT_APP = "-select_app_"
+SELECTED_APP = "-selected_app_"
 
 CN_MODELS = [
     "cldm_v15.yaml",

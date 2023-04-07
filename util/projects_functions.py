@@ -105,7 +105,7 @@ def install_requirements(app_info):
     subprocess.run([f"{venv_path}/Scripts/python","-m", "pip","install","-r","requirements.txt"], cwd=project_path)
     print(f"{app_info['repo_name']} requirements installed")
 
-def install_webui_extension(app_info):
+def install_webui_extension(app_info,args=[]):
     print(f"installing {app_info['repo_name']}")
     # venv_path = os.path.abspath(f"{app_info['webui_path']}venv")
     # project_path = f"{app_info['webui_path']}\extensions\{app_info['repo_name']}"
@@ -119,11 +119,11 @@ def install_webui_extension(app_info):
     # C:\repos\seait\stable-diffusion-webui\venv/Scripts/python
     print(f"{app_info['repo_name']} installed")
 
-def update_webui_extension(app_info):
+def update_webui_extension(app_info,args=[]):
     print(f"updating {app_info['repo_name']}")
     subprocess.run(["git","pull"], cwd=f"{app_info['webui_path']}\extensions\{app_info['repo_name']}")
 
-def uninstall_webui_extension(app_info):
+def uninstall_webui_extension(app_info,args=[]):
     print(f"uninstalling {app_info['repo_name']}")
     subprocess.run(["rd", "/s", "/q", f"{app_info['webui_path']}\extensions\{app_info['repo_name']}"], shell=True)
     print(f"{app_info['repo_name']} uninstalled")
