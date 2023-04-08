@@ -31,29 +31,32 @@ def uninstall(app_info,args=[]):
     subprocess.run(["rd", "/s", "/q", project_path], shell=True)
     print(f"{app_info['repo_name']} uninstalled")
 
-# def launch(app_info,args):
-#     project_path = get_project_path(app_info)
-#     venv_path = get_venv_path(app_info)
-#     launch_path = get_entry_point(app_info, 'launch')
-#     print(f"launching {app_info['repo_name']}")
-#     subprocess.run([f"{venv_path}/Scripts/python", launch_path,*args], cwd=project_path)
-
-def launch(app_info ,args=[]):
-    # print(app_info)
+def launch(app_info, args=[]):
     project_path = get_project_path(app_info)
     venv_path = get_venv_path(app_info)
     launch_path = get_entry_point(app_info, 'launch')
     print(f"launching {app_info['repo_name']}")
-    
-    if launch_path.endswith(".py"):
+    command_len = len(launch_path.split())
+    cmd_launch = app_info['entry_point']['launch']
+    activate_script = f"{venv_path}/Scripts/activate.bat"
+    cmd_command = f'cmd /K "{activate_script} && {cmd_launch} {" ".join(args)}"'
+
+    if launch_path.endswith(".py") and command_len == 1:
+        print('.py run')
         subprocess.run([f"{venv_path}/Scripts/python", launch_path, *args], cwd=project_path)
+    elif launch_path.endswith(".py") and command_len > 1:
+        print('command run and script run')
+        subprocess.run(cmd_command, cwd=project_path, shell=True)           
     elif launch_path.endswith(".bat"):
+        print('.bat run')
         subprocess.run([launch_path, *args], cwd=project_path)
     else:
-        raise ValueError("Unsupported file format for launch_path")    
+        print('command run')
+        subprocess.run(cmd_command, cwd=project_path, shell=True)        
+ 
 
 def install(app_info,args=[]):
-    print(f"installing {app_info['repo_name']}")
+    print(f"installing {app_info['repo_name']} with arguments")
     clone_repo(app_info)
     create_virtual_environment(app_info)
     project_path = get_project_path(app_info) 
@@ -61,17 +64,25 @@ def install(app_info,args=[]):
     install_path = get_entry_point(app_info, 'install') 
     print("venv_path",f"{venv_path}/Scripts/python")
 
+    command_len = len(install_path.split())
+    cmd_launch = app_info['entry_point']['launch']
+    activate_script = f"{venv_path}/Scripts/activate.bat"
+    cmd_command = f'cmd /K "{activate_script} && {cmd_launch} {" ".join(args)}"'
+
     if app_info['install_requirements']:
         install_requirements(app_info)
-    # if app_info['id'] == 2:
-    #     download_comfyui_models(app_info)
-    # subprocess.run([f"{venv_path}/Scripts/python", install_path,*args], cwd=project_path)
-    if install_path.endswith(".py"):
+    if app_info['install_instructions_available']:
+        install_instructions(app_info)    
+
+    if install_path.endswith(".py") and command_len == 1:
         subprocess.run([f"{venv_path}/Scripts/python", install_path, *args], cwd=project_path)
+    elif install_path.endswith(".py") and command_len > 1:
+        print('command run and script run')        
+        subprocess.run(cmd_command, cwd=project_path, shell=True)         
     elif install_path.endswith(".bat"):
         subprocess.run([install_path, *args], cwd=project_path)
     else:
-        raise ValueError("Unsupported file format for launch_path")       
+        subprocess.run(cmd_command, cwd=project_path, shell=True)         
 
 def delete_virtual_environment(app_info,args=[]):
     venv_path = get_venv_path(app_info)
@@ -104,6 +115,43 @@ def install_requirements(app_info):
         install_cuda(app_info)
     subprocess.run([f"{venv_path}/Scripts/python","-m", "pip","install","-r","requirements.txt"], cwd=project_path)
     print(f"{app_info['repo_name']} requirements installed")
+
+
+
+
+# def update_app_args_from_string(app_id, values_string):
+#     args_list = values_string.split()
+#     for arg_name in args_list:
+
+
+
+def install_instructions(app_info):
+    project_path = get_project_path(app_info)
+    venv_path = get_venv_path(app_info)
+    print(f"installing requirements for {app_info['repo_name']}")
+
+    for command in app_info["install_instructions"]:
+        subprocess.run([f"{venv_path}/Scripts/python"] + command.split(), cwd=project_path)
+        # print([f"{venv_path}/Scripts/python"] + command.split(), cwd=project_path)
+        print(f"{app_info['repo_name']} requirements installed")
+# def install_instructions(app_info):
+#     project_path = get_project_path(app_info)
+#     venv_path = get_venv_path(app_info)
+#     print(f"installing requirements {app_info['repo_name']}")
+
+#     for command in app_info["install_instructions"]:
+#         subprocess.run([f"{venv_path}/Scripts/python","-m", "pip","install","-r","requirements.txt"], cwd=project_path)
+#         print(f"{app_info['repo_name']} requirements installed")
+
+
+# def install_instructions(app_info):
+#     project_path = get_project_path(app_info)
+#     venv_path = get_venv_path(app_info)
+#     print(f"installing requirements for {app_info['repo_name']}")
+
+#     for command in app_info["install_instructions"]:
+#         subprocess.run(command.split(), cwd=project_path)
+#         print(f"{app_info['repo_name']} requirements installed")        
 
 def install_webui_extension(app_info,args=[]):
     print(f"installing {app_info['repo_name']}")

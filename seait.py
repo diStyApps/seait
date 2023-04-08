@@ -17,7 +17,7 @@ import util.projects_functions as project_funcs
 import util.update_check_temp as update_check
 import util.support as support
 import util.repos as repos
-import util.system_stats as system_stats
+# import util.system_stats as system_stats
 import util.app_item as app_item
 import util.installation_status as installation_status
 
@@ -32,7 +32,7 @@ sg.set_options(
     sbar_width=15,sbar_trough_color=0,sbar_arrow_width=8,    
     suppress_error_popups = True,
 )
-__version__ = '0.0.5'
+__version__ = '0.0.6'
 APP_TITLE = f"Super Easy AI Installer Tool - Ver {__version__}"
 sg.theme('Dark Gray 15')
 python_ver = depcheck.check_python()
@@ -40,13 +40,15 @@ git_ver = depcheck.check_git()
 usePreInstalledPython=True
 project_args = {
     1: ['--autolaunch', '--theme=dark'],
-    2: [],
+    2: ['--web'],
     3: [],
     4: [],
     5: [],
     6: [],
     7: [],
     8: [],
+    9: [],
+
 }
 
 def isfile_exist_check(file_path):
@@ -107,7 +109,7 @@ def main():
             sg.Frame('',[       
                     [
                         sg.Button("Projects",k=PROJECTS_TAB_KEY,disabled=False,font=FONT,expand_x=True,size=(15,2),button_color=nav_tab_button_active_color,mouseover_colors=nav_tab_mouseover_colors),
-                        sg.Button("System Monitor",disabled=False,k=SYSTEM_STATS_TAB_KEY,font=FONT,expand_x=True,size=(20,2),button_color=nav_tab_button_color,mouseover_colors=nav_tab_mouseover_colors),
+                        sg.Button("System Monitor",visible=False,disabled=True,k=SYSTEM_STATS_TAB_KEY,font=FONT,expand_x=True,size=(20,2),button_color=nav_tab_button_color,mouseover_colors=nav_tab_mouseover_colors),
                         sg.Button("AiPanic",disabled=True,k=AIPANIC_TAB_KEY,font=FONT,expand_x=True,size=(10,2),button_color=nav_tab_button_color,mouseover_colors=nav_tab_mouseover_colors),
                         sg.Button("Settings",disabled=True,k=SETTINGS_TAB_KEY,font=FONT,expand_x=True,size=(10,2),button_color=nav_tab_button_color,mouseover_colors=nav_tab_mouseover_colors),
                         sg.Button("About",k=ABOUT_TAB_KEY,font=FONT,expand_x=False,size=(10,2),button_color=nav_tab_button_color,mouseover_colors=nav_tab_mouseover_colors),
@@ -237,33 +239,33 @@ def main():
         ],  
     ]
 
-    gpu_stats = system_stats.get_gpu_stats()
-    for i, gpu_stat in enumerate(gpu_stats):
-        system_stats_tab_column.append([
-            sg.Frame('',[
-                [
-                    sg.Text(gpu_stat['name'], key=f"-{SYSTEM_STATS_GPU_NAME_LBL_KEY}_{i}-", font=FONT_H1, background_color=color.DARK_GRAY, text_color=color.LIGHT_GRAY),
-                ],
-                [
-                    sg.Frame("",[       
-                            [
-                                sg.Button("Temperature",size=(15,2),font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
+    # gpu_stats = system_stats.get_gpu_stats()
+    # for i, gpu_stat in enumerate(gpu_stats):
+    #     system_stats_tab_column.append([
+    #         sg.Frame('',[
+    #             [
+    #                 sg.Text(gpu_stat['name'], key=f"-{SYSTEM_STATS_GPU_NAME_LBL_KEY}_{i}-", font=FONT_H1, background_color=color.DARK_GRAY, text_color=color.LIGHT_GRAY),
+    #             ],
+    #             [
+    #                 sg.Frame("",[       
+    #                         [
+    #                             sg.Button("Temperature",size=(15,2),font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
             
-                                sg.Button('', key=f"-{SYSTEM_STATS_GPU_TEMP_LBL_KEY}_{i}-",size=(40,2),font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
-                            ], 
-                            [
-                                sg.Button("VRAM Usage",size=(15,2),font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
-                                sg.Button(f"",size=(40,2), key=f"-{SYSTEM_STATS_GPU_VRAM_LBL_KEY}_{i}-",font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
-                            ],                                 
-                            [
-                                sg.Button("Power Usage",size=(15,2),font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
+    #                             sg.Button('', key=f"-{SYSTEM_STATS_GPU_TEMP_LBL_KEY}_{i}-",size=(40,2),font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
+    #                         ], 
+    #                         [
+    #                             sg.Button("VRAM Usage",size=(15,2),font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
+    #                             sg.Button(f"",size=(40,2), key=f"-{SYSTEM_STATS_GPU_VRAM_LBL_KEY}_{i}-",font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
+    #                         ],                                 
+    #                         [
+    #                             sg.Button("Power Usage",size=(15,2),font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
             
-                                sg.Button(f"",size=(40,2), key=f"-{SYSTEM_STATS_GPU_POWER_USAGE_LBL_KEY}_{i}-",font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
-                            ],                              
-                        ],expand_x=True,expand_y=True,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
-                ]
-            ], expand_x=True, expand_y=False, border_width=5, pad=(10,10), relief=sg.RELIEF_FLAT, element_justification="c", background_color=color.DARK_GRAY)
-        ])
+    #                             sg.Button(f"",size=(40,2), key=f"-{SYSTEM_STATS_GPU_POWER_USAGE_LBL_KEY}_{i}-",font=FONT,expand_x=True,button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True),
+    #                         ],                              
+    #                     ],expand_x=True,expand_y=True,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
+    #             ]
+    #         ], expand_x=True, expand_y=False, border_width=5, pad=(10,10), relief=sg.RELIEF_FLAT, element_justification="c", background_color=color.DARK_GRAY)
+    #     ])
 
     about_tab_column = [
             [
@@ -318,7 +320,7 @@ def main():
 
     #endregion layout
 
-    window = sg.Window(APP_TITLE,layout,finalize=True,size=(1100,800), resizable=True,enable_close_attempted_event=False,background_color=color.GRAY_9900)
+    window = sg.Window(APP_TITLE,layout,finalize=True,size=(1100,800), resizable=True,enable_close_attempted_event=False,background_color=color.GRAY_9900,icon=ic.icon3)
     # window.Maximize()    
     # window.set_min_size((800,600))
     # window.set_min_size((500,300))
@@ -431,17 +433,25 @@ def main():
                     window[f"-{SYSTEM_STATS_GPU_VRAM_LBL_KEY}_{i}-"].update(f"{gpu_stat['vram_used']} / {gpu_stat['vram_total']}")            
                 time.sleep(update_interval)
 
-    def default_launcher_buttons():
-        window["-selected_app_args_1_--autolaunch_btn-"].update(button_color=(color.GRAY,color.DIM_GREEN))
-        window["-selected_app_args_1_--theme=dark_btn-"].update(button_color=(color.GRAY,color.DIM_GREEN))
+
+    def default_launcher_buttons(project_args, id_number):
+        try:
+            
+            if id_number in project_args:
+                args = project_args[id_number]
+                for arg in args:
+                    button_id = f"-selected_app_args_{id_number}_{arg}_btn-"
+                    window[button_id].update(button_color=(color.GRAY,color.DIM_GREEN))
+        except TypeError as e:
+            print(e)
 
     def handle_tab_event(event, tab_elements, tab_btn_elements, active_color, inactive_color):
-        if event == "-system_stats_tab-":
-            stop_event.clear()
-            t = threading.Thread(target=system_stats_monitor, args=(stop_event,2,))
-            t.start()
-        else:
-            stop_event.set()
+        # if event == "-system_stats_tab-":
+        #     stop_event.clear()
+        #     t = threading.Thread(target=system_stats_monitor, args=(stop_event,2,))
+        #     t.start()
+        # else:
+        #     stop_event.set()
 
         for tab_key in tab_elements:
             is_target = tab_key == event
@@ -512,8 +522,8 @@ def main():
             window.extend_layout(window[C2_LAUNCH_KEY],new_layout)
             flatten_ui_elements(window)  
             window.visibility_changed()           
-            if id_number == 1:
-                default_launcher_buttons() 
+            # if id_number == 1:
+            default_launcher_buttons(project_args,id_number) 
                     
         if event.startswith(SELECTED_APP) and event.endswith("_btn-"):
                 # print("selected_app_",event)

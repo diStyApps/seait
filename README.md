@@ -60,11 +60,10 @@ But remains a great solution for users with minimal technical knowledge or exper
 [![0.0.1](media/covers/yt_0.0.1.jpg)](https://youtu.be/ePZzmMFb8Po "0.0.1")
 
 
-<img src="media/preview/1_0.0.5.jpg">
-<img src="media/preview/2_0.0.5.jpg">
+<img src="media/preview/1_0.0.6.jpg">
+<img src="media/preview/2_0.0.6.jpg">
 <img src="media/preview/3_0.0.1.jpg">
 <img src="media/preview/3_0.0.3.jpg">
-<img src="media/preview/4_0.0.4.jpg">
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- Downloads -->
@@ -90,8 +89,7 @@ In the future ill try maybe nukita or something.
 ## Roadmap
 
 - [ ] Multi-language support
-- [x] GPU Stats
-- [ ] More AI-related repos
+- [x] More AI-related repos
 - [ ] Pre installed auto1111 version
 - [ ] Pre installed python version
 - [ ] Locate repo

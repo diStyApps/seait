@@ -48,7 +48,23 @@ def layout(app):
                     launch_buttons_button
                 ] 
             ],key=f'{main_key}frame-',expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
-        ],   
+        ],  
+        [
+            sg.Frame("",[       
+                [
+                    sg.MLine(f"""{app['description'][0]}""",k=f"{main_key}description_{app['id']}_console_ml-",visible=True,text_color=color.DIM_BLUE,border_width=10,sbar_width=20,sbar_trough_color=0,
+                            autoscroll=True, auto_refresh=True,expand_x=True,expand_y=True,font=FONT,no_scrollbar=True,disabled=True,size=(100,4)),
+                ],                            
+                ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
+        ] if app['description'] else [],         
+        [
+            sg.Frame("",[       
+                [
+                    sg.MLine("""This project has not been fully implemented in the installer. If you do not want to deal with errors, it is recommended to skip this one for now.""",k=f"{main_key}isIncomplete{app['id']}_console_ml-",visible=True,text_color=color.RED_ORANGE,border_width=10,sbar_width=20,sbar_trough_color=0,
+                            autoscroll=True, auto_refresh=True,expand_x=True,expand_y=True,font=FONT,no_scrollbar=True,disabled=True,size=(100,3)),
+                ],                            
+                ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
+        ] if app['isIncomplete'] else [], 
         [
             sg.Frame("",[       
                 [
