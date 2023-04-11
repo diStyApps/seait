@@ -28,6 +28,19 @@ SETTINGS_TAB_BTN = '-settings_tab-'
 ABOUT_TAB_BTN = '-about_tab-'
 
 
+
+SELECTED_PROJECT = '-selected_project_'
+SELECT_PROJECT = '-select_project_'
+
+SET_APP_ARGS = "-set_app_args-"
+RUN_APP_FUNC = "-run_app_func-"
+
+
+
+SELECT_APP = "-select_app_"
+SELECTED_APP = "-selected_app_"
+
+
 USE_PRE_INSTALLED_VERSION_BTN = '-use_pre_installed_version_btn-'
 
 INSTALL_GIT_BUTTON = '-install_git_btn-'
@@ -63,10 +76,6 @@ SYSTEM_STATS_CPU_USAGE_PRECENT_LBL_KEY = '-system_stats_cpu_usage_precent_lbl'
 SYSTEM_STATS_RAM_USAGE_LBL_KEY = '-system_stats_ram_usage_lbl'
 
 
-SET_APP_ARGS = "-set_app_args-"
-RUN_APP_FUNC = "-run_app_func-"
-SELECT_APP = "-select_app_"
-SELECTED_APP = "-selected_app_"
 
 
 LOCALIZATION_PATH = "data/localizations/"
@@ -123,43 +132,7 @@ project_args = {
     8: [],
     9: [],
 }
-# "lang": "English",
-# "native": "English",
-# "Yes":"Yes",
-# "No":"No",
-# "Projects":"Projects",
-# "System Monitor":"System Monitor",
-# "AiPanic":"AiPanic",
-# "Settings":"Settings",
-# "About":"About",
-# "Check for Update":"Check for Update",
-# "None":"None",
-# "Installed":"Installed",
-# "Install":"Install",
-# "Launch":"Launch",
-# "Uninstall":"Uninstall",
-# "Update":"Update",
-# "Delete venv":"Delete venv",
-# "Create venv":"Create venv",
-# "Installed Version":"Installed Version",
-# "Installing and launching":"Installing and launching",
-# "Launching":"Launching",
-# "Launched":"Launched",
-# "Pre installed":"Pre installed",
-# "Use pre installed":"Use pre installed",
-# "Arguments":"Arguments",
-# "Setup":"Setup",
-# "Custom":"Custom",
-# "Download Models":"Download Models",
-# "Update available":"Update available",
-# "No update available - latest version":"No update available - latest version",
-# "Could not find version information":"Could not find version information",
-# "CPU Usage":"CPU Usage",
-# "RAM Usage":"RAM Usage",
-# "Temperature":"Temperature",
-# "VRAM Usage":"VRAM Usage",
-# "Power Usage":"Power Usage",
-# "Don't forget to leave a like/star.":"Don't forget to leave a like/star."
+
 LOCAL_YES = "Yes"
 LOCAL_NO = "No"
 LOCAL_LANG = "lang"
@@ -197,12 +170,7 @@ LOCAL_TEMPERATURE = "Temperature"
 LOCAL_VRAM_USAGE = "VRAM Usage"
 LOCAL_POWER_USAGE = "Power Usage"
 LOCAL_LIKE_STAR = "Don't forget to leave a like/star."
+LOCAL_INCOMPLETE = "isIncomplete"
 
-
-
-# native_name = lang_data["native"]
-# Projects_local = lang_data["Projects"]
-# System_stats_local = lang_data["System Monitor"]
-# AiPanic_local = lang_data["AiPanic"]
-# Settings_local = lang_data["Settings"]
-# About_local = lang_data["About"]
+#prefs
+PREF_SELECTED_LANG = 'selected_lang'

@@ -7,13 +7,13 @@ import util.installation_status as installation_status
 
 def create_layout(project,lang_data):
     main_key = '-selected_app_'
-    selected_app_key = f"{main_key}{project['id']}_"
+    selected_project_key = f"{main_key}{project['id']}_"
     installation_status_val = installation_status.check_project(project)
     git_Python_status = installation_status.check_git_python()
-    app_commit_hash = installation_status.get_last_commit_hash_local(project)
+    project_commit_hash = installation_status.get_last_commit_hash_local(project)
     
-    if app_commit_hash == None:
-        app_commit_hash = lang_data["None"]
+    if project_commit_hash == None:
+        project_commit_hash = lang_data[LOCAL_NONE]
 
     launch_buttons_index = 0 if installation_status_val else 1
     launch_buttons_key = f"{main_key}func_{project['id']}_{project['launch_buttons'][launch_buttons_index]['key']}_btn-"
@@ -32,11 +32,6 @@ def create_layout(project,lang_data):
         mouseover_colors=launch_buttons_mouseover_colors
     )
 
-    installed_version = lang_data["Installed Version"]
-    arguments = lang_data["Arguments"]
-    custom = lang_data["Custom"]
-    setup = lang_data["Setup"]
-
     layout = [
         [
             sg.Frame('',[        
@@ -46,11 +41,11 @@ def create_layout(project,lang_data):
                     sg.Push(background_color=color.DARK_GRAY),
                 ],        
                 [
-                    sg.Button(project['github_url'],k=f"{selected_app_key}github_btn-",font=FONT,expand_x=True,button_color=(color.DIM_BLUE,color.GRAY),mouseover_colors=(color.GRAY_9900,color.DIM_BLUE),disabled=False),
+                    sg.Button(project['github_url'],k=f"{selected_project_key}github_btn-",font=FONT,expand_x=True,button_color=(color.DIM_BLUE,color.GRAY),mouseover_colors=(color.GRAY_9900,color.DIM_BLUE),disabled=False),
                 ],                                         
                 [
-                    sg.Button(installed_version,k=f"{main_key}_{project['id']}_github_lbl-",visible=True,font=FONT,expand_x=True,size=(20,1),disabled=True),
-                    sg.Button(app_commit_hash,visible=True,k=f"-{selected_app_key}commit_hash_lbl-",size=(40,1),font=FONT,expand_x=True,disabled=True)
+                    sg.Button(lang_data[LOCAL_INSTALLED_VERSION],k=f"{main_key}_{project['id']}_github_lbl-",visible=True,font=FONT,expand_x=True,size=(20,1),disabled=True),
+                    sg.Button(project_commit_hash,visible=True,k=f"-{selected_project_key}commit_hash_lbl-",size=(40,1),font=FONT,expand_x=True,disabled=True)
                 ],                        
                 [ 
                     launch_buttons_button
@@ -68,7 +63,7 @@ def create_layout(project,lang_data):
         [
             sg.Frame("",[       
                 [
-                    sg.MLine("""This project has not been fully implemented in the installer. If you do not want to deal with errors, it is recommended to skip this one for now.""",k=f"{main_key}isIncomplete{project['id']}_console_ml-",visible=True,text_color=color.RED_ORANGE,border_width=10,sbar_width=20,sbar_trough_color=0,
+                    sg.MLine(f"""{lang_data[LOCAL_INCOMPLETE]}""",k=f"{main_key}isIncomplete{project['id']}_console_ml-",visible=True,text_color=color.RED_ORANGE,border_width=10,sbar_width=20,sbar_trough_color=0,
                             autoscroll=True, auto_refresh=True,expand_x=True,expand_y=True,font=FONT,no_scrollbar=True,disabled=True,size=(100,3)),
                 ],                            
                 ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
@@ -79,7 +74,7 @@ def create_layout(project,lang_data):
                     sg.Frame('',[       
                         [
                             sg.Image(ic.args,key=f"{main_key}args_img-",background_color=color.DARK_GRAY,size=(30,30)),
-                            sg.Text(arguments,key=f"{main_key}args_lbl-",text_color=color.LIGHT_GRAY,font=FONT,background_color=color.DARK_GRAY),
+                            sg.Text(lang_data[LOCAL_ARGUMENTS],key=f"{main_key}args_lbl-",text_color=color.LIGHT_GRAY,font=FONT,background_color=color.DARK_GRAY),
                         ],  
                     ],key=f"{main_key}args_header_frame-",expand_x=True,expand_y=False,border_width=0,pad=(10,3),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)            
                 ],  
@@ -95,7 +90,7 @@ def create_layout(project,lang_data):
                 ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
         ] if project['args'] else [],    
         [
-            sg.Frame(custom,[       
+            sg.Frame(lang_data[LOCAL_CUSTOM],[       
                 [
                     sg.MLine("",k=f"{main_key}args_{project['id']}_console_ml-",visible=True,text_color=color.DIM_GREEN,border_width=10,sbar_width=20,sbar_trough_color=0,
                             autoscroll=True, auto_refresh=True,expand_x=True,expand_y=True,font=FONT,no_scrollbar=True,),
@@ -108,7 +103,7 @@ def create_layout(project,lang_data):
                 sg.Frame('',[       
                     [
                         sg.Image(ic.args,key=f"{main_key}setup_img-",background_color=color.DARK_GRAY,size=(30,30)),
-                        sg.Text(setup,key=f"{main_key}setup_lbl-",text_color=color.LIGHT_GRAY,font=FONT,background_color=color.DARK_GRAY),
+                        sg.Text(lang_data[LOCAL_SETUP],key=f"{main_key}setup_lbl-",text_color=color.LIGHT_GRAY,font=FONT,background_color=color.DARK_GRAY),
                     ],  
                 ],key=f"{main_key}setup_header_frame-",expand_x=True,expand_y=False,border_width=0,pad=(10,3),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)            
             ],                

@@ -33,7 +33,6 @@ def read_json_file_full_path(filename_path):
         x = json.load(f) # x is a python dictionary in this case
     return x
 
-
 def save_preference(preference_name,preference_value):
     try:
         file = read_json_file(PREFERENCES_FILE_NAME)
@@ -54,7 +53,7 @@ def create_preferences_init():
     preferences={
         "init": 0,
         # "usePreInstalledPython": True,
-        "selected_lang": "he_IL",
+        "selected_lang": "en_EN",
 
     }
     def create_preferences(preferences):
@@ -68,7 +67,7 @@ def create_preferences_init():
             # print(create_preferences,'preferences file initialized')
             pass
     except FileNotFoundError:
-        print(create_preferences,'creating preferences file ')
+        # print('creating preferences file')
         create_preferences(preferences)
         save_preference('init',0)
         # print(create_preferences,'preferences file initialized')

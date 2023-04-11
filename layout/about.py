@@ -34,6 +34,6 @@ def create_layout(lang_data):
         ]
     return layout
 
-def set_buttons(event):
+def events(event):
     support.buttons(event)
     repos.buttons(event)

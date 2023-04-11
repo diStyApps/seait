@@ -23,7 +23,7 @@ def create_layout(lang_data,languages):
                     sg.Button(AiPanic_local,disabled=True,k=AIPANIC_TAB_BTN,font=FONT,expand_x=True,size=(10,2),button_color=nav_tab_button_color,mouseover_colors=nav_tab_mouseover_colors),
                     sg.Button(About_local,k=ABOUT_TAB_BTN,font=FONT,expand_x=True,size=(10,2),button_color=nav_tab_button_color,mouseover_colors=nav_tab_mouseover_colors),                    
                     # sg.Push(),
-                    sg.Combo(languages, default_value=native_name, s=(1, 10), enable_events=True, readonly=True, k=SET_LANGUAGE, expand_x=True, expand_y=True,
+                    sg.Combo(languages, default_value=native_name, s=(1, 20), enable_events=True, readonly=True, k=SET_LANGUAGE, expand_x=True, expand_y=True,
                               font=FONT,text_color=color.DIM_BLUE,button_background_color=color.DARK_GRAY,button_arrow_color=color.DARK_GRAY),
                 ],
             ], expand_x=True,key='-nav-', expand_y=False, border_width=0, relief=sg.RELIEF_FLAT, element_justification="c", background_color=color.GRAY_9900)

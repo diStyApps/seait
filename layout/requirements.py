@@ -83,7 +83,7 @@ def python_event_handler(window,lang_data):
         convert_button_enable() if project_funcs.usePreInstalledPython else convert_button_disable()
     else:
         # print("pre installed python not found")         
-        window[PRE_INSTALLED_VERSION_LBL].update("Pre installed")
+        window[PRE_INSTALLED_VERSION_LBL].update(lang_data[LOCAL_PRE_INSTALLED])
         window[USE_PRE_INSTALLED_VERSION_BTN].update(disabled_button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True)
 
 def isfile_exist_check(file_path):

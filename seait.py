@@ -11,6 +11,7 @@ import util.projects_functions as project_funcs
 import util.update_check_temp as update_check
 import util.installation_status as installation_status
 import util.json_tools as jt
+import util.project_util as project_util
 # import util.system_stats as system_stats
 import util.localizations as localizations
 import layout.navigation as navigation_layout
@@ -29,58 +30,20 @@ sg.set_options(
     # font=('Helvetica', 14),
     # background_color='lightgray',
     # text_color='black',
-    # ttk_theme='alt',
+    # ttk_theme='classic',
     sbar_width=15,sbar_trough_color=0,sbar_arrow_width=8,    
     suppress_error_popups = True,
 )
-
-def update_project_args(project_id, arg_name):
-    if project_id not in project_args:
-        project_args[project_id] = []
-
-    if arg_name in project_args[project_id]:
-        project_args[project_id].remove(arg_name)
-    else:
-        project_args[project_id].append(arg_name)
-
-def update_project_args_from_string(project_id, values_string):
-    args_list = values_string.split()
-    for arg_name in args_list:
-        if arg_name not in project_args.get(project_id, []):
-            update_project_args(project_id, arg_name)
-
-def get_project_by_id(projects, project_id):
-    for project in projects:
-        if project.get("id") == project_id:
-            return project
-    return None
-
-def get_project_id(event):
-    return int(re.search(r"_\d+", event).group(0)[1:])
-
-def get_func_and_id(event):
-    id_number = get_project_id(event)
-    method = re.search(r"-selected_app_func_\d+_(.+)_btn-", event).group(1)
-    return id_number,method
 
 def reopen_window(window):
     window.close()
     main()  
 
 def main():
-    print('main',VERSION)
     jt.create_preferences_init()
-    print('selected_lang',jt.load_preference('selected_lang'))
     languages = localizations.get_language_by_codes()
-    lang_data = localizations.set_language(jt.load_preference('selected_lang'))
+    lang_data = localizations.set_language(jt.load_preference(PREF_SELECTED_LANG))
 
-    print('selected_lang',lang_data['id'],lang_data['lang'])
-
-    Update_available_local = lang_data["Update available"]
-    No_update_available_local = lang_data["No update available - latest version"]
-
-
-   #region layout
 
     layout = [[ 
             [
@@ -93,8 +56,6 @@ def main():
                 # sg.Column(system_stats_layout, key=SYSTEM_INFO_COL, element_justification='c', expand_x=True,expand_y=True,visible=False),
             ],        
     ]]
-
-    #endregion layout
 
     window = sg.Window(APP_TITLE,layout,finalize=True,size=(1100,800), resizable=True,enable_close_attempted_event=False,background_color=color.GRAY_9900,icon=ic.icon3)
 
@@ -152,21 +113,22 @@ def main():
     while True:
         event, values = window.read()
         # print("event", event, "values", values)
+
         if event == sg.WIN_CLOSED:
             break
-        
+
         requirements_layout.events(window,event,lang_data)
+        about_layout.events(event)
 
         if event == SET_LANGUAGE:
-            # print('set language',values[SET_LANGUAGE])
-            jt.save_preference('selected_lang',localizations.get_language_by_native(values[SET_LANGUAGE]))
+            jt.save_preference(PREF_SELECTED_LANG,localizations.get_language_by_native(values[SET_LANGUAGE]))
             reopen_window(window)
 
         if event in nav_elements:
             navigation_layout.handle_tab_event(event, nav_elements, nav_btn_elements, nav_active_color, nav_inactive_color)
    
         if event.startswith(SELECT_APP) and event.endswith("_btn-"):
-            id_number = get_project_id(event)
+            id_number = project_util.get_project_id(event)
 
             #project_menu_item_highlight
             # window[f"-select_app_{id_number}_btn-"].update(disabled=True,button_color=(color.DARK_GRAY,color.DIM_GREEN))
@@ -178,7 +140,7 @@ def main():
 
             clear_items_keys(window)        
             # fix white flash
-            project = get_project_by_id(projects_data, id_number)
+            project = project_util.get_project_by_id(projects_data, id_number)
             layout = project_layout.create_layout(project,lang_data)
             for element in list(window[PROJECTS_COL_2].Widget.children.values()):
                 element.destroy()
@@ -201,11 +163,11 @@ def main():
 
         if event == RUN_APP_FUNC:
             event_value = values['-run_app_func-']
-            id_number, method = get_func_and_id(event_value)   
-            project = get_project_by_id(projects_data, id_number)
+            id_number, method = project_util.get_function_and_project_id(event_value)   
+            project = project_util.get_project_by_id(projects_data, id_number)
             if project['type'] == 'app':
                 args_list = values[f"-selected_app_args_{id_number}_console_ml-"]
-                update_project_args_from_string(id_number, args_list)
+                project_util.update_project_args_from_string(id_number, args_list)
 
             if dialog_layout.dialog_window(project['title'],method,lang_data):
                 if method == "install":
@@ -222,9 +184,9 @@ def main():
         if event == SET_APP_ARGS:
             # print("args",event,values['-set_app_args-'])
             event_value = values['-set_app_args-']
-            id_number = get_project_id(event_value)
+            id_number = project_util.get_project_id(event_value)
             args = re.search(r"-selected_app_args_\d+_(.+)_btn-", event_value).group(1)   
-            update_project_args(id_number,args)
+            project_util.update_project_args(id_number,args)
             # print(project_args)
             if window[event_value].ButtonColor[0] == color.GRAY:
                 window[event_value].update(button_color=(color.DIM_GREEN,color.GRAY))
@@ -233,20 +195,19 @@ def main():
 
         if event == CHECK_UPDATE_BTN_KEY:
             if not update_check.check_update_available():
-                Update_available_local = localizations.set_language_by_native(values[SET_LANGUAGE])["Update available"]
-                update_available_lbl_elem.update(f"{Update_available_local}: {update_check.latest_release}",button_color=(color.GRAY_9900,color.DARK_GREEN),disabled=False)
+                update_available = localizations.set_language_by_native(values[SET_LANGUAGE])[LOCAL_UPDATE_AVAILABLE]
+                update_available_lbl_elem.update(f"{update_available}: {update_check.latest_release}",button_color=(color.GRAY_9900,color.DARK_GREEN),disabled=False)
             else:
-                No_update_available_local = localizations.set_language_by_native(values[SET_LANGUAGE])["No update available - latest version"]
-                update_available_lbl_elem.update(f"{No_update_available_local}: {VERSION}")
+                no_update_available = localizations.set_language_by_native(values[SET_LANGUAGE])[LOCAL_NO_UPDATE_AVAILABLE]
+                update_available_lbl_elem.update(f"{no_update_available}: {VERSION}")
 
         if event == UPDATE_AVAILABLE_LBL_KEY:
             webbrowser.open(LATEST_RELEASE_URL)  
      
         if event.startswith("-selected_app_") and event.endswith("_github_btn-"):
-            id_number = get_project_id(event)
-            webbrowser.open(get_project_by_id(projects_data, id_number)['github_url']) 
+            id_number = project_util.get_project_id(event)
+            webbrowser.open(project_util.get_project_by_id(projects_data, id_number)['github_url']) 
 
-        about_layout.set_buttons(event)
 
 if __name__ == '__main__':
     main() 

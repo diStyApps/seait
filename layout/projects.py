@@ -4,9 +4,7 @@ from util.CONSTANTS import *
 import util.colors as color
 import util.icons as ic
 import util.installation_status as installation_status
-from util.ui_tools import flatten_ui_elements,expand_column_helper,clear_items_keys
 import layout.requirements as requirements_layout 
-
 
 def create_layout_list_menu(projects):
 
@@ -66,35 +64,3 @@ def create_project_layout(lang_data):
     ]]
 
     return layout
-# def default_launcher_buttons(project_args, id_number):
-#     try:
-#         if id_number in project_args:
-#             args = project_args[id_number]
-#             for arg in args:
-#                 button_id = f"-selected_app_args_{id_number}_{arg}_btn-"
-#                 window[button_id].update(button_color=(color.GRAY,color.DIM_GREEN))
-#     except TypeError as e:
-#         print(e)
-
-# def events(window,event,lang_data):
-#     if event.startswith(SELECT_APP) and event.endswith("_btn-"):
-#         id_number = get_project_id(event)
-
-#         #project_menu_item_highlight
-#         # window[f"-select_app_{id_number}_btn-"].update(disabled=True,button_color=(color.DARK_GRAY,color.DIM_GREEN))
-#         # if window[event].ButtonColor[0] == color.GRAY:
-#         #     window[event].update(button_color=(color.DIM_BLUE,color.GRAY),disabled=False)
-#         # else:
-#         #     window[event].update(button_color=(color.GRAY,color.DIM_GREEN),disabled_button_color=(color.GRAY,color.GRAY),disabled=True)            
-#         # print("triggered",id_number)
-
-#         clear_items_keys(window)        
-#         # fix white flash
-#         layout = project_layout.layout(get_project_by_id(projects, id_number))
-#         for element in list(window[PROJECTS_COL_2].Widget.children.values()):
-#             element.destroy()
-#         window.extend_layout(window[PROJECTS_COL_2],layout)
-#         flatten_ui_elements(window)  
-#         window.visibility_changed()           
-#         # if id_number == 1:
-#         default_launcher_buttons(project_args,id_number) 
