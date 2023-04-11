@@ -36,22 +36,24 @@ def launch(app_info, args=[]):
     venv_path = get_venv_path(app_info)
     launch_path = get_entry_point(app_info, 'launch')
     print(f"launching {app_info['repo_name']}")
+
     command_len = len(launch_path.split())
     cmd_launch = app_info['entry_point']['launch']
     activate_script = f"{venv_path}/Scripts/activate.bat"
     cmd_command = f'cmd /K "{activate_script} && {cmd_launch} {" ".join(args)}"'
-
     if launch_path.endswith(".py") and command_len == 1:
-        print('.py run')
+        # print('.py run')
         subprocess.run([f"{venv_path}/Scripts/python", launch_path, *args], cwd=project_path)
     elif launch_path.endswith(".py") and command_len > 1:
         print('command run and script run')
         subprocess.run(cmd_command, cwd=project_path, shell=True)           
     elif launch_path.endswith(".bat"):
-        print('.bat run')
+        # os.environ['COMMANDLINE_ARGS'] = '--api'        
+        # os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'garbage_collection_threshold:0.6,max_split_size_mb:128'
+        # print('.bat run')
         subprocess.run([launch_path, *args], cwd=project_path)
     else:
-        print('command run')
+        # print('command run')
         subprocess.run(cmd_command, cwd=project_path, shell=True)        
  
 

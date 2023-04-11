@@ -1,4 +1,4 @@
-projects = [
+projects_data = [
         {
             "id": 1,
             "key": "app_",
@@ -22,7 +22,7 @@ projects = [
             "entry_point": 
                 {
                     "install":"launch.py",
-                    "launch":"launch.py",
+                    "launch":"webui.bat",
                 },  
             "buttons": [
                 {

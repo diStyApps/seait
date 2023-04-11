@@ -1,8 +1,8 @@
 import requests
 import re
 from util.CONSTANTS import *
-
-def check_update_available(current_version):
+latest_release = None
+def check_update_available():
     r = requests.get(CHECK_UPDATE_URL)
     html_content = r.text
     pattern = re.compile(r'<h2[^>]*class="[^"]*sr-only[^"]*"[^>]*>(.*?)</h2>', re.DOTALL)
@@ -13,9 +13,12 @@ def check_update_available(current_version):
         version_pattern = re.compile(r"\d+\.\d+(\.\d+)?")
         latest_release = version_pattern.search(h2_sr_only).group()
 
-        if latest_release != current_version:
-            return f"Update available: {latest_release}"
+        if latest_release != VERSION:
+            # return f"Update available: {latest_release}"
+            return True
         else:
-            return f"No update available - latest version: {current_version}"
-    else:
-        return "Could not find version information"
+            return False
+            # return f"No update available - latest version: {current_version}"
+        
+    # else:
+    #     return "Could not find version information"

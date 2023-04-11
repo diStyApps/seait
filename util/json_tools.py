@@ -54,6 +54,8 @@ def create_preferences_init():
     preferences={
         "init": 0,
         # "usePreInstalledPython": True,
+        "selected_lang": "he_IL",
+
     }
     def create_preferences(preferences):
         save_json_file(PREFERENCES_FILE_NAME,preferences)
@@ -70,3 +72,16 @@ def create_preferences_init():
         create_preferences(preferences)
         save_preference('init',0)
         # print(create_preferences,'preferences file initialized')
+
+def load_preference(preference_key):
+    preference = get_preference()
+    try:
+        preference_value=preference[preference_key]
+        return preference_value
+    except KeyError as e:
+        print('setup','preference not set yet',preference_key)  
+
+# def save_preference(values,preference_key):
+#     preference_value = values[f'-{preference_key}-']
+#     # print(save_preference,'preference_value',preference_value)
+#     save_preference(preference_key,preference_value)         

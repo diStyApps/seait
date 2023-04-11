@@ -8,3 +8,4 @@ __pycache__/
 util\__pycache__/
 util/__pycache__/
 *.pyc
+preferences.json

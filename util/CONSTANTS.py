@@ -1,57 +1,51 @@
-# PBAR_KEY = 'progress_bar'
+VERSION = '0.0.7'
+APP_TITLE = f"Super Easy AI Installer Tool - Ver {VERSION}"
+
 
 FONT = 'Arial 12'
 FONT_H1 = 'Arial 14'
 
-INSTALLS_TAB_KEY = '-installs_tab-'
-PROJECTS_TAB_KEY = '-launcher_tab-'
-GPU_TAB_KEY = '-gpu_tab-'
-LANGUAGE_TAB_KEY = '-language_tab-'
-SYSTEM_STATS_TAB_KEY = '-system_stats_tab-'
-AIPANIC_TAB_KEY = '-aipanic_tab-'
-SETTINGS_TAB_KEY = '-settings_tab-'
-ABOUT_TAB_KEY = '-about_tab-'
-C1_INSTALLS_KEY = '-c1_installs-'
-C2_INSTALLS_KEY = '-c2_installs-'
-C1_LAUNCH_KEY = '-c1_launch-'
-C2_LAUNCH_KEY = '-c2_launch-'
-
-C2_LAUNCH_PLACE_KEY = '-c2_launch_placeholder-'
-
-C1_ABOUT_KEY = '-c1_about-'
-#system_stats
-C1_SYSTEM_STATS_KEY = '-c1_system_stats-'
-
-INSTALLS_TAB_RTL_KEY = '-installs_tab_rtl-'
-LAUNCHER_TAB_RTL_KEY = '-launcher_tab_rtl-'
-C1_INSTALLS_RTL_KEY = '-c1_installs_rtl-'
-C2_INSTALLS_RTL_KEY = '-c2_installs_rtl-'
-C1_LAUNCH_RTL_KEY = '-c1_launch_rtl-'
-C2_LAUNCH_RTL_KEY = '-c2_launch_rtl-'
 
 
-LAUNCH_A11WEBUI_BTN_KEY = '-launch_a11webui_button-'
-LAUNCH_A11API_BTN_KEY = '-launch_a11api_button-'
+#nav 
+PROJECTS_COL_1 = '-projects_col_1-'
+PROJECTS_COL_2 = '-projects_col_2-'
+ABOUT_COL = '-about_col-'
+SYSTEM_INFO_COL = '-system_stats_col-'
 
-INSTALL_COLUMN_LEFT_SCROLLABLE_KEY = '-install_column_left_scrollable_key-'
-LAUNCH_COLUMN_LEFT_SCROLLABLE_KEY = '-launch_column_left_scrollable_key-'
+#layout
+PROJECTS_LIST_MENU = '-projects_list_menu-'
+PROJECTS_COL_PLACEHOLDER = '-projects_col_placeholder-'
 
-DEP_APP_PYTHON_USE_PRE_INSTALL_KEY = '-dep_app_python_use_pre_install-'
-DEP_APP_PYTHON_INSTALL_KEY = '-dep_app_python_install-'
-DEP_APP_GIT_INSTALL_KEY = '-dep_app_git_install-'
-DEP_APP_PYTHON_INSTALLED_VERSION_LBL_KEY = '-dep_app_installed_version-'
-DEP_APP_GIT_INSTALLED_VERSION_LBL_KEY = '-dep_app_git_installed_version-'
+
+#nav buttons
+PROJECTS_TAB_BTN = '-projects_tab-'
+SYSTEM_STATS_TAB_BTN = '-system_stats_tab-'
+AIPANIC_TAB_BTN = '-aipanic_tab-'
+SETTINGS_TAB_BTN = '-settings_tab-'
+ABOUT_TAB_BTN = '-about_tab-'
+
+
+USE_PRE_INSTALLED_VERSION_BTN = '-use_pre_installed_version_btn-'
+
+INSTALL_GIT_BUTTON = '-install_git_btn-'
+INSTALLED_GIT_VERSION_LBL = '-installed_git_version_lbl-'
+
+INSTALL_PYTHON_BUTTON = '-install_python_btn-'
+INSTALLED_PYTHON_VERSION_LBL = '-installed_python_version_lbl-'
+
+
 DEP_APP_GIT_INSTALLED_VERSION_FRAME_KEY = '-dep_app_git_installed_version_frame-'
-DEP_APP_PRE_INSTALLED_VERSION_LBL_KEY = '-dep_app_pre_installed_version-'
+PRE_INSTALLED_VERSION_LBL = '-pre_installed_version_lbl-'
 
 INSTALLERS_PYTHON_PATH = 'data\installers\python-3.10.6-amd64.exe'
 INSTALLERS_GIT_PATH = 'data\installers\Git-2.40.0-64-bit.exe'
 PRE_INSTALLED_PYTHON_PATH = 'data\Python3106\python.exe'
 
 
-UPDATE_BTN_KEY = '-update_app_btn-'
-UPDATE_AVAILABLE_LBL_KEY = '-update_available_lbl-'
 CHECK_UPDATE_BTN_KEY = '-check_update_btn-'
+UPDATE_AVAILABLE_LBL_KEY = '-update_available_lbl-'
+# CHECK_UPDATE_BTN_KEY = '-check_update_btn-'
 
 LATEST_RELEASE_URL = "https://github.com/diStyApps/seait/releases/latest"
 LATEST_RELEASE_CIVITAI_URL = "https://github.com/diStyApps/seait/releases/latest"
@@ -71,6 +65,19 @@ SET_APP_ARGS = "-set_app_args-"
 RUN_APP_FUNC = "-run_app_func-"
 SELECT_APP = "-select_app_"
 SELECTED_APP = "-selected_app_"
+
+
+LOCALIZATION_PATH = "data/localizations/"
+
+LEAVE_A_LIKE_STAR_TXT_KEY = '-leave_a_like_star_txt_key-'
+SET_LANGUAGE = '-set_language_key-'
+
+INSTALLS_TAB_RTL_KEY = '-installs_tab_rtl-'
+LAUNCHER_TAB_RTL_KEY = '-launcher_tab_rtl-'
+C1_INSTALLS_RTL_KEY = '-c1_installs_rtl-'
+C2_INSTALLS_RTL_KEY = '-c2_installs_rtl-'
+C1_LAUNCH_RTL_KEY = '-c1_launch_rtl-'
+C2_LAUNCH_RTL_KEY = '-c2_launch_rtl-'
 
 CN_MODELS = [
     "cldm_v15.yaml",
@@ -103,3 +110,14 @@ CN_MODELS = [
     "coadapter-sketch-sd15v1.pth",
     "coadapter-style-sd15v1.pth"    
 ]
+project_args = {
+    1: ['--autolaunch', '--theme=dark'],
+    2: ['--web'],
+    3: [],
+    4: [],
+    5: [],
+    6: [],
+    7: [],
+    8: [],
+    9: [],
+}
