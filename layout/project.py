@@ -6,22 +6,18 @@ import util.icons as ic
 import util.installation_status as installation_status
 
 def create_layout(project,lang_data):
- 
-
     main_key = '-selected_app_'
     selected_app_key = f"{main_key}{project['id']}_"
     installation_status_val = installation_status.check_project(project)
     git_Python_status = installation_status.check_git_python()
     app_commit_hash = installation_status.get_last_commit_hash_local(project)
+    
     if app_commit_hash == None:
         app_commit_hash = lang_data["None"]
 
     launch_buttons_index = 0 if installation_status_val else 1
     launch_buttons_key = f"{main_key}func_{project['id']}_{project['launch_buttons'][launch_buttons_index]['key']}_btn-"
     launch_buttons_button_text = project['launch_buttons'][launch_buttons_index]['button_text']
-
-    print('launch_buttons_button_text',lang_data[launch_buttons_button_text])
-
     launch_buttons_disabled = not git_Python_status
     launch_buttons_button_color = (color.DIM_GREEN, color.GRAY)
     launch_buttons_mouseover_colors = (color.GRAY_9900, color.DIM_GREEN)
@@ -134,21 +130,3 @@ def create_layout(project,lang_data):
     ]
     
     return layout
-
-def set_language(window,project):
-    # selected_lang = jt.load_preference('selected_lang')
-    # lang_data = localizations.set_language(selected_lang)
-
-    # main_key = '-selected_app_'
-    # installed_version = lang_data["Installed Version"]
-
-    # print("update_top_row_buttons")
-    # k=f"{main_key}_{project['id']}_github_lbl-"    
-    print(project)
-    # window[f"{main_key}github_lbl-"].update(installed_version)
-    # window[f"{main_key}github_lbl-"].update(installed_version)
-
-    # window[SYSTEM_STATS_TAB_BTN].update(lang_data["System Monitor"])
-    # window[AIPANIC_TAB_BTN].update(lang_data["AiPanic"])
-    # window[SETTINGS_TAB_BTN].update(lang_data["Settings"])
-    # window[ABOUT_TAB_BTN].update(lang_data["About"])

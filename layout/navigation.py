@@ -6,19 +6,14 @@ nav_tab_mouseover_colors=(color.DARK_GRAY,color.DIM_BLUE)
 nav_tab_button_color=(color.DIM_BLUE,color.DARK_GRAY)
 nav_tab_button_active_color=(color.DARK_GRAY,color.DIM_BLUE)
 
-# Functions to create buttons
-def create_button(text, key, active=False, font=FONT, size=(15, 2), expand_x=True, button_color=nav_tab_button_color, mouseover_colors=nav_tab_mouseover_colors):
-    return sg.Button(text, k=key, disabled=not active, font=font, expand_x=expand_x, size=size, button_color=button_color, mouseover_colors=mouseover_colors)
-
-# Create top row layout
 def create_layout(lang_data,languages):
-    native_name = lang_data["native"]
-    Projects_local = lang_data["Projects"]
-    System_stats_local = lang_data["System Monitor"]
-    AiPanic_local = lang_data["AiPanic"]
-    Settings_local = lang_data["Settings"]
-    About_local = lang_data["About"]
-    top_row = [
+    native_name = lang_data[LOCAL_NATIVE]
+    Projects_local = lang_data[LOCAL_PROJECTS]
+    System_stats_local = lang_data[LOCAL_SYSTEM_MONITOR]
+    AiPanic_local = lang_data[LOCAL_AIPANIC]
+    Settings_local = lang_data[LOCAL_SETTINGS]
+    About_local = lang_data[LOCAL_ABOUT]
+    layout = [
         [
             sg.Frame('', [
                 [
@@ -35,16 +30,7 @@ def create_layout(lang_data,languages):
         ]
     ]
 
-    return top_row
-
-def set_language(window, lang_data):
-
-    print("update_top_row_buttons")
-    window[PROJECTS_TAB_BTN].update(lang_data["Projects"])
-    window[SYSTEM_STATS_TAB_BTN].update(lang_data["System Monitor"])
-    window[AIPANIC_TAB_BTN].update(lang_data["AiPanic"])
-    window[SETTINGS_TAB_BTN].update(lang_data["Settings"])
-    window[ABOUT_TAB_BTN].update(lang_data["About"])
+    return layout
 
 def handle_tab_event(event, tab_elements, tab_btn_elements, active_color, inactive_color):
     # if event == "-system_stats_tab-":

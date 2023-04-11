@@ -4,6 +4,8 @@ APP_TITLE = f"Super Easy AI Installer Tool - Ver {VERSION}"
 
 FONT = 'Arial 12'
 FONT_H1 = 'Arial 14'
+FONT_H2_BOLD = 'Arial 14 bold'
+FONT_H1_BOLD = 'Arial 18 bold'
 
 
 
@@ -121,3 +123,86 @@ project_args = {
     8: [],
     9: [],
 }
+# "lang": "English",
+# "native": "English",
+# "Yes":"Yes",
+# "No":"No",
+# "Projects":"Projects",
+# "System Monitor":"System Monitor",
+# "AiPanic":"AiPanic",
+# "Settings":"Settings",
+# "About":"About",
+# "Check for Update":"Check for Update",
+# "None":"None",
+# "Installed":"Installed",
+# "Install":"Install",
+# "Launch":"Launch",
+# "Uninstall":"Uninstall",
+# "Update":"Update",
+# "Delete venv":"Delete venv",
+# "Create venv":"Create venv",
+# "Installed Version":"Installed Version",
+# "Installing and launching":"Installing and launching",
+# "Launching":"Launching",
+# "Launched":"Launched",
+# "Pre installed":"Pre installed",
+# "Use pre installed":"Use pre installed",
+# "Arguments":"Arguments",
+# "Setup":"Setup",
+# "Custom":"Custom",
+# "Download Models":"Download Models",
+# "Update available":"Update available",
+# "No update available - latest version":"No update available - latest version",
+# "Could not find version information":"Could not find version information",
+# "CPU Usage":"CPU Usage",
+# "RAM Usage":"RAM Usage",
+# "Temperature":"Temperature",
+# "VRAM Usage":"VRAM Usage",
+# "Power Usage":"Power Usage",
+# "Don't forget to leave a like/star.":"Don't forget to leave a like/star."
+LOCAL_YES = "Yes"
+LOCAL_NO = "No"
+LOCAL_LANG = "lang"
+LOCAL_NATIVE = "native"
+LOCAL_PROJECTS = "Projects"
+LOCAL_SYSTEM_MONITOR = "System Monitor"
+LOCAL_AIPANIC = "AiPanic"
+LOCAL_SETTINGS = "Settings"
+LOCAL_ABOUT = "About"
+LOCAL_CHECK_FOR_UPDATE = "Check for Update"
+LOCAL_NONE = "None"
+LOCAL_INSTALLED = "Installed"
+LOCAL_INSTALL = "Install"
+LOCAL_LAUNCH = "Launch"
+LOCAL_UNINSTALL = "Uninstall"
+LOCAL_UPDATE = "Update"
+LOCAL_DELETE_VENV = "Delete venv"
+LOCAL_CREATE_VENV = "Create venv"
+LOCAL_INSTALLED_VERSION = "Installed Version"
+LOCAL_INSTALLING_AND_LAUNCHING = "Installing and launching"
+LOCAL_LAUNCHING = "Launching"
+LOCAL_LAUNCHED = "Launched"
+LOCAL_PRE_INSTALLED = "Pre installed"
+LOCAL_USE_PRE_INSTALLED = "Use pre installed"
+LOCAL_ARGUMENTS = "Arguments"
+LOCAL_SETUP = "Setup"
+LOCAL_CUSTOM = "Custom"
+LOCAL_DOWNLOAD_MODELS = "Download Models"
+LOCAL_UPDATE_AVAILABLE = "Update available"
+LOCAL_NO_UPDATE_AVAILABLE = "No update available - latest version"
+LOCAL_COULD_NOT_FIND_VERSION = "Could not find version information"
+LOCAL_CPU_USAGE = "CPU Usage"
+LOCAL_RAM_USAGE = "RAM Usage"
+LOCAL_TEMPERATURE = "Temperature"
+LOCAL_VRAM_USAGE = "VRAM Usage"
+LOCAL_POWER_USAGE = "Power Usage"
+LOCAL_LIKE_STAR = "Don't forget to leave a like/star."
+
+
+
+# native_name = lang_data["native"]
+# Projects_local = lang_data["Projects"]
+# System_stats_local = lang_data["System Monitor"]
+# AiPanic_local = lang_data["AiPanic"]
+# Settings_local = lang_data["Settings"]
+# About_local = lang_data["About"]

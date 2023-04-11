@@ -64,9 +64,8 @@ def get_func_and_id(event):
     return id_number,method
 
 def reopen_window(window):
-    print('reopen_window')
-    window.un_hide()
-    window.refresh()
+    window.close()
+    main()  
 
 def main():
     print('main',VERSION)
@@ -83,24 +82,13 @@ def main():
 
    #region layout
 
-      
-    project_col = [[
-        sg.Frame('',[   
-            [
-                # sg.Button("Select a app to launch",expand_x=True,visible=True,k=f"-selected_app_lbl-",font=FONT,disabled=True)
-                sg.Column(requirements_layout.create_layout(lang_data), key=PROJECTS_COL_PLACEHOLDER, element_justification='r', expand_x=True,expand_y=True,visible=True),
-            ],
-        ],expand_x=True,expand_y=True,border_width=0,pad=(0,0),size=(650,None),relief=sg.RELIEF_FLAT,element_justification="c",background_color=color.DARK_GRAY)
-    ]]
-
-
     layout = [[ 
             [
                 navigation_layout.create_layout(lang_data,languages)
             ],
             [
                 sg.Column(projects_layout.create_layout_list_menu(projects_data), key=PROJECTS_COL_1, element_justification='l', expand_x=True,expand_y=True,visible=True),
-                sg.Column(project_col, key=PROJECTS_COL_2, element_justification='r', expand_x=True,expand_y=True,visible=True),
+                sg.Column(projects_layout.create_project_layout(lang_data), key=PROJECTS_COL_2, element_justification='r', expand_x=True,expand_y=True,visible=True),
                 sg.Column(about_layout.create_layout(lang_data), key=ABOUT_COL, element_justification='c', expand_x=True,expand_y=True,visible=False),
                 # sg.Column(system_stats_layout, key=SYSTEM_INFO_COL, element_justification='c', expand_x=True,expand_y=True,visible=False),
             ],        
@@ -144,7 +132,6 @@ def main():
 
     #endregion nav
 
-
     def default_launcher_buttons(project_args, id_number):
         try:
             if id_number in project_args:
@@ -164,39 +151,16 @@ def main():
 
     while True:
         event, values = window.read()
-        print("event", event, "values", values)
+        # print("event", event, "values", values)
         if event == sg.WIN_CLOSED:
             break
         
         requirements_layout.events(window,event,lang_data)
 
         if event == SET_LANGUAGE:
-            # global selected_lang
-            print('set language',values[SET_LANGUAGE])
+            # print('set language',values[SET_LANGUAGE])
             jt.save_preference('selected_lang',localizations.get_language_by_native(values[SET_LANGUAGE]))
-            # jt.save_preference('init',1)
-            # jt.save_preference('selected_lang','en_EN')         
-            selected_lang = jt.load_preference('selected_lang')
-            print('fromfile',selected_lang)
-            # set_language_by_native = localizations.set_language_by_native(values[SET_LANGUAGE])
-
-
-            # print(localizations.get_language_by_native(values[SET_LANGUAGE]))
-            # navigation_layout.set_language(window, selected_lang)
-            # about_layout.set_language(window, selected_lang)
-            # project_layout.set_language(window,projects_data)
-
-            # requirements_layout.set_language(window, set_language_by_native)
-            # reopen_window(window)          
-            # for element in list(window['-nav-'].Widget.children.values()):
-            #     element.destroy()       
-            # for row in window.Rows:
-            #     for element in row:
-            #         element.Widget.destroy()      
-            # window.hide()   #      
-            window.close()
-            main()  
-            # window.un_hide()
+            reopen_window(window)
 
         if event in nav_elements:
             navigation_layout.handle_tab_event(event, nav_elements, nav_btn_elements, nav_active_color, nav_inactive_color)
@@ -243,7 +207,7 @@ def main():
                 args_list = values[f"-selected_app_args_{id_number}_console_ml-"]
                 update_project_args_from_string(id_number, args_list)
 
-            if dialog_layout.dialog_window(project['title'],method):
+            if dialog_layout.dialog_window(project['title'],method,lang_data):
                 if method == "install":
                     Installing_and_launching_local = localizations.set_language_by_native(values[SET_LANGUAGE])["Installing and launching"]                    
                     window[f"-selected_app_func_{id_number}_{method}_btn-"].update(Installing_and_launching_local,disabled_button_color=(color.DIM_GREEN,color.GRAY),disabled=True)
