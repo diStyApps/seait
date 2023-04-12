@@ -56,25 +56,23 @@ The tool is designed to provide an easy-to-use solution for accessing and instal
 But remains a great solution for users with minimal technical knowledge or expertise. Fixes underway.
 
 
-### Update Implemented localization
+### Update 0.0.7
 
+Added Multi-language support
 Added Spanish (es_ES), French (fr_FR), German (de_DE), Italian (it_IT), Portuguese (pt_BR), Russian (ru_RU), Chinese Simplified (zh_CN), Chinese Traditional (zh_TW), Japanese (ja_JP), Korean (ko_KR), Arabic (ar_AR), Hebrew (he_IL), and Hindi (hi_IN) languages. All translations were done by AI. Please feel free to correct them.
 
 I will add fixes for the RTL and LTR directions for languages later on.
 
-Tomorrow, I'll release the executables.
+Spread the word; don't only keep it to yourself.
 
 <img src="media/preview/1_0.0.7.jpg">
+<img src="media/preview/2_0.0.7.jpg">
+<img src="media/preview/3_0.0.3.jpg">
 
 [![0.0.2](media/covers/yt_0.0.2.jpg)](https://www.youtube.com/watch?v=_PJe_gSZn7I "0.0.2")
+
 [![0.0.1](media/covers/yt_0.0.1.jpg)](https://youtu.be/ePZzmMFb8Po "0.0.1")
 
-
-
-<img src="media/preview/1_0.0.6.jpg">
-<img src="media/preview/2_0.0.6.jpg">
-<img src="media/preview/3_0.0.1.jpg">
-<img src="media/preview/3_0.0.3.jpg">
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- Downloads -->
@@ -99,7 +97,7 @@ In the future ill try maybe nukita or something.
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Multi-language support
+- [x] Multi-language support
 - [x] More AI-related repos
 - [ ] Pre installed auto1111 version
 - [ ] Pre installed python version

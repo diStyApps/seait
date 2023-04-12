@@ -539,10 +539,10 @@ projects_data = [
             "isIncomplete": True,
             "type": "app",
             "install_requirements":True,
-            "install_cuda":False,
+            "install_cuda":True,
             "install_instructions_available":True,
             "install_instructions": [
-                "-m pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117",
+                # "-m pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117",
                 "-m pip install https://github.com/jllllll/bitsandbytes-windows-webui/raw/main/bitsandbytes-0.37.2-py3-none-any.whl --force-reinstall",
                 "download-model.py facebook/opt-1.3b",
             ],

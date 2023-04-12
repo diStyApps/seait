@@ -10,13 +10,13 @@
     "AiPanic": "AiPanic",
     "Settings": "הגדרות",
     "About": "אודות",
-    "Check for Update": "בדיקת עדכונים",
+    "Check for Update": "בדיקת עדכון",
     "None": "אין",
     "Installed": "מותקן",
     "Install": "התקנה",
     "Launch": "הפעלה",
     "Uninstall": "הסרת התקנה",
-    "Update": "עידכון",
+    "Update": "עדכון",
     "Delete venv": "מחיקת venv",
     "Create venv": "יצירת venv",
     "Installed Version": "גרסה מותקנת",
@@ -26,7 +26,7 @@
     "Pre installed": "מותקן מראש",
     "Use pre installed": "שימוש בגרסה המותקנת מראש",
     "Arguments": "ארגומנטים",
-    "Setup": "הגדרות",
+    "Setup": "פעולות",
     "Custom": "התאמה אישית",
     "Download Models": "הורדת מודלים",
     "Update available": "עדכון זמין",
@@ -38,5 +38,6 @@
     "VRAM Usage": "שימוש בVRAM",
     "Power Usage": "שימוש בכוח",
     "Don't forget to leave a like/star.": "אל תשכחו להשאיר לייק/כוכב",
-    "isIncomplete": ".הפרויקט ניסיוני במתקין. אם אינכם רוצים להתמודד עם שגיאות, מומלץ לדלג כרגע"
+    "isIncomplete": ".הפרויקט ניסיוני במתקין. אם אינכם רוצים להתמודד עם שגיאות, מומלץ לדלג כרגע",
+    "Download": "להוריד"
 }

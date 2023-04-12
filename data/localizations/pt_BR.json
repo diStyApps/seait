@@ -27,7 +27,7 @@
     "Pre installed": "Pré-instalado",
     "Use pre installed": "Usar pré-instalado",
     "Arguments": "Argumentos",
-    "Setup": "Configuração",
+    "Setup": "Ações",
     "Custom": "Personalizado",
     "Update available": "Atualização disponível",
     "No update available - latest version": "Não há atualizações disponíveis - última versão",
@@ -38,5 +38,6 @@
     "VRAM Usage": "Uso de VRAM",
     "Power Usage": "Uso de energia",
     "Don't forget to leave a like/star.": "Não esqueça de deixar um like/estrela.",
-    "isIncomplete": "Este projeto não foi totalmente implementado no instalador. Se você não quiser lidar com erros, é recomendável pular este por enquanto."
+    "isIncomplete": "Este projeto não foi totalmente implementado no instalador. Se você não quiser lidar com erros, é recomendável pular este por enquanto.",
+    "Download": "Baixar"
 }

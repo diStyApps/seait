@@ -27,7 +27,7 @@
     "Pre installed": "Önceden yüklenmiş",
     "Use pre installed": "Önceden yüklenmiş olanı kullan",
     "Arguments": "Argümanlar",
-    "Setup": "Kurulum",
+    "Setup": "Eylemler",
     "Custom": "Özel",
     "Update available": "Güncelleme mevcut",
     "No update available - latest version": "Güncelleme mevcut değil - en son sürüm",
@@ -38,5 +38,6 @@
     "VRAM Usage": "VRAM Kullanımı",
     "Power Usage": "Güç Kullanımı",
     "Don't forget to leave a like/star.": "Beğenmeyi/yıldızlamayı unutmayın.",
-    "isIncomplete": "Bu proje, kurulumda tamamen uygulanmadı. Hatalarla uğraşmak istemiyorsanız şimdilik atlamayı öneriyoruz."
+    "isIncomplete": "Bu proje, kurulumda tamamen uygulanmadı. Hatalarla uğraşmak istemiyorsanız şimdilik atlamayı öneriyoruz.",
+    "Download": "İndir"
 }

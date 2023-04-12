@@ -27,7 +27,7 @@
     "Pre installed": "预安装",
     "Use pre installed": "使用预安装的",
     "Arguments": "参数",
-    "Setup": "设置",
+    "Setup": "操作",
     "Custom": "自定义",
     "Update available": "有可用更新",
     "No update available - latest version": "没有可用更新 - 最新版本",
@@ -38,5 +38,6 @@
     "VRAM Usage": "VRAM 使用率",
     "Power Usage": "功率使用率",
     "Don't forget to leave a like/star.": "别忘了点个赞/星标。",
-    "isIncomplete": "此项目在安装程序中未完全实现。如果您不想处理错误，则建议暂时跳过此项目。"
+    "isIncomplete": "此项目在安装程序中未完全实现。如果您不想处理错误，则建议暂时跳过此项目。",
+    "Download": "下载"
 }

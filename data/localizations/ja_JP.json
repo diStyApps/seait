@@ -27,7 +27,7 @@
     "Pre installed": "事前インストール済み",
     "Use pre installed": "事前インストール済みを使用",
     "Arguments": "引数",
-    "Setup": "セットアップ",
+    "Setup": "アクション",
     "Custom": "カスタム",
     "Update available": "アップデートがあります",
     "No update available - latest version": "アップデートはありません - 最新バージョンです",
@@ -38,5 +38,6 @@
     "VRAM Usage": "VRAM 使用量",
     "Power Usage": "電力使用量",
     "Don't forget to leave a like/star.": "いいね/スターを忘れずに残してください。",
-    "isIncomplete": "このプロジェクトはインストーラで完全に実装されていません。エラーを扱いたくない場合は、今のところこれをスキップすることをお勧めします。"
+    "isIncomplete": "このプロジェクトはインストーラで完全に実装されていません。エラーを扱いたくない場合は、今のところこれをスキップすることをお勧めします。",
+    "Download": "ダウンロード"
 }

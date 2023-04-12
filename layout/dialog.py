@@ -4,7 +4,7 @@ from util.CONSTANTS import *
 import util.util as util
     
 def dialog_window(title,method,lang_data):
-        method = lang_data[util.remove_special_characters_from_text(method,case='capitalize')]
+        method = lang_data[util.remove_special_characters_from_text(get_first_word(method),case='capitalize')]
         event, values = sg.Window('', 
         [
             [
@@ -23,3 +23,12 @@ def dialog_window(title,method,lang_data):
             return True
         if event == '-no_key-':
             return False
+        
+
+def get_first_word(input_string):
+    if not input_string or not isinstance(input_string, str):
+        return None
+
+    input_string = input_string.replace('_', ' ')
+    first_word = input_string.split()[0]
+    return first_word

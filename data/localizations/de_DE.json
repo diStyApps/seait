@@ -27,7 +27,7 @@
     "Pre installed": "Vorinstalliert",
     "Use pre installed": "Vorinstallierte Version verwenden",
     "Arguments": "Argumente",
-    "Setup": "Setup",
+    "Setup": "Aktionen",
     "Custom": "Benutzerdefiniert",
     "Update available": "Aktualisierung verfügbar",
     "No update available - latest version": "Keine Aktualisierung verfügbar - neueste Version",
@@ -38,5 +38,6 @@
     "VRAM Usage": "VRAM-Auslastung",
     "Power Usage": "Stromverbrauch",
     "Don't forget to leave a like/star.": "Vergiss nicht, ein Like/einen Stern zu hinterlassen.",
-    "isIncomplete": "Dieses Projekt wurde im Installationsprogramm nicht vollständig implementiert. Wenn Sie keine Fehler behandeln möchten, wird empfohlen, dies vorerst zu überspringen."
+    "isIncomplete": "Dieses Projekt wurde im Installationsprogramm nicht vollständig implementiert. Wenn Sie keine Fehler behandeln möchten, wird empfohlen, dies vorerst zu überspringen.",
+    "Download": "Herunterladen"
 }

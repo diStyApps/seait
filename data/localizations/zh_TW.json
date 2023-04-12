@@ -27,7 +27,7 @@
     "Pre installed": "預安裝",
     "Use pre installed": "使用預安裝的",
     "Arguments": "引數",
-    "Setup": "設定",
+    "Setup": "操作",
     "Custom": "自訂",
     "Update available": "有可用更新",
     "No update available - latest version": "沒有可用的更新 - 最新版本",
@@ -38,5 +38,6 @@
     "VRAM Usage": "VRAM 使用率",
     "Power Usage": "電力使用率",
     "Don't forget to leave a like/star.": "不要忘記點個讚/星號。",
-    "isIncomplete": "此專案在安裝程式中尚未完全實現。如果您不想處理錯誤，建議暫時跳過此項。"
+    "isIncomplete": "此專案在安裝程式中尚未完全實現。如果您不想處理錯誤，建議暫時跳過此項。",
+    "Download": "下載"
 }

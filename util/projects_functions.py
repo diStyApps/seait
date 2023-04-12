@@ -119,14 +119,6 @@ def install_requirements(app_info):
     print(f"{app_info['repo_name']} requirements installed")
 
 
-
-
-# def update_app_args_from_string(app_id, values_string):
-#     args_list = values_string.split()
-#     for arg_name in args_list:
-
-
-
 def install_instructions(app_info):
     project_path = get_project_path(app_info)
     venv_path = get_venv_path(app_info)
@@ -136,24 +128,6 @@ def install_instructions(app_info):
         subprocess.run([f"{venv_path}/Scripts/python"] + command.split(), cwd=project_path)
         # print([f"{venv_path}/Scripts/python"] + command.split(), cwd=project_path)
         print(f"{app_info['repo_name']} requirements installed")
-# def install_instructions(app_info):
-#     project_path = get_project_path(app_info)
-#     venv_path = get_venv_path(app_info)
-#     print(f"installing requirements {app_info['repo_name']}")
-
-#     for command in app_info["install_instructions"]:
-#         subprocess.run([f"{venv_path}/Scripts/python","-m", "pip","install","-r","requirements.txt"], cwd=project_path)
-#         print(f"{app_info['repo_name']} requirements installed")
-
-
-# def install_instructions(app_info):
-#     project_path = get_project_path(app_info)
-#     venv_path = get_venv_path(app_info)
-#     print(f"installing requirements for {app_info['repo_name']}")
-
-#     for command in app_info["install_instructions"]:
-#         subprocess.run(command.split(), cwd=project_path)
-#         print(f"{app_info['repo_name']} requirements installed")        
 
 def install_webui_extension(app_info,args=[]):
     print(f"installing {app_info['repo_name']}")

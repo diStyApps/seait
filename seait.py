@@ -21,23 +21,6 @@ import layout.requirements as requirements_layout
 import layout.dialog as dialog_layout
 import layout.projects as projects_layout
 
-sg.theme('Dark Gray 15')
-sg.set_options(
-    # button_color=('white', 'green'),
-    # button_color=(color.LIGHT_GRAY, color.GRAY),
-    # element_size=(50, 20),
-    # auto_size_buttons=True,
-    # font=('Helvetica', 14),
-    # background_color='lightgray',
-    # text_color='black',
-    # ttk_theme='classic',
-    sbar_width=15,sbar_trough_color=0,sbar_arrow_width=8,    
-    suppress_error_popups = True,
-)
-
-def reopen_window(window):
-    window.close()
-    main()  
 
 def main():
     jt.create_preferences_init()
@@ -210,4 +193,30 @@ def main():
 
 
 if __name__ == '__main__':
+    sg.theme('Dark Gray 15')
+
+    sg.set_options(
+        # button_color=('white', 'green'),
+        # button_color=(color.LIGHT_GRAY, color.GRAY),
+        # element_size=(50, 20),
+        # auto_size_buttons=True,
+        # font=('Helvetica', 14),
+        # background_color='lightgray',
+        # text_color='black',
+        # ttk_theme='classic',
+        sbar_width=15,sbar_trough_color=0,sbar_arrow_width=8,    
+        suppress_raise_key_errors=True,
+        suppress_error_popups=True,
+        suppress_key_guessing=True    
+    )
+
+    def suppress_errors(*args, **kwargs):
+        pass
+
+    sg.Print = suppress_errors  
+
+    def reopen_window(window):
+        window.close()
+        main()  
+
     main() 
