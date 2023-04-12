@@ -65,9 +65,11 @@ I will add fixes for the RTL and LTR directions for languages later on.
 
 Spread the word; don't only keep it to yourself.
 
+<img src="media/preview/3_0.0.7.jpg">
 <img src="media/preview/1_0.0.7.jpg">
 <img src="media/preview/2_0.0.7.jpg">
 <img src="media/preview/3_0.0.3.jpg">
+<img src="media/preview/1_0.0.1.jpg">
 
 [![0.0.2](media/covers/yt_0.0.2.jpg)](https://www.youtube.com/watch?v=_PJe_gSZn7I "0.0.2")
 
@@ -137,11 +139,11 @@ distty@gmail.com
 
 
 * [AUTOMATIC1111- stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
+* [InvokeAI](https://github.com/invoke-ai/InvokeAI)
 * [ComfyUI](https://github.com/comfyanonymous/ComfyUI)
 * [Kohya's GUI](https://github.com/bmaltais/kohya_ss)
 * [sd-webui-controlnet](https://github.com/Mikubill/sd-webui-controlnet)
 * [sd_dreambooth_extension](https://github.com/d8ahazard/sd_dreambooth_extension)
-
 
 <!-- * [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
 * [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
