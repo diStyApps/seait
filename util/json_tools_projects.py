@@ -65,7 +65,7 @@ def delete_project(project_id, file_path):
 
     save_project_preferences(project_preferences, file_path)
 
-def return_project(project_id):
+def get_pref_project_data(project_id):
     project_preferences = load_project_preferences(file_path)
     projects = project_preferences["set_project_paths"][0]["projects"]
 

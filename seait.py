@@ -11,7 +11,7 @@ import util.projects_functions as project_funcs
 import util.update_check_temp as update_check
 import util.installation_status as installation_status
 import util.json_tools as jt
-from util.json_tools_projects import return_project,add_project
+from util.json_tools_projects import get_pref_project_data,add_project
 import util.project_util as project_util
 # import util.system_stats as system_stats
 import util.localizations as localizations
@@ -196,8 +196,8 @@ def main():
             input_project_path = values[f'-selected_app_{id_number}_project_path_in-']
             if input_project_path:
                 print("project",input_project_path)
-                print(return_project(id_number))
-                project_pref = return_project(id_number)
+                print(get_pref_project_data(id_number))
+                project_pref = get_pref_project_data(id_number)
                 if project_pref:
                     project_pref_isSet = project_pref['isSet']
                     if project_pref_isSet:

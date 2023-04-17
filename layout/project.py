@@ -4,7 +4,7 @@ from util.CONSTANTS import *
 import util.colors as color
 import util.icons as ic
 import util.installation_status as installation_status
-from util.json_tools_projects import return_project,add_project
+from util.json_tools_projects import get_pref_project_data,add_project
 import os
 def create_layout(project,lang_data):
     main_key = '-selected_app_'
@@ -12,21 +12,20 @@ def create_layout(project,lang_data):
     git_Python_status = installation_status.check_git_python()
 
 
-    project_pref_path=os.path.abspath(project['repo_name'])
-    project_pref = return_project(project['id'])
-    if project_pref:
-        project_pref_path = project_pref['path']
-        project_pref_isSet = project_pref['isSet']
-        print('project_pref_path_abspath',os.path.abspath(project_pref_path))
-        installation_status_val = installation_status.check_project(project,project_pref_path)
-        installation_status_venv = installation_status.check_project_venv(project,project_pref_path)
-        print(  'installation_status_val',installation_status_val)
-        project_commit_hash = installation_status.get_last_commit_hash_local(project,project_pref_path)
-    else:
-        installation_status_val = installation_status.check_project(project)
-        installation_status_venv = installation_status.check_project_venv(project)
-        project_commit_hash = installation_status.get_last_commit_hash_local(project)
+    project_pref_path = os.path.abspath(project['repo_name'])
+    project_pref = get_pref_project_data(project['id'])
     
+    if project_pref:
+        project_pref_isSet = project_pref['isSet']
+        project_pref_path = project_pref['path']
+
+        # if project_pref_isSet:
+        #     project_pref_path = project_pref['path']
+    
+    installation_status_val = installation_status.check_project(project)
+    installation_status_venv = installation_status.check_project_venv(project)
+    project_commit_hash = installation_status.get_last_commit_hash_local(project)
+
     if project_commit_hash == None:
         project_commit_hash = lang_data[LOCAL_NONE]
 

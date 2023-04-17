@@ -45,7 +45,7 @@ def create_layout_list_menu(projects):
                             element_justification="l",
                             background_color=color.DARK_GRAY)
                         ]
-                        for project in projects if project['type'] #== "app" #vertical
+                        for project in projects if project['type'] == "app" #vertical
                 ]        
              ,key=PROJECTS_LIST_MENU, element_justification='l', expand_x=True,expand_y=True,visible=True,scrollable=True,vertical_scroll_only=True),
         ],

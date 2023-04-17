@@ -116,7 +116,9 @@ projects_data = [
                     {
                         "button_text": "--enable-insecure-extension-access",
                     },
-                    
+                    {
+                        "button_text": "--skip-version-check",
+                    },                    
                 ]
             ],
             "def_args": [

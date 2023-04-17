@@ -122,7 +122,8 @@ CN_MODELS = [
     "coadapter-style-sd15v1.pth"    
 ]
 project_args = {
-    1: ['--autolaunch', '--theme=dark'],
+    # 1: ['--autolaunch', '--theme=dark'],
+    1: [],
     2: ['--web'],
     3: [],
     4: [],
