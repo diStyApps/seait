@@ -33,6 +33,7 @@ def create_layout(lang_data,languages):
     return layout
 
 def handle_tab_event(event, tab_elements, tab_btn_elements, active_color, inactive_color):
+  
     # if event == "-system_stats_tab-":
     #     stop_event.clear()
     #     t = threading.Thread(target=system_stats_monitor, args=(stop_event,2,))

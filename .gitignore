@@ -9,3 +9,5 @@ util\__pycache__/
 util/__pycache__/
 *.pyc
 preferences.json
+util/projects_preferences.json
+projects_preferences.json

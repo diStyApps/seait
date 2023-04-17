@@ -11,6 +11,7 @@ import util.projects_functions as project_funcs
 import util.update_check_temp as update_check
 import util.installation_status as installation_status
 import util.json_tools as jt
+from util.json_tools_projects import return_project,add_project
 import util.project_util as project_util
 # import util.system_stats as system_stats
 import util.localizations as localizations
@@ -27,7 +28,6 @@ def main():
     languages = localizations.get_language_by_codes()
     lang_data = localizations.set_language(jt.load_preference(PREF_SELECTED_LANG))
 
-
     layout = [[ 
             [
                 navigation_layout.create_layout(lang_data,languages)
@@ -40,8 +40,7 @@ def main():
             ],        
     ]]
 
-    window = sg.Window(APP_TITLE,layout,finalize=True,size=(1100,800), resizable=True,enable_close_attempted_event=False,background_color=color.GRAY_9900,icon=ic.icon3)
-
+    window = sg.Window(APP_TITLE,layout,finalize=True,size=(1200,799),ttk_theme='alt', resizable=True,enable_close_attempted_event=False,background_color=color.GRAY_9900,icon=ic.icon3)
     #region nav
     projects_layout_col_1:sg.Column = window[PROJECTS_COL_1]
     projects_layout_col_2:sg.Column = window[PROJECTS_COL_2]
@@ -71,8 +70,12 @@ def main():
     nav_inactive_color = (color.DIM_BLUE, color.DARK_GRAY)
 
     #ui fixes..
-    expand_column_helper(window[PROJECTS_LIST_MENU].widget)
+    expand_column_helper(window[PROJECTS_LIST_MENU].widget)    
+    window.visibility_changed()           
+    window[PROJECTS_LIST_MENU].contents_changed()  
+
     flatten_ui_elements(window)
+    window.size = (1200,800)
 
     #endregion nav
 
@@ -103,6 +106,8 @@ def main():
         requirements_layout.events(window,event,lang_data)
         about_layout.events(event)
 
+        # if event == UPDATE_AVAILABLE_LBL_KEY:
+
         if event == SET_LANGUAGE:
             jt.save_preference(PREF_SELECTED_LANG,localizations.get_language_by_native(values[SET_LANGUAGE]))
             reopen_window(window)
@@ -112,7 +117,7 @@ def main():
    
         if event.startswith(SELECT_APP) and event.endswith("_btn-"):
             id_number = project_util.get_project_id(event)
-
+            # print("select_app_",event)
             #project_menu_item_highlight
             # window[f"-select_app_{id_number}_btn-"].update(disabled=True,button_color=(color.DARK_GRAY,color.DIM_GREEN))
             # if window[event].ButtonColor[0] == color.GRAY:
@@ -128,21 +133,31 @@ def main():
             for element in list(window[PROJECTS_COL_2].Widget.children.values()):
                 element.destroy()
             window.extend_layout(window[PROJECTS_COL_2],layout)
+            if project['type'] == "app":
+                try:
+                    expand_column_helper(window[f"-selected_app_scroll_frame-"].widget)
+                except KeyError:
+                    pass
             flatten_ui_elements(window)  
+
             window.visibility_changed()           
             # if id_number == 1:
-            default_launcher_buttons(project_args,id_number) 
+            # default_launcher_buttons(project_args,id_number) 
                     
         if event.startswith(SELECTED_APP) and event.endswith("_btn-"):
-                # print("selected_app_",event)
+                print("selected_app_",event)
 
                 if event.startswith("-selected_app_args"):
                     # print("args",event)
                     window.write_event_value(SET_APP_ARGS,event)    
 
                 if event.startswith("-selected_app_func"):
-                    # print("func",event)
+                    print("func",event)
                     window.write_event_value(RUN_APP_FUNC,event)    
+
+                if event.endswith("_project_path_set_btn-"):
+                    # print("project",event)
+                    window.write_event_value(SET_PROJECT_PATH,id_number)    
 
         if event == RUN_APP_FUNC:
             event_value = values['-run_app_func-']
@@ -175,6 +190,24 @@ def main():
                 window[event_value].update(button_color=(color.DIM_GREEN,color.GRAY))
             else:
                 window[event_value].update(button_color=(color.GRAY,color.DIM_GREEN))
+
+        if event == SET_PROJECT_PATH:
+            id_number = values[SET_PROJECT_PATH]
+            input_project_path = values[f'-selected_app_{id_number}_project_path_in-']
+            if input_project_path:
+                print("project",input_project_path)
+                print(return_project(id_number))
+                project_pref = return_project(id_number)
+                if project_pref:
+                    project_pref_isSet = project_pref['isSet']
+                    if project_pref_isSet:
+                         add_project(id_number, input_project_path,False) 
+                    else:
+                         add_project(id_number, input_project_path,True) 
+                else:
+                    add_project(id_number, input_project_path,True) 
+
+            window.write_event_value(f"-select_app_{id_number}_btn-",'')    
 
         if event == CHECK_UPDATE_BTN_KEY:
             if not update_check.check_update_available():

@@ -2,6 +2,8 @@ import subprocess
 import os
 from util.CONSTANTS import *
 import requests
+import util.installation_status as installation_status
+
 def get_project_path(app_info):
     return os.path.abspath(app_info['repo_name'])
 
@@ -10,9 +12,6 @@ def get_venv_path(app_info):
 
 def get_entry_point(app_info, key):
     return os.path.join(get_project_path(app_info), app_info['entry_point'][key])
-
-pre_installed_python_path = os.path.abspath(PRE_INSTALLED_PYTHON_PATH)
-usePreInstalledPython = False
 
 def clone_repo(app_info):
     project_path = get_project_path(app_info)
@@ -36,25 +35,34 @@ def launch(app_info, args=[]):
     venv_path = get_venv_path(app_info)
     launch_path = get_entry_point(app_info, 'launch')
     print(f"launching {app_info['repo_name']}")
+    installation_status_venv = installation_status.check_project_venv(app_info)
+    if not installation_status_venv:
+        print(f"{app_info['repo_name']} venv not installed")
+        install(app_info,args=[])
 
-    command_len = len(launch_path.split())
-    cmd_launch = app_info['entry_point']['launch']
-    activate_script = f"{venv_path}/Scripts/activate.bat"
-    cmd_command = f'cmd /K "{activate_script} && {cmd_launch} {" ".join(args)}"'
-    if launch_path.endswith(".py") and command_len == 1:
-        # print('.py run')
-        subprocess.run([f"{venv_path}/Scripts/python", launch_path, *args], cwd=project_path)
-    elif launch_path.endswith(".py") and command_len > 1:
-        print('command run and script run')
-        subprocess.run(cmd_command, cwd=project_path, shell=True)           
-    elif launch_path.endswith(".bat"):
-        # os.environ['COMMANDLINE_ARGS'] = '--api'        
-        # os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'garbage_collection_threshold:0.6,max_split_size_mb:128'
-        # print('.bat run')
-        subprocess.run([launch_path, *args], cwd=project_path)
+    elif installation_status.check_project(app_info):
+        # print(f"{app_info['repo_name']} venv installed")
+        command_len = len(launch_path.split())
+        cmd_launch = app_info['entry_point']['launch']
+        activate_script = f"{venv_path}/Scripts/activate.bat"
+        cmd_command = f'cmd /K "{activate_script} && {cmd_launch} {" ".join(args)}"'
+        if launch_path.endswith(".py") and command_len == 1:
+            # print('.py run')
+            subprocess.run([f"{venv_path}/Scripts/python", launch_path, *args], cwd=project_path)
+            
+        elif launch_path.endswith(".py") and command_len > 1:
+            print('command run and script run')
+            subprocess.run(cmd_command, cwd=project_path, shell=True)           
+        elif launch_path.endswith(".bat"):
+            # os.environ['COMMANDLINE_ARGS'] = '--api'        
+            # os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'garbage_collection_threshold:0.6,max_split_size_mb:128'
+            # print('.bat run')
+            subprocess.run([launch_path, *args], cwd=project_path)
+        else:
+            # print('command run')
+            subprocess.run(cmd_command, cwd=project_path, shell=True)      
     else:
-        # print('command run')
-        subprocess.run(cmd_command, cwd=project_path, shell=True)        
+        print(f"Failed to create virtual environment for {app_info['repo_name']}")
  
 
 def install(app_info,args=[]):
@@ -75,7 +83,6 @@ def install(app_info,args=[]):
         install_requirements(app_info)
     if app_info['install_instructions_available']:
         install_instructions(app_info)    
-
     if install_path.endswith(".py") and command_len == 1:
         subprocess.run([f"{venv_path}/Scripts/python", install_path, *args], cwd=project_path)
     elif install_path.endswith(".py") and command_len > 1:
@@ -91,14 +98,11 @@ def delete_virtual_environment(app_info,args=[]):
     print(f"Deleting virtual environment for {app_info['repo_name']}")
     subprocess.run(["rd", "/s", "/q", venv_path], shell=True)
     print(f"virtual environment deleted for {app_info['repo_name']}")
-
-def create_virtual_environment(app_info,args=[]):
+    
+def create_virtual_environment(app_info, args=[]):
     venv_path = get_venv_path(app_info)
     print(f"creating virtual environment for {app_info['repo_name']}")
-    if usePreInstalledPython:
-        subprocess.run([pre_installed_python_path, "-m", "venv", venv_path], shell=True)     
-    else:
-        subprocess.run(["python", "-m", "venv", venv_path], shell=True) 
+    subprocess.run(["python", "-m", "venv", venv_path], shell=True)         
     print(f"virtual environment created for {app_info['repo_name']}")
 
 def install_cuda(app_info):

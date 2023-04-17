@@ -1,19 +1,21 @@
 import PySimpleGUI as sg
 import util.colors as color
-from util.CONSTANTS import *    
 import util.icons as ic
-import util.dependency_check as depcheck
-import util.projects_functions as project_funcs
-import os
+from util.CONSTANTS import *    
+from util.util import isfile_exist_check
+from util.dependency_check import check_git, check_python
 import subprocess
 
-python_ver = depcheck.check_python()
-git_ver = depcheck.check_git()
-usePreInstalledPython=True
+git_ver = check_git()
+python_ver = check_python()
+python = "Python"
+git = "Git"
+version = "version"
+download_iv = "Please download the installers version"
 
 def create_layout(lang_data):
     layout = [
-            
+             
             #seait
             [
                 sg.Frame('',[       
@@ -30,27 +32,25 @@ def create_layout(lang_data):
                 sg.Frame('',[       
                             [
                                 sg.Image(data=ic.python,background_color=color.DARK_GRAY),
-                                sg.Text("Python",font=FONT,background_color=color.DARK_GRAY),
+                                sg.Text(python,font=FONT,background_color=color.DARK_GRAY),
                             ],  
                     [
-                        sg.Button(f"{LOCAL_PRE_INSTALLED} - 3.10.6",visible=False,key=PRE_INSTALLED_VERSION_LBL,font=FONT,expand_x=True,size=(20,2),disabled=True),
-                        sg.Button(f"{python_ver}",k=INSTALLED_PYTHON_VERSION_LBL,font=FONT,expand_x=True,size=(30,2),disabled=True),
+                        sg.Button("",k=INSTALLED_PYTHON_VERSION_LBL,font=FONT,expand_x=True,size=(30,2),disabled=True),
                     ],               
                     [
-                        sg.Button(lang_data[LOCAL_USE_PRE_INSTALLED],visible=False,k=USE_PRE_INSTALLED_VERSION_BTN,font=FONT,expand_x=True,size=(20,1),button_color=(color.LIGHT_BLUE,color.GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
                         sg.Button("",k=INSTALL_PYTHON_BUTTON,font=FONT,expand_x=True,size=(30,1),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
                     ],                                          
                 ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
-            ],                 
+            ],                          
             #Git
             [
                 sg.Frame('',[       
                             [
                                 sg.Image(data=ic.git,background_color=color.DARK_GRAY),
-                                sg.Text("Git",font=FONT,background_color=color.DARK_GRAY),
+                                sg.Text(git,font=FONT,background_color=color.DARK_GRAY),
                             ],  
                     [
-                        sg.Button(git_ver ,k=INSTALLED_GIT_VERSION_LBL,font=FONT,expand_x=True,size=(40,2),disabled=True),
+                        sg.Button('' ,k=INSTALLED_GIT_VERSION_LBL,font=FONT,expand_x=True,size=(40,2),disabled=True),
                     ],                
                     [
                                 sg.Button("",k=INSTALL_GIT_BUTTON,font=FONT,expand_x=True,size=(20,1),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),
@@ -61,46 +61,21 @@ def create_layout(lang_data):
     return layout
 
 def git_event_handler(window,lang_data):
-    if depcheck.check_git():
+    if git_ver:
         window[INSTALL_GIT_BUTTON].update(lang_data[LOCAL_INSTALLED],disabled_button_color=(color.DIM_GREEN,color.DARK_GREEN),disabled=True)   
+        window[INSTALLED_GIT_VERSION_LBL].update(git_ver)
+
     else:
         window[INSTALL_GIT_BUTTON].update(lang_data[LOCAL_INSTALL],disabled=False)
-        window[INSTALLED_GIT_VERSION_LBL].update(disabled_button_color=(color.GRAY,color.GRAY),button_color=(color.RED_ORANGE,color.RED_ORANGE),disabled=True)
+        window[INSTALLED_GIT_VERSION_LBL].update(lang_data[LOCAL_NONE],disabled_button_color=(color.GRAY,color.GRAY),button_color=(color.RED_ORANGE,color.RED_ORANGE),disabled=True)
 
 def python_event_handler(window,lang_data):
-    if depcheck.check_python():
+    if python_ver:
         window[INSTALL_PYTHON_BUTTON].update(lang_data[LOCAL_INSTALLED],disabled_button_color=(color.DIM_GREEN,color.DARK_GREEN),disabled=True)   
+        window[INSTALLED_PYTHON_VERSION_LBL].update(python_ver[version])   
     else:
         window[INSTALL_PYTHON_BUTTON].update(lang_data[LOCAL_INSTALL],disabled=False)
-        window[INSTALLED_PYTHON_VERSION_LBL].update(disabled_button_color=(color.GRAY,color.GRAY),button_color=(color.RED_ORANGE,color.RED_ORANGE),disabled=True)
-        if is_folder_exist_check(project_funcs.pre_installed_python_path):
-            project_funcs.usePreInstalledPython = not project_funcs.usePreInstalledPython
-            convert_button_enable() if project_funcs.usePreInstalledPython else convert_button_disable()
-
-    if is_folder_exist_check(project_funcs.pre_installed_python_path):
-        # print("pre installed python found")
-        project_funcs.usePreInstalledPython = not project_funcs.usePreInstalledPython
-        convert_button_enable() if project_funcs.usePreInstalledPython else convert_button_disable()
-    else:
-        # print("pre installed python not found")         
-        window[PRE_INSTALLED_VERSION_LBL].update(lang_data[LOCAL_PRE_INSTALLED])
-        window[USE_PRE_INSTALLED_VERSION_BTN].update(disabled_button_color=(color.LIGHT_GRAY,color.GRAY),disabled=True)
-
-def isfile_exist_check(file_path):
-    if os.path.isfile(file_path):
-        # print('isfile_exist_check:',file_path, ' FILE EXIST')
-        return True
-    if not os.path.isfile(file_path):
-        # print('isfile_exist_check:',file_path,' FILE NOT EXIST')    
-        return False   
-    
-def is_folder_exist_check(file_path):
-    if os.path.exists(file_path):
-        # print('isfolder_exist_check:',file_path, ' FOLDER EXIST')
-        return True
-    if not os.path.exists(file_path):
-        # print('isfolder_exist_check:',file_path,' FOLDER NOT EXIST')    
-        return False   
+        window[INSTALLED_PYTHON_VERSION_LBL].update(lang_data[LOCAL_NONE],disabled_button_color=(color.GRAY,color.GRAY),button_color=(color.RED_ORANGE,color.RED_ORANGE),disabled=True)
 
 def convert_button_disable(window):
     window[USE_PRE_INSTALLED_VERSION_BTN].update(button_color=(color.LIGHT_BLUE,color.GRAY))
@@ -109,22 +84,17 @@ def convert_button_enable(window):
     window[USE_PRE_INSTALLED_VERSION_BTN].update(button_color=(color.GRAY_9900,color.DARK_GREEN))
 
 def events(window,event,lang_data):
-    if event == USE_PRE_INSTALLED_VERSION_BTN:
-        project_funcs.usePreInstalledPython = not project_funcs.usePreInstalledPython
-        convert_button_enable() if project_funcs.usePreInstalledPython else convert_button_disable()
 
     if event == INSTALL_PYTHON_BUTTON:
         if isfile_exist_check(INSTALLERS_PYTHON_PATH):
             subprocess.run([INSTALLERS_PYTHON_PATH]) 
-            window[INSTALLED_PYTHON_VERSION_LBL].update(python_ver)
             python_event_handler()
         else:
-            window[INSTALLED_PYTHON_VERSION_LBL].update("Download the installers version")
+            window[INSTALLED_PYTHON_VERSION_LBL].update(download_iv)
 
     if event == INSTALL_GIT_BUTTON:
         if isfile_exist_check(INSTALLERS_GIT_PATH):
             subprocess.run([INSTALLERS_GIT_PATH])
-            window[INSTALLED_GIT_VERSION_LBL].update(git_ver)
             git_event_handler(window,lang_data)
         else:
-            window[INSTALLED_GIT_VERSION_LBL].update("Download the installers version")
+            window[INSTALLED_GIT_VERSION_LBL].update(download_iv)

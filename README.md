@@ -69,6 +69,7 @@ Spread the word; don't only keep it to yourself.
 <img src="media/preview/0.0.7/2_0.0.7.jpg">
 <img src="media/preview/0.0.7/3_0.0.7.jpg">
 <img src="media/preview/0.0.3/3_0.0.3.jpg">
+<img src="media/preview/0.0.7/4_0.0.7.jpg">
 <img src="media/preview/0.0.1/1_0.0.1.jpg">
 
 [![0.0.2](media/covers/yt_0.0.2.jpg)](https://www.youtube.com/watch?v=_PJe_gSZn7I "0.0.2")

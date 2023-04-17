@@ -4,7 +4,7 @@ from util.CONSTANTS import *
 import util.util as util
     
 def dialog_window(title,method,lang_data):
-        method = lang_data[util.remove_special_characters_from_text(get_first_word(method),case='capitalize')]
+        # method = lang_data[util.remove_special_characters_from_text(get_first_word(method),case='capitalize')]
         event, values = sg.Window('', 
         [
             [

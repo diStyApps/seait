@@ -5,6 +5,7 @@ import util.colors as color
 import util.icons as ic
 import util.installation_status as installation_status
 import layout.requirements as requirements_layout 
+from util.ui_tools import flatten_ui_elements,expand_column_helper,clear_items_keys
 
 def create_layout_list_menu(projects):
 
@@ -45,8 +46,8 @@ def create_layout_list_menu(projects):
                             background_color=color.DARK_GRAY)
                         ]
                         for project in projects if project['type'] #== "app" #vertical
-                    ]        
-        , key=PROJECTS_LIST_MENU, element_justification='l', expand_x=True,expand_y=True,visible=True,scrollable=True,vertical_scroll_only=True),
+                ]        
+             ,key=PROJECTS_LIST_MENU, element_justification='l', expand_x=True,expand_y=True,visible=True,scrollable=True,vertical_scroll_only=True),
         ],
     ] 
     return layout
@@ -60,7 +61,7 @@ def create_project_layout(lang_data):
                 # sg.Button("Select a app to launch",expand_x=True,visible=True,k=f"-selected_app_lbl-",font=FONT,disabled=True)
                 sg.Column(requirements_layout.create_layout(lang_data), key=PROJECTS_COL_PLACEHOLDER, element_justification='r', expand_x=True,expand_y=True,visible=True),
             ],
-        ],expand_x=True,expand_y=True,border_width=0,pad=(0,0),size=(650,None),relief=sg.RELIEF_FLAT,element_justification="c",background_color=color.DARK_GRAY)
+        ],expand_x=True,expand_y=True,border_width=0,pad=(0,0),size=(1300,None),relief=sg.RELIEF_FLAT,element_justification="c",background_color=color.DARK_GRAY)
     ]]
 
     return layout

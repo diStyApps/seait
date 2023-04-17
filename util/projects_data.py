@@ -22,7 +22,7 @@ projects_data = [
             "entry_point": 
                 {
                     "install":"launch.py",
-                    "launch":"webui.bat",
+                    "launch":"launch.py",
                 },  
             "buttons": [
                 {

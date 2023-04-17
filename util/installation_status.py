@@ -1,35 +1,17 @@
 import os
-import util.dependency_check as depcheck
+from util.dependency_check import check_git, check_python
+from util.util import is_folder_exist_check
 # import requests
 
-
-def is_file_exist_check(file_path):
-    if os.path.isfile(file_path):
-        # print('isfile_exist_check:',file_path, ' FILE EXIST')
-        return True
-    if not os.path.isfile(file_path):
-        # print('isfile_exist_check:',file_path,' FILE NOT EXIST')    
-        return False   
-    
-def is_folder_exist_check(file_path):
-    if os.path.exists(file_path):
-        # print('isfolder_exist_check:',file_path, ' FOLDER EXIST')
-        return True
-    if not os.path.exists(file_path):
-        # print('isfolder_exist_check:',file_path,' FOLDER NOT EXIST')    
-        return False   
-
-def check_project(project):
-    project_path = os.path.abspath(project['repo_name'])
+def check_project(project,custom_path=None):
+    if custom_path:
+        project_path = os.path.abspath(custom_path)
+    else:
+        project_path = os.path.abspath(project['repo_name'])
     if project['type'] == "app":
+        # print('installation_status_val',project_path)
         if is_folder_exist_check(project_path):
-            # print(f"{project['repo_name']} project installed")      
-            if is_folder_exist_check(os.path.join(project_path, 'venv')):
-                # print(f"{project['repo_name']} venv installed")
-                return True
-            else:
-                # print(f"{project['repo_name']} venv not installed")
-                return False
+            return True
         else:
             # print(f"{project['repo_name']} project not installed")
             return False
@@ -41,19 +23,43 @@ def check_project(project):
             # print(f"extension {project['repo_name']} is not installed")
             return False
 
+
+def check_project_venv(project,custom_path=None):
+    if custom_path:
+        project_path = os.path.abspath(custom_path)
+    else:
+        project_path = os.path.abspath(project['repo_name'])
+    if project['type'] == "app":
+        # print('installation_status_val',project_path)
+        if is_folder_exist_check(project_path):
+            # print(f"{project['repo_name']} project installed")      
+            if is_folder_exist_check(os.path.join(project_path, 'venv')):
+                # print(f"{project['repo_name']} venv installed")
+                return True
+            else:
+                # print(f"{project['repo_name']} venv not installed")
+                return False
+        else:
+            # print(f"{project['repo_name']} project not installed")
+            return False
+
 def check_git_python():
-    if depcheck.check_python() and depcheck.check_git():
+    if check_python() and check_git():
         # print("Python and git installed")
         return True  
     else:
         # print("Python or git not installed")
         return False               
 
-def get_last_commit_hash_local(app_info):
-    if depcheck.check_git():
+def get_last_commit_hash_local(app_info,custom_path=None):
+   
+    if check_git():
         import git
         if app_info['type'] == "app":
-            repo_path = app_info['repo_name']
+            if custom_path:
+                repo_path = os.path.abspath(custom_path)
+            else:
+                repo_path = app_info['repo_name']
         elif app_info['type'] == "webui_extension":
             repo_path = os.path.join(app_info['webui_path'], 'extensions', app_info['repo_name'])
         else:

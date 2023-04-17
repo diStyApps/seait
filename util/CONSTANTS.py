@@ -1,4 +1,4 @@
-VERSION = '0.0.7'
+VERSION = '0.0.8'
 APP_TITLE = f"Super Easy AI Installer Tool - Ver {VERSION}"
 
 
@@ -34,7 +34,7 @@ SELECT_PROJECT = '-select_project_'
 
 SET_APP_ARGS = "-set_app_args-"
 RUN_APP_FUNC = "-run_app_func-"
-
+SET_PROJECT_PATH = "-set_project_path-"
 
 
 SELECT_APP = "-select_app_"

@@ -1,4 +1,5 @@
 import re
+import os
 
 def remove_special_characters_from_text(text,underline=False,case='raw'):
 
@@ -39,3 +40,22 @@ def remove_special_characters_from_text(text,underline=False,case='raw'):
         return text[:-1]
     else:
         return text
+    
+def isfile_exist_check(file_path):
+    if os.path.isfile(file_path):
+        # print('isfile_exist_check:',file_path, ' FILE EXIST')
+        return True
+    if not os.path.isfile(file_path):
+        # print('isfile_exist_check:',file_path,' FILE NOT EXIST')    
+        return False   
+    
+def is_folder_exist_check(file_path):
+    if os.path.exists(file_path):
+        # print('isfolder_exist_check:',file_path, ' FOLDER EXIST')
+        return True
+    if not os.path.exists(file_path):
+        # print('isfolder_exist_check:',file_path,' FOLDER NOT EXIST')    
+        return False       
+    
+
+    
