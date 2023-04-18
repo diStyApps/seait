@@ -36,6 +36,7 @@ SET_APP_ARGS = "-set_app_args-"
 RUN_APP_FUNC = "-run_app_func-"
 SET_PROJECT_PATH = "-set_project_path-"
 ACTIVATE_PROJECT_PATH = "-activate_project_path-"
+ADD_PROJECT_FOLDER_NAME = "-add_project_folder_name-"
 
 SELECT_APP = "-select_app_"
 SELECTED_APP = "-selected_app_"
@@ -181,12 +182,14 @@ LOCAL_WILL_USED= "will_be_used"
 
 LOCAL_BROWSE= "browse"
 LOCAL_SET_PATH = "set_path"
+LOCAL_SET_FOLDER_PROJECT_NAME = "set_folder_project_name"
 LOCAL_ACTIVATE= "activate"
 LOCAL_ACTIVATED= "activated"
 LOCAL_ACTIVATED= "activated"
 LOCAL_CHECK_PYTHON_PATH = "check_python_path"
 LOCAL_CHECK_PYTHON_PATH_LBL= "-check_python_path_lbl-"
-
+#'Add Project Name Folder to Path'
+LOCAL_ADD_PROJECT_NAME_FOLDER_TO_PATH = "add_project_name_folder_to_path"
 
 #prefs
 PREF_SELECTED_LANG = 'selected_lang'

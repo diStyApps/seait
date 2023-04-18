@@ -20,8 +20,9 @@ import layout.about as about_layout
 import layout.requirements as requirements_layout 
 import layout.dialog as dialog_layout
 import layout.projects as projects_layout
-
-
+import os
+def contains_spaces(file_path):
+    return ' ' in file_path
 def main():
     jt.create_preferences_init()
     languages = localizations.get_language_by_codes()
@@ -75,7 +76,7 @@ def main():
 
     flatten_ui_elements(window)
     window.size = (window_width,800)
-
+    
     #endregion nav
 
     def default_launcher_buttons(project_args, id_number):
@@ -163,6 +164,10 @@ def main():
                     # print("project_activate",event)
                     window.write_event_value(ACTIVATE_PROJECT_PATH,id_number)  
 
+                if event.endswith("_project_path_add_folder_name_btn-"):
+                    # print("project_add_folder_name",event)
+                    window.write_event_value(ADD_PROJECT_FOLDER_NAME,id_number) 
+
         if event == RUN_APP_FUNC:
             event_value = values['-run_app_func-']
             id_number, method = project_util.get_function_and_project_id(event_value)   
@@ -215,15 +220,29 @@ def main():
             window.write_event_value(f"-select_app_{id_number}_btn-",'')    
             # window.write_event_value(f"refresh_menu_list",'')    
 
+        if event == ADD_PROJECT_FOLDER_NAME:
+            id_number = values[ADD_PROJECT_FOLDER_NAME]
+            input_project_path = values[f'-selected_app_{id_number}_project_path_in-']
+            project = project_util.get_project_by_id(projects_data, id_number)
+            project_name = project['repo_name']
+
+            if not input_project_path.endswith(project_name):
+                window[f'-selected_app_{id_number}_project_path_in-'].update(f"{input_project_path}/{project_name}")
+                # print("project",input_project_path,project_name)
+            else:
+                print("Can only add project folder to path if it is not already in the path, you can add it manually if you want to.")
+
         if event == SET_PROJECT_PATH:
             id_number = values[SET_PROJECT_PATH]
             input_project_path = values[f'-selected_app_{id_number}_project_path_in-']
             if input_project_path:
-                # print("project",input_project_path)
-                # print(get_pref_project_data(id_number))
-                project_pref = get_pref_project_data(id_number)
-                add_project(id_number, input_project_path,False) 
-                window.write_event_value(f"-select_app_{id_number}_btn-",'')    
+                if not contains_spaces(input_project_path):
+                    project_pref = get_pref_project_data(id_number)
+                    add_project(id_number, input_project_path,False) 
+                    print("Path has been set.")
+                    window.write_event_value(f"-select_app_{id_number}_btn-",'')    
+                else:
+                    print("Path cannot contain spaces.")
 
         if event == CHECK_UPDATE_BTN_KEY:
             if not update_check.check_update_available():

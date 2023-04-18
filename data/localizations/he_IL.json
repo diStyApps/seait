@@ -47,5 +47,6 @@
     "set_path": "קביעת נתיב",
     "activate": "הפעלה",
     "activated": "מופעל",
-    "check_python_path": "חשוב! ודאו שסימנתם את הוספת Python 3.10 ל- PATH לפני ההתקנה."
+    "check_python_path": "חשוב! ודאו שסימנתם את הוספת Python 3.10 ל- PATH לפני ההתקנה.",
+    "add_project_name_folder_to_path": "הוספת שם תיקיית הפרוייקט לנתיב"
 }

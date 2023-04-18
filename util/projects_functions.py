@@ -63,7 +63,7 @@ def launch(project_data, args=[]):
     project_path = get_project_path(project_data)
     venv_path = get_venv_path(project_data)
     launch_path = get_entry_point(project_data, 'launch')
-    print(f"launching {project_data['repo_name']}")
+    print(f"launching {project_data['repo_name']} at {project_path}")
     installation_status_venv = installation_status.check_project_venv(project_data)
     installation_status_project = installation_status.check_project(project_data)
 

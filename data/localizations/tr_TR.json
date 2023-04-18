@@ -47,5 +47,6 @@
     "set_path": "Yolu Ayarla",
     "activate": "Aktif Et",
     "activated": "Aktifleştirildi",
-    "check_python_path": "ÖNEMLİ! Kurulumdan önce 'Python 3.10'u PATH'e ekle' seçeneğini işaretlediğinizden emin olun."
+    "check_python_path": "ÖNEMLİ! Kurulumdan önce 'Python 3.10'u PATH'e ekle' seçeneğini işaretlediğinizden emin olun.",
+    "add_project_name_folder_to_path": "Proje Klasör Adını PATH'e Ekle"
 }

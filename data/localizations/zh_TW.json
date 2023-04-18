@@ -47,5 +47,6 @@
     "set_path": "設定路徑",
     "activate": "啟用",
     "activated": "已啟用",
-    "check_python_path": "重要！在安裝前，請務必勾選 '將 Python 3.10 加入 PATH'。"
+    "check_python_path": "重要！在安裝前，請務必勾選 '將 Python 3.10 加入 PATH'。",
+    "add_project_name_folder_to_path": "將專案資料夾名稱加入 PATH"
 }

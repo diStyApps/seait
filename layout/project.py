@@ -157,14 +157,21 @@ def create_layout(project,lang_data):
                             ),                                                  
                     ], 
                     [
-                                sg.Button(
+                        sg.Button(
+                                button_text=lang_data[LOCAL_ADD_PROJECT_NAME_FOLDER_TO_PATH],
+                                button_color=(color.DIM_BLUE, color.GRAY),
+                                key=f"{main_key}{project['id']}_project_path_add_folder_name_btn-", 
+                                expand_x=True, 
+                                mouseover_colors=(color.GRAY_9900, color.DIM_BLUE),
+                                # size=(None,2)
+                            ) ,        
+                        sg.Button(
                                 lang_data[LOCAL_SET_PATH],
                                 button_color=(color.DIM_BLUE, color.GRAY),
                                 key=f"{main_key}{project['id']}_project_path_set_btn-", 
                                 expand_x=True, 
                                 mouseover_colors=(color.GRAY_9900, color.DIM_BLUE),
                                 # size=(None,2)
-                                
                             ) ,
                         sg.Button(
                                 lang_data[LOCAL_ACTIVATED] if project_pref and project_pref_isSet else lang_data[LOCAL_ACTIVATE],
