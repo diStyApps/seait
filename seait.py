@@ -9,7 +9,6 @@ import util.icons as ic
 from util.projects_data import projects_data
 import util.projects_functions as project_funcs
 import util.update_check_temp as update_check
-import util.installation_status as installation_status
 import util.json_tools as jt
 from util.json_tools_projects import get_pref_project_data,add_project,set_project_active
 import util.project_util as project_util

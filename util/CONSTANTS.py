@@ -124,7 +124,8 @@ CN_MODELS = [
 project_args = {
     # 1: ['--autolaunch', '--theme=dark'],
     1: [],
-    2: ['--web'],
+    # 2: ['--web'],
+    2: [],
     3: [],
     4: [],
     5: [],
@@ -134,6 +135,7 @@ project_args = {
     9: [],
 }
 
+# LOCALIZATION
 LOCAL_YES = "Yes"
 LOCAL_NO = "No"
 LOCAL_LANG = "lang"
@@ -172,6 +174,18 @@ LOCAL_VRAM_USAGE = "VRAM Usage"
 LOCAL_POWER_USAGE = "Power Usage"
 LOCAL_LIKE_STAR = "Don't forget to leave a like/star."
 LOCAL_INCOMPLETE = "isIncomplete"
+
+LOCAL_SET_CUSTOM_PROJECT_PATH = "Set custom project path"
+LOCAL_IF_NOT_ACTIVATED = "If not activated"
+LOCAL_WILL_USED= "will be used"
+
+LOCAL_BROWSE= "Browse"
+LOCAL_SET_PATH = "Set Path"
+LOCAL_ACTIVATE= "Activate"
+LOCAL_ACTIVATED= "Activated"
+
+
+
 
 #prefs
 PREF_SELECTED_LANG = 'selected_lang'
