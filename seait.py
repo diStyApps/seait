@@ -145,14 +145,14 @@ def main():
             # default_launcher_buttons(project_args,id_number) 
                     
         if event.startswith(SELECTED_APP) and event.endswith("_btn-"):
-                print("selected_app_",event)
+                # print("selected_app_",event)
 
                 if event.startswith("-selected_app_args"):
                     # print("args",event)
                     window.write_event_value(SET_APP_ARGS,event)    
 
                 if event.startswith("-selected_app_func"):
-                    print("func",event)
+                    # print("func",event)
                     window.write_event_value(RUN_APP_FUNC,event)    
 
                 if event.endswith("_project_path_set_btn-"):

@@ -5,8 +5,6 @@ import util.colors as color
 import util.icons as ic
 import util.installation_status as installation_status
 import layout.requirements as requirements_layout 
-from util.ui_tools import flatten_ui_elements,expand_column_helper,clear_items_keys
-
 def create_layout_list_menu(projects):
 
     layout = [

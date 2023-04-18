@@ -1,11 +1,11 @@
 import os
-from util.dependency_check import check_git, check_python
+from util.dependency_check import check_git,check_python
 from util.util import is_folder_exist_check
-# import requests
 from util.json_tools_projects import get_pref_project_data
+# import requests
 
-def pref_project_path(project_data):
-    project_id = project_data['id']
+def pref_project_path(project):
+    project_id = project['id']
     if get_pref_project_data(project_id):
         pref_project_data =get_pref_project_data(project_id)
         project_pref_path = pref_project_data['path']
@@ -13,115 +13,61 @@ def pref_project_path(project_data):
         if project_pref_isSet:
             return os.path.abspath(project_pref_path)
         else:
-            return os.path.abspath(project_data['repo_name'])
+            return os.path.abspath(project['repo_name'])
     else:
-        return os.path.abspath(project_data['repo_name'])
+        return os.path.abspath(project['repo_name'])
         
-
-def check_project(project,custom_path=None):
+def check_project(project):
     project_path = pref_project_path(project)
-    # print('project_path_',project_path_)
-    # if custom_path:
-    #     project_path = os.path.abspath(custom_path)
-    # else:
-    #     project_path = os.path.abspath(project['repo_name'])
-    #     print('project[repo_name]',project['repo_name'])
-
     if project['type'] == "app":
-        # print('installation_status_val',project_path)
         if project_path and is_folder_exist_check(project_path):
             return True
         else:
-            # print(f"{project['repo_name']} project not installed")
             return False
     elif project['type'] == "webui_extension":
         if is_folder_exist_check(f"{project['webui_path']}\extensions\{project['repo_name']}"):
-            # print(f"extension {project['repo_name']} is installed")
             return True
         else:
-            # print(f"extension {project['repo_name']} is not installed")
             return False
 
-
-def check_project_venv(project,custom_path=None):
+def check_project_venv(project):
     project_path = pref_project_path(project)
-
-    # if custom_path:
-    #     project_path = os.path.abspath(custom_path)
-    # else:
-    #     project_path = os.path.abspath(project['repo_name'])
-    # project_path = pref_project_path(project)
-
     if project['type'] == "app":
-        # print('installation_status_val',project_path)
         if project_path and is_folder_exist_check(project_path):
-            # print(f"{project['repo_name']} project installed")      
             if is_folder_exist_check(os.path.join(project_path, 'venv')):
-                # print(f"{project['repo_name']} venv installed")
                 return True
             else:
-                # print(f"{project['repo_name']} venv not installed")
                 return False
         else:
-            # print(f"{project['repo_name']} project not installed")
-            return False
+            return False             
 
-def check_git_python():
-    if check_python() and check_git():
-        # print("Python and git installed")
-        return True  
-    else:
-        # print("Python or git not installed")
-        return False               
-
-def get_last_commit_hash_local(app_info,custom_path=None):
-   
+def get_last_commit_hash_local(app_info):
     if check_git():
         import git
         if app_info['type'] == "app":
             repo_path = pref_project_path(app_info)
-
-            # if custom_path:
-            #     repo_path = os.path.abspath(custom_path)
-            # else:
-            #     repo_path = app_info['repo_name']
-            # repo_path = pref_project_path(app_info)
-            # repo_path = app_info['repo_name']
-            # print('repo_path',repo_path)
-            # print('repo_pref_path',repo_pref_path)
-
-
-
         elif app_info['type'] == "webui_extension":
             repo_path = os.path.join(app_info['webui_path'], 'extensions', app_info['repo_name'])
-
         else:
             print("Error: Invalid app type")
             return None
-        
-
         if not os.path.exists(repo_path):
-            # print(f"Error: Path {repo_path} does not exist")
             return None
-        
         try:
-            # open the repository at the specified path
             repo = git.Repo(repo_path)
-
-            # get the last commit hash
             last_commit_hash = repo.head.object.hexsha
-
-            # return the last commit hash
             return last_commit_hash
         except git.InvalidGitRepositoryError:
-            # print(f"Error: Invalid git repository at {repo_path}")
             return None
         except ValueError:
-            # print(f"Error: Invalid value")
             return None  
-          
+
+def check_git_python():
+    if check_python() and check_git():
+        return True  
+    else:
+        return False            
 def get_last_commit_hash_remote(github_url):
-    
     # extract the owner and repo name from the GitHub URL
     # url_parts = github_url.split('/')
     # owner = url_parts[-2]

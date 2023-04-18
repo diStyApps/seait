@@ -37,75 +37,65 @@ def clone_repo(project_data):
     project_name = project_data['repo_name']
     git_clone_url = project_data['git_clone_url']
     project_path = get_project_path(project_data)
-    print(f"cloning {project_name}",project_path)
     subprocess.run(["git", "clone", git_clone_url, project_path]) 
-    print(f"{project_data['repo_name']} cloned")
+    print(f"{project_name} cloned into {project_path}")
 
 def create_virtual_environment(project_data, args=[]):
+    project_name = project_data['repo_name']
+    project_path = get_project_path(project_data)
     venv_path = get_venv_path(project_data)
-    print(f"creating virtual environment for {project_data['repo_name']}")
+    print(f"Creating virtual environment for {project_name} at {venv_path} ")
     subprocess.run(["python", "-m", "venv", venv_path], shell=True)         
-    print(f"virtual environment created for {project_data['repo_name']}")
+    print(f"Virtual environment created for {project_name} at {venv_path}")
 
 def update(project_data,args=[]):
     project_path = get_project_path(project_data)
-    print(f"updating {project_data['repo_name']}")
+    print(f"Updating {project_data['repo_name']} at {project_path}")
     subprocess.run(["git", "pull"], cwd=project_path)
 
 def uninstall(project_data,args=[]):
     project_path = get_project_path(project_data)
-    print(f"Uninstalling {project_data['repo_name']}")
+    print(f"Uninstalling {project_data['repo_name']} deleting {project_path} folder.")
     subprocess.run(["rd", "/s", "/q", project_path], shell=True)
-    print(f"{project_data['repo_name']} uninstalled")
+    print(f"{project_data['repo_name']} uninstalled {project_path} folder deleted.")
 
 def launch(project_data, args=[]):
     project_path = get_project_path(project_data)
     venv_path = get_venv_path(project_data)
     launch_path = get_entry_point(project_data, 'launch')
     print(f"launching {project_data['repo_name']}")
-    if pref_project_path(project_data):
-        installation_status_venv = installation_status.check_project_venv(project_data,pref_project_path(project_data))
-        installation_status_project = installation_status.check_project(project_data,pref_project_path(project_data))
-    else:
-        installation_status_venv = installation_status.check_project_venv(project_data)
-        installation_status_project = installation_status.check_project(project_data)
+    installation_status_venv = installation_status.check_project_venv(project_data)
+    installation_status_project = installation_status.check_project(project_data)
 
     if not installation_status_venv:
-        print(f"{project_data['repo_name']} venv not installed")
+        print(f"Virtual environment (venv) not found for {project_data['repo_name']} at {project_path}. Will create a new one.")
         install(project_data,args=[])
 
-    elif installation_status_project:
+    if installation_status_project:
         # print(f"{project_data['repo_name']} venv installed")
         command_len = len(launch_path.split())
         cmd_launch = project_data['entry_point']['launch']
         activate_script = f"{venv_path}/Scripts/activate.bat"
         cmd_command = f'cmd /K "{activate_script} && {cmd_launch} {" ".join(args)}"'
         if launch_path.endswith(".py") and command_len == 1:
-            # print('.py run')
             subprocess.run([f"{venv_path}/Scripts/python", launch_path, *args], cwd=project_path)
-            
         elif launch_path.endswith(".py") and command_len > 1:
-            print('command run and script run')
             subprocess.run(cmd_command, cwd=project_path, shell=True)           
         elif launch_path.endswith(".bat"):
-            # os.environ['COMMANDLINE_ARGS'] = '--api'        
-            # os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'garbage_collection_threshold:0.6,max_split_size_mb:128'
-            # print('.bat run')
             subprocess.run([launch_path, *args], cwd=project_path)
         else:
-            # print('command run')
             subprocess.run(cmd_command, cwd=project_path, shell=True)      
     else:
-        print(f"Failed to create virtual environment for {project_data['repo_name']}")
- 
+        print(f"Failed to launch {project_data['repo_name']} venv not installed.")
+        
 def install(project_data,args=[]):
-    print(f"installing {project_data['repo_name']} with arguments")
+    project_path = get_project_path(project_data) 
+    print(f"installing {project_data['repo_name']} with at {project_path}")
     clone_repo(project_data)
     create_virtual_environment(project_data)
-    project_path = get_project_path(project_data) 
     venv_path = get_venv_path(project_data)
     install_path = get_entry_point(project_data, 'install') 
-    print("venv_path",f"{venv_path}/Scripts/python")
+    # print("venv_path",f"{venv_path}/Scripts/python")
 
     command_len = len(install_path.split())
     cmd_launch = project_data['entry_point']['launch']
@@ -119,7 +109,6 @@ def install(project_data,args=[]):
     if install_path.endswith(".py") and command_len == 1:
         subprocess.run([f"{venv_path}/Scripts/python", install_path, *args], cwd=project_path)
     elif install_path.endswith(".py") and command_len > 1:
-        print('command run and script run')        
         subprocess.run(cmd_command, cwd=project_path, shell=True)         
     elif install_path.endswith(".bat"):
         subprocess.run([install_path, *args], cwd=project_path)
@@ -128,8 +117,7 @@ def install(project_data,args=[]):
 
 def delete_virtual_environment(project_data,args=[]):
     venv_path = get_venv_path(project_data)
-    print(f"Deleting virtual environment for {venv_path}")
-    print(f"Deleting virtual environment for {project_data['repo_name']}")
+    print(f"Deleting virtual environment for {project_data['repo_name']} at {venv_path}")
     subprocess.run(["rd", "/s", "/q", venv_path], shell=True)
     print(f"virtual environment deleted for {project_data['repo_name']}")
     
@@ -144,11 +132,11 @@ def install_cuda(project_data):
 def install_requirements(project_data):
     project_path = get_project_path(project_data)
     venv_path = get_venv_path(project_data)
-    print(f"installing requirements {project_data['repo_name']}")
+    print(f"Installing requirements for {project_data['repo_name']} at {venv_path}")
     if project_data['install_cuda']:
         install_cuda(project_data)
     subprocess.run([f"{venv_path}/Scripts/python","-m", "pip","install","-r","requirements.txt"], cwd=project_path)
-    print(f"{project_data['repo_name']} requirements installed")
+    print(f"{project_data['repo_name']} requirements installed at {venv_path}")
 
 def install_instructions(project_data):
     project_path = get_project_path(project_data)

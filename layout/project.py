@@ -18,7 +18,6 @@ def create_layout(project,lang_data):
     if project_pref:
         project_pref_isSet = project_pref['isSet']
         project_pref_path = project_pref['path']
-
         # if project_pref_isSet:
         #     project_pref_path = project_pref['path']
     
