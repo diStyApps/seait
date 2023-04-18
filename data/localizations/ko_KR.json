@@ -39,5 +39,13 @@
     "Power Usage": "전력 사용량",
     "Don't forget to leave a like/star.": "좋아요/별점을 남기지 않으셨나요?",
     "isIncomplete": "이 프로젝트는 설치 프로그램에서 완전히 구현되지 않았습니다. 오류를 다루기 싫으면 일단 이것을 건너뛰는 것이 좋습니다.",
-    "Download": "다운로드"
+    "Download": "다운로드",
+    "set_custom_project_path": "사용자 정의 프로젝트 경로 설정",
+    "If_not_activated": "활성화되지 않은 경우",
+    "will_be_used": "사용될 예정입니다",
+    "browse": "찾아보기",
+    "set_path": "경로 설정",
+    "activate": "활성화",
+    "activated": "활성화됨",
+    "check_python_path": "중요! 설치하기 전에 'Python 3.10을 PATH에 추가' 옵션을 체크해주세요."
 }

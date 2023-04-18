@@ -175,16 +175,17 @@ LOCAL_POWER_USAGE = "Power Usage"
 LOCAL_LIKE_STAR = "Don't forget to leave a like/star."
 LOCAL_INCOMPLETE = "isIncomplete"
 
-LOCAL_SET_CUSTOM_PROJECT_PATH = "Set custom project path"
-LOCAL_IF_NOT_ACTIVATED = "If not activated"
-LOCAL_WILL_USED= "will be used"
+LOCAL_SET_CUSTOM_PROJECT_PATH = "set_custom_project_path"
+LOCAL_IF_NOT_ACTIVATED = "If_not_activated"
+LOCAL_WILL_USED= "will_be_used"
 
-LOCAL_BROWSE= "Browse"
-LOCAL_SET_PATH = "Set Path"
-LOCAL_ACTIVATE= "Activate"
-LOCAL_ACTIVATED= "Activated"
-
-
+LOCAL_BROWSE= "browse"
+LOCAL_SET_PATH = "set_path"
+LOCAL_ACTIVATE= "activate"
+LOCAL_ACTIVATED= "activated"
+LOCAL_ACTIVATED= "activated"
+LOCAL_CHECK_PYTHON_PATH = "check_python_path"
+LOCAL_CHECK_PYTHON_PATH_LBL= "-check_python_path_lbl-"
 
 
 #prefs

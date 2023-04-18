@@ -39,5 +39,13 @@
     "Power Usage": "استخدام الطاقة",
     "Don't forget to leave a like/star.": "لا تنسى أن تترك إعجاباً أو نجمة.",
     "isIncomplete": "لم يتم تنفيذ هذا المشروع بالكامل في المثبت. إذا كنت لا ترغب في التعامل مع الأخطاء ، فمن المستحسن تخطي هذا في الوقت الحالي.",
-    "Download": "تحميل"
+    "Download": "تحميل",
+    "set_custom_project_path": "تعيين مسار المشروع المخصص",
+    "If_not_activated": "إذا لم يتم التفعيل",
+    "will_be_used": "سيتم استخدامه",
+    "browse": "تصفح",
+    "set_path": "تعيين المسار",
+    "activate": "تفعيل",
+    "activated": "تم التفعيل",
+    "check_python_path": "مهم! تأكد من تحديد 'أضف Python 3.10 إلى PATH' قبل التثبيت."
 }

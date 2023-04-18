@@ -39,5 +39,13 @@
     "Power Usage": "功率使用率",
     "Don't forget to leave a like/star.": "别忘了点个赞/星标。",
     "isIncomplete": "此项目在安装程序中未完全实现。如果您不想处理错误，则建议暂时跳过此项目。",
-    "Download": "下载"
+    "Download": "下载",
+    "set_custom_project_path": "设置自定义项目路径",
+    "If_not_activated": "如果未激活",
+    "will_be_used": "将被使用",
+    "browse": "浏览",
+    "set_path": "设置路径",
+    "activate": "激活",
+    "activated": "已激活",
+    "check_python_path": "重要！在安装前，请确保勾选'将Python 3.10添加到PATH'。"
 }

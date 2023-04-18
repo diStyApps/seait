@@ -39,5 +39,13 @@
     "Power Usage": "Güç Kullanımı",
     "Don't forget to leave a like/star.": "Beğenmeyi/yıldızlamayı unutmayın.",
     "isIncomplete": "Bu proje, kurulumda tamamen uygulanmadı. Hatalarla uğraşmak istemiyorsanız şimdilik atlamayı öneriyoruz.",
-    "Download": "İndir"
+    "Download": "İndir",
+    "set_custom_project_path": "Özel proje yolunu ayarla",
+    "If_not_activated": "Etkinleştirilmediyse",
+    "will_be_used": "kullanılacak",
+    "browse": "Göz atın",
+    "set_path": "Yolu Ayarla",
+    "activate": "Aktif Et",
+    "activated": "Aktifleştirildi",
+    "check_python_path": "ÖNEMLİ! Kurulumdan önce 'Python 3.10'u PATH'e ekle' seçeneğini işaretlediğinizden emin olun."
 }

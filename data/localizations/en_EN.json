@@ -39,5 +39,13 @@
     "Power Usage": "Power Usage",
     "Don't forget to leave a like/star.": "Don't forget to leave a like/star.",
     "isIncomplete": "This project has not been fully implemented in the installer. If you do not want to deal with errors, it is recommended to skip this one for now.",
-    "Download": "Download"
+    "Download": "Download",
+    "set_custom_project_path": "Set custom project path",
+    "If_not_activated": "If not activated",
+    "will_be_used": "will be used",
+    "browse": "Browse",
+    "set_path": "Set Path",
+    "activate": "Activate",
+    "activated": "Activated",
+    "check_python_path": "IMPORTANT! Ensure that you check 'Add Python 3.10 to PATH' before installing."
 }

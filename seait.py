@@ -26,7 +26,7 @@ def main():
     jt.create_preferences_init()
     languages = localizations.get_language_by_codes()
     lang_data = localizations.set_language(jt.load_preference(PREF_SELECTED_LANG))
-
+    window_width = 1250
     layout = [[ 
             [
                 navigation_layout.create_layout(lang_data,languages)
@@ -39,7 +39,7 @@ def main():
             ],        
     ]]
 
-    window = sg.Window(APP_TITLE,layout,finalize=True,size=(1200,799),ttk_theme='alt', resizable=True,enable_close_attempted_event=False,background_color=color.GRAY_9900,icon=ic.icon3)
+    window = sg.Window(APP_TITLE,layout,finalize=True,size=(window_width,799),ttk_theme='alt', resizable=True,enable_close_attempted_event=False,background_color=color.GRAY_9900,icon=ic.icon3)
     #region nav
     projects_layout_col_1:sg.Column = window[PROJECTS_COL_1]
     projects_layout_col_2:sg.Column = window[PROJECTS_COL_2]
@@ -74,7 +74,7 @@ def main():
     window[PROJECTS_LIST_MENU].contents_changed()  
 
     flatten_ui_elements(window)
-    window.size = (1200,800)
+    window.size = (window_width,800)
 
     #endregion nav
 
@@ -108,6 +108,8 @@ def main():
 
         if event == SET_LANGUAGE:
             jt.save_preference(PREF_SELECTED_LANG,localizations.get_language_by_native(values[SET_LANGUAGE]))
+            # window_width =300
+
             reopen_window(window)
 
         if event in nav_elements:

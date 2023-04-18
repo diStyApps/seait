@@ -39,5 +39,13 @@
     "Power Usage": "Uso de energía",
     "Don't forget to leave a like/star.": "No olvides dejar un me gusta/estrella.",
     "isIncomplete": "Este proyecto no ha sido completamente implementado en el instalador. Si no desea lidiar con errores, se recomienda omitirlo por ahora.",
-    "Download": "Descargar"
+    "Download": "Descargar",
+    "set_custom_project_path": "Establecer ruta de proyecto personalizada",
+    "If_not_activated": "Si no está activado",
+    "will_be_used": "será utilizado",
+    "browse": "Navegar",
+    "set_path": "Establecer ruta",
+    "activate": "Activar",
+    "activated": "Activado",
+    "check_python_path": "¡IMPORTANTE! Asegúrate de marcar 'Añadir Python 3.10 al PATH' antes de instalar."
 }

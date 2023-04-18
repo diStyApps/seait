@@ -39,5 +39,13 @@
     "Power Usage": "電力使用量",
     "Don't forget to leave a like/star.": "いいね/スターを忘れずに残してください。",
     "isIncomplete": "このプロジェクトはインストーラで完全に実装されていません。エラーを扱いたくない場合は、今のところこれをスキップすることをお勧めします。",
-    "Download": "ダウンロード"
+    "Download": "ダウンロード",
+    "set_custom_project_path": "カスタムプロジェクトパスを設定",
+    "If_not_activated": "アクティブ化されていない場合",
+    "will_be_used": "使用されます",
+    "browse": "ブラウズ",
+    "set_path": "パスの設定",
+    "activate": "アクティブ化",
+    "activated": "アクティブ化されました",
+    "check_python_path": "重要！インストール前に「Python 3.10をPATHに追加する」を確認してください。"
 }

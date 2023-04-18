@@ -39,5 +39,13 @@
     "Power Usage": "שימוש בכוח",
     "Don't forget to leave a like/star.": "אל תשכחו להשאיר לייק/כוכב",
     "isIncomplete": ".הפרויקט ניסיוני במתקין. אם אינכם רוצים להתמודד עם שגיאות, מומלץ לדלג כרגע",
-    "Download": "להוריד"
+    "Download": "להוריד",
+    "set_custom_project_path": "הגדרת נתיב הפרוייקט",
+    "If_not_activated": "אם לא מופעל",
+    "will_be_used": "ישומש",
+    "browse": "עיון",
+    "set_path": "קביעת נתיב",
+    "activate": "הפעלה",
+    "activated": "מופעל",
+    "check_python_path": "חשוב! ודאו שסימנתם את הוספת Python 3.10 ל- PATH לפני ההתקנה."
 }
