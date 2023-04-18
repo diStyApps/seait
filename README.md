@@ -21,6 +21,9 @@
 
   <h1 align="center">Super Easy AI Installer Tool</h1>
   <h3 align="center">Use artificial intelligence tools quickly and easily.</h3>
+  <h4 align="center">Don't forget to leave a star.</h4>
+  
+  
   <p align="center">
     <a href="https://github.com/diStyApps/seait/issues">Report Bug</a>
     ·
@@ -38,6 +41,7 @@
       <a href="#about-the-project">About The Project</a>
     </li>
     <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#localization">Localization</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#my-other-projects">My Other Projects</a></li>    
     <li><a href="#acknowledgments">Acknowledgments</a></li>
@@ -56,20 +60,28 @@ The tool is designed to provide an easy-to-use solution for accessing and instal
 But remains a great solution for users with minimal technical knowledge or expertise. Fixes underway.
 
 
-### Update 0.0.7
+### Update 0.0.8
 
-Added Multi-language support
-Added Spanish (es_ES), French (fr_FR), German (de_DE), Italian (it_IT), Portuguese (pt_BR), Russian (ru_RU), Chinese Simplified (zh_CN), Chinese Traditional (zh_TW), Japanese (ja_JP), Korean (ko_KR), Arabic (ar_AR), Hebrew (he_IL), and Hindi (hi_IN) languages. All translations were done by AI. Please feel free to correct them.
+Added custom project path
 
-I will add fixes for the RTL and LTR directions for languages later on.
+Modified Python detection
+
+And more
+
+Custom project path:
+- Now you can install and launch existing installations from any drive or location, as well as perform other actions
+- Please note, avoid using paths with spaces
+
+Modified Python detection:
+
+- Python will now detect system environment PATH
+
 
 Spread the word; don't only keep it to yourself.
 
-<img src="media/preview/0.0.7/1_0.0.7.jpg">
+<img src="media/preview/0.0.8/1_0.0.8.jpg">
+<img src="media/preview/0.0.8/2_0.0.8.jpg">
 <img src="media/preview/0.0.7/2_0.0.7.jpg">
-<img src="media/preview/0.0.7/3_0.0.7.jpg">
-<img src="media/preview/0.0.3/3_0.0.3.jpg">
-<img src="media/preview/0.0.7/4_0.0.7.jpg">
 <img src="media/preview/0.0.1/1_0.0.1.jpg">
 
 [![0.0.2](media/covers/yt_0.0.2.jpg)](https://www.youtube.com/watch?v=_PJe_gSZn7I "0.0.2")
@@ -104,7 +116,7 @@ In the future ill try maybe nukita or something.
 - [x] More AI-related repos
 - [ ] Pre installed auto1111 version
 - [ ] Pre installed python version
-- [ ] Locate repo
+- [x] Set custom project path
 - [ ] App updater 
 - [ ] Remembering arguments
 - [x] Custom arguments
@@ -115,14 +127,22 @@ See the [open issues](https://github.com/diStyApps/seait/issues) for a full list
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
+<!-- LOCALIZATION -->
+## Localization
+
+Spanish (es_ES), French (fr_FR), German (de_DE), Italian (it_IT), Portuguese (pt_BR), Russian (ru_RU), Chinese Simplified (zh_CN), Chinese Traditional (zh_TW), Japanese (ja_JP), Korean (ko_KR), Arabic (ar_AR), Hebrew (he_IL), Hindi (hi_IN)
+
+All translations were done by AI. Please feel free to correct them.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- CONTACT -->
 ## Contact
 
 distty@gmail.com
 
 [Facebook](https://www.facebook.com/disty.fc)
-
-[@The_diSty](https://twitter.com/The_diSty)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
