@@ -35,7 +35,7 @@ SELECT_PROJECT = '-select_project_'
 SET_APP_ARGS = "-set_app_args-"
 RUN_APP_FUNC = "-run_app_func-"
 SET_PROJECT_PATH = "-set_project_path-"
-
+ACTIVATE_PROJECT_PATH = "-activate_project_path-"
 
 SELECT_APP = "-select_app_"
 SELECTED_APP = "-selected_app_"

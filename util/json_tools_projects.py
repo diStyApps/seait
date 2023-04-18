@@ -75,6 +75,16 @@ def get_pref_project_data(project_id):
 
     return None
 
+def set_project_active(project_id, isSet):
+    project_preferences = load_project_preferences(file_path)
+    projects = project_preferences["set_project_paths"][0]["projects"]
+
+    for project in projects:
+        if project["project_id"] == project_id:
+            project["isSet"] = isSet
+            break
+
+    save_project_preferences(project_preferences, file_path)
 
 # add_project(1, "C:\\repos\\-SEAIT",False) 
 

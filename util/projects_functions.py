@@ -3,7 +3,7 @@ import os
 from util.CONSTANTS import *
 import requests
 import util.installation_status as installation_status
-from util.json_tools_projects import get_pref_project_data,add_project
+from util.json_tools_projects import get_pref_project_data
 
 def convert_to_backslashes(file_path):
     return file_path.replace("/", "\\")

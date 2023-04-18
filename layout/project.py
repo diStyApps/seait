@@ -11,16 +11,17 @@ def create_layout(project,lang_data):
     selected_project_key = f"{main_key}{project['id']}_"
     git_Python_status = installation_status.check_git_python()
 
-
+    project_pref_path_len = 0
     project_pref_path = os.path.abspath(project['repo_name'])
+    project_pref_path_def = os.path.abspath(project['repo_name'])
+
     project_pref = get_pref_project_data(project['id'])
     
     if project_pref:
         project_pref_isSet = project_pref['isSet']
         project_pref_path = project_pref['path']
-        # if project_pref_isSet:
-        #     project_pref_path = project_pref['path']
-    
+        project_pref_path_len = len(project_pref_path)
+
     installation_status_val = installation_status.check_project(project)
     installation_status_venv = installation_status.check_project_venv(project)
     project_commit_hash = installation_status.get_last_commit_hash_local(project)
@@ -44,7 +45,6 @@ def create_layout(project,lang_data):
         expand_x=True,
         mouseover_colors=launch_buttons_mouseover_colors
     )
-
     layout = [
         [
             sg.Frame('',[        
@@ -134,22 +134,50 @@ def create_layout(project,lang_data):
                 ],key=f"{main_key}setup_header_frame-",expand_x=True,expand_y=False,border_width=0,pad=(10,3),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)            
             ],  
             [
-                sg.Frame('Set project path',[       
+                sg.Frame(f"Set a custom project path.",[      
                     [
-                        sg.In(default_text=project_pref_path,key=f"{main_key}{project['id']}_project_path_in-",enable_events=True,expand_x=True,text_color=color.LIGHT_GRAY,font=FONT,background_color=color.GRAY),
-                        sg.FolderBrowse(k=f"{main_key}{project['id']}_project_path_FolderBrowse-",size=(None,2),button_color=(color.DIM_BLUE, color.GRAY)),
+                    sg.Button(f"If not activated, ({project_pref_path_def}) will be used.",
+                              k=f"{main_key}_{project['id']}_custom_path_lbl-",visible=True,expand_x=False,disabled=True,disabled_button_color=(color.LIGHT_GRAY, color.DIM_BLUE),button_color= (color.GRAY, color.DARK_GRAY)),
+        
+                    ], 
+                    [
+                        sg.In(default_text=project_pref_path,key=f"{main_key}{project['id']}_project_path_in-",
+                              enable_events=True,expand_x=True,expand_y=True,
+                              font=FONT,
+                              text_color=color.GRAY if project_pref and project_pref_isSet else color.LIGHT_GRAY,  
+                              
+    
+                              background_color=color.DIM_GREEN if project_pref and project_pref_isSet else color.GRAY,  
+                              
+                              
+                              ),
+                        sg.FolderBrowse(k=f"{main_key}{project['id']}_project_path_FolderBrowse-",
+                            button_color=(color.DIM_BLUE, color.GRAY),
+                            # size=(10,2)     
+                            ),
+                        
                         sg.Button(
-                                
-                                'Unset' if project_pref and project_pref_isSet else 'Set',
-                                button_color=(color.GRAY, color.DIM_GREEN) if project_pref and project_pref_isSet else (color.DIM_BLUE, color.GRAY),
+                                'Set path',
+                                button_color=(color.DIM_BLUE, color.GRAY),
                                 key=f"{main_key}{project['id']}_project_path_set_btn-", 
                                 expand_x=False, 
-                                mouseover_colors=(color.GRAY_9900, color.DIM_BLUE)
-                            )                        
+                                mouseover_colors=(color.GRAY_9900, color.DIM_BLUE),
+                                # size=(None,2)
+                                
+                            ) ,
+                        sg.Button(
+                                'Activated' if project_pref and project_pref_isSet else 'Activate',
+                                button_color= (color.GRAY, color.DIM_GREEN) if project_pref and project_pref_isSet else (color.DIM_BLUE, color.GRAY),
+                                key=f"{main_key}{project['id']}_project_path_activate_btn-", 
+                                expand_x=False, 
+                                mouseover_colors=(color.GRAY_9900, color.DIM_BLUE),
+                                disabled=False if project_pref_path_len else True,
+                                size=(10,1)
+
+                            )                                                      
                     ],  
-                ],key=f"{main_key}{project['id']}_project_path_frame-",expand_x=True,expand_y=False,border_width=0,pad=(10,3),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)            
+                ],key=f"{main_key}{project['id']}_project_path_frame-",title_color=color.DIM_GREEN,expand_x=True,expand_y=False,border_width=0,pad=(15,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)            
             ] if project['type'] == 'app' else [
-        
             ],             
             [
                 sg.Frame("",[       
@@ -188,4 +216,3 @@ def create_layout(project,lang_data):
        
     ]
     return layout
-

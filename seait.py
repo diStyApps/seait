@@ -11,7 +11,7 @@ import util.projects_functions as project_funcs
 import util.update_check_temp as update_check
 import util.installation_status as installation_status
 import util.json_tools as jt
-from util.json_tools_projects import get_pref_project_data,add_project
+from util.json_tools_projects import get_pref_project_data,add_project,set_project_active
 import util.project_util as project_util
 # import util.system_stats as system_stats
 import util.localizations as localizations
@@ -99,14 +99,13 @@ def main():
     while True:
         event, values = window.read()
         # print("event", event, "values", values)
+        # print("event", event)
 
         if event == sg.WIN_CLOSED:
             break
 
         requirements_layout.events(window,event,lang_data)
         about_layout.events(event)
-
-        # if event == UPDATE_AVAILABLE_LBL_KEY:
 
         if event == SET_LANGUAGE:
             jt.save_preference(PREF_SELECTED_LANG,localizations.get_language_by_native(values[SET_LANGUAGE]))
@@ -156,8 +155,12 @@ def main():
                     window.write_event_value(RUN_APP_FUNC,event)    
 
                 if event.endswith("_project_path_set_btn-"):
-                    # print("project",event)
+                    # print("project_set",event)
                     window.write_event_value(SET_PROJECT_PATH,id_number)    
+
+                if event.endswith("_project_path_activate_btn-"):
+                    # print("project_activate",event)
+                    window.write_event_value(ACTIVATE_PROJECT_PATH,id_number)  
 
         if event == RUN_APP_FUNC:
             event_value = values['-run_app_func-']
@@ -191,23 +194,35 @@ def main():
             else:
                 window[event_value].update(button_color=(color.GRAY,color.DIM_GREEN))
 
-        if event == SET_PROJECT_PATH:
-            id_number = values[SET_PROJECT_PATH]
+        if event == ACTIVATE_PROJECT_PATH:
+            id_number = values[ACTIVATE_PROJECT_PATH]
             input_project_path = values[f'-selected_app_{id_number}_project_path_in-']
             if input_project_path:
-                print("project",input_project_path)
-                print(get_pref_project_data(id_number))
+                # print("project",input_project_path)
+                # print(get_pref_project_data(id_number))
                 project_pref = get_pref_project_data(id_number)
                 if project_pref:
                     project_pref_isSet = project_pref['isSet']
                     if project_pref_isSet:
-                         add_project(id_number, input_project_path,False) 
+                        set_project_active(id_number, False)
+                        # add_project(id_number, input_project_path,False) 
+
                     else:
-                         add_project(id_number, input_project_path,True) 
-                else:
-                    add_project(id_number, input_project_path,True) 
+                        set_project_active(id_number, True)
+                        # add_project(id_number, input_project_path,True) 
 
             window.write_event_value(f"-select_app_{id_number}_btn-",'')    
+            # window.write_event_value(f"refresh_menu_list",'')    
+
+        if event == SET_PROJECT_PATH:
+            id_number = values[SET_PROJECT_PATH]
+            input_project_path = values[f'-selected_app_{id_number}_project_path_in-']
+            if input_project_path:
+                # print("project",input_project_path)
+                # print(get_pref_project_data(id_number))
+                project_pref = get_pref_project_data(id_number)
+                add_project(id_number, input_project_path,False) 
+                window.write_event_value(f"-select_app_{id_number}_btn-",'')    
 
         if event == CHECK_UPDATE_BTN_KEY:
             if not update_check.check_update_available():
@@ -224,6 +239,18 @@ def main():
             id_number = project_util.get_project_id(event)
             webbrowser.open(project_util.get_project_by_id(projects_data, id_number)['github_url']) 
 
+        if event.startswith("refresh_menu_list"):
+            window[PROJECTS_COL_1].update(projects_layout.create_layout_list_menu(projects_data))
+            # clear_items_keys(window)        
+            # # fix white flash
+            # project = project_util.get_project_by_id(projects_data, id_number)
+            # for element in list(window[PROJECTS_COL_1].Widget.children.values()):
+            #     element.destroy()
+            # layout = projects_layout.create_layout_list_menu(projects_data)
+            # window.extend_layout(window[PROJECTS_COL_1],layout)
+            # flatten_ui_elements(window)  
+            # window.visibility_changed()
+            pass
 
 if __name__ == '__main__':
     sg.theme('Dark Gray 15')
