@@ -116,14 +116,14 @@ In the future ill try maybe nukita or something.
 
 - [x] Multi-language support
 - [x] More AI-related repos
-- [ ] Pre installed auto1111 version
-- [ ] Pre installed python version
 - [x] Set custom project path
+- [x] Custom arguments
+- [ ] Pre installed auto1111 version
 - [ ] App updater 
 - [ ] Remembering arguments
-- [x] Custom arguments
 - [ ] Maybe arguments profiles
 - [ ] Better event handling
+- [ ] Fully standalone version no python or git needed
 
 See the [open issues](https://github.com/diStyApps/seait/issues) for a full list of proposed features (and known issues).
 
