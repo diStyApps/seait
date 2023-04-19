@@ -74,7 +74,7 @@ def create_layout(project,lang_data):
             sg.Frame("",[       
                 [
                     sg.MLine(f"""{project['description'][0]}""",k=f"{main_key}description_{project['id']}_console_ml-",visible=True,text_color=color.DIM_BLUE,border_width=10,sbar_width=20,sbar_trough_color=0,
-                            autoscroll=True, auto_refresh=True,expand_x=True,expand_y=True,font=FONT,no_scrollbar=True,disabled=True,size=(100,4)),
+                            autoscroll=True, auto_refresh=True,expand_x=True,expand_y=True,font=FONT,no_scrollbar=True,disabled=True,size=(100,3)),
                 ],                            
                 ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
         ] if project['description'] else [],         
@@ -111,7 +111,7 @@ def create_layout(project,lang_data):
                                 ],key=f"{main_key}_args_header_frame-",expand_x=True,expand_y=True,border_width=0,relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)            
                         ]                     
                     ]
-                    ,key=f"-selected_app_scroll_frame-", element_justification='c',size=(50,110), expand_x=True,expand_y=True,visible=True,scrollable=True,vertical_scroll_only=True,background_color=color.DARK_GRAY)
+                    ,key=f"-selected_app_scroll_frame-", element_justification='c',size=(50,70), expand_x=True,expand_y=True,visible=True,scrollable=True,vertical_scroll_only=True,background_color=color.DARK_GRAY)
                 ],                            
                 ],expand_x=True,expand_y=False,border_width=1,pad=(1,1),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
         ] if project['args'] else [],    

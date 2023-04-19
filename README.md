@@ -60,26 +60,28 @@ The tool is designed to provide an easy-to-use solution for accessing and instal
 But remains a great solution for users with minimal technical knowledge or expertise. Fixes underway.
 
 
-### Update 0.0.8
+### Update 0.0.9
 
-Added custom project path
 
-Modified Python detection
 
-And more
+Added Projects:
 
-Custom project path:
-- Now you can install and launch existing installations from any drive or location, as well as perform other actions
-- Please note, avoid using paths with spaces
+"automatic" is a fork of the Auto1111 web UI, diving into the name chaos with flair.
 
-Modified Python detection:
+ This fork promises to deliver more frequent updates for improved stability, enhanced speed, and a selection of pre-installed extensions.
 
-- Python will now detect system environment PATH
+https://github.com/vladmandic/automatic
+
+A free and open-source inpainting tool powered by SOTA AI model.
+
+https://github.com/Sanster/lama-cleaner
+
+
 
 
 Spread the word; don't only keep it to yourself.
 
-<img src="media/preview/0.0.8/1_0.0.8.jpg">
+<img src="media/preview/0.0.9/1_0.0.9.jpg">
 <img src="media/preview/0.0.8/2_0.0.8.jpg">
 <img src="media/preview/0.0.7/2_0.0.7.jpg">
 <img src="media/preview/0.0.1/1_0.0.1.jpg">

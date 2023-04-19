@@ -128,6 +128,187 @@ projects_data = [
             "description":[]     
         },
         {
+            "id": 10,
+            "key": "app_",
+            "image_path": b'iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAIAAAC0Ujn1AAAEOklEQVR4nMWWTWxUVRSAv3Pf/LXToZ1Sph2KpcW2/AoS/5A0ECCgARNjoibERGWjBheoIJi4MZoQo8REjTs2mhCJiYmJC12oicREN8QEgjYi/rVQY8G2U9qZ93PvcTEztFM6QCTGu3iL9+79znfPO/e9A//ZkOvOMIJUZ6kCKKDozUa+fuj6a6/9TGHZYm7vISjhKT9dIlJGL+EcheK/RZd9F7fy4YsM9CPNMMknX3Nygu9PcWGEc5colCrh5x2xemjPEFme3MrAbRw5Rhjx0BoGOvj2N3pynB+io4FC6VrWpp6ydWQaeGorEpJP8fJH7D9OWzPLk2TiLMqQdqRjaP2Nz4/2DKo8vomudsIRHruTdZ18/iODg+zqwk7RlwNLvu6e66AFrCMZ57ntaAHrI8oLG1Hl8Fe0L6DLI5skm6Y5IiV1cz0Puqz86N305okmSES4CR5eTlczx89wfoideWyRvjawLJaKzQ2hneIZDmxDLyMB4hNN0xjj+fWEliPf0dPCIsglaUrTqiTqiM9FewanPLCWtV3YCbwA9fFCtMATfSxMcfQHxi5yXxvWp7cVUfJ1xOeiy0f54FYogo/6SIAJiIpkEzy7nMsh751mdZaMsiROKkkOvPmquwZdVt7Sz8Ye7DgmRALwwccE6BTPdJOO8fYgxUm2tOAClqXxlA4zj3gNuqz80mYIcP4MlwATYKfJJ9mzhIs+75/lnmaSSrdHzCMP5irxGXS5MO66he292HG8CK1yy1cJ0CL7OokLr5/D+WzIYAKWxklA7qqMz7JWFA4OIBZXAh+ZxSXAhNgivQkeWcjvJT4eYvMCBHodRug0c78nFbQRnLIqx4P9uAm8aIarQQVdjqE+B9oQeG2YWMi6RhKOTkMjLKwVr6BFUNi/gbhgSzNcCTCzMuMFuCLr49yf5nSRL0fZlsYa+gWFrtr3aCrKju4Wdq/ATeCFFTsJGZ/ijTOYqCoeVDZxKAPwyihpS1+KJmgXMkKLzHywzBXlfXfQEMMWkQACrA+OL0Y4NMjPYxBhq+K2xCYj98bkmxInC7LDeAGsMCh0zxI3ZeX2NHtWooWKcrmQKfLuLwBv/YHMFg9Fpr1DCvBqgdbL2hlJ1tAqZIVMVdwYQWHvWpqTRNOVWo58jOPECCfG8IQPRhkax4twPoRipj1XsDttfBXm01DPhmaHS/purriJHAsSPL0SN4mEaDWbEvDmrwAxmHK88xcS4gKh6MmktS4WJ3WQBoXD0Elj1iZzhiZoE1Kg5VzvXU17E6ZILMKEmIC449Qon/2NgVAROFrgzymJlzwpOLHxOClI7Kb5VmLHiC7g7bJZVVnjEROWXTn3q1poiqMWUVDUYeB8ieGg5hQsNdKiqGq5N1HEYIaxF7E9eB3EhiUw6BgoTN54m/Iv+hEp1/XVK1VxtXfm/Y1qNa1Czfyb7a3+t/EP2bDTpMDStYIAAAAASUVORK5CYII=',
+            "title": "automatic - Auto1111 webui fork",
+            "repo_name": "automatic",
+            "github_url": "https://github.com/vladmandic/automatic",
+            "git_clone_url":"https://github.com/vladmandic/automatic.git",
+            "installed_version": "-",
+            "available_version": "-",
+            "installed": True,
+            "visible":True,
+            "status": 1,
+            "isIncomplete": False,
+            "type": "app",
+            "install_requirements":False,
+            "install_cuda":False,
+            "install_instructions_available":False,
+            "install_instructions": [
+            ],            
+            "entry_point": 
+                {
+                    "install":"launch.py",
+                    "launch":"launch.py",
+                },  
+            "buttons": [
+                {
+                    "button_text": "Update",
+                    "key": "update",
+                },
+                {
+                    "button_text": "Delete venv",
+                    "key": "delete_venv",
+                },
+                {
+                    "button_text": "Create venv",
+                    "key": "create_venv",
+                },                        
+                {
+                    "button_text": "Uninstall",
+                    "key": "uninstall",
+                },                                               
+            ],
+            "launch_buttons": [
+                {
+                    "button_text": "Launch",
+                    "key": "launch",
+                },           
+                {
+                    "button_text": "Install",
+                    "key": "install",
+                },                                               
+            ],            
+            "args": [
+                [
+                    {
+                        "button_text": "--autolaunch",
+                        "key": "autolaunch",
+                    },  
+
+                    {
+                        "button_text": "--theme=dark",
+                    },
+                ],                
+                [
+
+                    {
+                        "button_text": "--lowvram",
+                        "key": "lowvram",
+                    },
+                    {
+                        "button_text": "--medvram",
+                        "key": "medvram",
+                    },
+
+                ],
+                [
+                    {
+                        "button_text": "--lowram",
+                        "key": "lowram",
+                    },    
+                        {
+                        "button_text": "--no-half",
+                    },   
+            ],
+                [
+                    {
+                        "button_text": "--share",
+                        "key": "share",
+                    },
+                    {
+                        "button_text": "--listen",
+                        "key": "listen",
+                    },
+                 
+                ],            
+
+            ],
+            "def_args": [
+                       "--autolaunch",
+                       "--theme=dark",
+            ],               
+            "description":['"automatic" is a fork of the Auto1111 web UI, diving into the name chaos with flair. This fork promises to deliver more frequent updates for improved stability, enhanced speed, and a selection of pre-installed extensions.']     
+        },   
+       {
+            "id": 11,
+            "key": "app_",
+            "image_path":b'iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAIAAAC0Ujn1AAACy0lEQVR4nLVVwU7yQBDe3bQEKxBsYgIaA/FC4qUhMWm8wAOQyJ3H8BF8Er34AGDiiQAHPXnApNF4ICTGoFFKsEKAuuz8h/FvcKlY5P/n0Gxndr+Znf1mhgIAIYQQAgAAQCkFAMYYWUaEEHjEWxBCKEIj6FJwkozHY8ZYKBTyNIqHa9v29fU15zwSiZimGQ6Hg/gDgMlkUq1WAUAIEYvF8vk8IYRSSoQQQgjbts/OztrttuM4zWazXC6jHhbKdDoFgFqtdnNzg5pGo3F1dYUmhqFZlmWaZjqdjkajhmFQSl3X/TFk3PD+/r63t4eJzeVyLy8vaPpMuaZptm2Tv4+ZzWZVVQ2Y5d3dXYwDAOr1ejKZ/EwyYn18fFxcXGxubpqmyRhb9kkR5O7u7vX1NZfLURSPfISQTqeTSCQYY0sRxqOsxNov0KvLbExMMqwIPXtX9p1hdTffFrTkRuoHv4d2XXc0GnkQ6GYwGIxGI3x8byfnXAjhC6JI/5xzRVFOT08rlUq5XJ5Op4yx4XBoWdZ4PFZVVVGUTCYTi8WEEIqiHB8fx+Pxo6MjPLgIGtljGEY4HPZCvr29PTk56fV6nHNVVYvFYqlUwjsdHBzgTp9m+WOLaLVa85c9Pz8HAM75guP+ucY2hoUQj8dLpZKu65hiXdcLhUImk8EC6Xa7nU6H+DEqaMk8Pz8/Pj4CwPb29tbWlqcfDoeVSuXw8HBtbU0q4EDQs7MDf5EnqL+8vNQ0LZvNStsCDSrsKkIIzL7Xv/CbSqXe3t7mT8kM+U4kOntKQoimaa7r+gQUENpXYOFcXQkaZTAYrK+vrwTtOE6/3599dlx3u92NjY1fQiNEu92+v7+fvTuun56ednZ2yFxBBnpGhDAMQ/JHKX14eAiFQpFIRGJe0Kg9LKnJCSEsy9rf3ydfm/BnQKu0fM654zi6rvta/8Fs/F/kWzD7/wDSnRnN1GeEDwAAAABJRU5ErkJggg==',
+            "title": "Lama Cleaner",
+            "repo_name": "lama-cleaner",
+            "github_url": "https://github.com/Sanster/lama-cleaner",
+            "git_clone_url":"https://github.com/Sanster/lama-cleaner.git",
+            "installed_version": "-",
+            "available_version": "-",
+            "installed": False,
+            "visible":True,
+            "status": 1,
+            "isIncomplete": False,
+            "type": "app",
+            "install_requirements":True,
+            "install_cuda":False,
+            "install_instructions_available":True,
+            "install_instructions": [
+                "-m pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113",
+                "-m pip install lama-cleaner",
+
+            ],
+            "entry_point": 
+            {
+                "install":"lama-cleaner",
+                "launch":"lama-cleaner",
+            },                      
+            "buttons": [
+                {
+                    "button_text": "Update",
+                    "key": "update",
+                },
+                {
+                    "button_text": "Delete venv",
+                    "key": "delete_venv",
+                },
+                {
+                    "button_text": "Create venv",
+                    "key": "create_venv",
+                },                        
+                {
+                    "button_text": "Uninstall",
+                    "key": "uninstall",
+                },                                              
+            ],
+            "launch_buttons": [
+                {
+                    "button_text": "Launch",
+                    "key": "launch",
+                },    
+                {
+                    "button_text": "Install",
+                    "key": "install",
+                },                                                           
+            ],            
+            "args": [
+                [
+                    {
+                        "button_text": "--model=lama",
+                        "key": "model=lama",
+                    },
+                    {
+                        "button_text": "--device=cpu",
+                        "key": "--device=cpu",
+                    },      
+                    {
+                        "button_text": "--port=8080",
+                        "key": "port=8080",
+                    },                                 
+                ],               
+            ],
+            "def_args": [
+            ],
+            "description":[ """A free and open-source inpainting tool powered by SOTA AI model.""",
+            ]             
+        },                
+        {
             "id": 2,
             "key": "app_",
             "image_path": b'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',
@@ -478,7 +659,7 @@ projects_data = [
             "installed": False,
             "visible":True,
             "status": 1,
-            "isIncomplete": True,
+            "isIncomplete": False,
             "type": "app",
             "install_requirements":True,
             "install_cuda":False,
@@ -487,8 +668,8 @@ projects_data = [
             ],              
             "entry_point": 
             {
-                "install":"scripts/main.py",
-                "launch":"scripts/main.py",
+                "install":"run.bat",
+                "launch":"run.bat",
             },                      
             "buttons": [
                 {
@@ -658,5 +839,7 @@ projects_data = [
             Got CUDA error on a 10GB GPU, maybe it work for you.
                             """,
             ]             
-        },                    
+        }
+ 
+                     
     ]

@@ -1,4 +1,4 @@
-VERSION = '0.0.8'
+VERSION = '0.0.9'
 APP_TITLE = f"Super Easy AI Installer Tool - Ver {VERSION}"
 
 
@@ -134,6 +134,9 @@ project_args = {
     7: [],
     8: [],
     9: [],
+    10: [],
+    11: [],
+
 }
 
 # LOCALIZATION
