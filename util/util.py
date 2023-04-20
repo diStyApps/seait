@@ -58,4 +58,13 @@ def is_folder_exist_check(file_path):
         return False       
     
 
-    
+def contains_spaces(file_path):
+    return ' ' in file_path
+
+def convert_list_to_string(input_list):
+    output_string = ' '.join(input_list)
+    return output_string    
+
+def convert_string_to_list(input_string):
+    items = input_string.split()
+    return items

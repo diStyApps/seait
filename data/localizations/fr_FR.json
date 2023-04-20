@@ -48,5 +48,6 @@
     "activate": "Activer",
     "activated": "Activé",
     "check_python_path": "IMPORTANT ! Assurez-vous de cocher 'Ajouter Python 3.10 au PATH' avant l'installation.",
-    "add_project_name_folder_to_path": "Ajouter le nom du dossier de projet au PATH"
+    "add_project_name_folder_to_path": "Ajouter le nom du dossier de projet au PATH",
+    "save": "Enregistrer"
 }

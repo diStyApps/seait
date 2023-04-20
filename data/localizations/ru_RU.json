@@ -48,5 +48,6 @@
     "activate": "Активировать",
     "activated": "Активировано",
     "check_python_path": "ВАЖНО! Обязательно отметьте опцию 'Добавить Python 3.10 в PATH' перед установкой.",
-    "add_project_name_folder_to_path": "Добавить имя папки проекта в PATH"
+    "add_project_name_folder_to_path": "Добавить имя папки проекта в PATH",
+    "save": "Сохранить"
 }

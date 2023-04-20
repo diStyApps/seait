@@ -48,5 +48,6 @@
     "activate": "활성화",
     "activated": "활성화됨",
     "check_python_path": "중요! 설치하기 전에 'Python 3.10을 PATH에 추가' 옵션을 체크해주세요.",
-    "add_project_name_folder_to_path": "프로젝트 폴더 이름을 PATH에 추가"
+    "add_project_name_folder_to_path": "프로젝트 폴더 이름을 PATH에 추가",
+    "save": "저장"
 }

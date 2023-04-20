@@ -48,5 +48,6 @@
     "activate": "تفعيل",
     "activated": "تم التفعيل",
     "check_python_path": "مهم! تأكد من تحديد 'أضف Python 3.10 إلى PATH' قبل التثبيت.",
-    "add_project_name_folder_to_path": "أضف اسم مجلد المشروع إلى المسار"
+    "add_project_name_folder_to_path": "أضف اسم مجلد المشروع إلى المسار",
+    "save": "حفظ"
 }

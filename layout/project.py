@@ -4,23 +4,27 @@ from util.CONSTANTS import *
 import util.colors as color
 import util.icons as ic
 import util.installation_status as installation_status
-from util.json_tools_projects import get_pref_project_data,add_project
+from util.json_tools_projects import get_pref_project_data
+from util.util import convert_string_to_list
 import os
+
 def create_layout(project,lang_data):
     main_key = '-selected_app_'
     selected_project_key = f"{main_key}{project['id']}_"
     git_Python_status = installation_status.check_git_python()
 
     project_pref_path_len = 0
+    project_pref_def_args=""
     project_pref_path = os.path.abspath(project['repo_name'])
     project_pref_path_def = os.path.abspath(project['repo_name'])
-
     project_pref = get_pref_project_data(project['id'])
     
     if project_pref:
         project_pref_isSet = project_pref['isSet']
         project_pref_path = project_pref['path']
         project_pref_path_len = len(project_pref_path)
+        project_pref_def_args = project_pref['def_args']
+
 
     installation_status_val = installation_status.check_project(project)
     installation_status_venv = installation_status.check_project_venv(project)
@@ -45,6 +49,9 @@ def create_layout(project,lang_data):
         expand_x=True,
         mouseover_colors=launch_buttons_mouseover_colors
     )
+
+    project_pref_def_args_load = convert_string_to_list(project_pref_def_args)
+ 
     layout = [
         [
             sg.Frame('',[        
@@ -87,51 +94,62 @@ def create_layout(project,lang_data):
                 ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
         ] if project['isIncomplete'] else [], 
         [
-            sg.Frame("",[       
+            sg.Frame("", [
                 [
-                    sg.Frame('',[       
+                    sg.Frame('', [
                         [
-                            sg.Image(ic.args,key=f"{main_key}args_img-",background_color=color.DARK_GRAY,size=(30,30)),
-                            sg.Text(lang_data[LOCAL_ARGUMENTS],key=f"{main_key}args_lbl-",text_color=color.LIGHT_GRAY,font=FONT,background_color=color.DARK_GRAY),
-                        ],  
-                    ],key=f"{main_key}args_header_frame-",expand_x=True,expand_y=False,border_width=0,pad=(10,3),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)            
-                ],  
+                            sg.Image(ic.args, key=f"{main_key}args_img-", background_color=color.DARK_GRAY, size=(30, 30)),
+                            sg.Text(lang_data[LOCAL_ARGUMENTS], key=f"{main_key}args_lbl-", text_color=color.LIGHT_GRAY, font=FONT,
+                                    background_color=color.DARK_GRAY),
+                        ],
+                    ], key=f"{main_key}args_header_frame-", expand_x=True, expand_y=False, border_width=0, pad=(10, 3),
+                        relief=sg.RELIEF_FLAT, element_justification="l", background_color=color.DARK_GRAY)
+                ],
                 [
-                    
-                    sg.Column( 
-                    [
-        
+                    sg.Column(
                         [
-                            sg.Frame('',[       
-                                [
-                                    sg.Button(option["button_text"],disabled=False,size=(25,1),button_color=(color.DIM_GREEN,color.GRAY), key=f"{main_key}args_{project['id']}_{option['button_text']}_btn-", font=FONT, expand_x=True,
-                                            mouseover_colors=(color.GRAY_9900,color.DIM_GREEN)) for option in arg
-                                ]
-                                for arg in project['args']
-                                ],key=f"{main_key}_args_header_frame-",expand_x=True,expand_y=True,border_width=0,relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)            
-                        ]                    
-                    ]
-                    ,key=f"-selected_app_scroll_frame-", element_justification='c',size=(50,70), expand_x=True,expand_y=True,visible=True,scrollable=True,vertical_scroll_only=True,background_color=color.DARK_GRAY)
-                ],                            
-                ],expand_x=True,expand_y=False,border_width=1,pad=(1,1),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
-        ] if project['args'] else [],    
+                            [
+                                sg.Frame('', [
+                                    [
+                                        sg.Button(option["button_text"], disabled=False, size=(25, 1),
+                                                button_color=((color.GRAY, color.DIM_GREEN) if option["button_text"] in project_pref_def_args_load else (color.DIM_BLUE, color.GRAY)),
+                                                key=f"{main_key}args_{project['id']}_{option['button_text']}_btn-", font=FONT, expand_x=True,
+                                                # mouseover_colors=(color.GRAY_9900, color.DIM_GREEN)
+                                                ) 
+                                                for option in arg
+                                    ]
+                                    for arg in project['args']
+                                ], key=f"{main_key}_args_header_frame-", expand_x=True, expand_y=True, border_width=0,
+                                    relief=sg.RELIEF_FLAT, element_justification="l", background_color=color.DARK_GRAY)
+                            ]
+                        ]
+                        , key=f"-selected_app_scroll_frame-", element_justification='c', size=(50, 70), expand_x=True, expand_y=True,
+                        visible=True, scrollable=True, vertical_scroll_only=True, background_color=color.DARK_GRAY)
+                ],
+            ], expand_x=True, expand_y=False, border_width=1, pad=(1, 1), relief=sg.RELIEF_FLAT, element_justification="l",
+            background_color=color.DARK_GRAY)
+        ] if project['args'] else [],
+ 
         [
             sg.Frame(lang_data[LOCAL_CUSTOM],[       
                 [
-                    sg.MLine("",k=f"{main_key}args_{project['id']}_console_ml-",visible=True,text_color=color.DIM_GREEN,border_width=10,sbar_width=20,sbar_trough_color=0,
-                            autoscroll=True, auto_refresh=True,expand_x=True,expand_y=True,font=FONT,no_scrollbar=True,),
+                    sg.MLine(project_pref_def_args,k=f"{main_key}args_{project['id']}_console_ml-",visible=True,text_color=color.DIM_GREEN,border_width=10,sbar_width=20,sbar_trough_color=0,
+                            autoscroll=True, auto_refresh=True,expand_x=True,expand_y=True,font=FONT,no_scrollbar=True),                     
                 ],
                 [
-                sg.Button(
-                        button_text='SAVE',
-                        button_color=(color.DIM_BLUE, color.GRAY),
-                        key=f"{main_key}{project['id']}_project_save_def_args_btn-", 
-                        expand_x=True, 
-                        mouseover_colors=(color.GRAY_9900, color.DIM_BLUE),
-                        # size=(None,2)
-                    ) ,        
-                ]                                               
-                ],key=f"{main_key}args_console_frame-",title_color=color.LIGHT_GRAY,expand_x=True,expand_y=True,border_width=5,pad=(5,0),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.GRAY_1111)
+                            sg.Button(
+                                    button_text=lang_data[LOCAL_SAVE],
+                                    button_color=(color.DIM_BLUE, color.GRAY),
+                                    key=f"{main_key}{project['id']}_project_save_def_args_btn-", 
+                                    expand_x=True, 
+                                    # expand_y=True, 
+                                    font=FONT,
+                                    mouseover_colors=(color.GRAY_9900, color.DIM_BLUE),
+                                    # size=(10,2)
+                                ),    
+                ]
+                                            
+                ],key=f"{main_key}args_console_frame-",title_color=color.LIGHT_GRAY,expand_x=True,expand_y=True,border_width=5,pad=(5,0),relief=sg.RELIEF_FLAT,element_justification="c",background_color=color.GRAY_1111)
         ] if project['args'] else [],
         [
             sg.Frame('',[       
@@ -155,11 +173,7 @@ def create_layout(project,lang_data):
                               enable_events=True,expand_x=True,expand_y=True,
                               font=FONT,
                               text_color=color.GRAY if project_pref and project_pref_isSet else color.LIGHT_GRAY,  
-                              
-    
                               background_color=color.DIM_GREEN if project_pref and project_pref_isSet else color.GRAY,  
-                              
-                              
                               ),
                         sg.FolderBrowse(button_text=lang_data[LOCAL_BROWSE],k=f"{main_key}{project['id']}_project_path_FolderBrowse-",
                             button_color=(color.DIM_BLUE, color.GRAY),

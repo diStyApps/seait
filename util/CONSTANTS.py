@@ -40,7 +40,7 @@ ADD_PROJECT_FOLDER_NAME = "-add_project_folder_name-"
 SAVE_DEFAULT_ARGS= "-save_default_args-"
 SELECT_APP = "-select_app_"
 SELECTED_APP = "-selected_app_"
-
+INIT_DEFAULT_PROJECT_ARGS = "-init_default_project_args-"
 
 USE_PRE_INSTALLED_VERSION_BTN = '-use_pre_installed_version_btn-'
 
@@ -122,22 +122,6 @@ CN_MODELS = [
     "coadapter-sketch-sd15v1.pth",
     "coadapter-style-sd15v1.pth"    
 ]
-project_args = {
-    # 1: ['--autolaunch', '--theme=dark'],
-    1: [],
-    # 2: ['--web'],
-    2: [],
-    3: [],
-    4: [],
-    5: [],
-    6: [],
-    7: [],
-    8: [],
-    9: [],
-    10: [],
-    11: [],
-
-}
 
 # LOCALIZATION
 LOCAL_YES = "Yes"
@@ -189,10 +173,16 @@ LOCAL_SET_FOLDER_PROJECT_NAME = "set_folder_project_name"
 LOCAL_ACTIVATE= "activate"
 LOCAL_ACTIVATED= "activated"
 LOCAL_ACTIVATED= "activated"
+LOCAL_SAVE = "save"
+LOCAL_TEMPORARY_NOT_WORKING_PROPERLY = "Temporary not working properly"
+
+
+
 LOCAL_CHECK_PYTHON_PATH = "check_python_path"
 LOCAL_CHECK_PYTHON_PATH_LBL= "-check_python_path_lbl-"
 #'Add Project Name Folder to Path'
 LOCAL_ADD_PROJECT_NAME_FOLDER_TO_PATH = "add_project_name_folder_to_path"
-
+#Please download the installers version
+LOCAL_DOWNLOAD_THE_IV = "please_download_the_iv"
 #prefs
 PREF_SELECTED_LANG = 'selected_lang'

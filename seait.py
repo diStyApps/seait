@@ -11,6 +11,8 @@ import util.projects_functions as project_funcs
 import util.update_check_temp as update_check
 import util.json_tools as jt
 from util.json_tools_projects import get_pref_project_data,add_project,set_project_active,add_project_def_args
+from util.util import contains_spaces,convert_list_to_string,convert_string_to_list
+
 import util.project_util as project_util
 # import util.system_stats as system_stats
 import util.localizations as localizations
@@ -20,9 +22,8 @@ import layout.about as about_layout
 import layout.requirements as requirements_layout 
 import layout.dialog as dialog_layout
 import layout.projects as projects_layout
-import os
-def contains_spaces(file_path):
-    return ' ' in file_path
+
+
 def main():
     jt.create_preferences_init()
     languages = localizations.get_language_by_codes()
@@ -79,51 +80,41 @@ def main():
     
     #endregion nav
 
-    def default_launcher_buttons(project_args, id_number):
-        try:
-            if id_number in project_args:
-                args = project_args[id_number]
-                for arg in args:
-                    button_id = f"-selected_app_args_{id_number}_{arg}_btn-"
-                    window[button_id].update(button_color=(color.GRAY,color.DIM_GREEN))
-        except TypeError as e:
-            print(e)
 
     def run_project_func(project,method,args=None):
         project_funcs.methods[method](project,args) 
         window.write_event_value(f"-select_app_{project['id']}_btn-","")    
 
-    def set_project_path(window, id_number, input_project_path,triggerevent=True):
+    def set_project_path(window, id_number, input_project_path,trigger_event=True):
         if input_project_path:
             if not contains_spaces(input_project_path):
-                project_pref = get_pref_project_data(id_number)
                 add_project(id_number, input_project_path,False) 
 
-                print("Path has been set.")
-                if triggerevent:
+                # print("Path has been set.")
+                if trigger_event:
                     window.write_event_value(f"-select_app_{id_number}_btn-",'')    
             else:
                 print("Path cannot contain spaces.")
 
-
     requirements_layout.git_event_handler(window,lang_data)
     requirements_layout.python_event_handler(window,lang_data) 
 
+    window.write_event_value("INIT",1)  
+
     while True:
         event, values = window.read()
-        print("event", event, "values", values)
+        # print("event", event, "values", values)
         # print("event", event)
 
         if event == sg.WIN_CLOSED:
             break
-
-        requirements_layout.events(window,event,lang_data)
-        about_layout.events(event)
+        
+        if event == "INIT":
+            # print("INIT",event,values["INIT"]) 
+            pass
 
         if event == SET_LANGUAGE:
             jt.save_preference(PREF_SELECTED_LANG,localizations.get_language_by_native(values[SET_LANGUAGE]))
-            # window_width =300
-
             reopen_window(window)
 
         if event in nav_elements:
@@ -147,29 +138,34 @@ def main():
             
             for element in list(window[PROJECTS_COL_2].Widget.children.values()):
                 element.destroy()
+
+            window.write_event_value(INIT_DEFAULT_PROJECT_ARGS,id_number)  
             window.extend_layout(window[PROJECTS_COL_2],layout)
+
             if project['type'] == "app":
                 try:
                     expand_column_helper(window[f"-selected_app_scroll_frame-"].widget)
                 except KeyError:
                     pass
+
             flatten_ui_elements(window)  
- 
-
             window.visibility_changed()           
-            # if id_number == 1:
-            # default_launcher_buttons(project_args,id_number) 
-            # print('_console_ml',values[f"-selected_app_args_{id_number}_console_ml-"])
-            # set_project_path(window, id_number, input_project_path)
-            window.write_event_value('-test-',id_number)  
+        
+        if event == INIT_DEFAULT_PROJECT_ARGS:
+                # print("init_default_project_args",values[INIT_DEFAULT_PROJECT_ARGS])
+                id_number = values[INIT_DEFAULT_PROJECT_ARGS]
+                # print('_console_ml',values[f"-selected_app_args_{values[INIT_DEFAULT_PROJECT_ARGS]}_console_ml-"])
+                project_pref_def_args = project['def_args']
+                input_project_path = values[f'-selected_app_{id_number}_project_path_in-']
 
-        if event == '-test-':
-            print("test",values['-test-'])
-            id_number = values['-test-']
-            # print('_console_ml',values[f"-selected_app_args_{values['-test-']}_console_ml-"])
-            input_project_path = values[f'-selected_app_{id_number}_project_path_in-']
-            set_project_path(window, id_number, input_project_path,False)
-
+                # print("project_pref_def_args",project_pref_def_args)
+                
+                if not get_pref_project_data(id_number):
+                    set_project_path(window, id_number, input_project_path,False)
+                    add_project_def_args(id_number, convert_list_to_string(project_pref_def_args))
+                    window.write_event_value(f"-select_app_{id_number}_btn-",'')    
+                # else:
+                #     print("project already exists")
 
         if event.startswith(SELECTED_APP) and event.endswith("_btn-"):
                 # print("selected_app_",event)
@@ -203,32 +199,33 @@ def main():
             id_number, method = project_util.get_function_and_project_id(event_value)   
             project = project_util.get_project_by_id(projects_data, id_number)
             if project['type'] == 'app':
-                args_list = values[f"-selected_app_args_{id_number}_console_ml-"]
-                project_util.update_project_args_from_string(id_number, args_list)
+                arguments = convert_string_to_list(values[f"-selected_app_args_{id_number}_console_ml-"])
 
             if dialog_layout.dialog_window(project['title'],method,lang_data):
                 if method == "install":
                     Installing_and_launching_local = localizations.set_language_by_native(values[SET_LANGUAGE])["Installing and launching"]                    
                     window[f"-selected_app_func_{id_number}_{method}_btn-"].update(Installing_and_launching_local,disabled_button_color=(color.DIM_GREEN,color.GRAY),disabled=True)
-                    Thread(target=run_project_func, args=(project,method,project_args[id_number],), daemon=True).start() 
+                    Thread(target=run_project_func, args=(project,method,arguments,), daemon=True).start() 
                 elif method == "launch":
                     Launched_local = localizations.set_language_by_native(values[SET_LANGUAGE])["Launched"]                     
-                    Thread(target=run_project_func, args=(project,method,project_args[id_number],), daemon=True).start() 
+                    Thread(target=run_project_func, args=(project,method,arguments,), daemon=True).start() 
                     window[f"-selected_app_func_{id_number}_{method}_btn-"].update(Launched_local,button_color=(color.GRAY_9900,color.DIM_GREEN),disabled_button_color=(color.GRAY_9900,color.DIM_GREEN),disabled=True)                  
                 else:
                     run_project_func(project,method)
    
         if event == SET_APP_ARGS:
-            # print("args",event,values['-set_app_args-'])
             event_value = values['-set_app_args-']
             id_number = project_util.get_project_id(event_value)
-            args = re.search(r"-selected_app_args_\d+_(.+)_btn-", event_value).group(1)   
-            project_util.update_project_args(id_number,args)
-            # print(project_args)
+            args = re.search(r"-selected_app_args_\d+_(.+)_btn-", event_value).group(1)
+            args_console_multiline = values[f"-selected_app_args_{id_number}_console_ml-"]
+
             if window[event_value].ButtonColor[0] == color.GRAY:
-                window[event_value].update(button_color=(color.DIM_GREEN,color.GRAY))
+                window[event_value].update(button_color=(color.DIM_BLUE, color.GRAY))
+                updated_args = args_console_multiline.replace(args, "").strip()
+                window[f"-selected_app_args_{id_number}_console_ml-"].update(updated_args)
             else:
-                window[event_value].update(button_color=(color.GRAY,color.DIM_GREEN))
+                window[event_value].update(button_color=(color.GRAY, color.DIM_GREEN))
+                window[f"-selected_app_args_{id_number}_console_ml-"].update(f"{args_console_multiline} {args}")
 
         if event == ACTIVATE_PROJECT_PATH:
             id_number = values[ACTIVATE_PROJECT_PATH]
@@ -270,9 +267,10 @@ def main():
         if event == SAVE_DEFAULT_ARGS:
             id_number = values[SAVE_DEFAULT_ARGS]
             args = values[f"-selected_app_args_{id_number}_console_ml-"]
-            print('event',event,"id_number",id_number,"args",args)
+            input_project_path = values[f'-selected_app_{id_number}_project_path_in-']
+            set_project_path(window, id_number, input_project_path,False)
             add_project_def_args(id_number, args)
-
+            window.write_event_value(f"-select_app_{id_number}_btn-",'')    
 
         if event == CHECK_UPDATE_BTN_KEY:
             latest_release = update_check.check_update_available()
@@ -292,18 +290,6 @@ def main():
 
         if event.startswith("refresh_menu_list"):
             window[PROJECTS_COL_1].update(projects_layout.create_layout_list_menu(projects_data))
-            # clear_items_keys(window)        
-            # # fix white flash
-            # project = project_util.get_project_by_id(projects_data, id_number)
-            # for element in list(window[PROJECTS_COL_1].Widget.children.values()):
-            #     element.destroy()
-            # layout = projects_layout.create_layout_list_menu(projects_data)
-            # window.extend_layout(window[PROJECTS_COL_1],layout)
-            # flatten_ui_elements(window)  
-            # window.visibility_changed()
-            pass
-
-
 
 
 if __name__ == '__main__':

@@ -35,7 +35,7 @@ def add_project(project_id, path, isSet):
         existing_project["path"] = path
         existing_project["isSet"] = isSet
     else:
-        new_project = {"project_id": project_id, "path": path, "isSet": isSet}
+        new_project = {"project_id": project_id, "path": path, "isSet": isSet,"def_args": ""}
         projects.append(new_project)
 
     save_project_preferences(project_preferences, file_path)

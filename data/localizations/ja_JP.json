@@ -48,5 +48,6 @@
     "activate": "アクティブ化",
     "activated": "アクティブ化されました",
     "check_python_path": "重要！インストール前に「Python 3.10をPATHに追加する」を確認してください。",
-    "add_project_name_folder_to_path": "プロジェクトフォルダ名をPATHに追加する"
+    "add_project_name_folder_to_path": "プロジェクトフォルダ名をPATHに追加する",
+    "save": "保存"
 }

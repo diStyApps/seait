@@ -48,5 +48,6 @@
     "activate": "激活",
     "activated": "已激活",
     "check_python_path": "重要！在安装前，请确保勾选'将Python 3.10添加到PATH'。",
-    "add_project_name_folder_to_path": "将项目文件夹名称添加到路径中"
+    "add_project_name_folder_to_path": "将项目文件夹名称添加到路径中",
+    "save": "保存"
 }

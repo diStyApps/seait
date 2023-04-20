@@ -72,7 +72,6 @@ def launch(project_data, args=[]):
         install(project_data,args=[])
 
     if installation_status_project:
-        # print(f"{project_data['repo_name']} venv installed")
         command_len = len(launch_path.split())
         cmd_launch = project_data['entry_point']['launch']
         activate_script = f"{venv_path}/Scripts/activate.bat"
@@ -95,10 +94,9 @@ def install(project_data,args=[]):
     create_virtual_environment(project_data)
     venv_path = get_venv_path(project_data)
     install_path = get_entry_point(project_data, 'install') 
-    # print("venv_path",f"{venv_path}/Scripts/python")
 
     command_len = len(install_path.split())
-    cmd_launch = project_data['entry_point']['launch']
+    cmd_launch = project_data['entry_point']['install']
     activate_script = f"{venv_path}/Scripts/activate.bat"
     cmd_command = f'cmd /K "{activate_script} && {cmd_launch} {" ".join(args)}"'
 
@@ -141,12 +139,12 @@ def install_requirements(project_data):
 def install_instructions(project_data):
     project_path = get_project_path(project_data)
     venv_path = get_venv_path(project_data)
-    print(f"installing requirements for {project_data['repo_name']}")
+    print(f"executing install instructions for {project_data['repo_name']}")
 
     for command in project_data["install_instructions"]:
         subprocess.run([f"{venv_path}/Scripts/python"] + command.split(), cwd=project_path)
         # print([f"{venv_path}/Scripts/python"] + command.split(), cwd=project_path)
-        print(f"{project_data['repo_name']} requirements installed")
+        print(f"{project_data['repo_name']} instructions installations completed")
 
 def install_webui_extension(project_data,args=[]):
     print(f"installing {project_data['repo_name']}")

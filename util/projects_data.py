@@ -62,7 +62,17 @@ projects_data = [
                     {
                         "button_text": "--theme=dark",
                     },
-                ],   
+                ],  
+                [
+                    {
+                        "button_text": "--force-enable-xformers",
+                        "key": "force-enable-xformers",
+                    },
+                    {
+                        "button_text": "--xformers",
+                        "key": "xformers",
+                    },
+                ],                 
                 [
                     {
                         "button_text": "--nowebui",
@@ -73,16 +83,7 @@ projects_data = [
                     }                      
                 ],
 
-                [
-                    {
-                        "button_text": "--force-enable-xformers",
-                        "key": "force-enable-xformers",
-                    },
-                    {
-                        "button_text": "--xformers",
-                        "key": "xformers",
-                    },
-                ],                
+                
                 [
                     {
                         "button_text": "--lowvram",
@@ -122,9 +123,11 @@ projects_data = [
                 ]
             ],
             "def_args": [
-                       "--autolaunch",
-                       "--theme=dark",
-            ],               
+                "--autolaunch",
+                "--theme=dark",
+                "--force-enable-xformers",
+                "--xformers"
+               ],               
             "description":[]     
         },
         {
@@ -231,7 +234,7 @@ projects_data = [
             ],               
             "description":['"automatic" is a fork of the Auto1111 web UI, diving into the name chaos with flair. This fork promises to deliver more frequent updates for improved stability, enhanced speed, and a selection of pre-installed extensions.']     
         },   
-       {
+        {
             "id": 11,
             "key": "app_",
             "image_path":b'iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAIAAAC0Ujn1AAACy0lEQVR4nLVVwU7yQBDe3bQEKxBsYgIaA/FC4qUhMWm8wAOQyJ3H8BF8Er34AGDiiQAHPXnApNF4ICTGoFFKsEKAuuz8h/FvcKlY5P/n0Gxndr+Znf1mhgIAIYQQAgAAQCkFAMYYWUaEEHjEWxBCKEIj6FJwkozHY8ZYKBTyNIqHa9v29fU15zwSiZimGQ6Hg/gDgMlkUq1WAUAIEYvF8vk8IYRSSoQQQgjbts/OztrttuM4zWazXC6jHhbKdDoFgFqtdnNzg5pGo3F1dYUmhqFZlmWaZjqdjkajhmFQSl3X/TFk3PD+/r63t4eJzeVyLy8vaPpMuaZptm2Tv4+ZzWZVVQ2Y5d3dXYwDAOr1ejKZ/EwyYn18fFxcXGxubpqmyRhb9kkR5O7u7vX1NZfLURSPfISQTqeTSCQYY0sRxqOsxNov0KvLbExMMqwIPXtX9p1hdTffFrTkRuoHv4d2XXc0GnkQ6GYwGIxGI3x8byfnXAjhC6JI/5xzRVFOT08rlUq5XJ5Op4yx4XBoWdZ4PFZVVVGUTCYTi8WEEIqiHB8fx+Pxo6MjPLgIGtljGEY4HPZCvr29PTk56fV6nHNVVYvFYqlUwjsdHBzgTp9m+WOLaLVa85c9Pz8HAM75guP+ucY2hoUQj8dLpZKu65hiXdcLhUImk8EC6Xa7nU6H+DEqaMk8Pz8/Pj4CwPb29tbWlqcfDoeVSuXw8HBtbU0q4EDQs7MDf5EnqL+8vNQ0LZvNStsCDSrsKkIIzL7Xv/CbSqXe3t7mT8kM+U4kOntKQoimaa7r+gQUENpXYOFcXQkaZTAYrK+vrwTtOE6/3599dlx3u92NjY1fQiNEu92+v7+fvTuun56ednZ2yFxBBnpGhDAMQ/JHKX14eAiFQpFIRGJe0Kg9LKnJCSEsy9rf3ydfm/BnQKu0fM654zi6rvta/8Fs/F/kWzD7/wDSnRnN1GeEDwAAAABJRU5ErkJggg==',
@@ -402,7 +405,7 @@ projects_data = [
                 ],  
                 [        
                     {
-                        "button_text": "--web",
+                        "button_text": "--embeddings",
                         "key": "embeddings",
                     },  
                     {
@@ -413,7 +416,6 @@ projects_data = [
 
             ],
             "def_args": [
-                    "--web",
             ],               
             "description":[]     
                                       
@@ -704,6 +706,8 @@ projects_data = [
                   
                 ],               
             ],
+            "def_args": [
+            ],              
             "description":["""Autonomous GPT runs till task complation uses on openai API, Be careful as it might be costly. Additionally, it requires a PINECONE API KEY."""]     
         },       
         {
@@ -840,6 +844,4 @@ projects_data = [
                             """,
             ]             
         }
- 
-                     
     ]
