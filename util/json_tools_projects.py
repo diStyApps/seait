@@ -86,5 +86,20 @@ def set_project_active(project_id, isSet):
 
     save_project_preferences(project_preferences, file_path)
 
-# add_project(1, "C:\\repos\\-SEAIT",False) 
+def add_project_def_args(project_id, def_args):
+    project_preferences = load_project_preferences(file_path)
+    projects = project_preferences["set_project_paths"][0]["projects"]
+
+    existing_project = None
+    for project in projects:
+        if project["project_id"] == project_id:
+            existing_project = project
+            break
+
+    if existing_project:
+        existing_project["def_args"] = def_args
+        save_project_preferences(project_preferences, file_path)
+    else:
+        print(f"Project with ID {project_id} not found.")
+
 

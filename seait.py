@@ -10,7 +10,7 @@ from util.projects_data import projects_data
 import util.projects_functions as project_funcs
 import util.update_check_temp as update_check
 import util.json_tools as jt
-from util.json_tools_projects import get_pref_project_data,add_project,set_project_active
+from util.json_tools_projects import get_pref_project_data,add_project,set_project_active,add_project_def_args
 import util.project_util as project_util
 # import util.system_stats as system_stats
 import util.localizations as localizations
@@ -93,12 +93,25 @@ def main():
         project_funcs.methods[method](project,args) 
         window.write_event_value(f"-select_app_{project['id']}_btn-","")    
 
+    def set_project_path(window, id_number, input_project_path,triggerevent=True):
+        if input_project_path:
+            if not contains_spaces(input_project_path):
+                project_pref = get_pref_project_data(id_number)
+                add_project(id_number, input_project_path,False) 
+
+                print("Path has been set.")
+                if triggerevent:
+                    window.write_event_value(f"-select_app_{id_number}_btn-",'')    
+            else:
+                print("Path cannot contain spaces.")
+
+
     requirements_layout.git_event_handler(window,lang_data)
     requirements_layout.python_event_handler(window,lang_data) 
 
     while True:
         event, values = window.read()
-        # print("event", event, "values", values)
+        print("event", event, "values", values)
         # print("event", event)
 
         if event == sg.WIN_CLOSED:
@@ -131,6 +144,7 @@ def main():
             # fix white flash
             project = project_util.get_project_by_id(projects_data, id_number)
             layout = project_layout.create_layout(project,lang_data)
+            
             for element in list(window[PROJECTS_COL_2].Widget.children.values()):
                 element.destroy()
             window.extend_layout(window[PROJECTS_COL_2],layout)
@@ -140,11 +154,23 @@ def main():
                 except KeyError:
                     pass
             flatten_ui_elements(window)  
+ 
 
             window.visibility_changed()           
             # if id_number == 1:
             # default_launcher_buttons(project_args,id_number) 
-                    
+            # print('_console_ml',values[f"-selected_app_args_{id_number}_console_ml-"])
+            # set_project_path(window, id_number, input_project_path)
+            window.write_event_value('-test-',id_number)  
+
+        if event == '-test-':
+            print("test",values['-test-'])
+            id_number = values['-test-']
+            # print('_console_ml',values[f"-selected_app_args_{values['-test-']}_console_ml-"])
+            input_project_path = values[f'-selected_app_{id_number}_project_path_in-']
+            set_project_path(window, id_number, input_project_path,False)
+
+
         if event.startswith(SELECTED_APP) and event.endswith("_btn-"):
                 # print("selected_app_",event)
 
@@ -167,6 +193,10 @@ def main():
                 if event.endswith("_project_path_add_folder_name_btn-"):
                     # print("project_add_folder_name",event)
                     window.write_event_value(ADD_PROJECT_FOLDER_NAME,id_number) 
+
+                if event.endswith("_project_save_def_args_btn-"):
+                    # print("project_save_def_args",event)
+                    window.write_event_value(SAVE_DEFAULT_ARGS,id_number)   
 
         if event == RUN_APP_FUNC:
             event_value = values['-run_app_func-']
@@ -235,19 +265,20 @@ def main():
         if event == SET_PROJECT_PATH:
             id_number = values[SET_PROJECT_PATH]
             input_project_path = values[f'-selected_app_{id_number}_project_path_in-']
-            if input_project_path:
-                if not contains_spaces(input_project_path):
-                    project_pref = get_pref_project_data(id_number)
-                    add_project(id_number, input_project_path,False) 
-                    print("Path has been set.")
-                    window.write_event_value(f"-select_app_{id_number}_btn-",'')    
-                else:
-                    print("Path cannot contain spaces.")
+            set_project_path(window, id_number, input_project_path)
+
+        if event == SAVE_DEFAULT_ARGS:
+            id_number = values[SAVE_DEFAULT_ARGS]
+            args = values[f"-selected_app_args_{id_number}_console_ml-"]
+            print('event',event,"id_number",id_number,"args",args)
+            add_project_def_args(id_number, args)
+
 
         if event == CHECK_UPDATE_BTN_KEY:
-            if not update_check.check_update_available():
+            latest_release = update_check.check_update_available()
+            if latest_release:
                 update_available = localizations.set_language_by_native(values[SET_LANGUAGE])[LOCAL_UPDATE_AVAILABLE]
-                update_available_lbl_elem.update(f"{update_available}: {update_check.latest_release}",button_color=(color.GRAY_9900,color.DARK_GREEN),disabled=False)
+                update_available_lbl_elem.update(f"{update_available}: {latest_release}",button_color=(color.GRAY_9900,color.DARK_GREEN),disabled=False)
             else:
                 no_update_available = localizations.set_language_by_native(values[SET_LANGUAGE])[LOCAL_NO_UPDATE_AVAILABLE]
                 update_available_lbl_elem.update(f"{no_update_available}: {VERSION}")
@@ -271,6 +302,9 @@ def main():
             # flatten_ui_elements(window)  
             # window.visibility_changed()
             pass
+
+
+
 
 if __name__ == '__main__':
     sg.theme('Dark Gray 15')

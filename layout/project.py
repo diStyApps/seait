@@ -109,7 +109,7 @@ def create_layout(project,lang_data):
                                 ]
                                 for arg in project['args']
                                 ],key=f"{main_key}_args_header_frame-",expand_x=True,expand_y=True,border_width=0,relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)            
-                        ]                     
+                        ]                    
                     ]
                     ,key=f"-selected_app_scroll_frame-", element_justification='c',size=(50,70), expand_x=True,expand_y=True,visible=True,scrollable=True,vertical_scroll_only=True,background_color=color.DARK_GRAY)
                 ],                            
@@ -120,7 +120,17 @@ def create_layout(project,lang_data):
                 [
                     sg.MLine("",k=f"{main_key}args_{project['id']}_console_ml-",visible=True,text_color=color.DIM_GREEN,border_width=10,sbar_width=20,sbar_trough_color=0,
                             autoscroll=True, auto_refresh=True,expand_x=True,expand_y=True,font=FONT,no_scrollbar=True,),
-                ]                              
+                ],
+                [
+                sg.Button(
+                        button_text='SAVE',
+                        button_color=(color.DIM_BLUE, color.GRAY),
+                        key=f"{main_key}{project['id']}_project_save_def_args_btn-", 
+                        expand_x=True, 
+                        mouseover_colors=(color.GRAY_9900, color.DIM_BLUE),
+                        # size=(None,2)
+                    ) ,        
+                ]                                               
                 ],key=f"{main_key}args_console_frame-",title_color=color.LIGHT_GRAY,expand_x=True,expand_y=True,border_width=5,pad=(5,0),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.GRAY_1111)
         ] if project['args'] else [],
         [

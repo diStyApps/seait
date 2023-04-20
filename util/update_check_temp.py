@@ -12,13 +12,9 @@ def check_update_available():
         h2_sr_only = match.group(1)
         version_pattern = re.compile(r"\d+\.\d+(\.\d+)?")
         latest_release = version_pattern.search(h2_sr_only).group()
-
         if latest_release != VERSION:
-            # return f"Update available: {latest_release}"
-            return True
+            return latest_release
         else:
-            return False
-            # return f"No update available - latest version: {current_version}"
-        
-    # else:
-    #     return "Could not find version information"
+            return False        
+    else:
+        return "Could not find version information"

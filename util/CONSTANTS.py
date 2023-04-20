@@ -1,4 +1,4 @@
-VERSION = '0.0.9'
+VERSION = '0.1.0'
 APP_TITLE = f"Super Easy AI Installer Tool - Ver {VERSION}"
 
 
@@ -37,7 +37,7 @@ RUN_APP_FUNC = "-run_app_func-"
 SET_PROJECT_PATH = "-set_project_path-"
 ACTIVATE_PROJECT_PATH = "-activate_project_path-"
 ADD_PROJECT_FOLDER_NAME = "-add_project_folder_name-"
-
+SAVE_DEFAULT_ARGS= "-save_default_args-"
 SELECT_APP = "-select_app_"
 SELECTED_APP = "-selected_app_"
 
