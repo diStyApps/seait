@@ -42,6 +42,7 @@ def main():
     ]]
 
     window = sg.Window(APP_TITLE,layout,finalize=True,size=(window_width,799),ttk_theme='alt', resizable=True,enable_close_attempted_event=False,background_color=color.GRAY_9900,icon=ic.icon3)
+    
     #region nav
     projects_layout_col_1:sg.Column = window[PROJECTS_COL_1]
     projects_layout_col_2:sg.Column = window[PROJECTS_COL_2]
@@ -80,7 +81,6 @@ def main():
     
     #endregion nav
 
-
     def run_project_func(project,method,args=None):
         project_funcs.methods[method](project,args) 
         window.write_event_value(f"-select_app_{project['id']}_btn-","")    
@@ -99,17 +99,12 @@ def main():
     requirements_layout.git_event_handler(window,lang_data)
     requirements_layout.python_event_handler(window,lang_data) 
 
-    window.write_event_value("INIT",1)  
-
     while True:
         event, values = window.read()
-        # print("event", event, "values", values)
-        # print("event", event)
 
         if event == sg.WIN_CLOSED:
             break
         
-        if event == "INIT":
             # print("INIT",event,values["INIT"]) 
             pass
 
@@ -152,46 +147,33 @@ def main():
             window.visibility_changed()           
         
         if event == INIT_DEFAULT_PROJECT_ARGS:
-                # print("init_default_project_args",values[INIT_DEFAULT_PROJECT_ARGS])
                 id_number = values[INIT_DEFAULT_PROJECT_ARGS]
-                # print('_console_ml',values[f"-selected_app_args_{values[INIT_DEFAULT_PROJECT_ARGS]}_console_ml-"])
                 project_pref_def_args = project['def_args']
                 input_project_path = values[f'-selected_app_{id_number}_project_path_in-']
-
-                # print("project_pref_def_args",project_pref_def_args)
                 
                 if not get_pref_project_data(id_number):
                     set_project_path(window, id_number, input_project_path,False)
                     add_project_def_args(id_number, convert_list_to_string(project_pref_def_args))
                     window.write_event_value(f"-select_app_{id_number}_btn-",'')    
-                # else:
-                #     print("project already exists")
 
         if event.startswith(SELECTED_APP) and event.endswith("_btn-"):
-                # print("selected_app_",event)
 
                 if event.startswith("-selected_app_args"):
-                    # print("args",event)
                     window.write_event_value(SET_APP_ARGS,event)    
 
                 if event.startswith("-selected_app_func"):
-                    # print("func",event)
                     window.write_event_value(RUN_APP_FUNC,event)    
 
                 if event.endswith("_project_path_set_btn-"):
-                    # print("project_set",event)
                     window.write_event_value(SET_PROJECT_PATH,id_number)    
 
                 if event.endswith("_project_path_activate_btn-"):
-                    # print("project_activate",event)
                     window.write_event_value(ACTIVATE_PROJECT_PATH,id_number)  
 
                 if event.endswith("_project_path_add_folder_name_btn-"):
-                    # print("project_add_folder_name",event)
                     window.write_event_value(ADD_PROJECT_FOLDER_NAME,id_number) 
 
                 if event.endswith("_project_save_def_args_btn-"):
-                    # print("project_save_def_args",event)
                     window.write_event_value(SAVE_DEFAULT_ARGS,id_number)   
 
         if event == RUN_APP_FUNC:
@@ -231,21 +213,14 @@ def main():
             id_number = values[ACTIVATE_PROJECT_PATH]
             input_project_path = values[f'-selected_app_{id_number}_project_path_in-']
             if input_project_path:
-                # print("project",input_project_path)
-                # print(get_pref_project_data(id_number))
                 project_pref = get_pref_project_data(id_number)
                 if project_pref:
                     project_pref_isSet = project_pref['isSet']
                     if project_pref_isSet:
                         set_project_active(id_number, False)
-                        # add_project(id_number, input_project_path,False) 
-
                     else:
                         set_project_active(id_number, True)
-                        # add_project(id_number, input_project_path,True) 
-
             window.write_event_value(f"-select_app_{id_number}_btn-",'')    
-            # window.write_event_value(f"refresh_menu_list",'')    
 
         if event == ADD_PROJECT_FOLDER_NAME:
             id_number = values[ADD_PROJECT_FOLDER_NAME]
@@ -255,7 +230,6 @@ def main():
 
             if not input_project_path.endswith(project_name):
                 window[f'-selected_app_{id_number}_project_path_in-'].update(f"{input_project_path}/{project_name}")
-                # print("project",input_project_path,project_name)
             else:
                 print("Can only add project folder to path if it is not already in the path, you can add it manually if you want to.")
 
@@ -287,10 +261,6 @@ def main():
         if event.startswith("-selected_app_") and event.endswith("_github_btn-"):
             id_number = project_util.get_project_id(event)
             webbrowser.open(project_util.get_project_by_id(projects_data, id_number)['github_url']) 
-
-        if event.startswith("refresh_menu_list"):
-            window[PROJECTS_COL_1].update(projects_layout.create_layout_list_menu(projects_data))
-
 
 if __name__ == '__main__':
     sg.theme('Dark Gray 15')

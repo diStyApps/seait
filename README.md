@@ -60,29 +60,27 @@ The tool is designed to provide an easy-to-use solution for accessing and instal
 But remains a great solution for users with minimal technical knowledge or expertise. Fixes underway.
 
 
-### Update 0.0.9
+### Update [0.1.0]
 
+Added
 
+- Argument Saving: Users can now save their preferred arguments.
+- xformers Arguments Default: The xformers argument is now set to "automatic 1111 webui" by default. it will install xformers by default unless unchecked.
+- Project Stable Diffusion web UI-UX (A1111 fork): Stable Diffusion web UI-UX project. Beautiful user interface and a more intuitive making it easier to navigate and interact with the project.
 
-Added Projects:
+Fixed
 
-"automatic" is a fork of the Auto1111 web UI, diving into the name chaos with flair.
+- InvokeAI Launch Issue: Previously, there was an issue causing InvokeAI to not launch correctly.
 
- This fork promises to deliver more frequent updates for improved stability, enhanced speed, and a selection of pre-installed extensions.
-
-https://github.com/vladmandic/automatic
-
-A free and open-source inpainting tool powered by SOTA AI model.
-
-https://github.com/Sanster/lama-cleaner
+- Update Checker Bug: A problem with the update checker resulted in incorrect update notifications. 
 
 
 
 
-Spread the word; don't only keep it to yourself.
+### Spread the word; don't only keep it to yourself.
 
-<img src="media/preview/0.0.9/1_0.0.9.jpg">
-<img src="media/preview/0.0.8/2_0.0.8.jpg">
+<img src="media/preview/0.1.0/1_0.1.0.jpg">
+<img src="media/preview/0.1.0/2_0.1.0.jpg">
 <img src="media/preview/0.0.7/2_0.0.7.jpg">
 <img src="media/preview/0.0.1/1_0.0.1.jpg">
 
@@ -99,6 +97,9 @@ Spread the word; don't only keep it to yourself.
 ### For Windows 10+ and Nvidia GPU-based cards
 [Releases](https://github.com/diStyApps/seait/releases)
 
+[CIVITAI](https://civitai.com/models/27574/super-easy-ai-installer-tool)
+
+
 $${\color{red}Note}$$
 ### False Positive Virustotal
 
@@ -114,16 +115,16 @@ In the future ill try maybe nukita or something.
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] Multi-language support
-- [x] More AI-related repos
-- [x] Set custom project path
-- [x] Custom arguments
-- [ ] Pre installed auto1111 version
-- [ ] App updater 
-- [ ] Remembering arguments
-- [ ] Maybe arguments profiles
+- [x] Support for multiple languages
+- [x] Adding more projects
+- [x] Customizable project directory
+- [x] User-defined arguments
+- [x] Saving argument configurations
+- [ ] In-app update feature
+- [ ] Potential argument profile management
 - [ ] Better event handling
-- [ ] Fully standalone version no python or git needed
+- [ ] Pre-installed auto1111 version
+- [ ] Fully independent version without Python or Git dependencies
 
 See the [open issues](https://github.com/diStyApps/seait/issues) for a full list of proposed features (and known issues).
 

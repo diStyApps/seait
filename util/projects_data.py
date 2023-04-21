@@ -131,10 +131,141 @@ projects_data = [
             "description":[]     
         },
         {
+            "id": 12,
+            "key": "app_",
+            "image_path":b'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',
+            "title": "Stable Diffusion web UI-UX - A1111 fork",
+            "repo_name": "stable-diffusion-webui-ux",
+            "github_url": "https://github.com/anapnoe/stable-diffusion-webui-ux",
+            "git_clone_url":"https://github.com/anapnoe/stable-diffusion-webui-ux.git",
+            "installed_version": "-",
+            "available_version": "-",
+            "installed": True,
+            "visible":True,
+            "status": 1,
+            "isIncomplete": False,
+            "type": "app",
+            "install_requirements":False,
+            "install_cuda":False,
+            "install_instructions_available":False,
+            "install_instructions": [
+            ],            
+            "entry_point": 
+                {
+                    "install":"launch.py",
+                    "launch":"launch.py",
+                },  
+            "buttons": [
+                {
+                    "button_text": "Update",
+                    "key": "update",
+                },
+                {
+                    "button_text": "Delete venv",
+                    "key": "delete_venv",
+                },
+                {
+                    "button_text": "Create venv",
+                    "key": "create_venv",
+                },                        
+                {
+                    "button_text": "Uninstall",
+                    "key": "uninstall",
+                },                                               
+            ],
+            "launch_buttons": [
+                {
+                    "button_text": "Launch",
+                    "key": "launch",
+                },           
+                {
+                    "button_text": "Install",
+                    "key": "install",
+                },                                               
+            ],            
+            "args": [
+                [
+                    {
+                        "button_text": "--autolaunch",
+                        "key": "autolaunch",
+                    },  
+
+                    {
+                        "button_text": "--theme=dark",
+                    },
+                ],  
+                [
+                    {
+                        "button_text": "--force-enable-xformers",
+                        "key": "force-enable-xformers",
+                    },
+                    {
+                        "button_text": "--xformers",
+                        "key": "xformers",
+                    },
+                ],                 
+                [
+                    {
+                        "button_text": "--nowebui",
+                        "key": "nowebui",
+                    },    
+                    {
+                        "button_text": "--no-half",
+                    }                      
+                ],
+
+                
+                [
+                    {
+                        "button_text": "--lowvram",
+                        "key": "lowvram",
+                    },
+                    {
+                        "button_text": "--medvram",
+                        "key": "medvram",
+                    },
+                    {
+                        "button_text": "--lowram",
+                        "key": "lowram",
+                    },
+                ],
+                [
+                    {
+                        "button_text": "--share",
+                        "key": "share",
+                    },
+                    {
+                        "button_text": "--listen",
+                        "key": "listen",
+                    },
+
+                    {
+                        "button_text": "--api",
+                        "key": "api",
+                    },                    
+                ],            
+                [
+                    {
+                        "button_text": "--enable-insecure-extension-access",
+                    },
+                    {
+                        "button_text": "--skip-version-check",
+                    },                    
+                ]
+            ],
+            "def_args": [
+                "--autolaunch",
+                "--theme=dark",
+                "--force-enable-xformers",
+                "--xformers"
+               ],               
+            "description":['One more fork of Automatic1111 web UI has a beautiful user interface and many additional features. It appears to be well-maintained.']     
+        },         
+        {
             "id": 10,
             "key": "app_",
             "image_path": b'iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAIAAAC0Ujn1AAAEOklEQVR4nMWWTWxUVRSAv3Pf/LXToZ1Sph2KpcW2/AoS/5A0ECCgARNjoibERGWjBheoIJi4MZoQo8REjTs2mhCJiYmJC12oicREN8QEgjYi/rVQY8G2U9qZ93PvcTEztFM6QCTGu3iL9+79znfPO/e9A//ZkOvOMIJUZ6kCKKDozUa+fuj6a6/9TGHZYm7vISjhKT9dIlJGL+EcheK/RZd9F7fy4YsM9CPNMMknX3Nygu9PcWGEc5colCrh5x2xemjPEFme3MrAbRw5Rhjx0BoGOvj2N3pynB+io4FC6VrWpp6ydWQaeGorEpJP8fJH7D9OWzPLk2TiLMqQdqRjaP2Nz4/2DKo8vomudsIRHruTdZ18/iODg+zqwk7RlwNLvu6e66AFrCMZ57ntaAHrI8oLG1Hl8Fe0L6DLI5skm6Y5IiV1cz0Puqz86N305okmSES4CR5eTlczx89wfoideWyRvjawLJaKzQ2hneIZDmxDLyMB4hNN0xjj+fWEliPf0dPCIsglaUrTqiTqiM9FewanPLCWtV3YCbwA9fFCtMATfSxMcfQHxi5yXxvWp7cVUfJ1xOeiy0f54FYogo/6SIAJiIpkEzy7nMsh751mdZaMsiROKkkOvPmquwZdVt7Sz8Ye7DgmRALwwccE6BTPdJOO8fYgxUm2tOAClqXxlA4zj3gNuqz80mYIcP4MlwATYKfJJ9mzhIs+75/lnmaSSrdHzCMP5irxGXS5MO66he292HG8CK1yy1cJ0CL7OokLr5/D+WzIYAKWxklA7qqMz7JWFA4OIBZXAh+ZxSXAhNgivQkeWcjvJT4eYvMCBHodRug0c78nFbQRnLIqx4P9uAm8aIarQQVdjqE+B9oQeG2YWMi6RhKOTkMjLKwVr6BFUNi/gbhgSzNcCTCzMuMFuCLr49yf5nSRL0fZlsYa+gWFrtr3aCrKju4Wdq/ATeCFFTsJGZ/ijTOYqCoeVDZxKAPwyihpS1+KJmgXMkKLzHywzBXlfXfQEMMWkQACrA+OL0Y4NMjPYxBhq+K2xCYj98bkmxInC7LDeAGsMCh0zxI3ZeX2NHtWooWKcrmQKfLuLwBv/YHMFg9Fpr1DCvBqgdbL2hlJ1tAqZIVMVdwYQWHvWpqTRNOVWo58jOPECCfG8IQPRhkax4twPoRipj1XsDttfBXm01DPhmaHS/purriJHAsSPL0SN4mEaDWbEvDmrwAxmHK88xcS4gKh6MmktS4WJ3WQBoXD0Elj1iZzhiZoE1Kg5VzvXU17E6ZILMKEmIC449Qon/2NgVAROFrgzymJlzwpOLHxOClI7Kb5VmLHiC7g7bJZVVnjEROWXTn3q1poiqMWUVDUYeB8ieGg5hQsNdKiqGq5N1HEYIaxF7E9eB3EhiUw6BgoTN54m/Iv+hEp1/XVK1VxtXfm/Y1qNa1Czfyb7a3+t/EP2bDTpMDStYIAAAAASUVORK5CYII=',
-            "title": "automatic - Auto1111 webui fork",
+            "title": "automatic - A1111 fork",
             "repo_name": "automatic",
             "github_url": "https://github.com/vladmandic/automatic",
             "git_clone_url":"https://github.com/vladmandic/automatic.git",
@@ -233,7 +364,8 @@ projects_data = [
                        "--theme=dark",
             ],               
             "description":['"automatic" is a fork of the Auto1111 web UI, diving into the name chaos with flair. This fork promises to deliver more frequent updates for improved stability, enhanced speed, and a selection of pre-installed extensions.']     
-        },   
+        },  
+        
         {
             "id": 11,
             "key": "app_",
@@ -843,5 +975,6 @@ projects_data = [
             Got CUDA error on a 10GB GPU, maybe it work for you.
                             """,
             ]             
-        }
+        },
+        
     ]
