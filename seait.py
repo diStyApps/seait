@@ -42,7 +42,6 @@ def main():
                 # sg.Column(system_stats_layout, key=SYSTEM_INFO_COL, element_justification='c', expand_x=True,expand_y=True,visible=False),
             ],        
     ]]
-
     window = sg.Window(APP_TITLE,layout,finalize=True,size=(window_width,849),ttk_theme='alt', resizable=True,enable_close_attempted_event=False,background_color=color.GRAY_9900,icon=ic.icon3)
 
     #region nav
@@ -107,18 +106,15 @@ def main():
     requirements_layout.git_event_handler(window,lang_data)
     requirements_layout.python_event_handler(window,lang_data) 
 
-    # image_carousel.start(window,4)
-    # image_carousel.stop_carousel(window)
+    if jt.load_preference('show_creations_carousel') or jt.load_preference('show_creations_carousel')==None:
+        image_carousel.start(window,5)
 
     while True:
         event, values = window.read()
 
         if event == sg.WIN_CLOSED:
             break
-        
-            # print("INIT",event,values["INIT"]) 
-            pass
-
+  
         if event == SET_LANGUAGE:
             jt.save_preference(PREF_SELECTED_LANG,localizations.get_language_by_native(values[SET_LANGUAGE]))
             reopen_window(window)
@@ -127,7 +123,8 @@ def main():
             navigation_layout.handle_tab_event(event, nav_elements, nav_btn_elements, nav_active_color, nav_inactive_color)
    
         if event.startswith(SELECT_APP) and event.endswith("_btn-"):
-            # image_carousel.stop_carousel(window)
+            if jt.load_preference('show_creations_carousel') or jt.load_preference('show_creations_carousel') == None:            
+                image_carousel.stop_carousel(window)
 
             id_number = project_util.get_project_id(event)
             # print("select_app_",event)
@@ -283,8 +280,7 @@ def main():
         
         about_layout.events(event)
         image_carousel.buttons(window,event)
-        settings_layout.events(event)
-
+        settings_layout.events(event,values)
 
         
 if __name__ == '__main__':

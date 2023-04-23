@@ -7,6 +7,7 @@ from util.dependency_check import check_git, detect_python
 import subprocess
 import time
 import layout.image_carousel as image_carousel
+import util.json_tools as jt
 
 python = "Python"
 git = "Git"
@@ -79,8 +80,10 @@ def create_layout(lang_data):
                 ],expand_x=True,expand_y=False,visible=False,k=LOCAL_CHECK_PYTHON_PATH_LBL,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)        
             ],
             [
-                # image_carousel.create_layout(lang_data),
-            ],                                       
+                image_carousel.create_layout(lang_data),
+            ] 
+            if jt.load_preference('show_creations_carousel') or jt.load_preference('show_creations_carousel')==None else []
+
         ]
     return layout
 

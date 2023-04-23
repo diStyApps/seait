@@ -34,6 +34,7 @@ def read_json_file_full_path(filename_path):
     return x
 
 def save_preference(preference_name,preference_value):
+    # print('save_preference',preference_name,preference_value)
     try:
         file = read_json_file(PREFERENCES_FILE_NAME)
         file[preference_name]=preference_value
@@ -78,7 +79,8 @@ def load_preference(preference_key):
         preference_value=preference[preference_key]
         return preference_value
     except KeyError as e:
-        print('setup','preference not set yet',preference_key)  
+        # print('setup','preference not set yet',preference_key)  
+        pass
 
 # def save_preference(values,preference_key):
 #     preference_value = values[f'-{preference_key}-']
