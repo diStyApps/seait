@@ -1,8 +1,9 @@
-
 dist/
 build/
 tests/
 output/
+Python3106/
+venv/
 *.exe
 __pycache__/
 util\__pycache__/
@@ -12,3 +13,4 @@ preferences.json
 util/projects_preferences.json
 projects_preferences.json
 projects_preferences.json_
+.gitignore
