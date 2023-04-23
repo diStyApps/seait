@@ -59,28 +59,24 @@ The tool is designed to provide an easy-to-use solution for accessing and instal
 "Super Easy AI Installer Tool" is currently in early development phase and may have a few bugs. 
 But remains a great solution for users with minimal technical knowledge or expertise. Fixes underway.
 
+### Tested on Windows 10+ and Nvidia GPU-based cards
 
-### Update [0.1.0]
+### Update [0.1.1] 
 
 Added
 
-- Argument Saving: Users can now save their preferred arguments.
-- xformers Arguments Default: The xformers argument is now set to "automatic 1111 webui" by default. it will install xformers by default unless unchecked.
-- Project Stable Diffusion web UI-UX (A1111 fork): Stable Diffusion web UI-UX project. Beautiful user interface and a more intuitive making it easier to navigate and interact with the project.
+- Your Creation some social fun.
+- A Kandinsky web user interface for https://github.com/ai-forever/Kandinsky-2, requires more than a 8GB VRAM GPU.
 
-Fixed
+Changed
 
-- InvokeAI Launch Issue: Previously, there was an issue causing InvokeAI to not launch correctly.
-
-- Update Checker Bug: A problem with the update checker resulted in incorrect update notifications. 
-
-
-
+- Python detection improved.
+- Minor bug fixes.
 
 ### Spread the word; don't only keep it to yourself.
 
-<img src="media/preview/0.1.0/1_0.1.0.jpg">
-<img src="media/preview/0.1.0/2_0.1.0.jpg">
+<img src="media/preview/0.1.1/1_0.1.1.jpg">
+<img src="media/preview/0.1.1/2_0.1.1.jpg">
 <img src="media/preview/0.0.7/2_0.0.7.jpg">
 <img src="media/preview/0.0.1/1_0.0.1.jpg">
 
