@@ -22,7 +22,8 @@ import layout.about as about_layout
 import layout.requirements as requirements_layout 
 import layout.dialog as dialog_layout
 import layout.projects as projects_layout
-
+import layout.settings as settings_layout
+import layout.image_carousel as image_carousel
 
 def main():
     jt.create_preferences_init()
@@ -31,28 +32,31 @@ def main():
     window_width = 1250
     layout = [[ 
             [
-                navigation_layout.create_layout(lang_data,languages)
+                navigation_layout.create_layout(lang_data)
             ],
             [
                 sg.Column(projects_layout.create_layout_list_menu(projects_data), key=PROJECTS_COL_1, element_justification='l', expand_x=True,expand_y=True,visible=True),
                 sg.Column(projects_layout.create_project_layout(lang_data), key=PROJECTS_COL_2, element_justification='r', expand_x=True,expand_y=True,visible=True),
                 sg.Column(about_layout.create_layout(lang_data), key=ABOUT_COL, element_justification='c', expand_x=True,expand_y=True,visible=False),
+                sg.Column(settings_layout.create_layout(lang_data,languages), key=SETTINGS_COL, element_justification='c', expand_x=True,expand_y=True,visible=False),
                 # sg.Column(system_stats_layout, key=SYSTEM_INFO_COL, element_justification='c', expand_x=True,expand_y=True,visible=False),
             ],        
     ]]
 
-    window = sg.Window(APP_TITLE,layout,finalize=True,size=(window_width,799),ttk_theme='alt', resizable=True,enable_close_attempted_event=False,background_color=color.GRAY_9900,icon=ic.icon3)
-    
+    window = sg.Window(APP_TITLE,layout,finalize=True,size=(window_width,849),ttk_theme='alt', resizable=True,enable_close_attempted_event=False,background_color=color.GRAY_9900,icon=ic.icon3)
+
     #region nav
     projects_layout_col_1:sg.Column = window[PROJECTS_COL_1]
     projects_layout_col_2:sg.Column = window[PROJECTS_COL_2]
     about_layout_col:sg.Column = window[ABOUT_COL]
     # system_stats_layout_col:sg.Column = window[SYSTEM_INFO_COL]
+    #SETTINGS_COL
+    settings_layout_col:sg.Column = window[SETTINGS_COL]
 
     projects_tab_btn_elem:sg.Button = window[PROJECTS_TAB_BTN]
     about_tab_btn_elem:sg.Button = window[ABOUT_TAB_BTN]
     # system_stats_tab_btn_elem:sg.Button = window[SYSTEM_STATS_TAB_BTN]
-    # settings_tab_btn_elem:sg.Button = window[SETTINGS_TAB_BTN]
+    settings_tab_btn_elem:sg.Button = window[SETTINGS_TAB_BTN]
 
     update_available_lbl_elem:sg.Text = window[UPDATE_AVAILABLE_LBL_KEY]
 
@@ -60,12 +64,16 @@ def main():
         PROJECTS_TAB_BTN: [projects_layout_col_1,projects_layout_col_2],
         ABOUT_TAB_BTN: [about_layout_col],
         # SYSTEM_STATS_TAB_BTN: [system_stats_layout_col]
+        SETTINGS_TAB_BTN: [settings_layout_col]
+
     }
 
     nav_btn_elements = {
         PROJECTS_TAB_BTN: projects_tab_btn_elem,
         ABOUT_TAB_BTN: about_tab_btn_elem,
         # SYSTEM_STATS_TAB_BTN: system_stats_tab_btn_elem
+        SETTINGS_TAB_BTN: settings_tab_btn_elem,
+
     }
 
     nav_active_color = (color.DARK_GRAY, color.DIM_BLUE)
@@ -77,7 +85,7 @@ def main():
     window[PROJECTS_LIST_MENU].contents_changed()  
 
     flatten_ui_elements(window)
-    window.size = (window_width,800)
+    window.size = (window_width,850)
     
     #endregion nav
 
@@ -99,6 +107,9 @@ def main():
     requirements_layout.git_event_handler(window,lang_data)
     requirements_layout.python_event_handler(window,lang_data) 
 
+    # image_carousel.start(window,4)
+    # image_carousel.stop_carousel(window)
+
     while True:
         event, values = window.read()
 
@@ -116,6 +127,8 @@ def main():
             navigation_layout.handle_tab_event(event, nav_elements, nav_btn_elements, nav_active_color, nav_inactive_color)
    
         if event.startswith(SELECT_APP) and event.endswith("_btn-"):
+            # image_carousel.stop_carousel(window)
+
             id_number = project_util.get_project_id(event)
             # print("select_app_",event)
             #project_menu_item_highlight
@@ -138,10 +151,13 @@ def main():
             window.extend_layout(window[PROJECTS_COL_2],layout)
 
             if project['type'] == "app":
-                try:
-                    expand_column_helper(window[f"-selected_app_scroll_frame-"].widget)
-                except KeyError:
-                    pass
+                if project['args']:
+                    try:
+                        expand_column_helper(window[f"-selected_app_scroll_frame-"].widget)
+                    except KeyError:
+                        pass
+                    except AttributeError:
+                        pass
 
             flatten_ui_elements(window)  
             window.visibility_changed()           
@@ -180,8 +196,11 @@ def main():
             event_value = values['-run_app_func-']
             id_number, method = project_util.get_function_and_project_id(event_value)   
             project = project_util.get_project_by_id(projects_data, id_number)
+            arguments = ""
+
             if project['type'] == 'app':
-                arguments = convert_string_to_list(values[f"-selected_app_args_{id_number}_console_ml-"])
+                if project['args']:
+                    arguments = convert_string_to_list(values[f"-selected_app_args_{id_number}_console_ml-"])
 
             if dialog_layout.dialog_window(project['title'],method,lang_data):
                 if method == "install":
@@ -261,7 +280,13 @@ def main():
         if event.startswith("-selected_app_") and event.endswith("_github_btn-"):
             id_number = project_util.get_project_id(event)
             webbrowser.open(project_util.get_project_by_id(projects_data, id_number)['github_url']) 
+        
+        about_layout.events(event)
+        image_carousel.buttons(window,event)
+        settings_layout.events(event)
 
+
+        
 if __name__ == '__main__':
     sg.theme('Dark Gray 15')
 

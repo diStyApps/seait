@@ -1,5 +1,5 @@
 import os
-from util.dependency_check import check_git,check_python
+from util.dependency_check import check_git,detect_python
 from util.util import is_folder_exist_check
 from util.json_tools_projects import get_pref_project_data
 # import requests
@@ -63,7 +63,7 @@ def get_last_commit_hash_local(app_info):
             return None  
 
 def check_git_python():
-    if check_python() and check_git():
+    if detect_python() and check_git():
         return True  
     else:
         return False            

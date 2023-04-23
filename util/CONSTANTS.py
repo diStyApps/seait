@@ -1,6 +1,7 @@
-VERSION = '0.1.0'
+VERSION = '0.1.1'
 APP_TITLE = f"Super Easy AI Installer Tool - Ver {VERSION}"
 
+FONT_S = 'Arial 11'
 
 FONT = 'Arial 12'
 FONT_H1 = 'Arial 14'
@@ -15,6 +16,7 @@ PROJECTS_COL_2 = '-projects_col_2-'
 ABOUT_COL = '-about_col-'
 SYSTEM_INFO_COL = '-system_stats_col-'
 
+SETTINGS_COL = '-settings_col-'
 #layout
 PROJECTS_LIST_MENU = '-projects_list_menu-'
 PROJECTS_COL_PLACEHOLDER = '-projects_col_placeholder-'
@@ -127,6 +129,7 @@ CN_MODELS = [
 LOCAL_YES = "Yes"
 LOCAL_NO = "No"
 LOCAL_LANG = "lang"
+LOCAL_LANG_ID = "id"
 LOCAL_NATIVE = "native"
 LOCAL_PROJECTS = "Projects"
 LOCAL_SYSTEM_MONITOR = "System Monitor"

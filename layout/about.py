@@ -24,7 +24,7 @@ def create_layout(lang_data):
                             ],                            
                             [repos.buttons_layout()],    
                             [
-                                sg.Text("Progress is impossible without change, and those who cannot change their minds cannot change anything.",
+                                sg.Text('"Progress is impossible without change, and those who cannot change their minds cannot change anything." – George Bernard Shaw.',
                                         font=FONT,background_color=color.DARK_GRAY,text_color=color.GRAY),
                             ],    
                         ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="c",background_color=color.DARK_GRAY)

@@ -123,7 +123,7 @@ def install_cuda(project_data):
     project_path = get_project_path(project_data)
     venv_path = get_venv_path(project_data)
     print(f"installing cuda")
-    cmd = f"{venv_path}/Scripts/python -m pip install torch==1.13.1 torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117 xformers"
+    cmd = f"{venv_path}/Scripts/python -m pip install torch==1.13.1 torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117"
     subprocess.run(cmd, shell=True, cwd=project_path)
     print(f"cuda installed")
 
@@ -139,12 +139,11 @@ def install_requirements(project_data):
 def install_instructions(project_data):
     project_path = get_project_path(project_data)
     venv_path = get_venv_path(project_data)
-    print(f"executing install instructions for {project_data['repo_name']}")
+    print(f"Executing install instructions for {project_data['repo_name']}")
 
     for command in project_data["install_instructions"]:
         subprocess.run([f"{venv_path}/Scripts/python"] + command.split(), cwd=project_path)
-        # print([f"{venv_path}/Scripts/python"] + command.split(), cwd=project_path)
-        print(f"{project_data['repo_name']} instructions installations completed")
+        print(f"{project_data['repo_name']} Instructed installation completed")
 
 def install_webui_extension(project_data,args=[]):
     print(f"installing {project_data['repo_name']}")

@@ -98,9 +98,9 @@ def create_layout(project,lang_data):
                 [
                     sg.Frame('', [
                         [
-                            sg.Image(ic.args, key=f"{main_key}args_img-", background_color=color.DARK_GRAY, size=(30, 30)),
-                            sg.Text(lang_data[LOCAL_ARGUMENTS], key=f"{main_key}args_lbl-", text_color=color.LIGHT_GRAY, font=FONT,
-                                    background_color=color.DARK_GRAY),
+                            # sg.Image(ic.args, key=f"{main_key}args_img-", background_color=color.DARK_GRAY, size=(30, 30)),
+                            sg.Text(lang_data[LOCAL_ARGUMENTS], key=f"{main_key}args_lbl-", text_color=color.LIGHT_GRAY,
+                                    background_color=color.DARK_GRAY,font=FONT),
                         ],
                     ], key=f"{main_key}args_header_frame-", expand_x=True, expand_y=False, border_width=0, pad=(10, 3),
                         relief=sg.RELIEF_FLAT, element_justification="l", background_color=color.DARK_GRAY)
@@ -156,7 +156,7 @@ def create_layout(project,lang_data):
             [
                 sg.Frame('',[       
                     [
-                        sg.Image(ic.args,key=f"{main_key}setup_img-",background_color=color.DARK_GRAY,size=(30,30)),
+                        # sg.Image(ic.args,key=f"{main_key}setup_img-",background_color=color.DARK_GRAY,size=(30,30)),
                         sg.Text(lang_data[LOCAL_SETUP],key=f"{main_key}setup_lbl-",text_color=color.LIGHT_GRAY,font=FONT,background_color=color.DARK_GRAY),
                     ],  
                 ],key=f"{main_key}setup_header_frame-",expand_x=True,expand_y=False,border_width=0,pad=(10,3),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)            
