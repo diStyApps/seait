@@ -49,5 +49,7 @@
     "activated": "已啟用",
     "check_python_path": "重要！在安裝前，請務必勾選 '將 Python 3.10 加入 PATH'。",
     "add_project_name_folder_to_path": "將專案資料夾名稱加入 PATH",
-    "save": "保存"
+    "save": "保存",
+    "quick_Launch": "快速啟動",
+    "path_spaces_warning": "警告：路徑中的空格可能在安裝過程中造成問題。考慮使用不含空格的路徑或縮短路徑長度。"
 }

@@ -14,3 +14,7 @@ def get_function_and_project_id(event):
     id_number = get_project_id(event)
     method = re.search(r"-selected_app_func_\d+_(.+)_btn-", event).group(1)
     return id_number,method
+def get_function_and_project_id_quick_launch(event):
+    id_number = get_project_id(event)
+    method = re.search(r"-selected_app_quick_\d+_(.+)_btn-", event).group(1)
+    return id_number,method

@@ -49,5 +49,7 @@
     "activated": "Aktiviert",
     "check_python_path": "WICHTIG! Stellen Sie sicher, dass Sie vor der Installation 'Python 3.10 zum PATH hinzufügen' auswählen.",
     "add_project_name_folder_to_path": "Projektordnername zum PATH hinzufügen",
-    "save": "Speichern"
+    "save": "Speichern",
+    "quick_Launch": "Schnellstart",
+    "path_spaces_warning": "Warnung: Leerzeichen im Pfad können während der Installation Probleme verursachen. Erwägen Sie, einen Pfad ohne Leerzeichen zu verwenden oder die Länge des Pfads zu verkürzen."
 }

@@ -5,21 +5,28 @@ from util.CONSTANTS import *
 from util.util import isfile_exist_check
 from util.dependency_check import check_git, detect_python
 import subprocess
-import time
-import layout.image_carousel as image_carousel
-import util.json_tools as jt
-
+import layout.quick_launch as quick_launch
+from util.util import contains_spaces
+import os
 python = "Python"
 git = "Git"
 version = "version"
 download_iv = "Please download the installers version"
 
 
-def create_layout(lang_data):
+def create_layout(lang_data,projects):
+    path_spaces = contains_spaces(os.path.abspath(os.getcwd()))
+    # path_spaces = True
     python_ver = detect_python()
 
     layout = [
-             
+            [
+                sg.Button(lang_data[LOCAL_PATH_SPACES_WARNING]                        ,k="LOCAL_CHECK_PYTHON_PATH_LBL",
+                            disabled_button_color=(color.RED_ORANGE,color.DARK_GRAY),
+                            button_color=(color.RED_ORANGE,color.DARK_GRAY),
+                            font=FONT,expand_x=True,size=(60,2),disabled=True,visible=True),
+            ]
+            if path_spaces else [],                 
             #seait
             [
                 sg.Frame('',[       
@@ -31,7 +38,6 @@ def create_layout(lang_data):
                     ],                                                          
                 ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY,visible=True)
             ], 
-
             #Python
             [
                 sg.Frame('',[       
@@ -80,9 +86,8 @@ def create_layout(lang_data):
                 ],expand_x=True,expand_y=False,visible=False,k=LOCAL_CHECK_PYTHON_PATH_LBL,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)        
             ],
             [
-                image_carousel.create_layout(lang_data),
-            ] 
-            if jt.load_preference('show_creations_carousel') or jt.load_preference('show_creations_carousel')==None else []
+                quick_launch.create_layout(lang_data,projects),
+            ],
 
         ]
     return layout

@@ -49,5 +49,7 @@
     "activated": "已激活",
     "check_python_path": "重要！在安装前，请确保勾选'将Python 3.10添加到PATH'。",
     "add_project_name_folder_to_path": "将项目文件夹名称添加到路径中",
-    "save": "保存"
+    "save": "保存",
+    "quick_Launch": "快速启动",
+    "path_spaces_warning": "警告：路径中的空格可能会在安装过程中导致问题。考虑使用不带空格的路径或缩短路径长度。"
 }

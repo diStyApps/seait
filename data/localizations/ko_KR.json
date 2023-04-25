@@ -49,5 +49,7 @@
     "activated": "활성화됨",
     "check_python_path": "중요! 설치하기 전에 'Python 3.10을 PATH에 추가' 옵션을 체크해주세요.",
     "add_project_name_folder_to_path": "프로젝트 폴더 이름을 PATH에 추가",
-    "save": "저장"
+    "save": "저장",
+    "quick_Launch": "빠른 실행",
+    "path_spaces_warning": "경고: 경로에 공백이 있으면 설치 중 문제가 발생할 수 있습니다. 공백이 없는 경로를 사용하거나 경로의 길이를 줄이십시오."
 }

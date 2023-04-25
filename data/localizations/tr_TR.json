@@ -49,5 +49,7 @@
     "activated": "Aktifleştirildi",
     "check_python_path": "ÖNEMLİ! Kurulumdan önce 'Python 3.10'u PATH'e ekle' seçeneğini işaretlediğinizden emin olun.",
     "add_project_name_folder_to_path": "Proje Klasör Adını PATH'e Ekle",
-    "save": "Kaydet"
+    "save": "Kaydet",
+    "quick_Launch": "Hızlı Başlat",
+    "path_spaces_warning": "Uyarı: Yol içindeki boşluklar, kurulum sırasında sorunlara neden olabilir. Boşluksuz bir yol kullanmayı düşünün veya yolun uzunluğunu kısaltın."
 }

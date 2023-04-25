@@ -49,5 +49,7 @@
     "activated": "アクティブ化されました",
     "check_python_path": "重要！インストール前に「Python 3.10をPATHに追加する」を確認してください。",
     "add_project_name_folder_to_path": "プロジェクトフォルダ名をPATHに追加する",
-    "save": "保存"
+    "save": "保存",
+    "quick_Launch": "クイックランチ",
+    "path_spaces_warning": "警告：パスにスペースがあると、インストール中に問題が発生することがあります。スペースのないパスを使用するか、パスの長さを短くすることを検討してください。"
 }

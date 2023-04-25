@@ -128,7 +128,7 @@ projects_data = [
                 "--force-enable-xformers",
                 "--xformers"
                ],               
-            "description":[]     
+            "description":["Most popular Stable Diffusion user interface, fully-featured and capable of installing extensions to help create virtually anything."]     
         },
         {
             "id": 10,
@@ -365,7 +365,7 @@ projects_data = [
                 ],               
             "description":['One more fork of Automatic1111 web UI has a beautiful user interface and many additional features. It appears to be well-maintained.']     
         },         
-      {
+        {
             "id": 11,
             "key": "app_",
             "image_path":b'iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAIAAAC0Ujn1AAACy0lEQVR4nLVVwU7yQBDe3bQEKxBsYgIaA/FC4qUhMWm8wAOQyJ3H8BF8Er34AGDiiQAHPXnApNF4ICTGoFFKsEKAuuz8h/FvcKlY5P/n0Gxndr+Znf1mhgIAIYQQAgAAQCkFAMYYWUaEEHjEWxBCKEIj6FJwkozHY8ZYKBTyNIqHa9v29fU15zwSiZimGQ6Hg/gDgMlkUq1WAUAIEYvF8vk8IYRSSoQQQgjbts/OztrttuM4zWazXC6jHhbKdDoFgFqtdnNzg5pGo3F1dYUmhqFZlmWaZjqdjkajhmFQSl3X/TFk3PD+/r63t4eJzeVyLy8vaPpMuaZptm2Tv4+ZzWZVVQ2Y5d3dXYwDAOr1ejKZ/EwyYn18fFxcXGxubpqmyRhb9kkR5O7u7vX1NZfLURSPfISQTqeTSCQYY0sRxqOsxNov0KvLbExMMqwIPXtX9p1hdTffFrTkRuoHv4d2XXc0GnkQ6GYwGIxGI3x8byfnXAjhC6JI/5xzRVFOT08rlUq5XJ5Op4yx4XBoWdZ4PFZVVVGUTCYTi8WEEIqiHB8fx+Pxo6MjPLgIGtljGEY4HPZCvr29PTk56fV6nHNVVYvFYqlUwjsdHBzgTp9m+WOLaLVa85c9Pz8HAM75guP+ucY2hoUQj8dLpZKu65hiXdcLhUImk8EC6Xa7nU6H+DEqaMk8Pz8/Pj4CwPb29tbWlqcfDoeVSuXw8HBtbU0q4EDQs7MDf5EnqL+8vNQ0LZvNStsCDSrsKkIIzL7Xv/CbSqXe3t7mT8kM+U4kOntKQoimaa7r+gQUENpXYOFcXQkaZTAYrK+vrwTtOE6/3599dlx3u92NjY1fQiNEu92+v7+fvTuun56ednZ2yFxBBnpGhDAMQ/JHKX14eAiFQpFIRGJe0Kg9LKnJCSEsy9rf3ydfm/BnQKu0fM654zi6rvta/8Fs/F/kWzD7/wDSnRnN1GeEDwAAAABJRU5ErkJggg==',
@@ -514,7 +514,7 @@ projects_data = [
             ],
             "def_args": [                  
             ],               
-            "description":[]     
+            "description":["A powerful and modular stable diffusion GUI and backend."]     
                                        
         }, 
         {
@@ -623,10 +623,9 @@ projects_data = [
             ],
             "def_args": [
             ],               
-            "description":[]     
+            "description":["InvokeAI is a leading creative engine for Stable Diffusion models, empowering professionals, artists, and enthusiasts to generate and create visual media using the latest AI-driven technologies."]     
                                       
         },    
-           
         {
             "id": 4,
             "key": "app_",
@@ -697,7 +696,7 @@ projects_data = [
             "def_args": [
                 "--inbrowser",
             ],               
-            "description":[]     
+            "description":["This repository provides a Windows-focused Gradio GUI for Kohya's Stable Diffusion trainers. The GUI allows you to set the training parameters and generate and run the required CLI commands to train the model."]     
                                       
         },         
         {
@@ -1035,4 +1034,124 @@ projects_data = [
             "description":[ "A Kandinsky web user interface for https://github.com/ai-forever/Kandinsky-2, requires more than a 8GB VRAM GPU.",
             ]             
         },         
+        {
+            "id": 14,
+            "key": "app_",
+            "image_path":b'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',            
+            "title": "Ckpt2Safetensors-Conversion-Tool-GUI",
+            "repo_name": "ckpt2Safetensors-Conversion-Tool-GUI",
+            "github_url": "https://github.com/diStyApps/Safe-and-Stable-Ckpt2Safetensors-Conversion-Tool-GUI",
+            "git_clone_url":"https://github.com/diStyApps/Safe-and-Stable-Ckpt2Safetensors-Conversion-Tool-GUI.git",
+            "installed_version": "-",
+            "available_version": "-",
+            "installed": False,
+            "visible":True,
+            "status": 1,
+            "isIncomplete": False,
+            "type": "app",
+            "install_requirements":True,
+            "install_cuda":False,
+            "install_instructions_available":False,
+            "install_instructions": [
+            ],
+            "entry_point": 
+            {
+                "install":"run_app_gui.py",
+                "launch":"run_app_gui.py",
+            },                      
+            "buttons": [
+                {
+                    "button_text": "Update",
+                    "key": "update",
+                },
+                {
+                    "button_text": "Delete venv",
+                    "key": "delete_venv",
+                },
+                {
+                    "button_text": "Create venv",
+                    "key": "create_venv",
+                },                        
+                {
+                    "button_text": "Uninstall",
+                    "key": "uninstall",
+                },                                              
+            ],
+            "launch_buttons": [
+                {
+                    "button_text": "Launch",
+                    "key": "launch",
+                },    
+                {
+                    "button_text": "Install",
+                    "key": "install",
+                },                                                           
+            ],            
+            "args": [
+             
+            ],
+            "def_args": [
+            ],
+            "description":["Effortlessly convert between Stable Diffusion checkpoints and safeTensors with the user-friendly Ckpt2Safetensors Tool-GUI, enabling seamless two-way conversions"]             
+        },     
+        {
+            "id": 15,
+            "key": "app_",
+            "image_path":b'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',            
+            "title": "Stable-Diffusion-Pickle-Scanner-GUI",
+            "repo_name": "Stable-Diffusion-Pickle-Scanner-GUI",
+            "github_url": "https://github.com/diStyApps/Stable-Diffusion-Pickle-Scanner-GUI",
+            "git_clone_url":"https://github.com/diStyApps/Stable-Diffusion-Pickle-Scanner-GUI.git",
+            "installed_version": "-",
+            "available_version": "-",
+            "installed": False,
+            "visible":True,
+            "status": 1,
+            "isIncomplete": False,
+            "type": "app",
+            "install_requirements":True,
+            "install_cuda":False,
+            "install_instructions_available":False,
+            "install_instructions": [
+            ],
+            "entry_point": 
+            {
+                "install":"run_app_gui.py",
+                "launch":"run_app_gui.py",
+            },                      
+            "buttons": [
+                {
+                    "button_text": "Update",
+                    "key": "update",
+                },
+                {
+                    "button_text": "Delete venv",
+                    "key": "delete_venv",
+                },
+                {
+                    "button_text": "Create venv",
+                    "key": "create_venv",
+                },                        
+                {
+                    "button_text": "Uninstall",
+                    "key": "uninstall",
+                },                                              
+            ],
+            "launch_buttons": [
+                {
+                    "button_text": "Launch",
+                    "key": "launch",
+                },    
+                {
+                    "button_text": "Install",
+                    "key": "install",
+                },                                                           
+            ],            
+            "args": [
+             
+            ],
+            "def_args": [
+            ],
+            "description":["Better safe than sorry, Stable-Diffusion-Pickle-Scanner-GUI offers an extra layer of protection against potential malicious code. - safetensors models don't need to be scanned."]             
+        },               
     ]

@@ -1,7 +1,7 @@
-VERSION = '0.1.1'
+VERSION = '0.1.2'
 APP_TITLE = f"Super Easy AI Installer Tool - Ver {VERSION}"
 
-FONT_S = 'Arial 11'
+FONT_S = 'Arial 8'
 
 FONT = 'Arial 12'
 FONT_H1 = 'Arial 14'
@@ -36,6 +36,7 @@ SELECT_PROJECT = '-select_project_'
 
 SET_APP_ARGS = "-set_app_args-"
 RUN_APP_FUNC = "-run_app_func-"
+SELECTED_APP_QUICK = '-selected_app_quick-'
 SET_PROJECT_PATH = "-set_project_path-"
 ACTIVATE_PROJECT_PATH = "-activate_project_path-"
 ADD_PROJECT_FOLDER_NAME = "-add_project_folder_name-"
@@ -178,8 +179,10 @@ LOCAL_ACTIVATED= "activated"
 LOCAL_ACTIVATED= "activated"
 LOCAL_SAVE = "save"
 LOCAL_TEMPORARY_NOT_WORKING_PROPERLY = "Temporary not working properly"
-
-
+#quick_Launch
+LOCAL_QUICK_LAUNCH = "quick_Launch"
+#path_spaces_warning
+LOCAL_PATH_SPACES_WARNING = "path_spaces_warning"
 
 LOCAL_CHECK_PYTHON_PATH = "check_python_path"
 LOCAL_CHECK_PYTHON_PATH_LBL= "-check_python_path_lbl-"

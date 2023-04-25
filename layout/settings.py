@@ -2,8 +2,6 @@
 import PySimpleGUI as sg
 import util.colors as color
 from util.CONSTANTS import *
-import util.support as support
-import util.repos as repos
 import util.icons as ic
 import util.json_tools as jt
 
@@ -50,5 +48,4 @@ def create_layout(lang_data,languages):
 
 def events(event,values):
     if event == '-SHOW_CREATIONS_CAROUSEL-':
-        print(values['-SHOW_CREATIONS_CAROUSEL-'])
         jt.save_preference('show_creations_carousel',values['-SHOW_CREATIONS_CAROUSEL-'])

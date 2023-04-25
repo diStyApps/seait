@@ -49,5 +49,7 @@
     "activated": "Activé",
     "check_python_path": "IMPORTANT ! Assurez-vous de cocher 'Ajouter Python 3.10 au PATH' avant l'installation.",
     "add_project_name_folder_to_path": "Ajouter le nom du dossier de projet au PATH",
-    "save": "Enregistrer"
+    "save": "Enregistrer",
+    "quick_Launch": "Lancement rapide",
+    "path_spaces_warning": "Avertissement : Des espaces dans le chemin peuvent provoquer des problèmes lors de l'installation. Envisagez d'utiliser un chemin sans espaces ou de raccourcir la longueur du chemin."
 }

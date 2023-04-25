@@ -23,8 +23,7 @@ import layout.requirements as requirements_layout
 import layout.dialog as dialog_layout
 import layout.projects as projects_layout
 import layout.settings as settings_layout
-import layout.image_carousel as image_carousel
-
+import os
 def main():
     jt.create_preferences_init()
     languages = localizations.get_language_by_codes()
@@ -36,7 +35,7 @@ def main():
             ],
             [
                 sg.Column(projects_layout.create_layout_list_menu(projects_data), key=PROJECTS_COL_1, element_justification='l', expand_x=True,expand_y=True,visible=True),
-                sg.Column(projects_layout.create_project_layout(lang_data), key=PROJECTS_COL_2, element_justification='r', expand_x=True,expand_y=True,visible=True),
+                sg.Column(projects_layout.create_project_layout(lang_data,projects_data), key=PROJECTS_COL_2, element_justification='r', expand_x=True,expand_y=True,visible=True),
                 sg.Column(about_layout.create_layout(lang_data), key=ABOUT_COL, element_justification='c', expand_x=True,expand_y=True,visible=False),
                 sg.Column(settings_layout.create_layout(lang_data,languages), key=SETTINGS_COL, element_justification='c', expand_x=True,expand_y=True,visible=False),
                 # sg.Column(system_stats_layout, key=SYSTEM_INFO_COL, element_justification='c', expand_x=True,expand_y=True,visible=False),
@@ -80,6 +79,9 @@ def main():
 
     #ui fixes..
     expand_column_helper(window[PROJECTS_LIST_MENU].widget)    
+
+
+    
     window.visibility_changed()           
     window[PROJECTS_LIST_MENU].contents_changed()  
 
@@ -94,27 +96,19 @@ def main():
 
     def set_project_path(window, id_number, input_project_path,trigger_event=True):
         if input_project_path:
-            if not contains_spaces(input_project_path):
                 add_project(id_number, input_project_path,False) 
-
-                # print("Path has been set.")
                 if trigger_event:
                     window.write_event_value(f"-select_app_{id_number}_btn-",'')    
-            else:
-                print("Path cannot contain spaces.")
 
     requirements_layout.git_event_handler(window,lang_data)
     requirements_layout.python_event_handler(window,lang_data) 
 
-    if jt.load_preference('show_creations_carousel') or jt.load_preference('show_creations_carousel')==None:
-        image_carousel.start(window,5)
 
     while True:
         event, values = window.read()
-
         if event == sg.WIN_CLOSED:
             break
-  
+
         if event == SET_LANGUAGE:
             jt.save_preference(PREF_SELECTED_LANG,localizations.get_language_by_native(values[SET_LANGUAGE]))
             reopen_window(window)
@@ -123,9 +117,6 @@ def main():
             navigation_layout.handle_tab_event(event, nav_elements, nav_btn_elements, nav_active_color, nav_inactive_color)
    
         if event.startswith(SELECT_APP) and event.endswith("_btn-"):
-            if jt.load_preference('show_creations_carousel') or jt.load_preference('show_creations_carousel') == None:            
-                image_carousel.stop_carousel(window)
-
             id_number = project_util.get_project_id(event)
             # print("select_app_",event)
             #project_menu_item_highlight
@@ -163,29 +154,28 @@ def main():
                 id_number = values[INIT_DEFAULT_PROJECT_ARGS]
                 project_pref_def_args = project['def_args']
                 input_project_path = values[f'-selected_app_{id_number}_project_path_in-']
-                
-                if not get_pref_project_data(id_number):
-                    set_project_path(window, id_number, input_project_path,False)
-                    add_project_def_args(id_number, convert_list_to_string(project_pref_def_args))
-                    window.write_event_value(f"-select_app_{id_number}_btn-",'')    
+                if not contains_spaces(input_project_path):
+                    if not get_pref_project_data(id_number):
+                        set_project_path(window, id_number, input_project_path,False)
+                        add_project_def_args(id_number, convert_list_to_string(project_pref_def_args))
+                        window.write_event_value(f"-select_app_{id_number}_btn-",'')    
+                else:
+                    print(f"Path cannot contain spaces. {input_project_path}")
 
         if event.startswith(SELECTED_APP) and event.endswith("_btn-"):
 
                 if event.startswith("-selected_app_args"):
                     window.write_event_value(SET_APP_ARGS,event)    
-
                 if event.startswith("-selected_app_func"):
-                    window.write_event_value(RUN_APP_FUNC,event)    
-
+                    window.write_event_value(RUN_APP_FUNC,event)   
+                if event.startswith("-selected_app_quick"):
+                    window.write_event_value(SELECTED_APP_QUICK,event)    
                 if event.endswith("_project_path_set_btn-"):
                     window.write_event_value(SET_PROJECT_PATH,id_number)    
-
                 if event.endswith("_project_path_activate_btn-"):
-                    window.write_event_value(ACTIVATE_PROJECT_PATH,id_number)  
-
+                    window.write_event_value(ACTIVATE_PROJECT_PATH,id_number) 
                 if event.endswith("_project_path_add_folder_name_btn-"):
                     window.write_event_value(ADD_PROJECT_FOLDER_NAME,id_number) 
-
                 if event.endswith("_project_save_def_args_btn-"):
                     window.write_event_value(SAVE_DEFAULT_ARGS,id_number)   
 
@@ -194,7 +184,6 @@ def main():
             id_number, method = project_util.get_function_and_project_id(event_value)   
             project = project_util.get_project_by_id(projects_data, id_number)
             arguments = ""
-
             if project['type'] == 'app':
                 if project['args']:
                     arguments = convert_string_to_list(values[f"-selected_app_args_{id_number}_console_ml-"])
@@ -211,6 +200,22 @@ def main():
                 else:
                     run_project_func(project,method)
    
+
+        if event == SELECTED_APP_QUICK:
+            event_value = values[SELECTED_APP_QUICK]
+            id_number, method = project_util.get_function_and_project_id_quick_launch(event_value)   
+            project = project_util.get_project_by_id(projects_data, id_number)
+            arguments = ""
+            if project['type'] == 'app':
+                if project['args']:
+                    # arguments = convert_string_to_list(values[f"-selected_app_args_{id_number}_console_ml-"])
+                    # if not values[f"-selected_app_args_{id_number}_console_ml-"]:
+                        arguments = convert_string_to_list(get_pref_project_data(id_number)['def_args'])
+            Launched_local = localizations.set_language_by_native(values[SET_LANGUAGE])["Launched"]                     
+            Thread(target=run_project_func, args=(project,method,arguments,), daemon=True).start() 
+            window[f"-selected_app_quick_{id_number}_{method}_btn-"].update(Launched_local,button_color=(color.GRAY_9900,color.DIM_GREEN),disabled_button_color=(color.GRAY_9900,color.DIM_GREEN),disabled=True)                  
+
+
         if event == SET_APP_ARGS:
             event_value = values['-set_app_args-']
             id_number = project_util.get_project_id(event_value)
@@ -252,15 +257,24 @@ def main():
         if event == SET_PROJECT_PATH:
             id_number = values[SET_PROJECT_PATH]
             input_project_path = values[f'-selected_app_{id_number}_project_path_in-']
-            set_project_path(window, id_number, input_project_path)
+            if not contains_spaces(input_project_path):
+                set_project_path(window, id_number, input_project_path)
+            else:
+                print(f"Path cannot contain spaces. {input_project_path}")
 
         if event == SAVE_DEFAULT_ARGS:
             id_number = values[SAVE_DEFAULT_ARGS]
             args = values[f"-selected_app_args_{id_number}_console_ml-"]
             input_project_path = values[f'-selected_app_{id_number}_project_path_in-']
-            set_project_path(window, id_number, input_project_path,False)
-            add_project_def_args(id_number, args)
-            window.write_event_value(f"-select_app_{id_number}_btn-",'')    
+            if not contains_spaces(input_project_path):
+                set_project_path(window, id_number, input_project_path,False)
+                add_project_def_args(id_number, args)
+                window.write_event_value(f"-select_app_{id_number}_btn-",'')    
+            else:
+                print(f"Path cannot contain spaces. {input_project_path}")
+
+
+
 
         if event == CHECK_UPDATE_BTN_KEY:
             latest_release = update_check.check_update_available()
@@ -279,7 +293,6 @@ def main():
             webbrowser.open(project_util.get_project_by_id(projects_data, id_number)['github_url']) 
         
         about_layout.events(event)
-        image_carousel.buttons(window,event)
         settings_layout.events(event,values)
 
         
