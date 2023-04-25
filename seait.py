@@ -293,7 +293,6 @@ def main():
             webbrowser.open(project_util.get_project_by_id(projects_data, id_number)['github_url']) 
         
         about_layout.events(event)
-        settings_layout.events(event,values)
 
         
 if __name__ == '__main__':

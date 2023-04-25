@@ -899,10 +899,103 @@ projects_data = [
                 },                                                           
             ],            
             "args": [
-             
+                [
+                    {
+                        "button_text": "--auto-launch",
+                    },                      
+                    {
+                        "button_text": "--model-menu",
+                    },  
+                ],  
+                [
+
+                    {
+                        "button_text": "--notebook",
+                    },
+                    {
+                        "button_text": "--chat",
+                    },   
+                ],                 
+                [
+                    {
+                        "button_text": "--cai-chat",
+                    },    
+                    {
+                        "button_text": "--character",
+                    },                      
+                ],
+                [
+                    {
+                        "button_text": "--model",
+                    },
+                    {
+                        "button_text": "--lora LORA",
+                    },
+                    {
+                        "button_text": "--model-dir",
+                    },
+                ],
+                [
+                    {
+                        "button_text": "--settings",
+                    },
+                    {
+                        "button_text": "--xformers",
+                    },
+                ],       
+                [
+                    {
+                        "button_text": "--extensions",
+                    },
+                    {
+                        "button_text": "--verbose",
+                    },
+                ],            
+                [
+                    {
+                        "button_text": "--cpu",
+                    },
+                    {
+                        "button_text": "--auto-devices",
+                    },
+                ],         
+                [
+                    {
+                        "button_text": "--gpu-memory",
+                    },
+                    {
+                        "button_text": "--cpu-memory",
+                    },
+                ],                                          
+                [
+
+                    {
+                        "button_text": "--listen",
+                        "key": "listen",
+                    },
+                    {
+                        "button_text": "--listen-host",
+                    },                    
+                    {
+                        "button_text": "--listen-port=7862",
+                    },                    
+                ],            
+                [
+                    {
+                        "button_text": "--gradio-auth-path",
+                    },
+                    {
+                        "button_text": "--api",
+                    },    
+                    {
+                        "button_text": "--share",
+                    },                                    
+                ]
             ],
             "def_args": [
-            ],  
+                "--auto-launch",
+                "--chat"
+               ],    
             "description":["""Text generation web UI is like auto1111 webui for large language models """]     
         },   
         {

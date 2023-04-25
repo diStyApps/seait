@@ -61,22 +61,20 @@ But remains a great solution for users with minimal technical knowledge or exper
 
 ### Tested on Windows 10+ and Nvidia GPU-based cards
 
-### Update [0.1.1] 
+### Update [0.1.2] 
 
 Added
 
-- Your Creation some social fun.
-- A Kandinsky web user interface for https://github.com/ai-forever/Kandinsky-2, requires more than a 8GB VRAM GPU.
-
-Changed
-
-- Python detection improved.
-- Minor bug fixes.
-
+- Quick launch menu, Launch projects even faster.
+- Arguments for text-generation-webui , try it out.
+- 2 other old projects of mine.
+  - Safe-and-Stable-Ckpt2Safetensors-Conversion-Tool-GUI
+  - Stable-Diffusion-Pickle-Scanner-GUI
+  
 ### Spread the word; don't only keep it to yourself.
 
-<img src="media/preview/0.1.1/1_0.1.1.jpg">
-<img src="media/preview/0.1.1/2_0.1.1.jpg">
+<img src="media/preview/0.1.2/1_0.1.2.jpg">
+<img src="media/preview/0.1.2/2_0.1.2.jpg">
 <img src="media/preview/0.0.7/2_0.0.7.jpg">
 <img src="media/preview/0.0.1/1_0.0.1.jpg">
 

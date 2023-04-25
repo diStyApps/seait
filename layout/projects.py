@@ -23,7 +23,7 @@ def create_layout_list_menu(projects):
                                         [
                                             sg.Image(project["image_path"], background_color=color.DARK_GRAY),
                                             sg.Button(project["title"], k=f"-select_app_{project['id']}_btn-", font=FONT, expand_x=True, size=(35, 1),button_color=(color.DIM_BLUE,color.GRAY)),
-                                            # sg.Button('', k=f"-select_app_{project['id']}_btn-",size=(1,1),font=FONT,disabled=True, expand_x=False,button_color=color.DIM_GREEN if installation_status.check_project(project) else color.GRAY)
+                                            sg.Button('', k=f"-select_app_{project['id']}_btn-",size=(1,1),font=FONT,disabled=True, expand_x=False,button_color=color.DIM_GREEN if installation_status.check_project(project) else color.GRAY)
 
                                         ],
                                     ],
