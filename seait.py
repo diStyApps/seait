@@ -114,7 +114,6 @@ def main():
         event, values = window.read()
         if event == sg.WIN_CLOSED:
             break
-        print(event)
 
         if event == SET_LANGUAGE:
             jt.save_preference(PREF_SELECTED_LANG,localizations.get_language_by_native(values[SET_LANGUAGE]))
@@ -300,7 +299,7 @@ def main():
             webbrowser.open(project_util.get_project_by_id(projects_data, id_number)['github_url']) 
         
         about_layout.events(event)
-        toolbox_layout.events(event,values,window)
+        toolbox_layout.events(event,values,window,lang_data)
 
 
         

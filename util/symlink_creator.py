@@ -55,12 +55,11 @@ def create_symlink_internal(src, dst, verbose=False, use_rollback=True):
 
             os.rmdir(dst)
         os.symlink(src, dst, target_is_directory=True)
-        print("Symbolic link created successfully")
-
         shutil.rmtree(temp_dir)
+        # print("Symbolic link created successfully")
 
     except Exception as e:
-        print(f"Error creating symlink: {e}")
+        # print(f"Error creating symlink: {e}")
         if use_rollback:
             rollback(src, dst, moved_items, temp_dir, str(e))
         shutil.rmtree(temp_dir)
@@ -69,16 +68,20 @@ def create_symlink_internal(src, dst, verbose=False, use_rollback=True):
 def create_symlink(src, dst, verbose=False, use_rollback=True):
     try:
         create_symlink_internal(src, dst, verbose=verbose, use_rollback=use_rollback)
+        return True
+
     except Exception as e:
-        print(f"Failed to create symlink: {e}")
+        # print(f"Failed to create symlink: {e}")
+        return False
 
 def remove_symlink(symlink_path, create_folder=False):
     if os.path.islink(symlink_path):
         os.unlink(symlink_path)
-        print(f"Symbolic link removed: {symlink_path}")
-        
+        # print(f"Symbolic link removed: {symlink_path}")
         if create_folder:
             os.makedirs(symlink_path)
-            print(f"New folder created: {symlink_path}")
+            # print(f"New folder created: {symlink_path}")
+            return True
     else:
-        print(f"The path is not a symbolic link: {symlink_path}")
+        # print(f"The path is not a symbolic link: {symlink_path}")
+        return False

@@ -1,4 +1,4 @@
-VERSION = '0.1.2'
+VERSION = '0.1.3'
 APP_TITLE = f"Super Easy AI Installer Tool - Ver {VERSION}"
 
 FONT_S = 'Arial 8'
@@ -158,7 +158,8 @@ LOCAL_PROJECTS = "Projects"
 LOCAL_SYSTEM_MONITOR = "System Monitor"
 LOCAL_AIPANIC = "AiPanic"
 LOCAL_SETTINGS = "Settings"
-LOCAL_TOOLS = "Tools"
+LOCAL_TOOLS = "tools"
+LOCAL_TOOLBOX = "toolbox"
 LOCAL_ABOUT = "About"
 LOCAL_CHECK_FOR_UPDATE = "Check for Update"
 LOCAL_NONE = "None"
@@ -189,11 +190,9 @@ LOCAL_VRAM_USAGE = "VRAM Usage"
 LOCAL_POWER_USAGE = "Power Usage"
 LOCAL_LIKE_STAR = "Don't forget to leave a like/star."
 LOCAL_INCOMPLETE = "isIncomplete"
-
 LOCAL_SET_CUSTOM_PROJECT_PATH = "set_custom_project_path"
 LOCAL_IF_NOT_ACTIVATED = "If_not_activated"
 LOCAL_WILL_USED= "will_be_used"
-
 LOCAL_BROWSE= "browse"
 LOCAL_SET_PATH = "set_path"
 LOCAL_SET_FOLDER_PROJECT_NAME = "set_folder_project_name"
@@ -202,16 +201,29 @@ LOCAL_ACTIVATED= "activated"
 LOCAL_ACTIVATED= "activated"
 LOCAL_SAVE = "save"
 LOCAL_TEMPORARY_NOT_WORKING_PROPERLY = "Temporary not working properly"
-#quick_Launch
 LOCAL_QUICK_LAUNCH = "quick_Launch"
-#path_spaces_warning
 LOCAL_PATH_SPACES_WARNING = "path_spaces_warning"
-
 LOCAL_CHECK_PYTHON_PATH = "check_python_path"
 LOCAL_CHECK_PYTHON_PATH_LBL= "-check_python_path_lbl-"
-#'Add Project Name Folder to Path'
 LOCAL_ADD_PROJECT_NAME_FOLDER_TO_PATH = "add_project_name_folder_to_path"
-#Please download the installers version
 LOCAL_DOWNLOAD_THE_IV = "please_download_the_iv"
-#prefs
 PREF_SELECTED_LANG = 'selected_lang'
+LOCAL_SOURCE= "Source"
+LOCAL_TARGET= "Target"
+LOCAL_DESTINATION= "Destination"
+LOCAL_ADD= "add"
+LOCAL_REMOVE= "remove"
+LOCAL_WARNING= "warning"
+LOCAL_WARNING_SYMLINK_MSG= "warning_symlink_msg"
+LOCAL_SET = "set"
+LOCAL_REMOVE_SYMLINK_TOOLTIP = "remove_symlink_tooltip"
+LOCAL_MODELS_TREASURY = "models_treasury"
+LOCAL_CREATE = "create"
+LOCAL_SYMLINK_CREATED_SUCC = "symlink_created_succ"
+LOCAL_SYMLINK_CREATED_FAIL = "symlink_created_fail"
+LOCAL_SYMLINK_REMOVING_FAIL = "symlink_removing_fail"
+LOCAL_SYMLINK_REMOVING_SUCC = "symlink_removing_succ"
+LOCAL_SOURCE_TARGET_PATH_EMPTY_MSG = "source_target_path_empty_msg"
+LOCAL_TARGET_PATH_EMPTY_MSG = "target_path_empty_msg"
+LOCAL_TREASURY_CREATED_MSG = "treasury_created_msg"
+LOCAL_CLOSE_RUNNING_PROJECTS = "close_running_projects"

@@ -6,6 +6,8 @@ import util.icons as ic
 import util.json_tools as jt
 import util.symlink_creator as symlink
 import os
+import re
+
 folders={
     "Checkpoints":"checkpoints",
     "Embeddings":"embeddings",
@@ -32,8 +34,9 @@ def convert_to_backslashes(file_path):
 main_folder = 'models_treasury'
 getcwd = convert_to_backslashes(os.path.abspath(os.getcwd()))
 path = convert_to_backslashes(os.path.join(getcwd,main_folder))
-if jt.load_preference('models_treasury_path') != None:
-    path = jt.load_preference('models_treasury_path')
+preference_models_treasury_path =  jt.load_preference('models_treasury_path')
+if preference_models_treasury_path != None:
+    path = preference_models_treasury_path
 
 def create_layout(lang_data,tools):
 
@@ -49,7 +52,7 @@ def create_layout(lang_data,tools):
             sg.Frame('',[       
                         [
                             sg.Image(data=ic.args,background_color=color.DARK_GRAY),
-                            sg.Text("Tools",font=FONT,text_color=color.LIGHT_GRAY,background_color=color.DARK_GRAY),
+                            sg.Text(lang_data[LOCAL_TOOLS],font=FONT,text_color=color.LIGHT_GRAY,background_color=color.DARK_GRAY),
                         ],  
                         [
                             sg.Combo(tools, default_value=tools[0], s=(1, 20), enable_events=True, readonly=True, k=SET_LANGUAGE, expand_x=True, expand_y=False,
@@ -57,7 +60,23 @@ def create_layout(lang_data,tools):
                         ],  
                 ],expand_x=True,expand_y=False,border_width=5,pad=(5,5),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY),        
         ],
-        
+        [
+            sg.Frame('',[    
+                        [
+                            sg.Text(lang_data[LOCAL_WARNING].upper(),font=FONT,text_color=color.RED_ORANGE,background_color=color.DARK_GRAY),
+                        ],    
+                        [
+                            sg.Text(lang_data[LOCAL_CLOSE_RUNNING_PROJECTS],font=FONT,text_color=color.RED_ORANGE,background_color=color.DARK_GRAY),
+                        ],         
+                        [
+                            sg.ML(f"""
+{lang_data[LOCAL_WARNING_SYMLINK_MSG]}
+""",
+                            font=FONT,text_color=color.LIGHT_GRAY,background_color=color.DARK_GRAY,size=(10,10),expand_x=True,expand_y=True,visible=True,no_scrollbar=True,disabled=True),
+                        ],  
+                ],expand_x=True,expand_y=False,border_width=5,pad=(5,5),size=(250,200),relief=sg.RELIEF_FLAT,element_justification="c",background_color=color.DARK_GRAY),        
+        ],
+
     ]
 
     
@@ -66,13 +85,13 @@ def create_layout(lang_data,tools):
             sg.Frame('',[       
                     [
                         sg.Image(data=ic.args,background_color=color.DARK_GRAY),
-                        sg.Text("Set Symlink",font=FONT,text_color=color.LIGHT_GRAY,background_color=color.DARK_GRAY),
+                        sg.Text(f"{lang_data[LOCAL_SET]} Symlink",font=FONT,text_color=color.LIGHT_GRAY,background_color=color.DARK_GRAY),
                     ],  
                     [
                         sg.Frame('',[       
 
                         [
-                            sg.Text("Source",font=FONT_M_B,text_color=color.LIGHT_GRAY,background_color=color.DARK_GRAY),
+                            sg.Text(lang_data[LOCAL_SOURCE],font=FONT_M_B,text_color=color.LIGHT_GRAY,background_color=color.DARK_GRAY),
                         ],                                  
                         [
                             sg.In(key=SOURCE_CUSTOM_SYMLINK_PATH_IN,
@@ -87,7 +106,7 @@ def create_layout(lang_data,tools):
                                 ),                                                  
                         ],  
                         [
-                            sg.Text("Target",font=FONT_M_B,text_color=color.LIGHT_GRAY,background_color=color.DARK_GRAY),
+                            sg.Text(lang_data[LOCAL_TARGET],font=FONT_M_B,text_color=color.LIGHT_GRAY,background_color=color.DARK_GRAY),
                         ],                                  
                         [
                             sg.In(key=TARGET_CUSTOM_SYMLINK_PATH_IN,
@@ -102,7 +121,7 @@ def create_layout(lang_data,tools):
                         ],  
                         [
                             sg.Button(
-                                    button_text='Create Symlink',
+                                    button_text=f'{lang_data[LOCAL_CREATE]} Symlink',
                                     button_color=(color.DIM_BLUE, color.GRAY),
                                     key=CREATE_SYMLINK_BTN, 
                                     expand_x=True, 
@@ -116,8 +135,8 @@ def create_layout(lang_data,tools):
                             sg.Frame('',[       
 
                             [
-                                sg.Text("Remove",font=FONT_M_B,text_color=color.LIGHT_GRAY,background_color=color.DARK_GRAY),
-                                sg.Text("type the folder path to remove",font=FONT_S,text_color=color.LIGHT_GRAY,background_color=color.DARK_GRAY),
+                                sg.Text(lang_data[LOCAL_REMOVE],font=FONT_M_B,text_color=color.LIGHT_GRAY,background_color=color.DARK_GRAY),
+                                sg.Text(lang_data[LOCAL_REMOVE_SYMLINK_TOOLTIP],font=FONT_S,text_color=color.LIGHT_GRAY,background_color=color.DARK_GRAY),
                             ],                                  
                             [
                                 sg.In(key=REMOVE_SYMLINK_PATH_IN,
@@ -126,7 +145,7 @@ def create_layout(lang_data,tools):
                                     text_color=color.LIGHT_GRAY,  
                                     background_color=color.GRAY),           
                                 sg.Button(
-                                                button_text='Remove Symlink',
+                                                button_text=f'{lang_data[LOCAL_REMOVE]} Symlink',
                                                 button_color=(color.DIM_BLUE, color.GRAY),
                                                 key=REMOVE_SYMLINK_BTN, 
                                                 mouseover_colors=(color.GRAY_9900, color.DIM_BLUE))                                                                    
@@ -145,7 +164,7 @@ def create_layout(lang_data,tools):
             sg.Frame('',[       
                     [
                         sg.Image(data=ic.args,background_color=color.DARK_GRAY),
-                        sg.Text("Models Treasury",font=FONT,text_color=color.LIGHT_GRAY,background_color=color.DARK_GRAY),
+                        sg.Text(lang_data[LOCAL_MODELS_TREASURY],font=FONT,text_color=color.LIGHT_GRAY,background_color=color.DARK_GRAY),
                       
                     ],  
 
@@ -154,11 +173,11 @@ def create_layout(lang_data,tools):
         [
             sg.Frame('',[        
                         [
-                            sg.Text(f"Set Models Treasury",font=FONT_S,text_color=color.LIGHT_GRAY,background_color=color.DARK_GRAY),
+                            sg.Text(f"{lang_data[LOCAL_SET]} {lang_data[LOCAL_MODELS_TREASURY]}",font=FONT_S,text_color=color.LIGHT_GRAY,background_color=color.DARK_GRAY),
                         ],                                  
                         [
                             sg.In(default_text=path,key=MODEL_TREASURY_PATH_IN,
-                                enable_events=True,expand_x=True,expand_y=True,
+                                expand_x=True,expand_y=True,
                                 font=FONT,
                                 text_color=color.LIGHT_GRAY,  
                                 background_color=color.GRAY,  
@@ -168,7 +187,7 @@ def create_layout(lang_data,tools):
                                     size=(None,2)    
                                 ),                  
                             sg.Button(
-                                    button_text='Set',
+                                    button_text=lang_data[LOCAL_SET],
                                     button_color=(color.DIM_BLUE, color.GRAY),
                                     key=SET_MODEL_TREASURY_FOLDER_BTN, 
                                     expand_x=False, 
@@ -179,7 +198,7 @@ def create_layout(lang_data,tools):
 
             ],expand_x=True,expand_y=False,border_width=5,pad=(5,5),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)        
         ], 
-        #models_treasury            -remove_symlink_btn-22
+        #models_treasury
         [
             sg.Column([       
                     [ 
@@ -201,14 +220,13 @@ def create_layout(lang_data,tools):
                                                         button_color=(color.DIM_BLUE, color.GRAY),
                                                         size=(None,2)    
                                                 ),   
-                                                sg.Button(button_text='Add',
+                                                sg.Button(button_text=lang_data[LOCAL_ADD],
                                                             button_color=(color.DIM_BLUE, color.GRAY),
                                                             key=f"-add_target_models_treasury_symlink_{folders[folder]}_btn-", 
-                                                            mouseover_colors=(color.GRAY_9900, color.DIM_BLUE)),          
-                                                # sg.Button(button_text='Remove',
-                                                #                 button_color=(color.DIM_BLUE, color.GRAY),
-                                                #                 key=f"-remove_target_models_treasury_symlink_{folders[folder]}_btn-",  
-                                                #                 mouseover_colors=(color.GRAY_9900, color.DIM_BLUE))                                                                           
+                                                            mouseover_colors=(color.GRAY_9900, color.DIM_BLUE),
+                                                            disabled=False if preference_models_treasury_path else True
+                                                            
+                                                            ),                                                                                    
                                         ],  
                                     ],expand_x=True,expand_y=False,border_width=0,relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)  
                                 ] 
@@ -228,24 +246,58 @@ def create_layout(lang_data,tools):
     return layout
 
 
-def events(event,values,window):
+def events(event,values,window,lang_data):
     if event == CREATE_SYMLINK_BTN:
-        src= values[SOURCE_CUSTOM_SYMLINK_PATH_IN]
-        dst= values[TARGET_CUSTOM_SYMLINK_PATH_IN]
-        if src and dst:
-            symlink.create_symlink(src, dst, verbose=True, use_rollback=True)
+        source = values[SOURCE_CUSTOM_SYMLINK_PATH_IN]
+        target = values[TARGET_CUSTOM_SYMLINK_PATH_IN]
+        if source and target:
+            res=symlink.create_symlink(source, target, verbose=True, use_rollback=True)
+            if res:
+                sg.popup_quick_message(lang_data[LOCAL_SYMLINK_CREATED_SUCC],text_color=color.GRAY,background_color=color.DIM_GREEN,font=FONT_H2_BOLD,auto_close_duration=2,keep_on_top=True)
+            else:
+                sg.popup_quick_message(lang_data[LOCAL_SYMLINK_CREATED_FAIL],text_color=color.GRAY,background_color=color.RED_ORANGE,font=FONT_H2_BOLD,auto_close_duration=2,keep_on_top=True)
         else:
-            sg.popup_error("Source or Target path is empty")
+            sg.popup_quick_message(lang_data[LOCAL_SOURCE_TARGET_PATH_EMPTY_MSG],text_color=color.GRAY,background_color=color.RED_ORANGE,font=FONT_H2_BOLD,auto_close_duration=2,keep_on_top=True)
 
     if event == REMOVE_SYMLINK_BTN:
-        dst= values[REMOVE_SYMLINK_PATH_IN]
-        symlink.remove_symlink(dst,create_folder=True)
+        target=values[REMOVE_SYMLINK_PATH_IN]
+        if target:
+            res=symlink.remove_symlink(target,create_folder=True)  
+            if res:
+                sg.popup_quick_message(lang_data[LOCAL_SYMLINK_REMOVING_SUCC],text_color=color.GRAY,background_color=color.DIM_GREEN,font=FONT_H2_BOLD,auto_close_duration=2,keep_on_top=True)
+            else:
+                sg.popup_quick_message(lang_data[LOCAL_SYMLINK_REMOVING_FAIL],text_color=color.GRAY,background_color=color.RED_ORANGE,font=FONT_H2_BOLD,auto_close_duration=2,keep_on_top=True)
+        else:
+            sg.popup_quick_message(lang_data[LOCAL_TARGET_PATH_EMPTY_MSG],text_color=color.GRAY,background_color=color.RED_ORANGE,font=FONT_H2_BOLD,auto_close_duration=2,keep_on_top=True)
         
     if event == SET_MODEL_TREASURY_FOLDER_BTN:
-        print('models_treasury_path',values[MODEL_TREASURY_PATH_IN])
+        # print('models_treasury_path',values[MODEL_TREASURY_PATH_IN])
         jt.save_preference('models_treasury_path',values[MODEL_TREASURY_PATH_IN])
+        path = jt.load_preference('models_treasury_path')            
+        sg.popup_quick_message(lang_data[LOCAL_TREASURY_CREATED_MSG],text_color=color.GRAY,background_color=color.DIM_GREEN,font=FONT_H2_BOLD,auto_close_duration=2,keep_on_top=True)
 
+        os.makedirs(path, exist_ok=True)
         for folder in folders:
+            folder_path = os.path.join(path, folders[folder])
+            os.makedirs(folder_path, exist_ok=True)            
             lbl_elem_key = f"-target_models_treasury_symlink_{folders[folder]}_path_lbl-"
-            path = jt.load_preference('models_treasury_path')            
             window[lbl_elem_key].update(f"{path}/{folders[folder]}")
+            window[f"-add_target_models_treasury_symlink_{folders[folder]}_btn-"].update(disabled=False)
+
+
+    if event.startswith("-add_target_models_treasury_symlink_") and event.endswith("_btn-"):
+        path = jt.load_preference('models_treasury_path')            
+        pattern = r"-add_target_models_treasury_symlink_(\w+)_btn-"
+        match = re.search(pattern, event)
+        if match:
+            folder_name = match.group(1)
+            target_folder = values[f'-target_models_treasury_symlink_{folder_name}_path_in-']
+            source_folder =f"{path}/{folder_name}"
+            if target_folder:
+                res=symlink.create_symlink(source_folder, target_folder, verbose=True, use_rollback=True)
+                if res:
+                    sg.popup_quick_message(lang_data[LOCAL_SYMLINK_CREATED_SUCC],text_color=color.GRAY,background_color=color.DIM_GREEN,font=FONT_H2_BOLD,auto_close_duration=2,keep_on_top=True)
+                else:
+                    sg.popup_quick_message(lang_data[LOCAL_SYMLINK_CREATED_FAIL],text_color=color.GRAY,background_color=color.RED_ORANGE,font=FONT_H2_BOLD,auto_close_duration=2,keep_on_top=True)
+            else:
+                sg.popup_quick_message(lang_data[LOCAL_TARGET_PATH_EMPTY_MSG],text_color=color.GRAY,background_color=color.RED_ORANGE,font=FONT_H2_BOLD,auto_close_duration=2,keep_on_top=True)
