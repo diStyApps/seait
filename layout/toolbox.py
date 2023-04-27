@@ -31,16 +31,18 @@ folders={
 }
 def convert_to_backslashes(file_path):
     return file_path.replace("\\", "/")
-main_folder = 'models_treasury'
-getcwd = convert_to_backslashes(os.path.abspath(os.getcwd()))
-path = convert_to_backslashes(os.path.join(getcwd,main_folder))
-preference_models_treasury_path =  jt.load_preference('models_treasury_path')
-if preference_models_treasury_path != None:
-    path = preference_models_treasury_path
+
+
 
 def create_layout(lang_data,tools):
+    main_folder = 'models_treasury'
+    getcwd = convert_to_backslashes(os.path.abspath(os.getcwd()))
+    path = convert_to_backslashes(os.path.join(getcwd,main_folder))
+    # jt.save_preference('models_treasury_path',path)
 
-
+    preference_models_treasury_path =  jt.load_preference('models_treasury_path')
+    if not preference_models_treasury_path == None:
+        path = preference_models_treasury_path
 
 
     tools =[
@@ -66,7 +68,7 @@ def create_layout(lang_data,tools):
                             sg.Text(lang_data[LOCAL_WARNING].upper(),font=FONT,text_color=color.RED_ORANGE,background_color=color.DARK_GRAY),
                         ],    
                         [
-                            sg.Text(lang_data[LOCAL_CLOSE_RUNNING_PROJECTS],font=FONT,text_color=color.RED_ORANGE,background_color=color.DARK_GRAY),
+                            sg.Text(lang_data[LOCAL_CLOSE_RUNNING_PROJECTS],size=(45,2),font=FONT,text_color=color.RED_ORANGE,background_color=color.DARK_GRAY),
                         ],         
                         [
                             sg.ML(f"""

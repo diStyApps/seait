@@ -61,20 +61,26 @@ But remains a great solution for users with minimal technical knowledge or exper
 
 ### Tested on Windows 10+ and Nvidia GPU-based cards
 
-### Update [0.1.2] 
+### Update [0.1.3] 
 
 Added
 
-- Quick launch menu, Launch projects even faster.
-- Arguments for text-generation-webui , try it out.
-- 2 other old projects of mine.
-  - Safe-and-Stable-Ckpt2Safetensors-Conversion-Tool-GUI
-  - Stable-Diffusion-Pickle-Scanner-GUI
+- Toolbox tab
+- Under toolbox tab, added symlink link creator
+  - Out of space? No problem, now you can put all your models in one directory and create symbolic links to them.
+  you can do this for any directory you want including virtual environments if you want it too.
+
+- Symlink Tool - a tool that creates symbolic links.
+- Models Treasury - a centralized folder for all the popular model directories. Simply assign to use on all your projects.
+
+Video tutorial soon.
   
 ### Spread the word; don't only keep it to yourself.
 
 <img src="media/preview/0.1.2/1_0.1.2.jpg">
+<img src="media/preview/0.1.3/1_0.1.3.jpg">
 <img src="media/preview/0.1.2/2_0.1.2.jpg">
+
 <img src="media/preview/0.0.7/2_0.0.7.jpg">
 <img src="media/preview/0.0.1/1_0.0.1.jpg">
 

@@ -25,7 +25,6 @@ import layout.projects as projects_layout
 import layout.settings as settings_layout
 import layout.toolbox as toolbox_layout
 
-import os
 def main():
     jt.create_preferences_init()
     languages = localizations.get_language_by_codes()
