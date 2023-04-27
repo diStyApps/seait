@@ -993,8 +993,8 @@ projects_data = [
                 ]
             ],
             "def_args": [
-                "--auto-launch",
-                "--chat"
+               '--auto-launch',
+                '--chat',
                ],    
             "description":["""Text generation web UI is like auto1111 webui for large language models """]     
         },   

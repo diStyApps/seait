@@ -23,6 +23,8 @@ import layout.requirements as requirements_layout
 import layout.dialog as dialog_layout
 import layout.projects as projects_layout
 import layout.settings as settings_layout
+import layout.toolbox as toolbox_layout
+
 import os
 def main():
     jt.create_preferences_init()
@@ -38,40 +40,40 @@ def main():
                 sg.Column(projects_layout.create_project_layout(lang_data,projects_data), key=PROJECTS_COL_2, element_justification='r', expand_x=True,expand_y=True,visible=True),
                 sg.Column(about_layout.create_layout(lang_data), key=ABOUT_COL, element_justification='c', expand_x=True,expand_y=True,visible=False),
                 sg.Column(settings_layout.create_layout(lang_data,languages), key=SETTINGS_COL, element_justification='c', expand_x=True,expand_y=True,visible=False),
+                sg.Column(toolbox_layout.create_layout(lang_data,languages), key=TOOLBOX_COL, element_justification='c', expand_x=True,expand_y=True,visible=False),
+
                 # sg.Column(system_stats_layout, key=SYSTEM_INFO_COL, element_justification='c', expand_x=True,expand_y=True,visible=False),
             ],        
     ]]
     window = sg.Window(APP_TITLE,layout,finalize=True,size=(window_width,849),ttk_theme='alt', resizable=True,enable_close_attempted_event=False,background_color=color.GRAY_9900,icon=ic.icon3)
+    update_available_lbl_elem:sg.Text = window[UPDATE_AVAILABLE_LBL_KEY]
 
     #region nav
     projects_layout_col_1:sg.Column = window[PROJECTS_COL_1]
     projects_layout_col_2:sg.Column = window[PROJECTS_COL_2]
-    about_layout_col:sg.Column = window[ABOUT_COL]
-    # system_stats_layout_col:sg.Column = window[SYSTEM_INFO_COL]
-    #SETTINGS_COL
-    settings_layout_col:sg.Column = window[SETTINGS_COL]
-
     projects_tab_btn_elem:sg.Button = window[PROJECTS_TAB_BTN]
-    about_tab_btn_elem:sg.Button = window[ABOUT_TAB_BTN]
-    # system_stats_tab_btn_elem:sg.Button = window[SYSTEM_STATS_TAB_BTN]
-    settings_tab_btn_elem:sg.Button = window[SETTINGS_TAB_BTN]
 
-    update_available_lbl_elem:sg.Text = window[UPDATE_AVAILABLE_LBL_KEY]
+    about_layout_col:sg.Column = window[ABOUT_COL]
+    about_tab_btn_elem:sg.Button = window[ABOUT_TAB_BTN]
+
+    settings_layout_col:sg.Column = window[SETTINGS_COL]
+    settings_tab_btn_elem:sg.Button = window[SETTINGS_TAB_BTN]
+    toolbox_layout_col:sg.Column = window[TOOLBOX_COL]
+    toolbox_tab_btn_elm:sg.Button = window[TOOLBOX_TAB_BTN]
+
 
     nav_elements = {
         PROJECTS_TAB_BTN: [projects_layout_col_1,projects_layout_col_2],
         ABOUT_TAB_BTN: [about_layout_col],
-        # SYSTEM_STATS_TAB_BTN: [system_stats_layout_col]
-        SETTINGS_TAB_BTN: [settings_layout_col]
-
+        SETTINGS_TAB_BTN: [settings_layout_col],
+        TOOLBOX_TAB_BTN: [toolbox_layout_col]
     }
 
     nav_btn_elements = {
         PROJECTS_TAB_BTN: projects_tab_btn_elem,
         ABOUT_TAB_BTN: about_tab_btn_elem,
-        # SYSTEM_STATS_TAB_BTN: system_stats_tab_btn_elem
         SETTINGS_TAB_BTN: settings_tab_btn_elem,
-
+        TOOLBOX_TAB_BTN: toolbox_tab_btn_elm
     }
 
     nav_active_color = (color.DARK_GRAY, color.DIM_BLUE)
@@ -79,11 +81,15 @@ def main():
 
     #ui fixes..
     expand_column_helper(window[PROJECTS_LIST_MENU].widget)    
+    expand_column_helper(window['-hub_scroll-'].widget)    
+
 
 
     
     window.visibility_changed()           
     window[PROJECTS_LIST_MENU].contents_changed()  
+
+
 
     flatten_ui_elements(window)
     window.size = (window_width,850)
@@ -108,6 +114,7 @@ def main():
         event, values = window.read()
         if event == sg.WIN_CLOSED:
             break
+        print(event)
 
         if event == SET_LANGUAGE:
             jt.save_preference(PREF_SELECTED_LANG,localizations.get_language_by_native(values[SET_LANGUAGE]))
@@ -293,6 +300,8 @@ def main():
             webbrowser.open(project_util.get_project_by_id(projects_data, id_number)['github_url']) 
         
         about_layout.events(event)
+        toolbox_layout.events(event,values,window)
+
 
         
 if __name__ == '__main__':

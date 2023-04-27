@@ -14,6 +14,8 @@ def create_layout(lang_data):
     System_stats_local = lang_data[LOCAL_SYSTEM_MONITOR]
     AiPanic_local = lang_data[LOCAL_AIPANIC]
     Settings_local = lang_data[LOCAL_SETTINGS]
+    Toolbox_local = 'ToolBox' #lang_data[LOCAL_TOOLS]
+
     About_local = lang_data[LOCAL_ABOUT]
     layout = [
         [
@@ -22,6 +24,7 @@ def create_layout(lang_data):
                     sg.Button(Projects_local,k=PROJECTS_TAB_BTN,disabled=False,font=FONT,expand_x=True,size=(15,2),button_color=nav_tab_button_active_color,mouseover_colors=nav_tab_mouseover_colors),
                     sg.Button(System_stats_local,visible=False,disabled=True,k=SYSTEM_STATS_TAB_BTN,font=FONT,expand_x=True,size=(20,2),button_color=nav_tab_button_color,mouseover_colors=nav_tab_mouseover_colors),
                     sg.Button(Settings_local,visible=True,k=SETTINGS_TAB_BTN,font=FONT,expand_x=True,size=(10,2),button_color=nav_tab_button_color,mouseover_colors=nav_tab_mouseover_colors),
+                    sg.Button(Toolbox_local,visible=True,k=TOOLBOX_TAB_BTN,font=FONT,expand_x=True,size=(10,2),button_color=nav_tab_button_color,mouseover_colors=nav_tab_mouseover_colors),
                     sg.Button(AiPanic_local,disabled=True,k=AIPANIC_TAB_BTN,font=FONT,expand_x=True,size=(10,2),button_color=nav_tab_button_color,mouseover_colors=nav_tab_mouseover_colors),
                     sg.Button(About_local,k=ABOUT_TAB_BTN,font=FONT,expand_x=True,size=(10,2),button_color=nav_tab_button_color,mouseover_colors=nav_tab_mouseover_colors),                    
                     sg.Button(native_name,disabled=True,font=FONT,expand_x=False,size=(10,2),button_color=(color.DIM_BLUE,color.DARK_GRAY),mouseover_colors=(color.GRAY_9900,color.DARK_GREEN)),

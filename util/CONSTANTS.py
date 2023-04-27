@@ -2,6 +2,10 @@ VERSION = '0.1.2'
 APP_TITLE = f"Super Easy AI Installer Tool - Ver {VERSION}"
 
 FONT_S = 'Arial 8'
+FONT_M = 'Arial 9'
+FONT_M_B = 'Arial 9 bold'
+
+
 
 FONT = 'Arial 12'
 FONT_H1 = 'Arial 14'
@@ -17,6 +21,7 @@ ABOUT_COL = '-about_col-'
 SYSTEM_INFO_COL = '-system_stats_col-'
 
 SETTINGS_COL = '-settings_col-'
+TOOLBOX_COL = '-toolbox_col-'
 #layout
 PROJECTS_LIST_MENU = '-projects_list_menu-'
 PROJECTS_COL_PLACEHOLDER = '-projects_col_placeholder-'
@@ -27,6 +32,7 @@ PROJECTS_TAB_BTN = '-projects_tab-'
 SYSTEM_STATS_TAB_BTN = '-system_stats_tab-'
 AIPANIC_TAB_BTN = '-aipanic_tab-'
 SETTINGS_TAB_BTN = '-settings_tab-'
+TOOLBOX_TAB_BTN = '-toolbox_tab-'
 ABOUT_TAB_BTN = '-about_tab-'
 
 
@@ -44,6 +50,22 @@ SAVE_DEFAULT_ARGS= "-save_default_args-"
 SELECT_APP = "-select_app_"
 SELECTED_APP = "-selected_app_"
 INIT_DEFAULT_PROJECT_ARGS = "-init_default_project_args-"
+
+
+
+
+REMOVE_SYMLINK_BTN = "-remove_symlink_btn-"
+CREATE_SYMLINK_BTN = "-create_symlink_btn-"
+SOURCE_CUSTOM_SYMLINK_PATH_IN = "-source_custom_symlink_path_in-"
+TARGET_CUSTOM_SYMLINK_PATH_IN = "-target_custom_symlink_path_in-"
+#Models Treasury
+MODEL_TREASURY_PATH_IN = "-model_treasury_path_in-"
+MODEL_TREASURY_PATH_FOLDER_BROWSE = "-model_treasury_path_FolderBrowse-"
+SET_MODEL_TREASURY_FOLDER_BTN = "-set_model_treasury_folder_btn-"
+REMOVE_SYMLINK_PATH_IN = "-remove_symlink_path_in-"
+SOURCE_CUSTOM_SYMLINK_PATH_FOLDER_BROWSE = "-source_custom_symlink_path_FolderBrowse-"
+TARGET_CUSTOM_SYMLINK_PATH_FOLDER_BROWSE = "-target_custom_symlink_path_FolderBrowse-"
+
 
 USE_PRE_INSTALLED_VERSION_BTN = '-use_pre_installed_version_btn-'
 
@@ -136,6 +158,7 @@ LOCAL_PROJECTS = "Projects"
 LOCAL_SYSTEM_MONITOR = "System Monitor"
 LOCAL_AIPANIC = "AiPanic"
 LOCAL_SETTINGS = "Settings"
+LOCAL_TOOLS = "Tools"
 LOCAL_ABOUT = "About"
 LOCAL_CHECK_FOR_UPDATE = "Check for Update"
 LOCAL_NONE = "None"
