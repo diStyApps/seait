@@ -20,14 +20,14 @@
 <img src="media/covers/seait_image.jpg">
 
   <h1 align="center">Super Easy AI Installer Tool</h1>
-  <h3 align="center">Use artificial intelligence tools quickly and easily.</h3>
+  <h3 align="center">One SEAIT to Install Them, One Click to Launch Them, One Space-Saving Models Folder to Bind Them All.</h3>
   <h4 align="center">Don't forget to leave a star.</h4>
   
   
   <p align="center">
     <a href="https://github.com/diStyApps/seait/issues">Report Bug</a>
     ·
-    <a href="https://github.com/diStyApps/seait/issues">Request Feature</a>
+    <a href="https://github.com/diStyApps/seait/discussions/11">Request Feature</a>
   </p>
 </div>
 
@@ -80,7 +80,6 @@ Video tutorial soon.
 <img src="media/preview/0.1.2/1_0.1.2.jpg">
 <img src="media/preview/0.1.3/1_0.1.3.jpg">
 <img src="media/preview/0.1.2/2_0.1.2.jpg">
-
 <img src="media/preview/0.0.7/2_0.0.7.jpg">
 <img src="media/preview/0.0.1/1_0.0.1.jpg">
 
@@ -90,7 +89,6 @@ Video tutorial soon.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- Downloads -->
 ## Downloads
 
 
@@ -126,7 +124,7 @@ In the future ill try maybe nukita or something.
 - [ ] Pre-installed auto1111 version
 - [ ] Fully independent version without Python or Git dependencies
 
-See the [open issues](https://github.com/diStyApps/seait/issues) for a full list of proposed features (and known issues).
+See the [Project/Feature Requests](https://github.com/diStyApps/seait/discussions/11) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
