@@ -20,7 +20,7 @@
 <img src="media/covers/seait_image.jpg">
 
   <h1 align="center">Super Easy AI Installer Tool</h1>
-  <h3 align="center">One SEAIT to Install Them, One Click to Launch Them, One Space-Saving Models Folder to Bind Them All.</h3>
+  <h4 align="center">One SEAIT to Install Them, One Click to Launch Them, One Space-Saving Models Folder to Bind Them All.</h3>
   <h4 align="center">Don't forget to leave a star.</h4>
   
   
