@@ -131,10 +131,657 @@ projects_data = [
             "description":["Most popular Stable Diffusion user interface, fully-featured and capable of installing extensions to help create virtually anything."]     
         },
         {
+            "id": 3,
+            "key": "app_",
+            "image_path": b'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',
+            "title": "ComfyUI",
+            "repo_name": "ComfyUI",
+            "github_url": "https://github.com/comfyanonymous/ComfyUI",
+            "git_clone_url":"https://github.com/comfyanonymous/ComfyUI.git",
+            "installed_version": "-",
+            "available_version": "-",
+            "installed": False,
+            "visible":True,
+            "status": 1,
+            "isIncomplete": False,
+            "type": "app",
+            "install_requirements":True,
+            "install_cuda":True,
+            "install_instructions_available":False,
+            "install_instructions": [
+            ],              
+            "download_models_path": "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.safetensors",
+            "checkpoints_path": "models\checkpoints",
+            "entry_point": 
+            {
+                "install":"main.py",
+                "launch":"main.py",
+            },                      
+            "buttons": [
+                {
+                    "button_text": "Update",
+                    "key": "update",
+                },
+                {
+                    "button_text": "Delete venv",
+                    "key": "delete_venv",
+                },
+                {
+                    "button_text": "Create venv",
+                    "key": "create_venv",
+                },                        
+                {
+                    "button_text": "Uninstall",
+                    "key": "uninstall",
+                },                                              
+            ],
+            "launch_buttons": [
+                {
+                    "button_text": "Launch",
+                    "key": "launch",
+                },    
+                {
+                    "button_text": "Install",
+                    "key": "install",
+                },                                                           
+            ],            
+            "args": [
+                [
+                    {
+                        "button_text": "--normalvram",
+                        "key": "normalvram",
+                    },
+                    {
+                        "button_text": "--listen",
+                        "key": "listen",
+                    },                   
+                ],               
+            ],
+            "def_args": [                  
+            ],               
+            "description":["A powerful and modular stable diffusion GUI and backend."]     
+                                       
+        },       
+        {
+            "id": 8,
+            "key": "app_",
+            "image_path": b'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',
+            "title": "Text generation web UI",
+            "repo_name": "text-generation-webui",
+            "github_url": "https://github.com/oobabooga/text-generation-webui",
+            "git_clone_url":"https://github.com/oobabooga/text-generation-webui.git",
+            "installed_version": "-",
+            "available_version": "-",
+            "installed": False,
+            "visible":True,
+            "status": 1,
+            "isIncomplete": False,
+            "type": "app",
+            "install_requirements":True,
+            "install_cuda":True,
+            "install_instructions_available":True,
+            "install_instructions": [
+                # "-m pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117",
+                "-m pip install https://github.com/jllllll/bitsandbytes-windows-webui/raw/main/bitsandbytes-0.37.2-py3-none-any.whl --force-reinstall",
+                "download-model.py facebook/opt-1.3b",
+            ],
+ 
+            "entry_point": 
+            {
+                "install":"server.py",
+                "launch":"server.py",
+            },                      
+            "buttons": [
+                {
+                    "button_text": "Update",
+                    "key": "update",
+                },
+                {
+                    "button_text": "Delete venv",
+                    "key": "delete_venv",
+                },
+                {
+                    "button_text": "Create venv",
+                    "key": "create_venv",
+                },                        
+                {
+                    "button_text": "Uninstall",
+                    "key": "uninstall",
+                },                                              
+            ],
+            "launch_buttons": [
+                {
+                    "button_text": "Launch",
+                    "key": "launch",
+                },    
+                {
+                    "button_text": "Install",
+                    "key": "install",
+                },                                                           
+            ],            
+            "args": [
+                [
+                    {
+                        "button_text": "--auto-launch",
+                    },                      
+                    {
+                        "button_text": "--model-menu",
+                    },  
+                ],  
+                [
+
+                    {
+                        "button_text": "--notebook",
+                    },
+                    {
+                        "button_text": "--chat",
+                    },   
+                ],                 
+                [
+                    {
+                        "button_text": "--cai-chat",
+                    },    
+                    {
+                        "button_text": "--character",
+                    },                      
+                ],
+                [
+                    {
+                        "button_text": "--model",
+                    },
+                    {
+                        "button_text": "--lora LORA",
+                    },
+                    {
+                        "button_text": "--model-dir",
+                    },
+                ],
+                [
+                    {
+                        "button_text": "--settings",
+                    },
+                    {
+                        "button_text": "--xformers",
+                    },
+                ],       
+                [
+                    {
+                        "button_text": "--extensions",
+                    },
+                    {
+                        "button_text": "--verbose",
+                    },
+                ],            
+                [
+                    {
+                        "button_text": "--cpu",
+                    },
+                    {
+                        "button_text": "--auto-devices",
+                    },
+                ],         
+                [
+                    {
+                        "button_text": "--gpu-memory",
+                    },
+                    {
+                        "button_text": "--cpu-memory",
+                    },
+                ],                                          
+                [
+
+                    {
+                        "button_text": "--listen",
+                        "key": "listen",
+                    },
+                    {
+                        "button_text": "--listen-host",
+                    },                    
+                    {
+                        "button_text": "--listen-port=7862",
+                    },                    
+                ],            
+                [
+                    {
+                        "button_text": "--gradio-auth-path",
+                    },
+                    {
+                        "button_text": "--api",
+                    },    
+                    {
+                        "button_text": "--share",
+                    },                                    
+                ]
+            ],
+            "def_args": [
+               '--auto-launch',
+                '--chat',
+               ],    
+            "description":["""Text generation web UI is like auto1111 webui for large language models """]     
+        },    
+        {
+            "id": 16,
+            "key": "app_",
+            "image_path":b'iVBORw0KGgoAAAANSUhEUgAAAB4AAAAWCAYAAADXYyzPAAAFT0lEQVR4nI2WW4heVxXHf2vvc853ny8zky+XyaWGMhonDVT7IO1E82RBoZFKtEwJQglMIUZEqJWCb4IvClUoYkIprT5JEqiUSSVmUKaSptjcwLaj4IxgmTaXufSbfNe9z14+nM/JzOS6YXPgnLXXf63/+u+1jlT6NysPtARrDWnq8c6jwZOmHjEGayOstdgoRlVQDff1Fj0QpAgQWJq/AervYWkp9VWxUYLqvfO5P7AIrtOk1ahT27iRpw4cYGxsjJ07H2JgoJ+/nfoN05fO8Y/ZG/zl4r+Yu7FAFOcolKsgBu4SgNyLahGh1ajjOk2e+94hXvjJS4yMjKyxuTJxnMWZv5PPl7i6uMybf73C796+ADaiVBkAc2dwcy/QbruB6zT5xc9/xmtv/J6RkRG894QQUFVUFWMs7a6n3mxTLiQ8//QT/PLINynF0FheuivAXd5nNW03lzk09gwvvPTTlS9RFGGMQUTWbGuy3Ww79n15mCNPP05Iu7RbDRB5MGBjhFazQQQc+taTAMzNzTE1NYVz7g4nFGMMH8xe5cP/XOVmx7FvZDtf2FKm07oJIe0lcx/g4Lu4dpuHq8JQJcKlgaNHv8/+/fs5fvw4AL4XgKIkUcQn83V+9Os/8uNX3uL6YoNIYP/na4DiXWc97u3AIgbvPWKUkaEScZLQaHWY+fcMcRwzPT2dBdcTTAiKEaHdcaRpwFphod5ERdjal2ewFNNutzFy34wV7z2REYY3lek4RxIZkiTBOUe5XF5jbaM4e1pLUKXZdhQLMc4H+ksxW6p5NHUIa5V92z1WVZzrsqWSo1rM0e06ivkcL//qZSYmTnP48OHsoLUA1HY9wsdXJtlULXDk26MksWVosI+l6/MUkohNfTk+mFvGuy5mVWO5vYGoQvA8NNhHLl9g5uIUj37jWUZH9zE6uu8WVT3gzcOPMfzV7/Dfy5OMff1RQppClNBqNOk6x86BEiI3cN6Ti3LAnYBF0NQByo7+AsVikdkL7/DeqWM88d0fgGT3W1VJ07TnRNj1lafYPPwYrfo8iDB7cYprfz5LHMfs6C+QGMF7T34Fdl2NBTJhAVurOUTAJAnT70zQqi9gTGZujCGOY+I4IY5jjEB5cIjarr3UPvcIC59+gmu3CBhqlRzVQkzq3ZrhsSZjEaHTaTNQihkoJbgQEAUxduWQiDA5OcnJkyepVCq0Wi327NnD+Ph41nZCSuuzeWwc9zqb8PCmMtdmFgkhINaC6jpgQFPH1mqZwVKCT7V3/24pUlXZvXs358+f5/LlywCcOHFipQTGWMSYNdNpx0CRd2cWQAOCRddT7X0XUGqVPLnIEPS2e08IKdu2bePMmTM8Pz7O26dPc/DgQTSElVKsHgoisH1DYZX/dVSLGJzLZu3OwSJeNWNghYtsGWtRVWq1Gr89dizDCWFF5aqa0dlbaVCqxZiBYsxip0OSL2V+VkfmvCMfCdv7C/g0ZOKylvbNOq3lRQBctwveo0C69FlGqSreOUIvgPbNOiIG6QFX8hFD/f9vJKwF1hBIvaOYWGrlhDRklJkoprF0jQt/+gMASZJD4hi8Z/noi7ipdxFrieI4GxTnzjI3fYkol0M1kAalnIvYtqEAKBo8ILeoVlUIKTsGKtm/lQ89lQbyhTLn3nyDifdn+dLjX+PJpMiGt87SPHEK//4VOPIckxsKXPronyy9d4ov1mKCWkARyfp6rZzPGPOeOIlW11jAWK7W2zivK5SoKkagGSJeefV1ePV1XiPmmcIWdGMNPr3Oxz98kWepE4ADezezd+sQHZcikulMgMVmJixrLarwP99UYqPL6MGRAAAAAElFTkSuQmCC',
+            "title": "Bark-gui",
+            "repo_name": "bark-gui",
+            "github_url": "https://github.com/C0untFloyd/bark-gui",
+            "git_clone_url":"https://github.com/C0untFloyd/bark-gui.git",
+            "installed_version": "-",
+            "available_version": "-",
+            "installed": False,
+            "visible":True,
+            "status": 1,
+            "isIncomplete": False,
+            "type": "app",
+            "install_requirements":False,
+            "install_cuda":False,
+            "install_instructions_available":True,
+            "install_instructions": [ 
+                "-m pip install git+https://github.com/C0untFloyd/bark-gui.git",
+                "-m pip uninstall -y torch torchvision torchaudio",
+                "-m pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu118",
+                "-m pip install gradio",
+            ],
+            "entry_point": 
+            {
+                "install":"webui.py",
+                "launch":"webui.py",
+            },                      
+            "buttons": [
+                {
+                    "button_text": "Update",
+                    "key": "update",
+                },
+                {
+                    "button_text": "Delete venv",
+                    "key": "delete_venv",
+                },
+                {
+                    "button_text": "Create venv",
+                    "key": "create_venv",
+                },                        
+                {
+                    "button_text": "Uninstall",
+                    "key": "uninstall",
+                },                                              
+            ],
+            "launch_buttons": [
+                {
+                    "button_text": "Launch",
+                    "key": "launch",
+                },    
+                {
+                    "button_text": "Install",
+                    "key": "install",
+                },                                                           
+            ],            
+            "args": [
+                [
+                    {
+                        "button_text": "-autolaunch",
+                    },
+                    {
+                        "button_text": "-smallmodels",
+                    },                    
+                ],      
+                [
+                    {
+                        "button_text": "-forcecpu",
+                    },
+                    {
+                        "button_text": "-offloadcpu",
+                    },  
+                    {
+                        "button_text": "-enablemps",
+                    },                                      
+                ]                     
+            ],
+            "def_args": [
+                '-autolaunch'
+            ],
+            "description":["""Original Bark Description:            
+Bark is a transformer-based text-to-audio model created by Suno. Bark can generate highly realistic, multilingual speech as well as other audio - including music, background noise and simple sound effects.
+The model can also produce nonverbal communications like laughing, sighing and crying.
+To support the research community, we are providing access to pretrained model checkpoints ready for inference. 
+
+GUI:
+This is a simple Web UI for an extended Bark Version using Gradio, meant to be run locally.
+
+It actually is some kind of Frankenstein-Bark with the original Code as base and various changes/improvements I liked, ripped and improved from these 2 repos:
+
+https://github.com/serp-ai/bark-with-voice-clone
+https://github.com/makawy7/bark-webui (inspired me to even start this)"""]             
+        },            
+        {
+            "id": 17,
+            "key": "app_",
+            "image_path":b'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',
+            "title": "Whisper-ui",
+            "repo_name": "whisper-ui",
+            "github_url": "https://github.com/hayabhay/whisper-ui",
+            "git_clone_url":"https://github.com/hayabhay/whisper-ui.git",
+            "installed_version": "-",
+            "available_version": "-",
+            "installed": False,
+            "visible":True,
+            "status": 1,
+            "isIncomplete": False,
+            "type": "app",
+            "install_requirements":True,
+            "install_cuda":False,
+            "install_instructions_available":True,
+            "install_instructions": [ 
+                "-m pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu118",
+            ],
+            "entry_point": 
+            {
+                "install":"streamlit run app/01_🏠_Home.py",
+                "launch":"streamlit run app/01_🏠_Home.py",
+            },                      
+            "buttons": [
+                {
+                    "button_text": "Update",
+                    "key": "update",
+                },
+                {
+                    "button_text": "Delete venv",
+                    "key": "delete_venv",
+                },
+                {
+                    "button_text": "Create venv",
+                    "key": "create_venv",
+                },                        
+                {
+                    "button_text": "Uninstall",
+                    "key": "uninstall",
+                },                                              
+            ],
+            "launch_buttons": [
+                {
+                    "button_text": "Launch",
+                    "key": "launch",
+                },    
+                {
+                    "button_text": "Install",
+                    "key": "install",
+                },                                                           
+            ],            
+            "args": [                
+            ],
+            "def_args": [
+            ],
+            "description":["""Streamlit UI for OpenAI's Whisper
+
+This is a simple Streamlit UI for OpenAI's Whisper speech-to-text model. It let's you download and transcribe media from YouTube videos, playlists, or local files. You can then browse, filter, and search through your saved audio files. """]             
+        },     
+        {
+            "id": 11,
+            "key": "app_",
+            "image_path":b'iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAIAAAC0Ujn1AAACy0lEQVR4nLVVwU7yQBDe3bQEKxBsYgIaA/FC4qUhMWm8wAOQyJ3H8BF8Er34AGDiiQAHPXnApNF4ICTGoFFKsEKAuuz8h/FvcKlY5P/n0Gxndr+Znf1mhgIAIYQQAgAAQCkFAMYYWUaEEHjEWxBCKEIj6FJwkozHY8ZYKBTyNIqHa9v29fU15zwSiZimGQ6Hg/gDgMlkUq1WAUAIEYvF8vk8IYRSSoQQQgjbts/OztrttuM4zWazXC6jHhbKdDoFgFqtdnNzg5pGo3F1dYUmhqFZlmWaZjqdjkajhmFQSl3X/TFk3PD+/r63t4eJzeVyLy8vaPpMuaZptm2Tv4+ZzWZVVQ2Y5d3dXYwDAOr1ejKZ/EwyYn18fFxcXGxubpqmyRhb9kkR5O7u7vX1NZfLURSPfISQTqeTSCQYY0sRxqOsxNov0KvLbExMMqwIPXtX9p1hdTffFrTkRuoHv4d2XXc0GnkQ6GYwGIxGI3x8byfnXAjhC6JI/5xzRVFOT08rlUq5XJ5Op4yx4XBoWdZ4PFZVVVGUTCYTi8WEEIqiHB8fx+Pxo6MjPLgIGtljGEY4HPZCvr29PTk56fV6nHNVVYvFYqlUwjsdHBzgTp9m+WOLaLVa85c9Pz8HAM75guP+ucY2hoUQj8dLpZKu65hiXdcLhUImk8EC6Xa7nU6H+DEqaMk8Pz8/Pj4CwPb29tbWlqcfDoeVSuXw8HBtbU0q4EDQs7MDf5EnqL+8vNQ0LZvNStsCDSrsKkIIzL7Xv/CbSqXe3t7mT8kM+U4kOntKQoimaa7r+gQUENpXYOFcXQkaZTAYrK+vrwTtOE6/3599dlx3u92NjY1fQiNEu92+v7+fvTuun56ednZ2yFxBBnpGhDAMQ/JHKX14eAiFQpFIRGJe0Kg9LKnJCSEsy9rf3ydfm/BnQKu0fM654zi6rvta/8Fs/F/kWzD7/wDSnRnN1GeEDwAAAABJRU5ErkJggg==',
+            "title": "Lama Cleaner",
+            "repo_name": "lama-cleaner",
+            "github_url": "https://github.com/Sanster/lama-cleaner",
+            "git_clone_url":"https://github.com/Sanster/lama-cleaner.git",
+            "installed_version": "-",
+            "available_version": "-",
+            "installed": False,
+            "visible":True,
+            "status": 1,
+            "isIncomplete": False,
+            "type": "app",
+            "install_requirements":True,
+            "install_cuda":False,
+            "install_instructions_available":True,
+            "install_instructions": [
+                "-m pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113",
+                "-m pip install lama-cleaner",
+
+            ],
+            "entry_point": 
+            {
+                "install":"lama-cleaner",
+                "launch":"lama-cleaner",
+            },                      
+            "buttons": [
+                {
+                    "button_text": "Update",
+                    "key": "update",
+                },
+                {
+                    "button_text": "Delete venv",
+                    "key": "delete_venv",
+                },
+                {
+                    "button_text": "Create venv",
+                    "key": "create_venv",
+                },                        
+                {
+                    "button_text": "Uninstall",
+                    "key": "uninstall",
+                },                                              
+            ],
+            "launch_buttons": [
+                {
+                    "button_text": "Launch",
+                    "key": "launch",
+                },    
+                {
+                    "button_text": "Install",
+                    "key": "install",
+                },                                                           
+            ],            
+            "args": [
+                [
+                    {
+                        "button_text": "--model=lama",
+                        "key": "model=lama",
+                    },
+                    {
+                        "button_text": "--device=cpu",
+                        "key": "--device=cpu",
+                    },      
+                    {
+                        "button_text": "--port=8080",
+                        "key": "port=8080",
+                    },                                 
+                ],               
+            ],
+            "def_args": [
+                '--model=lama',
+                '--device=cpu',
+                '--port=8080',
+            ],
+            "description":[ """A free and open-source inpainting tool powered by SOTA AI model.""",
+            ]             
+        },       
+        {
+            "id": 2,
+            "key": "app_",
+            "image_path": b'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',
+            "title": "InvokeAI",
+            "repo_name": "InvokeAI",
+            "github_url": "https://github.com/invoke-ai/InvokeAI",
+            "git_clone_url":"https://github.com/invoke-ai/InvokeAI.git",
+            "installed_version": "-",
+            "available_version": "-",
+            "installed": False,
+            "visible":True,
+            "status": 1,
+            "isIncomplete": False,
+            "type": "app",
+            "install_requirements":False,
+            "install_cuda":False,
+            "install_instructions_available":True,
+            "install_instructions": [
+                '-m pip install InvokeAI[xformers] --use-pep517 --extra-index-url https://download.pytorch.org/whl/cu117',
+            ],
+ 
+            "entry_point": 
+            {
+                "install":"invokeai-configure",
+                "launch":"invokeai",
+            },                      
+            "buttons": [
+                {
+                    "button_text": "Update",
+                    "key": "update",
+                },
+                {
+                    "button_text": "Delete venv",
+                    "key": "delete_venv",
+                },
+                {
+                    "button_text": "Create venv",
+                    "key": "create_venv",
+                },                        
+                {
+                    "button_text": "Uninstall",
+                    "key": "uninstall",
+                },                                              
+            ],
+            "launch_buttons": [
+                {
+                    "button_text": "Launch",
+                    "key": "launch",
+                },    
+                {
+                    "button_text": "Install",
+                    "key": "install",
+                },                                                           
+            ],            
+            "args": [
+                [
+                    {
+                        "button_text": "--web",
+                        "key": "web",
+                    },                                                          
+                ],      
+                [
+                    {
+                        "button_text": "--internet",
+                        "key": "internet",
+                    },  
+                    {
+                        "button_text": "--no-internet",
+                        "key": "no-internet",
+                    },                                                           
+                ],    
+                [        
+                    {
+                        "button_text": "--nsfw_checker",
+                        "key": "nsfw_checker",
+                    },  
+                    {
+                        "button_text": "--no-nsfw_checker",
+                        "key": "no-nsfw_checker",
+                    },                                                    
+                ],   
+                [        
+                    {
+                        "button_text": "--safety_checker",
+                        "key": "safety_checker",
+                    },  
+                    {
+                        "button_text": "--no-safety_checker",
+                        "key": "no-safety_checker",
+                    },                                                    
+                ],  
+                [        
+                    {
+                        "button_text": "--embeddings",
+                        "key": "embeddings",
+                    },  
+                    {
+                        "button_text": "--no-embeddings",
+                        "key": "no-embeddings",
+                    },                                                    
+                ],
+
+            ],
+            "def_args": [
+            ],               
+            "description":["InvokeAI is a leading creative engine for Stable Diffusion models, empowering professionals, artists, and enthusiasts to generate and create visual media using the latest AI-driven technologies."]     
+                                      
+        },    
+        {
+            "id": 4,
+            "key": "app_",
+            "image_path": b'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',
+            "title": "Kohya's GUI",
+            "repo_name": "kohya_ss",
+            "github_url": "https://github.com/bmaltais/kohya_ss",
+            "git_clone_url":"https://github.com/bmaltais/kohya_ss.git",
+            "installed_version": "-",
+            "available_version": "-",
+            "installed": False,
+            "visible":True,
+            "status": 1,
+            "isIncomplete": False,
+            "type": "app",
+            "install_requirements":False,
+            "install_cuda":False,
+            "install_instructions_available":False,
+            "install_instructions": [
+            ],              
+            "download_models_path": "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.safetensors",
+            "checkpoints_path": "models\checkpoints",
+            "entry_point": 
+            {
+                "install":"setup.bat",
+                "launch":"gui.bat",
+            },                      
+            "buttons": [
+                {
+                    "button_text": "Update",
+                    "key": "update",
+                },
+                {
+                    "button_text": "Delete venv",
+                    "key": "delete_venv",
+                },
+                {
+                    "button_text": "Create venv",
+                    "key": "create_venv",
+                },                        
+                {
+                    "button_text": "Uninstall",
+                    "key": "uninstall",
+                },                                              
+            ],
+            "launch_buttons": [
+                {
+                    "button_text": "Launch",
+                    "key": "launch",
+                },     
+                {
+                    "button_text": "Install",
+                    "key": "install",
+                },                                                          
+            ],            
+            "args": [
+                [
+                    {
+                        "button_text": "--inbrowser",
+                        "key": "inbrowser",
+                    },
+                    {
+                        "button_text": "--share",
+                        "key": "share",
+                    },                    
+                ],               
+            ],
+            "def_args": [
+                "--inbrowser",
+            ],               
+            "description":["This repository provides a Windows-focused Gradio GUI for Kohya's Stable Diffusion trainers. The GUI allows you to set the training parameters and generate and run the required CLI commands to train the model."]     
+                                      
+        },         
+        {
             "id": 10,
             "key": "app_",
             "image_path":b'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',
-            "title": "Vladiffsuion - A1111 fork",
+            "title": "Vladiffusion - A1111 fork",
             "repo_name": "automatic",
             "github_url": "https://github.com/vladmandic/automatic",
             "git_clone_url":"https://github.com/vladmandic/automatic.git",
@@ -366,340 +1013,6 @@ projects_data = [
             "description":['One more fork of Automatic1111 web UI has a beautiful user interface and many additional features. It appears to be well-maintained.']     
         },         
         {
-            "id": 11,
-            "key": "app_",
-            "image_path":b'iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAIAAAC0Ujn1AAACy0lEQVR4nLVVwU7yQBDe3bQEKxBsYgIaA/FC4qUhMWm8wAOQyJ3H8BF8Er34AGDiiQAHPXnApNF4ICTGoFFKsEKAuuz8h/FvcKlY5P/n0Gxndr+Znf1mhgIAIYQQAgAAQCkFAMYYWUaEEHjEWxBCKEIj6FJwkozHY8ZYKBTyNIqHa9v29fU15zwSiZimGQ6Hg/gDgMlkUq1WAUAIEYvF8vk8IYRSSoQQQgjbts/OztrttuM4zWazXC6jHhbKdDoFgFqtdnNzg5pGo3F1dYUmhqFZlmWaZjqdjkajhmFQSl3X/TFk3PD+/r63t4eJzeVyLy8vaPpMuaZptm2Tv4+ZzWZVVQ2Y5d3dXYwDAOr1ejKZ/EwyYn18fFxcXGxubpqmyRhb9kkR5O7u7vX1NZfLURSPfISQTqeTSCQYY0sRxqOsxNov0KvLbExMMqwIPXtX9p1hdTffFrTkRuoHv4d2XXc0GnkQ6GYwGIxGI3x8byfnXAjhC6JI/5xzRVFOT08rlUq5XJ5Op4yx4XBoWdZ4PFZVVVGUTCYTi8WEEIqiHB8fx+Pxo6MjPLgIGtljGEY4HPZCvr29PTk56fV6nHNVVYvFYqlUwjsdHBzgTp9m+WOLaLVa85c9Pz8HAM75guP+ucY2hoUQj8dLpZKu65hiXdcLhUImk8EC6Xa7nU6H+DEqaMk8Pz8/Pj4CwPb29tbWlqcfDoeVSuXw8HBtbU0q4EDQs7MDf5EnqL+8vNQ0LZvNStsCDSrsKkIIzL7Xv/CbSqXe3t7mT8kM+U4kOntKQoimaa7r+gQUENpXYOFcXQkaZTAYrK+vrwTtOE6/3599dlx3u92NjY1fQiNEu92+v7+fvTuun56ednZ2yFxBBnpGhDAMQ/JHKX14eAiFQpFIRGJe0Kg9LKnJCSEsy9rf3ydfm/BnQKu0fM654zi6rvta/8Fs/F/kWzD7/wDSnRnN1GeEDwAAAABJRU5ErkJggg==',
-            "title": "Lama Cleaner",
-            "repo_name": "lama-cleaner",
-            "github_url": "https://github.com/Sanster/lama-cleaner",
-            "git_clone_url":"https://github.com/Sanster/lama-cleaner.git",
-            "installed_version": "-",
-            "available_version": "-",
-            "installed": False,
-            "visible":True,
-            "status": 1,
-            "isIncomplete": False,
-            "type": "app",
-            "install_requirements":True,
-            "install_cuda":False,
-            "install_instructions_available":True,
-            "install_instructions": [
-                "-m pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113",
-                "-m pip install lama-cleaner",
-
-            ],
-            "entry_point": 
-            {
-                "install":"lama-cleaner",
-                "launch":"lama-cleaner",
-            },                      
-            "buttons": [
-                {
-                    "button_text": "Update",
-                    "key": "update",
-                },
-                {
-                    "button_text": "Delete venv",
-                    "key": "delete_venv",
-                },
-                {
-                    "button_text": "Create venv",
-                    "key": "create_venv",
-                },                        
-                {
-                    "button_text": "Uninstall",
-                    "key": "uninstall",
-                },                                              
-            ],
-            "launch_buttons": [
-                {
-                    "button_text": "Launch",
-                    "key": "launch",
-                },    
-                {
-                    "button_text": "Install",
-                    "key": "install",
-                },                                                           
-            ],            
-            "args": [
-                [
-                    {
-                        "button_text": "--model=lama",
-                        "key": "model=lama",
-                    },
-                    {
-                        "button_text": "--device=cpu",
-                        "key": "--device=cpu",
-                    },      
-                    {
-                        "button_text": "--port=8080",
-                        "key": "port=8080",
-                    },                                 
-                ],               
-            ],
-            "def_args": [
-                '--model=lama',
-                '--device=cpu',
-                '--port=8080',
-            ],
-            "description":[ """A free and open-source inpainting tool powered by SOTA AI model.""",
-            ]             
-        },       
-        {
-            "id": 3,
-            "key": "app_",
-            "image_path": b'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',
-            "title": "ComfyUI",
-            "repo_name": "ComfyUI",
-            "github_url": "https://github.com/comfyanonymous/ComfyUI",
-            "git_clone_url":"https://github.com/comfyanonymous/ComfyUI.git",
-            "installed_version": "-",
-            "available_version": "-",
-            "installed": False,
-            "visible":True,
-            "status": 1,
-            "isIncomplete": False,
-            "type": "app",
-            "install_requirements":True,
-            "install_cuda":True,
-            "install_instructions_available":False,
-            "install_instructions": [
-            ],              
-            "download_models_path": "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.safetensors",
-            "checkpoints_path": "models\checkpoints",
-            "entry_point": 
-            {
-                "install":"main.py",
-                "launch":"main.py",
-            },                      
-            "buttons": [
-                {
-                    "button_text": "Update",
-                    "key": "update",
-                },
-                {
-                    "button_text": "Delete venv",
-                    "key": "delete_venv",
-                },
-                {
-                    "button_text": "Create venv",
-                    "key": "create_venv",
-                },                        
-                {
-                    "button_text": "Uninstall",
-                    "key": "uninstall",
-                },                                              
-            ],
-            "launch_buttons": [
-                {
-                    "button_text": "Launch",
-                    "key": "launch",
-                },    
-                {
-                    "button_text": "Install",
-                    "key": "install",
-                },                                                           
-            ],            
-            "args": [
-                [
-                    {
-                        "button_text": "--normalvram",
-                        "key": "normalvram",
-                    },
-                    {
-                        "button_text": "--listen",
-                        "key": "listen",
-                    },                   
-                ],               
-            ],
-            "def_args": [                  
-            ],               
-            "description":["A powerful and modular stable diffusion GUI and backend."]     
-                                       
-        }, 
-        {
-            "id": 2,
-            "key": "app_",
-            "image_path": b'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',
-            "title": "InvokeAI",
-            "repo_name": "InvokeAI",
-            "github_url": "https://github.com/invoke-ai/InvokeAI",
-            "git_clone_url":"https://github.com/invoke-ai/InvokeAI.git",
-            "installed_version": "-",
-            "available_version": "-",
-            "installed": False,
-            "visible":True,
-            "status": 1,
-            "isIncomplete": False,
-            "type": "app",
-            "install_requirements":False,
-            "install_cuda":False,
-            "install_instructions_available":True,
-            "install_instructions": [
-                '-m pip install InvokeAI[xformers] --use-pep517 --extra-index-url https://download.pytorch.org/whl/cu117',
-            ],
- 
-            "entry_point": 
-            {
-                "install":"invokeai-configure",
-                "launch":"invokeai",
-            },                      
-            "buttons": [
-                {
-                    "button_text": "Update",
-                    "key": "update",
-                },
-                {
-                    "button_text": "Delete venv",
-                    "key": "delete_venv",
-                },
-                {
-                    "button_text": "Create venv",
-                    "key": "create_venv",
-                },                        
-                {
-                    "button_text": "Uninstall",
-                    "key": "uninstall",
-                },                                              
-            ],
-            "launch_buttons": [
-                {
-                    "button_text": "Launch",
-                    "key": "launch",
-                },    
-                {
-                    "button_text": "Install",
-                    "key": "install",
-                },                                                           
-            ],            
-            "args": [
-                [
-                    {
-                        "button_text": "--web",
-                        "key": "web",
-                    },                                                          
-                ],      
-                [
-                    {
-                        "button_text": "--internet",
-                        "key": "internet",
-                    },  
-                    {
-                        "button_text": "--no-internet",
-                        "key": "no-internet",
-                    },                                                           
-                ],    
-                [        
-                    {
-                        "button_text": "--nsfw_checker",
-                        "key": "nsfw_checker",
-                    },  
-                    {
-                        "button_text": "--no-nsfw_checker",
-                        "key": "no-nsfw_checker",
-                    },                                                    
-                ],   
-                [        
-                    {
-                        "button_text": "--safety_checker",
-                        "key": "safety_checker",
-                    },  
-                    {
-                        "button_text": "--no-safety_checker",
-                        "key": "no-safety_checker",
-                    },                                                    
-                ],  
-                [        
-                    {
-                        "button_text": "--embeddings",
-                        "key": "embeddings",
-                    },  
-                    {
-                        "button_text": "--no-embeddings",
-                        "key": "no-embeddings",
-                    },                                                    
-                ],
-
-            ],
-            "def_args": [
-            ],               
-            "description":["InvokeAI is a leading creative engine for Stable Diffusion models, empowering professionals, artists, and enthusiasts to generate and create visual media using the latest AI-driven technologies."]     
-                                      
-        },    
-        {
-            "id": 4,
-            "key": "app_",
-            "image_path": b'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',
-            "title": "Kohya's GUI",
-            "repo_name": "kohya_ss",
-            "github_url": "https://github.com/bmaltais/kohya_ss",
-            "git_clone_url":"https://github.com/bmaltais/kohya_ss.git",
-            "installed_version": "-",
-            "available_version": "-",
-            "installed": False,
-            "visible":True,
-            "status": 1,
-            "isIncomplete": False,
-            "type": "app",
-            "install_requirements":False,
-            "install_cuda":False,
-            "install_instructions_available":False,
-            "install_instructions": [
-            ],              
-            "download_models_path": "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.safetensors",
-            "checkpoints_path": "models\checkpoints",
-            "entry_point": 
-            {
-                "install":"setup.bat",
-                "launch":"gui.bat",
-            },                      
-            "buttons": [
-                {
-                    "button_text": "Update",
-                    "key": "update",
-                },
-                {
-                    "button_text": "Delete venv",
-                    "key": "delete_venv",
-                },
-                {
-                    "button_text": "Create venv",
-                    "key": "create_venv",
-                },                        
-                {
-                    "button_text": "Uninstall",
-                    "key": "uninstall",
-                },                                              
-            ],
-            "launch_buttons": [
-                {
-                    "button_text": "Launch",
-                    "key": "launch",
-                },     
-                {
-                    "button_text": "Install",
-                    "key": "install",
-                },                                                          
-            ],            
-            "args": [
-                [
-                    {
-                        "button_text": "--inbrowser",
-                        "key": "inbrowser",
-                    },
-                    {
-                        "button_text": "--share",
-                        "key": "share",
-                    },                    
-                ],               
-            ],
-            "def_args": [
-                "--inbrowser",
-            ],               
-            "description":["This repository provides a Windows-focused Gradio GUI for Kohya's Stable Diffusion trainers. The GUI allows you to set the training parameters and generate and run the required CLI commands to train the model."]     
-                                      
-        },         
-        {
             "id": 5,
             "key": "app_",
             "image_path": b'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',
@@ -841,163 +1154,7 @@ projects_data = [
             ],              
             "description":["""Autonomous GPT runs till task complation uses on openai API, Be careful as it might be costly. Additionally, it requires a PINECONE API KEY."""]     
         },       
-        {
-            "id": 8,
-            "key": "app_",
-            "image_path": b'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',
-            "title": "Text generation web UI",
-            "repo_name": "text-generation-webui",
-            "github_url": "https://github.com/oobabooga/text-generation-webui",
-            "git_clone_url":"https://github.com/oobabooga/text-generation-webui.git",
-            "installed_version": "-",
-            "available_version": "-",
-            "installed": False,
-            "visible":True,
-            "status": 1,
-            "isIncomplete": False,
-            "type": "app",
-            "install_requirements":True,
-            "install_cuda":True,
-            "install_instructions_available":True,
-            "install_instructions": [
-                # "-m pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117",
-                "-m pip install https://github.com/jllllll/bitsandbytes-windows-webui/raw/main/bitsandbytes-0.37.2-py3-none-any.whl --force-reinstall",
-                "download-model.py facebook/opt-1.3b",
-            ],
- 
-            "entry_point": 
-            {
-                "install":"server.py",
-                "launch":"server.py",
-            },                      
-            "buttons": [
-                {
-                    "button_text": "Update",
-                    "key": "update",
-                },
-                {
-                    "button_text": "Delete venv",
-                    "key": "delete_venv",
-                },
-                {
-                    "button_text": "Create venv",
-                    "key": "create_venv",
-                },                        
-                {
-                    "button_text": "Uninstall",
-                    "key": "uninstall",
-                },                                              
-            ],
-            "launch_buttons": [
-                {
-                    "button_text": "Launch",
-                    "key": "launch",
-                },    
-                {
-                    "button_text": "Install",
-                    "key": "install",
-                },                                                           
-            ],            
-            "args": [
-                [
-                    {
-                        "button_text": "--auto-launch",
-                    },                      
-                    {
-                        "button_text": "--model-menu",
-                    },  
-                ],  
-                [
-
-                    {
-                        "button_text": "--notebook",
-                    },
-                    {
-                        "button_text": "--chat",
-                    },   
-                ],                 
-                [
-                    {
-                        "button_text": "--cai-chat",
-                    },    
-                    {
-                        "button_text": "--character",
-                    },                      
-                ],
-                [
-                    {
-                        "button_text": "--model",
-                    },
-                    {
-                        "button_text": "--lora LORA",
-                    },
-                    {
-                        "button_text": "--model-dir",
-                    },
-                ],
-                [
-                    {
-                        "button_text": "--settings",
-                    },
-                    {
-                        "button_text": "--xformers",
-                    },
-                ],       
-                [
-                    {
-                        "button_text": "--extensions",
-                    },
-                    {
-                        "button_text": "--verbose",
-                    },
-                ],            
-                [
-                    {
-                        "button_text": "--cpu",
-                    },
-                    {
-                        "button_text": "--auto-devices",
-                    },
-                ],         
-                [
-                    {
-                        "button_text": "--gpu-memory",
-                    },
-                    {
-                        "button_text": "--cpu-memory",
-                    },
-                ],                                          
-                [
-
-                    {
-                        "button_text": "--listen",
-                        "key": "listen",
-                    },
-                    {
-                        "button_text": "--listen-host",
-                    },                    
-                    {
-                        "button_text": "--listen-port=7862",
-                    },                    
-                ],            
-                [
-                    {
-                        "button_text": "--gradio-auth-path",
-                    },
-                    {
-                        "button_text": "--api",
-                    },    
-                    {
-                        "button_text": "--share",
-                    },                                    
-                ]
-            ],
-            "def_args": [
-               '--auto-launch',
-                '--chat',
-               ],    
-            "description":["""Text generation web UI is like auto1111 webui for large language models """]     
-        },   
+    
         {
             "id": 9,
             "key": "app_",
@@ -1246,5 +1403,9 @@ projects_data = [
             "def_args": [
             ],
             "description":["Better safe than sorry, Stable-Diffusion-Pickle-Scanner-GUI offers an extra layer of protection against potential malicious code. - safetensors models don't need to be scanned."]             
-        },               
+        },
+                                      
     ]
+
+
+

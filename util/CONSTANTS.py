@@ -1,4 +1,4 @@
-VERSION = '0.1.3'
+VERSION = '0.1.4'
 APP_TITLE = f"Super Easy AI Installer Tool - Ver {VERSION}"
 
 FONT_S = 'Arial 8'

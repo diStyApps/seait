@@ -81,7 +81,7 @@ def create_layout(project,lang_data):
             sg.Frame("",[       
                 [
                     sg.MLine(f"""{project['description'][0]}""",k=f"{main_key}description_{project['id']}_console_ml-",visible=True,text_color=color.DIM_BLUE,border_width=10,sbar_width=20,sbar_trough_color=0,
-                            autoscroll=True, auto_refresh=True,expand_x=True,expand_y=True,font=FONT,no_scrollbar=True,disabled=True,size=(100,3)),
+                            autoscroll=True, auto_refresh=True,expand_x=True,expand_y=True,font=FONT,no_scrollbar=False,disabled=True,size=(100,3),),
                 ],                            
                 ],expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
         ] if project['description'] else [],         

@@ -87,7 +87,7 @@ def create_layout(lang_data,tools):
             sg.Frame('',[       
                     [
                         sg.Image(data=ic.args,background_color=color.DARK_GRAY),
-                        sg.Text(f"{lang_data[LOCAL_SET]} Symlink",font=FONT,text_color=color.LIGHT_GRAY,background_color=color.DARK_GRAY),
+                        sg.Text(f"Symlink Creator",font=FONT,text_color=color.LIGHT_GRAY,background_color=color.DARK_GRAY),
                     ],  
                     [
                         sg.Frame('',[       

@@ -299,6 +299,8 @@ def main():
         
         about_layout.events(event)
         toolbox_layout.events(event,values,window,lang_data)
+        requirements_layout.events(window,event,lang_data)
+
 
 
         
