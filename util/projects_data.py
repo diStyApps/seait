@@ -382,6 +382,7 @@ projects_data = [
                 "-m pip uninstall -y torch torchvision torchaudio",
                 "-m pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu118",
                 "-m pip install gradio",
+                "-m pip install soundfile"
             ],
             "entry_point": 
             {
@@ -452,7 +453,7 @@ It actually is some kind of Frankenstein-Bark with the original Code as base and
 
 https://github.com/serp-ai/bark-with-voice-clone
 https://github.com/makawy7/bark-webui (inspired me to even start this)"""]             
-        },            
+        },
         {
             "id": 17,
             "key": "app_",
@@ -1154,7 +1155,6 @@ This is a simple Streamlit UI for OpenAI's Whisper speech-to-text model. It let'
             ],              
             "description":["""Autonomous GPT runs till task complation uses on openai API, Be careful as it might be costly. Additionally, it requires a PINECONE API KEY."""]     
         },       
-    
         {
             "id": 9,
             "key": "app_",
@@ -1403,8 +1403,7 @@ This is a simple Streamlit UI for OpenAI's Whisper speech-to-text model. It let'
             "def_args": [
             ],
             "description":["Better safe than sorry, Stable-Diffusion-Pickle-Scanner-GUI offers an extra layer of protection against potential malicious code. - safetensors models don't need to be scanned."]             
-        },
-                                      
+        },         
     ]
 
 
