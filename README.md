@@ -61,43 +61,30 @@ But remains a great solution for users with minimal technical knowledge or exper
 
 ### Tested on Windows 10+ and Nvidia GPU-based cards
 
-### Update [0.1.4] 
+### Update [0.1.4.6] 
+<img src="media/covers/SEAIT_anim.gif">
 
-Added
+Added:
 
-### bark-gui and openai whisper-ui both tested on GTX 970 4GB and worked great.
+- VisionCrafter
 
-[Play man](media/preview/0.1.4/final_23-25-37.wav)
+  A tool that can generates animations and music from text,
+  ideal for producing short videos and GIFs, as well as creating brief cinematic scenes.
 
-[Play woman](media/preview/0.1.4/final_23-33-38.wav)
+  https://github.com/diStyApps/VisionCrafter
 
-- bark-gui [text-to-speech and voice cloning]
+- VisualClipPicker
 
-  https://github.com/suno-ai/bark
+  Trimming Clips by Face Recognition
 
-  Bark is a transformer-based text-to-audio model created by Suno. Bark can generate highly realistic, multilingual speech as well as other audio - including music, background noise and simple sound effects. The model can also produce nonverbal communications like laughing, sighing and crying. To support the research community, we are providing access to pretrained model checkpoints ready for inference.
+  https://github.com/diStyApps/VisualClipPicker
 
-  https://github.com/C0untFloyd/bark-gui
+Changed:
 
-  bark-gui is This is a simple Web UI for an extended Bark Version using Gradio, meant to be run locally.
-
-- whisper-ui [speech-to-text]
-
-  https://github.com/openai/whisper
-
-  Whisper is a general-purpose speech recognition model. It is trained on a large dataset of diverse audio and is also a multitasking model that can perform multilingual speech recognition, speech translation, and language identification.
-
-  A bit old maybe there new GUIs for whisper but i used this one.
-
-  https://github.com/hayabhay/whisper-ui
-
-  whisper-ui is a simple Streamlit UI for OpenAI's Whisper speech-to-text model. It let's you download and transcribe media from YouTube videos, playlists, or local files. You can then browse, filter, and search through your saved audio files. 
-
-  I have also have an old fork of this project with some differences that let chose gpu or cpu but its older then this one i might added later if requested.
-
-Minor fixes and changes to the code.
+Vladiffsuion to SD.Next
 
 ### Spread the word; don't only keep it to yourself.
+<img src="media/preview/0.1.4.6/1.png">
 <img src="media/preview/0.1.4/1_0.1.4.jpg">
 <img src="media/preview/0.1.2/1_0.1.2.jpg">
 <img src="media/preview/0.1.3/1_0.1.3.jpg">
