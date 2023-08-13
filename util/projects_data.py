@@ -507,12 +507,12 @@ This repo currently support Text-to-Audio Generation (including Music)"""
             "install_cuda":False,
             "install_instructions_available":True,
             "install_instructions": [ 
+                "-m pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118",
+                "-m pip install tensorboardX"
                 # "-m pip install git+https://github.com/C0untFloyd/bark-gui.git",
                 # "-m pip uninstall -y torch torchvision torchaudio",
-                "-m pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118",
                 # "-m pip install gradio",
                 # "-m pip install soundfile"
-                "-m pip install tensorboardX"
 
                 
 
