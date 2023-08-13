@@ -7,6 +7,7 @@ import util.installation_status as installation_status
 from util.json_tools_projects import get_pref_project_data
 from util.util import convert_string_to_list
 import os
+from util.path_handler import full_path
 
 def create_layout(project,lang_data):
     main_key = '-selected_app_'
@@ -15,8 +16,12 @@ def create_layout(project,lang_data):
 
     project_pref_path_len = 0
     project_pref_def_args=""
-    project_pref_path = os.path.abspath(project['repo_name'])
-    project_pref_path_def = os.path.abspath(project['repo_name'])
+    # project_pref_path = os.path.abspath(project['repo_name'])
+    project_pref_path =  f"{full_path}\{project['repo_name']}"
+
+    # project_pref_path_def = os.path.abspath(project['repo_name'])
+    project_pref_path_def = f"{full_path}\{project['repo_name']}"
+
     project_pref = get_pref_project_data(project['id'])
     
     if project_pref:
@@ -68,13 +73,14 @@ def create_layout(project,lang_data):
                     sg.Button(project_commit_hash,visible=True,k=f"-{selected_project_key}commit_hash_lbl-",size=(50,1),font=FONT,expand_x=True,disabled=True)
                 ],                        
                 [ 
-                    launch_buttons_button
-                    # sg.Text(project['type'],font=FONT,background_color=color.DARK_GRAY),
-
+                    launch_buttons_button,
+                    sg.Button(f'{lang_data[LOCAL_INSTALL]} ControlNet',visible=True if len(project['launch_buttons']) > 2 else False,
+                              k=f"{selected_project_key}install_ext_btn-",font=FONT_H1,expand_x=False
+                              ,mouseover_colors=launch_buttons_mouseover_colors,button_color=launch_buttons_button_color)
                 ] 
-                # if project['type'] == 'app' else [
-        
-                # ]
+                if len(project['launch_buttons']) > 2 else [
+                    launch_buttons_button,
+                ]
             ],key=f'{main_key}frame-',expand_x=True,expand_y=False,border_width=5,pad=(10,10),relief=sg.RELIEF_FLAT,element_justification="l",background_color=color.DARK_GRAY)
         ],  
         [

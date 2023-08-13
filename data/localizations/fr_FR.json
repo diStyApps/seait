@@ -72,5 +72,8 @@
     "source_target_path_empty_msg": "Le chemin source ou cible est vide",
     "target_path_empty_msg": "Le chemin cible est vide",
     "treasury_created_msg": "La trésorerie des modèles a été créée.",
-    "close_running_projects": "Fermez tous les projets en cours d'exécution avant de continuer l'opération."
+    "close_running_projects": "Fermez tous les projets en cours d'exécution avant de continuer l'opération.",
+    "warn_perm_del": "AVERTISSEMENT Cette action supprimera définitivement les modèles et les résultats situés dans",
+    "warn_cannot_be_recovered": "et ne pourra pas être récupéré.",
+    "sure_want_to_continue": "Êtes-vous sûr de vouloir continuer ?"
 }

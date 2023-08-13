@@ -72,5 +72,8 @@
     "source_target_path_empty_msg": "Kaynak veya Hedef yol boş",
     "target_path_empty_msg": "Hedef yol boş",
     "treasury_created_msg": "Modeller hazinesi oluşturuldu.",
-    "close_running_projects": "İşlemi sürdürmeden önce çalışan tüm projeleri kapatın."
+    "close_running_projects": "İşlemi sürdürmeden önce çalışan tüm projeleri kapatın.",
+    "warn_perm_del": "UYARI Bu eylem, şu konumdaki modelleri ve çıktıları kalıcı olarak silecektir",
+    "warn_cannot_be_recovered": "ve geri getirilemez.",
+    "sure_want_to_continue": "Devam etmek istediğinizden emin misiniz?"
 }

@@ -24,6 +24,8 @@ import layout.dialog as dialog_layout
 import layout.projects as projects_layout
 import layout.settings as settings_layout
 import layout.toolbox as toolbox_layout
+import util.path_handler as path_handler
+import util.setup as setup
 
 def main():
     jt.create_preferences_init()
@@ -40,7 +42,6 @@ def main():
                 sg.Column(about_layout.create_layout(lang_data), key=ABOUT_COL, element_justification='c', expand_x=True,expand_y=True,visible=False),
                 sg.Column(settings_layout.create_layout(lang_data,languages), key=SETTINGS_COL, element_justification='c', expand_x=True,expand_y=True,visible=False),
                 sg.Column(toolbox_layout.create_layout(lang_data,languages), key=TOOLBOX_COL, element_justification='c', expand_x=True,expand_y=True,visible=False),
-
                 # sg.Column(system_stats_layout, key=SYSTEM_INFO_COL, element_justification='c', expand_x=True,expand_y=True,visible=False),
             ],        
     ]]
@@ -82,8 +83,6 @@ def main():
     expand_column_helper(window[PROJECTS_LIST_MENU].widget)    
     expand_column_helper(window['-hub_scroll-'].widget)    
 
-
-
     
     window.visibility_changed()           
     window[PROJECTS_LIST_MENU].contents_changed()  
@@ -113,7 +112,6 @@ def main():
         event, values = window.read()
         if event == sg.WIN_CLOSED:
             break
-
         if event == SET_LANGUAGE:
             jt.save_preference(PREF_SELECTED_LANG,localizations.get_language_by_native(values[SET_LANGUAGE]))
             reopen_window(window)
@@ -158,17 +156,18 @@ def main():
         if event == INIT_DEFAULT_PROJECT_ARGS:
                 id_number = values[INIT_DEFAULT_PROJECT_ARGS]
                 project_pref_def_args = project['def_args']
-                input_project_path = values[f'-selected_app_{id_number}_project_path_in-']
-                if not contains_spaces(input_project_path):
+                try:
+                    input_project_path = values[f'-selected_app_{id_number}_project_path_in-']
                     if not get_pref_project_data(id_number):
                         set_project_path(window, id_number, input_project_path,False)
                         add_project_def_args(id_number, convert_list_to_string(project_pref_def_args))
                         window.write_event_value(f"-select_app_{id_number}_btn-",'')    
-                else:
-                    print(f"Path cannot contain spaces. {input_project_path}")
-
+                except KeyError:
+                        # set_project_path(window, 1, input_project_path,False)
+                        # add_project_def_args(1, convert_list_to_string(project_pref_def_args))
+                        window.write_event_value(f"-select_app_{1}_btn-",'')    
+                       
         if event.startswith(SELECTED_APP) and event.endswith("_btn-"):
-
                 if event.startswith("-selected_app_args"):
                     window.write_event_value(SET_APP_ARGS,event)    
                 if event.startswith("-selected_app_func"):
@@ -183,6 +182,8 @@ def main():
                     window.write_event_value(ADD_PROJECT_FOLDER_NAME,id_number) 
                 if event.endswith("_project_save_def_args_btn-"):
                     window.write_event_value(SAVE_DEFAULT_ARGS,id_number)   
+                if event.endswith("_install_ext_btn-"):
+                    window.write_event_value(INSTALL_EXT,id_number)
 
         if event == RUN_APP_FUNC:
             event_value = values['-run_app_func-']
@@ -262,23 +263,43 @@ def main():
         if event == SET_PROJECT_PATH:
             id_number = values[SET_PROJECT_PATH]
             input_project_path = values[f'-selected_app_{id_number}_project_path_in-']
-            if not contains_spaces(input_project_path):
-                set_project_path(window, id_number, input_project_path)
-            else:
-                print(f"Path cannot contain spaces. {input_project_path}")
+            set_project_path(window, id_number, input_project_path)
+
+            # if not contains_spaces(input_project_path):
+            #     set_project_path(window, id_number, input_project_path)
+            # else:
+            #     print(f"Path cannot contain spaces. {input_project_path}")
 
         if event == SAVE_DEFAULT_ARGS:
             id_number = values[SAVE_DEFAULT_ARGS]
             args = values[f"-selected_app_args_{id_number}_console_ml-"]
             input_project_path = values[f'-selected_app_{id_number}_project_path_in-']
-            if not contains_spaces(input_project_path):
-                set_project_path(window, id_number, input_project_path,False)
-                add_project_def_args(id_number, args)
-                window.write_event_value(f"-select_app_{id_number}_btn-",'')    
-            else:
-                print(f"Path cannot contain spaces. {input_project_path}")
+            set_project_path(window, id_number, input_project_path,False)
+            add_project_def_args(id_number, args)
+            window.write_event_value(f"-select_app_{id_number}_btn-",'')                
+            # if not contains_spaces(input_project_path):
+            #     set_project_path(window, id_number, input_project_path,False)
+            #     add_project_def_args(id_number, args)
+            #     window.write_event_value(f"-select_app_{id_number}_btn-",'')    
+            # else:
+            #     print(f"Path cannot contain spaces. {input_project_path}")
 
+        if event == INSTALL_EXT:
+            id_number = values[INSTALL_EXT]
+            project = project_util.get_project_by_id(projects_data, 5)
+            method = "install_webui_extension"
+            arguments = ""
+            # print(project['title'])
+            if dialog_layout.dialog_window(project['title'],method,lang_data):
+                print("Installing extension")
 
+                Thread(target=run_project_func, args=(project,method,arguments,), daemon=True).start() 
+
+            # print(project,id_number)
+            # if project['type'] == 'ext':
+                # install_ext(project)
+            # else:
+                # print("Only extensions can be installed.")
 
 
         if event == CHECK_UPDATE_BTN_KEY:
@@ -316,7 +337,11 @@ if __name__ == '__main__':
         # background_color='lightgray',
         # text_color='black',
         # ttk_theme='classic',
-        sbar_width=15,sbar_trough_color=0,sbar_arrow_width=8,    
+        ttk_theme='alt',
+        sbar_relief=sg.RELIEF_FLAT,        
+        # sbar_width=15,sbar_trough_color=0,sbar_arrow_width=8,    
+        sbar_width=15,sbar_trough_color=0,
+        # sbar_arrow_color=sg.theme_background_color(),
         suppress_raise_key_errors=True,
         suppress_error_popups=True,
         suppress_key_guessing=True    

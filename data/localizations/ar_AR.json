@@ -72,5 +72,8 @@
     "source_target_path_empty_msg": "مسار المصدر أو الهدف فارغ",
     "target_path_empty_msg": "مسار الهدف فارغ",
     "treasury_created_msg": "تم إنشاء خزانة النماذج.",
-    "close_running_projects": "أغلق جميع المشاريع الجارية قبل متابعة العملية."
+    "close_running_projects": "أغلق جميع المشاريع الجارية قبل متابعة العملية.",
+    "warn_perm_del": "تحذير ستؤدي هذه العملية إلى حذف النماذج والنتائج الموجودة في هذا الموقع نهائيًا",
+    "warn_cannot_be_recovered": "ولا يمكن استعادتها.",
+    "sure_want_to_continue": "هل أنت متأكد أنك تريد المتابعة؟"
 }

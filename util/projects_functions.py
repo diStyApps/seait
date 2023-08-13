@@ -4,6 +4,7 @@ from util.CONSTANTS import *
 import requests
 import util.installation_status as installation_status
 from util.json_tools_projects import get_pref_project_data
+from util.path_handler import full_path
 
 def convert_to_backslashes(file_path):
     return file_path.replace("/", "\\")
@@ -12,8 +13,9 @@ def get_project_path(project_data):
     if pref_project_path(project_data):
         return convert_to_backslashes(pref_project_path(project_data))
     else:
-        return os.path.abspath(project_data['repo_name'])
-
+        # return os.path.abspath(project_data['repo_name'])
+        return os.path.join(full_path, project_data['repo_name'])
+    
 def get_venv_path(project_data):
     return f"{os.path.join(get_project_path(project_data), 'venv')}"
 
@@ -42,7 +44,6 @@ def clone_repo(project_data):
 
 def create_virtual_environment(project_data, args=[]):
     project_name = project_data['repo_name']
-    project_path = get_project_path(project_data)
     venv_path = get_venv_path(project_data)
     print(f"Creating virtual environment for {project_name} at {venv_path} ")
     subprocess.run(["python", "-m", "venv", venv_path], shell=True)         
@@ -63,6 +64,7 @@ def launch(project_data, args=[]):
     project_path = get_project_path(project_data)
     venv_path = get_venv_path(project_data)
     launch_path = get_entry_point(project_data, 'launch')
+
     print(f"launching {project_data['repo_name']} at {project_path}")
     installation_status_venv = installation_status.check_project_venv(project_data)
     installation_status_project = installation_status.check_project(project_data)
@@ -75,7 +77,7 @@ def launch(project_data, args=[]):
         command_len = len(launch_path.split())
         cmd_launch = project_data['entry_point']['launch']
         activate_script = f"{venv_path}/Scripts/activate.bat"
-        cmd_command = f'cmd /K "{activate_script} && {cmd_launch} {" ".join(args)}"'
+        cmd_command = f'cmd /K ""{activate_script}" && "{venv_path}/Scripts/python" {cmd_launch} {" ".join(args)}"'
         if launch_path.endswith(".py") and command_len == 1:
             subprocess.run([f"{venv_path}/Scripts/python", launch_path, *args], cwd=project_path)
         elif launch_path.endswith(".py") and command_len > 1:
@@ -98,7 +100,7 @@ def install(project_data,args=[]):
     command_len = len(install_path.split())
     cmd_launch = project_data['entry_point']['install']
     activate_script = f"{venv_path}/Scripts/activate.bat"
-    cmd_command = f'cmd /K "{activate_script} && {cmd_launch} {" ".join(args)}"'
+    cmd_command = f'cmd /K ""{activate_script}" && "{venv_path}/Scripts/python" {cmd_launch} {" ".join(args)}"'
 
     if project_data['install_requirements']:
         install_requirements(project_data)
@@ -147,8 +149,11 @@ def install_instructions(project_data):
 
 def install_webui_extension(project_data,args=[]):
     print(f"installing {project_data['repo_name']}")
-    subprocess.run(["git","clone",project_data["git_clone_url"],f"{project_data['webui_path']}\extensions\{project_data['repo_name']}"]) 
+    subprocess.run(["git","clone",project_data["git_clone_url"],f"{full_path}\{project_data['webui_path']}\extensions\{project_data['repo_name']}"]) 
+    # print(["git","clone",project_data["git_clone_url"],f"{full_path}\{project_data['webui_path']}\extensions\{project_data['repo_name']}"])
+
     print(f"{project_data['repo_name']} installed")
+    download_models(project_data, skip_existing=True)
 
 def update_webui_extension(project_data,args=[]):
     print(f"updating {project_data['repo_name']}")
@@ -160,11 +165,14 @@ def uninstall_webui_extension(project_data,args=[]):
     print(f"{project_data['repo_name']} uninstalled")
 
 def download_models(project_data, skip_existing=True):
-    base_url = "https://huggingface.co/datasets/disty/seait_ControlNet-modules-safetensors/resolve/main/"
-    download_folder = os.path.join(project_data['webui_path'], 'models', 'ControlNet')
+    # base_url = "https://huggingface.co/datasets/disty/seait_ControlNet-modules-safetensors/resolve/main/"
+    base_url = "https://huggingface.co/datasets/disty/seait_ControlNet1-1-modules-safetensors/resolve/main/"
+
+    download_folder = os.path.join(full_path,project_data['webui_path'], 'models', 'ControlNet')
+    # print(download_folder)
     os.makedirs(download_folder, exist_ok=True)
 
-    for model in CN_MODELS:
+    for model in CN_MODELS_11:
         file_path = os.path.join(download_folder, model)
         
         if skip_existing and os.path.exists(file_path):

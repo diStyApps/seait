@@ -72,5 +72,8 @@
     "source_target_path_empty_msg": "Quell- oder Zielpfad ist leer",
     "target_path_empty_msg": "Zielpfad ist leer",
     "treasury_created_msg": "Das Modellschatzamt wurde erstellt.",
-    "close_running_projects": "Schließen Sie alle laufenden Projekte, bevor Sie den Vorgang fortsetzen."
+    "close_running_projects": "Schließen Sie alle laufenden Projekte, bevor Sie den Vorgang fortsetzen.",
+    "warn_perm_del": "WARNUNG Diese Aktion löscht dauerhaft Modelle und Ausgaben, die sich in befinden",
+    "warn_cannot_be_recovered": "und kann nicht wiederhergestellt werden.",
+    "sure_want_to_continue": "Sind Sie sicher, dass Sie fortfahren möchten?"
 }

@@ -72,5 +72,8 @@
     "source_target_path_empty_msg": "La ruta de origen o destino está vacía",
     "target_path_empty_msg": "La ruta de destino está vacía",
     "treasury_created_msg": "Se ha creado el tesoro de modelos.",
-    "close_running_projects": "Cierre todos los proyectos en ejecución antes de continuar con la operación."
+    "close_running_projects": "Cierre todos los proyectos en ejecución antes de continuar con la operación.",
+    "warn_perm_del": "ADVERTENCIA Esta acción eliminará permanentemente los modelos y la salida ubicados en",
+    "warn_cannot_be_recovered": "y no se puede recuperar.",
+    "sure_want_to_continue": "¿Estás seguro de que quieres continuar?"
 }

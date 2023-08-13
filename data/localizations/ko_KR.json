@@ -72,5 +72,8 @@
     "source_target_path_empty_msg": "원본 또는 대상 경로가 비어 있습니다",
     "target_path_empty_msg": "대상 경로가 비어 있습니다",
     "treasury_created_msg": "모델 재무부가 생성되었습니다.",
-    "close_running_projects": "작업을 계속하기 전에 실행 중인 모든 프로젝트를 닫으십시오."
+    "close_running_projects": "작업을 계속하기 전에 실행 중인 모든 프로젝트를 닫으십시오.",
+    "warn_perm_del": "경고 이 작업은 다음 위치에 있는 모델과 출력을 영구적으로 삭제합니다",
+    "warn_cannot_be_recovered": "그리고 복구할 수 없습니다.",
+    "sure_want_to_continue": "계속하시겠습니까?"
 }

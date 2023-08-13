@@ -72,5 +72,8 @@
     "source_target_path_empty_msg": "O caminho de origem ou destino está vazio",
     "target_path_empty_msg": "O caminho de destino está vazio",
     "treasury_created_msg": "O tesouro de modelos foi criado.",
-    "close_running_projects": "Feche todos os projetos em execução antes de continuar a operação."
+    "close_running_projects": "Feche todos os projetos em execução antes de continuar a operação.",
+    "warn_perm_del": "AVISO Esta ação excluirá permanentemente modelos e saídas localizados em",
+    "warn_cannot_be_recovered": "e não poderão ser recuperados.",
+    "sure_want_to_continue": "Tem certeza de que deseja continuar?"
 }

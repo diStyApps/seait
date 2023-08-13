@@ -72,5 +72,8 @@
     "source_target_path_empty_msg": "נתיב המקור או היעד ריקים",
     "target_path_empty_msg": "נתיב היעד ריק",
     "treasury_created_msg": "מטמון המודלים נוצר בהצלחה.",
-    "close_running_projects": "סגורו את כל הפרויקטים הפועלים לפני הפעולה."
+    "close_running_projects": "סגורו את כל הפרויקטים הפועלים לפני הפעולה.",
+    "warn_perm_del": "אזהרה פעולה זו תמחק לצמיתות את המודלים והפלט הממוקמים ב",
+    "warn_cannot_be_recovered": "ולא ניתן לשחזור.",
+    "sure_want_to_continue": "האם אתה בטוחים שאתם רוצים להמשיך?"
 }

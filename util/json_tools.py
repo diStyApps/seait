@@ -1,5 +1,6 @@
 import json
-PREFERENCES_FILE_NAME = 'preferences.json'
+PREFERENCES_FILE_NAME = 'preferences\preferences.json'
+from util.path_handler import full_path
 
 class SetEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -7,24 +8,30 @@ class SetEncoder(json.JSONEncoder):
             return list(obj)
         return json.JSONEncoder.default(self, obj)
 
+def get_full_path_filename(filename_path):
+    full_path_filename = f'{full_path}\{filename_path}'
+    return full_path_filename
 
 def save_json_file(filename_path,dictionary,add_default_ext=False):
+    full_path_filename = get_full_path_filename(filename_path)
+
     if add_default_ext:
-        with open(f'{filename_path}.json', 'w') as fp:
+        with open(f'{full_path_filename}.json', 'w') as fp:
             json.dump(dictionary, fp,  indent=4,cls=SetEncoder)
     else:
-        with open(filename_path, 'w') as fp:
+        with open(full_path_filename, 'w') as fp:
             json.dump(dictionary, fp,  indent=4,cls=SetEncoder)
             
     return read_json_file(filename_path)
 
 def read_json_file(filename_path,add_default_ext=False):
+    full_path_filename = get_full_path_filename(filename_path)
     if add_default_ext:
-        with open(f'{filename_path}.json', 'r') as f:
+        with open(f'{full_path_filename}.json', 'r') as f:
             x = json.load(f) # x is a python dictionary in this case
         return x
     else:
-        with open(filename_path, 'r') as f:
+        with open(full_path_filename, 'r') as f:
             x = json.load(f) # x is a python dictionary in this case
         return x
 

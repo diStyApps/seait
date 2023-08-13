@@ -50,7 +50,11 @@ projects_data = [
                 {
                     "button_text": "Install",
                     "key": "install",
-                },                                               
+                },         
+                {
+                    "button_text": "install_CNet",
+                    "key": "Install ControlNet",
+                },                                                             
             ],            
             "args": [
                 [
@@ -146,9 +150,10 @@ projects_data = [
             "isIncomplete": False,
             "type": "app",
             "install_requirements":True,
-            "install_cuda":True,
-            "install_instructions_available":False,
+            "install_cuda":False,
+            "install_instructions_available":True,
             "install_instructions": [
+                "-m pip install torch==1.13.1 torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117",
             ],              
             "download_models_path": "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.safetensors",
             "checkpoints_path": "models\checkpoints",
@@ -201,7 +206,131 @@ projects_data = [
             ],               
             "description":["A powerful and modular stable diffusion GUI and backend."]     
                                        
+        },     
+        {
+            "id": 18,
+            "key": "app_",
+            "image_path":b'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',            
+            "title": "VisionCrafter",
+            "repo_name": "VisionCrafter",
+            "github_url": "https://github.com/diStyApps/VisionCrafter",
+            "git_clone_url":"https://github.com/diStyApps/VisionCrafter.git",
+            "installed_version": "-",
+            "available_version": "-",
+            "installed": False,
+            "visible":True,
+            "status": 1,
+            "isIncomplete": False,
+            "type": "app",
+            "install_requirements":False,
+            "install_cuda":False,
+            "install_instructions_available":False,
+            "install_instructions": [
+            ],
+            "entry_point": 
+            {
+                "install":"0_Install_VisionCrafter.bat",
+                "launch":"main.py",
+            },                      
+            "buttons": [
+                {
+                    "button_text": "Update",
+                    "key": "update",
+                },
+                {
+                    "button_text": "Delete venv",
+                    "key": "delete_venv",
+                },
+                {
+                    "button_text": "Create venv",
+                    "key": "create_venv",
+                },                        
+                {
+                    "button_text": "Uninstall",
+                    "key": "uninstall",
+                },                                              
+            ],
+            "launch_buttons": [
+                {
+                    "button_text": "Launch",
+                    "key": "launch",
+                },    
+                {
+                    "button_text": "Install",
+                    "key": "install",
+                },                                                           
+            ],            
+            "args": [
+             
+            ],
+            "def_args": [
+            ],
+            "description":["VisionCrafter tool can generates animations and music from text, Ideal for producing short videos and GIFs, as well as creating brief cinematic scenes."]             
         },       
+        {
+                "id": 21,
+                "key": "app_",
+                "image_path":b'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',            
+                "title": "AudioLDM2",
+                "repo_name": "AudioLDM2",
+                "github_url": "https://github.com/haoheliu/AudioLDM2",
+                "git_clone_url":"https://github.com/diStyApps/AudioLDM2.git",
+                "installed_version": "-",
+                "available_version": "-",
+                "installed": False,
+                "visible":True,
+                "status": 1,
+                "isIncomplete": False,
+                "type": "app",
+                "install_requirements":True,
+                "install_cuda":False,
+                "install_instructions_available":False,
+                "install_instructions": [
+                ],
+                "entry_point": 
+                {
+                    "install":"0_install_AudioLDM2.bat",
+                    "launch":"1_Run_AudioLDM2.bat",
+                },                      
+                "buttons": [
+                    {
+                        "button_text": "Update",
+                        "key": "update",
+                    },
+                    {
+                        "button_text": "Delete venv",
+                        "key": "delete_venv",
+                    },
+                    {
+                        "button_text": "Create venv",
+                        "key": "create_venv",
+                    },                        
+                    {
+                        "button_text": "Uninstall",
+                        "key": "uninstall",
+                    },                                              
+                ],
+                "launch_buttons": [
+                    {
+                        "button_text": "Launch",
+                        "key": "launch",
+                    },    
+                    {
+                        "button_text": "Install",
+                        "key": "install",
+                    },                                                           
+                ],            
+                "args": [
+                
+                ],
+                "def_args": [
+                ],
+                "description":["""
+This my fork, 10 seconds limit increased to 50 seconds.
+AudioLDM 2 can generate different types of audio, such as speech, music, and sound effects                               
+This repo currently support Text-to-Audio Generation (including Music)"""
+                               ]             
+            },                  
         {
             "id": 8,
             "key": "app_",
@@ -218,10 +347,10 @@ projects_data = [
             "isIncomplete": False,
             "type": "app",
             "install_requirements":True,
-            "install_cuda":True,
+            "install_cuda":False,
             "install_instructions_available":True,
             "install_instructions": [
-                # "-m pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117",
+                "-m pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117",
                 "-m pip install https://github.com/jllllll/bitsandbytes-windows-webui/raw/main/bitsandbytes-0.37.2-py3-none-any.whl --force-reinstall",
                 "download-model.py facebook/opt-1.3b",
             ],
@@ -374,15 +503,19 @@ projects_data = [
             "status": 1,
             "isIncomplete": False,
             "type": "app",
-            "install_requirements":False,
+            "install_requirements":True,
             "install_cuda":False,
             "install_instructions_available":True,
             "install_instructions": [ 
-                "-m pip install git+https://github.com/C0untFloyd/bark-gui.git",
-                "-m pip uninstall -y torch torchvision torchaudio",
-                "-m pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu118",
-                "-m pip install gradio",
-                "-m pip install soundfile"
+                # "-m pip install git+https://github.com/C0untFloyd/bark-gui.git",
+                # "-m pip uninstall -y torch torchvision torchaudio",
+                "-m pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118",
+                # "-m pip install gradio",
+                # "-m pip install soundfile"
+                "-m pip install tensorboardX"
+
+                
+
             ],
             "entry_point": 
             {
@@ -473,7 +606,7 @@ https://github.com/makawy7/bark-webui (inspired me to even start this)"""]
             "install_cuda":False,
             "install_instructions_available":True,
             "install_instructions": [ 
-                "-m pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu118",
+                "-m pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118",
             ],
             "entry_point": 
             {
@@ -782,7 +915,7 @@ This is a simple Streamlit UI for OpenAI's Whisper speech-to-text model. It let'
             "id": 10,
             "key": "app_",
             "image_path":b'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',
-            "title": "Vladiffusion - A1111 fork",
+            "title": "SD.Next - A1111 fork",
             "repo_name": "automatic",
             "github_url": "https://github.com/vladmandic/automatic",
             "git_clone_url":"https://github.com/vladmandic/automatic.git",
@@ -880,7 +1013,7 @@ This is a simple Streamlit UI for OpenAI's Whisper speech-to-text model. It let'
                        "--autolaunch",
                        "--theme=dark",
             ],               
-            "description":['"automatic" also known as Vladiffsuion is a fork of A1111 webui, diving into the name chaos with flair. This fork promises to deliver more frequent updates for improved stability, enhanced speed, and a selection of pre-installed extensions.']     
+            "description":['"SD.Next" also known as Vladiffsuion is a fork of A1111 webui, diving into the name chaos with flair. This fork promises to deliver more frequent updates for improved stability, enhanced speed, and a selection of pre-installed extensions.']     
         },  
         {
             "id": 12,
@@ -1017,7 +1150,7 @@ This is a simple Streamlit UI for OpenAI's Whisper speech-to-text model. It let'
             "id": 5,
             "key": "app_",
             "image_path": b'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',
-            "title": "Controlnet - auto1111 extension",
+            "title": "Controlnet",
             "repo_name": "sd-webui-controlnet",
             "github_url": "https://github.com/Mikubill/sd-webui-controlnet",
             "git_clone_url":"https://github.com/Mikubill/sd-webui-controlnet.git",
@@ -1028,8 +1161,8 @@ This is a simple Streamlit UI for OpenAI's Whisper speech-to-text model. It let'
             "status": 1,
             "isIncomplete": False,
             "type": "webui_extension",
-            "webui_path": "stable-diffusion-webui",
-            "models_path": "https://huggingface.co/datasets/disty/seait_ControlNet-modules-safetensors",
+            "webui_path": "stable-diffusion-webui", 
+            "models_path": "https://huggingface.co/datasets/disty/seait_ControlNet1-1-modules-safetensors",
             "buttons": [                     
                 {
                     "button_text": "Download Models",
@@ -1234,7 +1367,7 @@ This is a simple Streamlit UI for OpenAI's Whisper speech-to-text model. It let'
             "isIncomplete": False,
             "type": "app",
             "install_requirements":False,
-            "install_cuda":True,
+            "install_cuda":False,
             "install_instructions_available":True,
             "install_instructions": [
                 "-m pip install torch==1.13.1 torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu117",
@@ -1403,7 +1536,69 @@ This is a simple Streamlit UI for OpenAI's Whisper speech-to-text model. It let'
             "def_args": [
             ],
             "description":["Better safe than sorry, Stable-Diffusion-Pickle-Scanner-GUI offers an extra layer of protection against potential malicious code. - safetensors models don't need to be scanned."]             
-        },         
+        },
+    
+            {
+                "id": 20,
+                "key": "app_",
+                "image_path":b'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',            
+                "title": "VisualClipPicker",
+                "repo_name": "VisualClipPicker",
+                "github_url": "https://github.com/diStyApps/VisualClipPicker",
+                "git_clone_url":"https://github.com/diStyApps/VisualClipPicker.git",
+                "installed_version": "-",
+                "available_version": "-",
+                "installed": False,
+                "visible":True,
+                "status": 1,
+                "isIncomplete": False,
+                "type": "app",
+                "install_requirements":False,
+                "install_cuda":False,
+                "install_instructions_available":False,
+                "install_instructions": [
+                ],
+                "entry_point": 
+                {
+                    "install":"Install.bat",
+                    "launch":"main.py",
+                },                      
+                "buttons": [
+                    {
+                        "button_text": "Update",
+                        "key": "update",
+                    },
+                    {
+                        "button_text": "Delete venv",
+                        "key": "delete_venv",
+                    },
+                    {
+                        "button_text": "Create venv",
+                        "key": "create_venv",
+                    },                        
+                    {
+                        "button_text": "Uninstall",
+                        "key": "uninstall",
+                    },                                              
+                ],
+                "launch_buttons": [
+                    {
+                        "button_text": "Launch",
+                        "key": "launch",
+                    },    
+                    {
+                        "button_text": "Install",
+                        "key": "install",
+                    },                                                           
+                ],            
+                "args": [
+                
+                ],
+                "def_args": [
+                ],
+                "description":["Visual Clip Picker: Trimming Clips by Face Recognition"]             
+            },                          
+                                  
     ]
 
 

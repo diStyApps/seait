@@ -72,5 +72,8 @@
     "source_target_path_empty_msg": "源路径或目标路径为空",
     "target_path_empty_msg": "目标路径为空",
     "treasury_created_msg": "模型库已创建。",
-    "close_running_projects": "在继续操作之前，请关闭所有正在运行的项目。"
+    "close_running_projects": "在继续操作之前，请关闭所有正在运行的项目。",
+    "warn_perm_del": "警告 此操作将永久删除位于以下位置的模型和输出",
+    "warn_cannot_be_recovered": "且无法恢复。",
+    "sure_want_to_continue": "确定要继续吗？"
 }

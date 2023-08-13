@@ -72,5 +72,8 @@
     "source_target_path_empty_msg": "ソースまたはターゲットのパスが空です",
     "target_path_empty_msg": "ターゲットのパスが空です",
     "treasury_created_msg": "モデルの財務省が作成されました。",
-    "close_running_projects": "操作を続行する前に実行中のすべてのプロジェクトを閉じます。"
+    "close_running_projects": "操作を続行する前に実行中のすべてのプロジェクトを閉じます。",
+    "warn_perm_del": "警告 この操作により、以下の場所にあるモデルと出力が完全に削除されます",
+    "warn_cannot_be_recovered": "そして回復することはできません。",
+    "sure_want_to_continue": "本当に続けてもよろしいですか？"
 }

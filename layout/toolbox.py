@@ -7,6 +7,7 @@ import util.json_tools as jt
 import util.symlink_creator as symlink
 import os
 import re
+from util.path_handler import full_path
 
 folders={
     "Checkpoints":"checkpoints",
@@ -37,8 +38,8 @@ def convert_to_backslashes(file_path):
 def create_layout(lang_data,tools):
     main_folder = 'models_treasury'
     getcwd = convert_to_backslashes(os.path.abspath(os.getcwd()))
-    path = convert_to_backslashes(os.path.join(getcwd,main_folder))
-    # jt.save_preference('models_treasury_path',path)
+    # path = convert_to_backslashes(os.path.join(getcwd,main_folder))
+    path = convert_to_backslashes(os.path.join(full_path,main_folder))
 
     preference_models_treasury_path =  jt.load_preference('models_treasury_path')
     if not preference_models_treasury_path == None:

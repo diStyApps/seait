@@ -1,6 +1,6 @@
-VERSION = '0.1.4'
+VERSION = '0.1.4.7'
 APP_TITLE = f"Super Easy AI Installer Tool - Ver {VERSION}"
-
+APP_NAME =  'seait'
 FONT_S = 'Arial 8'
 FONT_M = 'Arial 9'
 FONT_M_B = 'Arial 9 bold'
@@ -47,6 +47,7 @@ SET_PROJECT_PATH = "-set_project_path-"
 ACTIVATE_PROJECT_PATH = "-activate_project_path-"
 ADD_PROJECT_FOLDER_NAME = "-add_project_folder_name-"
 SAVE_DEFAULT_ARGS= "-save_default_args-"
+INSTALL_EXT = "-install_ext-"
 SELECT_APP = "-select_app_"
 SELECTED_APP = "-selected_app_"
 INIT_DEFAULT_PROJECT_ARGS = "-init_default_project_args-"
@@ -116,38 +117,69 @@ C2_INSTALLS_RTL_KEY = '-c2_installs_rtl-'
 C1_LAUNCH_RTL_KEY = '-c1_launch_rtl-'
 C2_LAUNCH_RTL_KEY = '-c2_launch_rtl-'
 
-CN_MODELS = [
-    "cldm_v15.yaml",
-    "cldm_v21.yaml",
-    "image_adapter_v14.yaml",
-    "sketch_adapter_v14.yaml",
-    "t2iadapter_style_sd14v1.yaml",
-    "t2iadapter_color_sd14v1.yaml",
-    "t2iadapter_keypose_sd14v1.yaml",
-    "diff_control_sd15_canny_fp16.safetensors",
-    "diff_control_sd15_depth_fp16.safetensors",
-    "diff_control_sd15_hed_fp16.safetensors",
-    "diff_control_sd15_mlsd_fp16.safetensors",
-    "diff_control_sd15_normal_fp16.safetensors",
-    "diff_control_sd15_openpose_fp16.safetensors",
-    "diff_control_sd15_scribble_fp16.safetensors",
-    "diff_control_sd15_seg_fp16.safetensors",
-    "t2iadapter_canny_sd14v1.pth",
-    "t2iadapter_color_sd14v1.pth",
-    "t2iadapter_depth_sd14v1.pth",
-    "t2iadapter_keypose_sd14v1.pth",
-    "t2iadapter_openpose_sd14v1.pth",
-    "t2iadapter_seg_sd14v1.pth",
-    "t2iadapter_sketch_sd14v1.pth",
-    "t2iadapter_style_sd14v1.pth",
-    "coadapter-canny-sd15v1.pth",
-    "coadapter-color-sd15v1.pth",
-    "coadapter-depth-sd15v1.pth",
-    "coadapter-fuser-sd15v1.pth",
-    "coadapter-sketch-sd15v1.pth",
-    "coadapter-style-sd15v1.pth"    
-]
+# CN_MODELS = [
+#     "cldm_v15.yaml",
+#     "cldm_v21.yaml",
+#     "image_adapter_v14.yaml",
+#     "sketch_adapter_v14.yaml",
+#     "t2iadapter_style_sd14v1.yaml",
+#     "t2iadapter_color_sd14v1.yaml",
+#     "t2iadapter_keypose_sd14v1.yaml",
+#     "diff_control_sd15_canny_fp16.safetensors",
+#     "diff_control_sd15_depth_fp16.safetensors",
+#     "diff_control_sd15_hed_fp16.safetensors",
+#     "diff_control_sd15_mlsd_fp16.safetensors",
+#     "diff_control_sd15_normal_fp16.safetensors",
+#     "diff_control_sd15_openpose_fp16.safetensors",
+#     "diff_control_sd15_scribble_fp16.safetensors",
+#     "diff_control_sd15_seg_fp16.safetensors",
+#     "t2iadapter_canny_sd14v1.pth",
+#     "t2iadapter_color_sd14v1.pth",
+#     "t2iadapter_depth_sd14v1.pth",
+#     "t2iadapter_keypose_sd14v1.pth",
+#     "t2iadapter_openpose_sd14v1.pth",
+#     "t2iadapter_seg_sd14v1.pth",
+#     "t2iadapter_sketch_sd14v1.pth",
+#     "t2iadapter_style_sd14v1.pth",
+#     "coadapter-canny-sd15v1.pth",
+#     "coadapter-color-sd15v1.pth",
+#     "coadapter-depth-sd15v1.pth",
+#     "coadapter-fuser-sd15v1.pth",
+#     "coadapter-sketch-sd15v1.pth",
+#     "coadapter-style-sd15v1.pth"    
+# ]
 
+
+CN_MODELS_11 = [
+    "control_v11e_sd15_ip2p.yaml",
+    "control_v11e_sd15_shuffle.yaml",
+    "control_v11f1e_sd15_tile.yaml",
+    "control_v11f1p_sd15_depth.yaml",
+    "control_v11p_sd15_canny.yaml",
+    "control_v11p_sd15_inpaint.yaml",
+    "control_v11p_sd15_lineart.yaml",
+    "control_v11p_sd15_mlsd.yaml",
+    "control_v11p_sd15_normalbae.yaml", 
+    "control_v11p_sd15_openpose.yaml",
+    "control_v11p_sd15_scribble.yaml",
+    "control_v11p_sd15_seg.yaml",
+    "control_v11p_sd15_softedge.yaml",
+    "control_v11p_sd15s2_lineart_anime.yaml",
+    "control_v11e_sd15_ip2p.pth",
+    "control_v11e_sd15_shuffle.pth",
+    "control_v11f1e_sd15_tile.pth",
+    "control_v11f1p_sd15_depth.pth",
+    "control_v11p_sd15_canny.pth",
+    "control_v11p_sd15_inpaint.pth",
+    "control_v11p_sd15_lineart.pth",
+    "control_v11p_sd15_mlsd.pth",
+    "control_v11p_sd15_normalbae.pth",
+    "control_v11p_sd15_openpose.pth",
+    "control_v11p_sd15_scribble.pth",
+    "control_v11p_sd15_seg.pth",
+    "control_v11p_sd15_softedge.pth",
+    "control_v11p_sd15s2_lineart_anime.pth",
+]
 # LOCALIZATION
 LOCAL_YES = "Yes"
 LOCAL_NO = "No"
@@ -227,3 +259,6 @@ LOCAL_SOURCE_TARGET_PATH_EMPTY_MSG = "source_target_path_empty_msg"
 LOCAL_TARGET_PATH_EMPTY_MSG = "target_path_empty_msg"
 LOCAL_TREASURY_CREATED_MSG = "treasury_created_msg"
 LOCAL_CLOSE_RUNNING_PROJECTS = "close_running_projects"
+LOCAL_WARN_PERM_DEL = "warn_perm_del"
+LOCAL_WARN_CANNOT_BE_RECOVERED = "warn_cannot_be_recovered"
+LOCAL_SURE_WANT_TO_CONTINUE = "sure_want_to_continue"

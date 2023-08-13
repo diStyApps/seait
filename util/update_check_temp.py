@@ -12,7 +12,7 @@ def check_update_available():
         h2_sr_only = match.group(1)
         version_pattern = re.compile(r"\d+\.\d+(\.\d+)?")
         latest_release = version_pattern.search(h2_sr_only).group()
-        if latest_release != VERSION:
+        if latest_release > VERSION:
             return latest_release
         else:
             return False        

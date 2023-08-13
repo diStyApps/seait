@@ -1,8 +1,10 @@
 import json
 import os
-file_path = "projects_preferences.json"
+file_path = "preferences\projects_preferences.json"
+from util.path_handler import full_path
 
 def load_project_preferences(file_path):
+    file_path = f'{full_path}\{file_path}'
     if not os.path.exists(file_path):
         default_project_preferences = {
             "set_project_paths": [
@@ -18,6 +20,7 @@ def load_project_preferences(file_path):
         return json.load(file)
 
 def save_project_preferences(project_preferences, file_path):
+    file_path = f'{full_path}\{file_path}'
     with open(file_path, "w") as file:
         json.dump(project_preferences, file, indent=4)
 

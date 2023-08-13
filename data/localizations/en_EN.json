@@ -72,5 +72,9 @@
     "source_target_path_empty_msg": "Source or Target path is empty",
     "target_path_empty_msg": "Target path is empty",
     "treasury_created_msg": "Models treasury has been created.",
-    "close_running_projects": "Close all running projects before continuing the operation."
+    "close_running_projects": "Close all running projects before continuing the operation.",
+    "warn_perm_del": "WARNING This action will permanently delete models and output located in",
+    "warn_cannot_be_recovered": "and cannot be recovered.",
+    "sure_want_to_continue": "Are you sure you want to continue?",
+    "Install webui extension": "Install webui extension"
 }

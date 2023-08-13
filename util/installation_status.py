@@ -2,7 +2,7 @@ import os
 from util.dependency_check import check_git,detect_python
 from util.util import is_folder_exist_check
 from util.json_tools_projects import get_pref_project_data
-# import requests
+from util.path_handler import full_path
 
 def pref_project_path(project):
     project_id = project['id']
@@ -13,12 +13,16 @@ def pref_project_path(project):
         if project_pref_isSet:
             return os.path.abspath(project_pref_path)
         else:
-            return os.path.abspath(project['repo_name'])
+            # return os.path.abspath(project['repo_name'])
+            return os.path.join(full_path, project['repo_name'])
+
     else:
-        return os.path.abspath(project['repo_name'])
+        # return os.path.abspath(project['repo_name'])
+        return os.path.join(full_path, project['repo_name'])
         
 def check_project(project):
     project_path = pref_project_path(project)
+
     if project['type'] == "app":
         if project_path and is_folder_exist_check(project_path):
             return True
@@ -67,25 +71,3 @@ def check_git_python():
         return True  
     else:
         return False            
-def get_last_commit_hash_remote(github_url):
-    # extract the owner and repo name from the GitHub URL
-    # url_parts = github_url.split('/')
-    # owner = url_parts[-2]
-    # repo_name = url_parts[-1].split('.')[0]
-
-    # # construct the API endpoint URL
-    # api_url = f"https://api.github.com/repos/{owner}/{repo_name}/commits"
-
-    # try:
-    #     # make a GET request to the API endpoint
-    #     response = requests.get(api_url)
-
-    #     # extract the last commit hash from the response
-    #     last_commit_hash = response.json()[0]['sha']
-
-    #     # return the last commit hash
-    #     return last_commit_hash
-    # except requests.exceptions.RequestException as e:
-    #     print(f"Error: {e}")
-    #     return None
-    pass        
