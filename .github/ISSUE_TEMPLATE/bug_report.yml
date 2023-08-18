@@ -1,0 +1,102 @@
+name: Bug Report
+description: You think somethings is broken in SEAIT
+title: "[Bug]: "
+labels: ["bug-report"]
+
+body:
+  - type: checkboxes
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please search to see if an issue already exists for the bug you encountered, and that it hasn't been fixed in a recent build/commit.
+      options:
+        - label: I have searched the existing issues and checked the recent builds/commits
+          required: true
+  - type: markdown
+    attributes:
+      value: |
+        *Please fill this form with as much information as possible, don't forget to fill "What OS..." and *provide screenshots if possible**
+  - type: textarea
+    id: what-did
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of the issue you're encountering.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Step-by-step instructions to reproduce the issue.
+      description: Be as specific as possible.
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: A description of what you expected to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: current-behavior
+    attributes:
+      label: Current Behavior
+      description: A description of what is currently happening instead.
+    validations:
+      required: true      
+  - type: input
+    id: commit
+    attributes:
+      label: Version or Commit where the problem happens
+      description: "Which SEAIT version or commit are you running ? Do not write *Latest Version/repo/commit*, as this means nothing and will have changed by the time we read your issue. Rather, copy the **Version: v1.2.3**"
+    validations:
+      required: true
+  - type: dropdown
+    id: platforms
+    attributes:
+      label: What platforms do you use SEAIT ?
+      multiple: true
+      options:
+        - Windows
+        - Linux
+        - MacOS      
+  - type: input
+    id: py-version
+    attributes:
+      label: What Python version are you running on ?
+      description: 3.10.6 , 3.10.7 , 3.10.8 ...
+  - type: dropdown
+    id: proccecor
+    attributes:
+      label: What proccecor do you running on SEAIT ?
+      multiple: true
+      options:
+        - GPU
+        - CPU     
+  - type: input
+    id: device
+    attributes:
+        label: What GPU are you running SEAIT on?
+        description: RTX 3090, RTX 4090, RX6800
+  - type: input
+    id: vram
+    attributes:
+        label: How much GPU VRAM are you running SEAIT on?
+        description: 10GB, 12GB, 24GB 
+  - type: input
+    id: project
+    attributes:
+        label: On what Project the issue are you facing?
+        description: SEAIT, Automatic 1111 webui, ComfyUI, Kohya's GUI ..           
+  - type: textarea
+    id: logs
+    attributes:
+      label: Console logs
+      description: Please provide **full** cmd/terminal and the terminal inside SEAIT logs from the moment you started SEAIT to the end of it, after your bug happened. If it's very long, provide a link to pastebin or similar service.
+      render: Shell
+    validations:
+      required: true        
+  - type: textarea
+    id: misc
+    attributes:
+      label: Additional information
+      description: Please provide us with any relevant additional info or context.
