@@ -78,6 +78,8 @@ def launch(project_data, args=[]):
         cmd_launch = project_data['entry_point']['launch']
         activate_script = f"{venv_path}/Scripts/activate.bat"
         cmd_command = f'cmd /K ""{activate_script}" && "{venv_path}/Scripts/python" {cmd_launch} {" ".join(args)}"'
+        cmd_command_no_py = f'cmd /K ""{activate_script}" && {cmd_launch} {" ".join(args)}"'
+
         if launch_path.endswith(".py") and command_len == 1:
             subprocess.run([f"{venv_path}/Scripts/python", launch_path, *args], cwd=project_path)
         elif launch_path.endswith(".py") and command_len > 1:
@@ -85,7 +87,7 @@ def launch(project_data, args=[]):
         elif launch_path.endswith(".bat"):
             subprocess.run([launch_path, *args], cwd=project_path)
         else:
-            subprocess.run(cmd_command, cwd=project_path, shell=True)      
+            subprocess.run(cmd_command_no_py, cwd=project_path, shell=True)      
     else:
         print(f"Failed to launch {project_data['repo_name']} venv not installed.")
         
@@ -101,6 +103,7 @@ def install(project_data,args=[]):
     cmd_launch = project_data['entry_point']['install']
     activate_script = f"{venv_path}/Scripts/activate.bat"
     cmd_command = f'cmd /K ""{activate_script}" && "{venv_path}/Scripts/python" {cmd_launch} {" ".join(args)}"'
+    cmd_command_no_py = f'cmd /K ""{activate_script}" && {cmd_launch} {" ".join(args)}"'
 
     if project_data['install_requirements']:
         install_requirements(project_data)
@@ -113,7 +116,7 @@ def install(project_data,args=[]):
     elif install_path.endswith(".bat"):
         subprocess.run([install_path, *args], cwd=project_path)
     else:
-        subprocess.run(cmd_command, cwd=project_path, shell=True)         
+        subprocess.run(cmd_command_no_py, cwd=project_path, shell=True)         
 
 def delete_virtual_environment(project_data,args=[]):
     venv_path = get_venv_path(project_data)

@@ -709,17 +709,25 @@ This is a simple Streamlit UI for OpenAI's Whisper speech-to-text model. It let'
                 [
                     {
                         "button_text": "--model=lama",
-                        "key": "model=lama",
                     },
                     {
                         "button_text": "--device=cpu",
-                        "key": "--device=cpu",
                     },      
                     {
                         "button_text": "--port=8080",
-                        "key": "port=8080",
-                    },                                 
-                ],               
+                    },                      
+                ],   
+              [
+                    {
+                        "button_text": "--input Path/to/InputFolder",
+                    },                                                                            
+                    {
+                        "button_text": "--output-dir Path/to/OutputFolder",
+                    },     
+                    {
+                        "button_text": "--gui",
+                    },                     
+                ],                               
             ],
             "def_args": [
                 '--model=lama',
@@ -748,13 +756,12 @@ This is a simple Streamlit UI for OpenAI's Whisper speech-to-text model. It let'
             "install_cuda":False,
             "install_instructions_available":True,
             "install_instructions": [
-                '-m pip install InvokeAI[xformers] --use-pep517 --extra-index-url https://download.pytorch.org/whl/cu117',
+                '-m pip install InvokeAI[xformers] --use-pep517 --extra-index-url https://download.pytorch.org/whl/cu118',
             ],
- 
             "entry_point": 
             {
-                "install":"invokeai-configure",
-                "launch":"invokeai",
+                "install":"invokeai-configure --root .",
+                "launch":"invokeai-web",
             },                      
             "buttons": [
                 {
@@ -910,7 +917,67 @@ This is a simple Streamlit UI for OpenAI's Whisper speech-to-text model. It let'
             ],               
             "description":["This repository provides a Windows-focused Gradio GUI for Kohya's Stable Diffusion trainers. The GUI allows you to set the training parameters and generate and run the required CLI commands to train the model."]     
                                       
-        },         
+        },    
+        {
+            "id": 22,
+            "key": "app_",
+            "image_path":b'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',            
+            "title": "LoRA_Easy_Training_Scripts",
+            "repo_name": "LoRA_Easy_Training_Scripts",
+            "github_url": "https://github.com/derrian-distro/LoRA_Easy_Training_Scripts",
+            "git_clone_url":"https://github.com/derrian-distro/LoRA_Easy_Training_Scripts.git",
+            "installed_version": "-",
+            "available_version": "-",
+            "installed": False,
+            "visible":True,
+            "status": 1,
+            "isIncomplete": False,
+            "type": "app",
+            "install_requirements":False,
+            "install_cuda":False,
+            "install_instructions_available":False,
+            "install_instructions": [
+            ],
+            "entry_point": 
+            {
+                "install":"Install.bat",
+                "launch":"run.bat",
+            },                      
+            "buttons": [
+                {
+                    "button_text": "Update",
+                    "key": "update",
+                },
+                {
+                    "button_text": "Delete venv",
+                    "key": "delete_venv",
+                },
+                {
+                    "button_text": "Create venv",
+                    "key": "create_venv",
+                },                        
+                {
+                    "button_text": "Uninstall",
+                    "key": "uninstall",
+                },                                              
+            ],
+            "launch_buttons": [
+                {
+                    "button_text": "Launch",
+                    "key": "launch",
+                },    
+                {
+                    "button_text": "Install",
+                    "key": "install",
+                },                                                           
+            ],            
+            "args": [
+            
+            ],
+            "def_args": [
+            ],
+            "description":["A set of training scripts written in python for use in Kohya's SD-Scripts. It has a UI written in pyside6 to help streamline the process of training models."]             
+        },                                                   
         {
             "id": 10,
             "key": "app_",
@@ -1537,69 +1604,64 @@ This is a simple Streamlit UI for OpenAI's Whisper speech-to-text model. It let'
             ],
             "description":["Better safe than sorry, Stable-Diffusion-Pickle-Scanner-GUI offers an extra layer of protection against potential malicious code. - safetensors models don't need to be scanned."]             
         },
-    
+        {
+            "id": 20,
+            "key": "app_",
+            "image_path":b'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',            
+            "title": "VisualClipPicker",
+            "repo_name": "VisualClipPicker",
+            "github_url": "https://github.com/diStyApps/VisualClipPicker",
+            "git_clone_url":"https://github.com/diStyApps/VisualClipPicker.git",
+            "installed_version": "-",
+            "available_version": "-",
+            "installed": False,
+            "visible":True,
+            "status": 1,
+            "isIncomplete": False,
+            "type": "app",
+            "install_requirements":False,
+            "install_cuda":False,
+            "install_instructions_available":False,
+            "install_instructions": [
+            ],
+            "entry_point": 
             {
-                "id": 20,
-                "key": "app_",
-                "image_path":b'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',            
-                "title": "VisualClipPicker",
-                "repo_name": "VisualClipPicker",
-                "github_url": "https://github.com/diStyApps/VisualClipPicker",
-                "git_clone_url":"https://github.com/diStyApps/VisualClipPicker.git",
-                "installed_version": "-",
-                "available_version": "-",
-                "installed": False,
-                "visible":True,
-                "status": 1,
-                "isIncomplete": False,
-                "type": "app",
-                "install_requirements":False,
-                "install_cuda":False,
-                "install_instructions_available":False,
-                "install_instructions": [
-                ],
-                "entry_point": 
+                "install":"Install.bat",
+                "launch":"main.py",
+            },                      
+            "buttons": [
                 {
-                    "install":"Install.bat",
-                    "launch":"main.py",
-                },                      
-                "buttons": [
-                    {
-                        "button_text": "Update",
-                        "key": "update",
-                    },
-                    {
-                        "button_text": "Delete venv",
-                        "key": "delete_venv",
-                    },
-                    {
-                        "button_text": "Create venv",
-                        "key": "create_venv",
-                    },                        
-                    {
-                        "button_text": "Uninstall",
-                        "key": "uninstall",
-                    },                                              
-                ],
-                "launch_buttons": [
-                    {
-                        "button_text": "Launch",
-                        "key": "launch",
-                    },    
-                    {
-                        "button_text": "Install",
-                        "key": "install",
-                    },                                                           
-                ],            
-                "args": [
-                
-                ],
-                "def_args": [
-                ],
-                "description":["Visual Clip Picker: Trimming Clips by Face Recognition"]             
-            },                          
-                                  
+                    "button_text": "Update",
+                    "key": "update",
+                },
+                {
+                    "button_text": "Delete venv",
+                    "key": "delete_venv",
+                },
+                {
+                    "button_text": "Create venv",
+                    "key": "create_venv",
+                },                        
+                {
+                    "button_text": "Uninstall",
+                    "key": "uninstall",
+                },                                              
+            ],
+            "launch_buttons": [
+                {
+                    "button_text": "Launch",
+                    "key": "launch",
+                },    
+                {
+                    "button_text": "Install",
+                    "key": "install",
+                },                                                           
+            ],            
+            "args": [
+            
+            ],
+            "def_args": [
+            ],
+            "description":["Visual Clip Picker: Trimming Clips by Face Recognition"]             
+        },     
     ]
-
-
-

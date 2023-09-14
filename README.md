@@ -61,27 +61,17 @@ But remains a great solution for users with minimal technical knowledge or exper
 
 ### Tested on Windows 10+ and Nvidia GPU-based cards
 
-### Update [0.1.4.6] 
 <img src="media/covers/SEAIT_anim.gif">
+### Update [0.1.4.8] 
 
 Added:
 
-- VisionCrafter
+  - LoRA_Easy_Training_Scripts
 
-  A tool that can generates animations and music from text,
-  ideal for producing short videos and GIFs, as well as creating brief cinematic scenes.
+Fixed:
 
-  https://github.com/diStyApps/VisionCrafter
+  - InvokeAI installation
 
-- VisualClipPicker
-
-  Trimming Clips by Face Recognition
-
-  https://github.com/diStyApps/VisualClipPicker
-
-Changed:
-
-Vladiffsuion to SD.Next
 
 ### Spread the word; don't only keep it to yourself.
 <img src="media/preview/0.1.4.6/1.png">
