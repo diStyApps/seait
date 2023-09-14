@@ -62,6 +62,7 @@ But remains a great solution for users with minimal technical knowledge or exper
 ### Tested on Windows 10+ and Nvidia GPU-based cards
 
 <img src="media/covers/SEAIT_anim.gif">
+
 ### Update [0.1.4.8] 
 
 Added:
